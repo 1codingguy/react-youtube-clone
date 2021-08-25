@@ -1,72 +1,69 @@
 import React from 'react'
-import styled from 'styled-components'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import SearchIcon from '@material-ui/icons/Search'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 
+import { styled as muiStyled, makeStyles } from '@material-ui/core/styles'
+
 export default function Header() {
+  const classes = useStyles()
+
   return (
     <>
-      <StyledAppBar>
-        <Toolbar>
-          <YouTubeLogo
+      <AppBar>
+        <Toolbar className={classes.toolbar}>
+          <img
+            className={classes.logo}
             src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
             alt="logo"
           />
 
-          <ToolbarRight>
-            <IconButton >
+          <div className={classes.toolbarRight}>
+            <IconButton>
               <SearchIcon />
             </IconButton>
 
-            <IconButton>
-              <Avatar>C</Avatar>
-            </IconButton>
-          </ToolbarRight>
+            <StyledIconButton>
+              <Avatar className={classes.avatar}>C</Avatar>
+            </StyledIconButton>
+          </div>
         </Toolbar>
-      </StyledAppBar>
+      </AppBar>
     </>
   )
 }
 
-const ToolbarRight = styled.div`
-  flex-grow: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  color: #606060;
-  height: 100%;
+const StyledIconButton = muiStyled(IconButton)({
+  padding: '12px',
+})
 
-  IconButton {
-    padding: 12px;
+
+const useStyles = makeStyles({
+  toolbarRight: {
+    flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    color: '#606060',
+    height: '100%',
+  },
+  avatar: {
+    width: '24px',
+    height: '24px',
+    fontSize: '0.875rem',
+    backgroundColor: '#ef6c00',
+  },
+  logo: {
+    height: '20px',
+    cursor: 'pointer',
+  },
+  toolbar : {
+    minHeight: '48px',
+    height: '48px',
+    backgroundColor: 'white',
+    paddingRight: 0
   }
+})
 
-  .MuiAvatar-root {
-    width: 24px;
-    height: 24px;
-    font-size: 0.875rem;
-    background-color: #ef6c00;
-  }
-`
-
-const YouTubeLogo = styled.img`
-  height: 20px;
-  cursor: pointer;
-`
-
-const StyledAppBar = styled(AppBar)`
-  .MuiToolbar-regular {
-    min-height: 48px;
-    height: 48px;
-  }
-
-  .MuiToolbar-root {
-    background-color: white;
-  }
-
-  .MuiToolbar-gutters {
-    padding-right: 0;
-  }
-`
