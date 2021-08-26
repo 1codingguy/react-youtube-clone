@@ -83,7 +83,7 @@ export default function Header() {
       </HideOnScroll>
 
       {/* Below text only to test if the hiding the AppBar works */}
-      <div>
+      {/* <div>
         {[...new Array(12)]
           .map(
             () => `Cras mattis consectetur purus sit amet fermentum.
@@ -92,7 +92,7 @@ Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
 Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
           )
           .join('\n')}
-      </div>
+      </div> */}
     </>
   )
 }
