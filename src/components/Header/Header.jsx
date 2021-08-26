@@ -16,16 +16,16 @@ const ToolbarRight = styled.div`
   color: #606060;
   height: 100%;
 
-  IconButton {
-    padding: 12px;
-  }
-
   .MuiAvatar-root {
     width: 24px;
     height: 24px;
     font-size: 0.875rem;
     background-color: #ef6c00;
   }
+`
+
+const StyledIconButton = styled(IconButton)`
+  padding: 12px;
 `
 
 const YouTubeLogo = styled.img`
@@ -70,18 +70,19 @@ export default function Header() {
             />
 
             <ToolbarRight>
-              <IconButton>
+              <StyledIconButton>
                 <SearchIcon />
-              </IconButton>
+              </StyledIconButton>
 
-              <IconButton>
+              <StyledIconButton>
                 <Avatar>C</Avatar>
-              </IconButton>
+              </StyledIconButton>
             </ToolbarRight>
           </Toolbar>
         </StyledAppBar>
       </HideOnScroll>
 
+      {/* Below text only to test if the hiding the AppBar works */}
       <div>
         {[...new Array(12)]
           .map(
