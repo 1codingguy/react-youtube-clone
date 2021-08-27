@@ -7,8 +7,13 @@ import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Slide from '@material-ui/core/Slide'
+import {
+  YouTubeLogoTooltip,
+  IconTooltip,
+  YouTubeLogoContainer,
+} from '../sharedComponents/sharedComponents'
 
-const ToolbarRight = styled.div`
+const RightContainer = styled.div`
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
@@ -64,20 +69,26 @@ export default function Header() {
       <HideOnScroll>
         <StyledAppBar>
           <Toolbar>
-            <YouTubeLogo
-              src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
-              alt="logo"
-            />
+            <YouTubeLogoTooltip title="YouTube Home">
+              <YouTubeLogoContainer>
+                <YouTubeLogo
+                  src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
+                  alt="logo"
+                />
+              </YouTubeLogoContainer>
+            </YouTubeLogoTooltip>
 
-            <ToolbarRight>
-              <StyledIconButton>
-                <SearchIcon />
-              </StyledIconButton>
+            <RightContainer>
+              <IconTooltip title="Search">
+                <StyledIconButton>
+                  <SearchIcon />
+                </StyledIconButton>
+              </IconTooltip>
 
               <StyledIconButton>
                 <Avatar>C</Avatar>
               </StyledIconButton>
-            </ToolbarRight>
+            </RightContainer>
           </Toolbar>
         </StyledAppBar>
       </HideOnScroll>

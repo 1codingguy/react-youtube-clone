@@ -13,8 +13,13 @@ import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import VideoCallIcon from '@material-ui/icons/VideoCall'
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp'
+import {
+  YouTubeLogoTooltip,
+  IconTooltip,
+  YouTubeLogoContainer,
+} from '../sharedComponents/sharedComponents'
 
-const SHOW_SEARCH_BOX_WIDTH = '657px';
+const SHOW_SEARCH_BOX_WIDTH = '657px'
 
 const StyledAppBar = styled(AppBar)`
   .MuiToolbar-regular {
@@ -42,22 +47,22 @@ const StyledBox = styled(Box)`
   }
 `
 
-const StyledBoxLeft = styled(StyledBox)`
+const LeftContainer = styled(StyledBox)`
   flex-grow: 0;
   flex-wrap: nowrap;
 `
 
-const StyledBoxCenter = styled(StyledBox)`
+const MiddleContainer = styled(StyledBox)`
   flex-grow: 1;
-  /* margin-right: 2rem; */
   justify-content: flex-end;
 
   @media screen and (min-width: ${SHOW_SEARCH_BOX_WIDTH}) {
     justify-content: center;
+    margin-right: 2rem;
   }
 `
 
-const StyledBoxRight = styled(StyledBox)`
+const RightContainer = styled(StyledBox)`
   flex-grow: 0;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -85,7 +90,7 @@ const StyledForm = styled.form`
   border: 0.2px solid lightgray;
 `
 
-const StyledInput = styled.input`
+const SearchBox = styled.input`
   border: none;
   padding: 1px 2px;
   padding-left: 12px;
@@ -99,7 +104,7 @@ const StyledInput = styled.input`
   }
 `
 
-const StyledSearchIconContainer = styled(Box)`
+const SearchIconContainer = styled(Box)`
   width: 72px;
   height: 30px;
   /* background-color: red; */
@@ -127,51 +132,70 @@ function DesktopHeader() {
     <>
       <StyledAppBar elevation={0}>
         <Toolbar>
+          <LeftContainer padding={'8px'}>
+            <IconButton>
+              <MenuIcon />
+            </IconButton>
 
-          <StyledBoxLeft padding={'8px'}>
-            <MenuIcon />
-            <YouTubeLogo
-              src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
-              alt="logo"
-            />
-          </StyledBoxLeft>
+            <YouTubeLogoTooltip title="YouTube Home">
+              <YouTubeLogoContainer>
+                <YouTubeLogo
+                  src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
+                  alt="logo"
+                />
+              </YouTubeLogoContainer>
+            </YouTubeLogoTooltip>
+          </LeftContainer>
 
-          <StyledBoxCenter>
+          <MiddleContainer>
             {showSearchBox ? (
               <StyledForm>
-                <StyledInput placeholder="Search" />
-
-                <StyledSearchIconContainer>
-                  <StyledIconButton>
-                    <SearchIcon />
-                  </StyledIconButton>
-                </StyledSearchIconContainer>
+                <SearchBox placeholder="Search" />
+                <IconTooltip title="Search">
+                  <SearchIconContainer>
+                    <StyledIconButton>
+                      <SearchIcon />
+                    </StyledIconButton>
+                  </SearchIconContainer>
+                </IconTooltip>
               </StyledForm>
             ) : (
-              <IconButton>
-                <SearchIcon />
-              </IconButton>
+              <IconTooltip title="Search">
+                <IconButton>
+                  <SearchIcon />
+                </IconButton>
+              </IconTooltip>
             )}
+            <IconTooltip title="Search with your voice">
+              <IconButton>
+                <MicIcon />
+              </IconButton>
+            </IconTooltip>
+          </MiddleContainer>
 
-            <IconButton>
-              <MicIcon />
-            </IconButton>
-          </StyledBoxCenter>
+          <RightContainer>
+            <IconTooltip title="Create">
+              <IconButton>
+                <VideoCallIcon />
+              </IconButton>
+            </IconTooltip>
 
-          <StyledBoxRight>
-            <IconButton>
-              <VideoCallIcon />
-            </IconButton>
-            <IconButton>
-              <AppsIcon />
-            </IconButton>
-            <IconButton>
-              <NotificationsNoneSharpIcon />
-            </IconButton>
+            <IconTooltip title="YouTube Apps">
+              <IconButton>
+                <AppsIcon />
+              </IconButton>
+            </IconTooltip>
+
+            <IconTooltip title='Notifications'>
+              <IconButton>
+                <NotificationsNoneSharpIcon />
+              </IconButton>
+            </IconTooltip>
+
             <IconButton>
               <Avatar>C</Avatar>
             </IconButton>
-          </StyledBoxRight>
+          </RightContainer>
         </Toolbar>
       </StyledAppBar>
     </>
