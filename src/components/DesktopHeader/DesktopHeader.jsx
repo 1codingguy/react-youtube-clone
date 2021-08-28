@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
-
+import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Box from '@material-ui/core/Box'
@@ -18,6 +18,15 @@ import {
   IconTooltip,
   YouTubeLogoContainer,
 } from '../sharedComponents/sharedComponents'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
+import YouTubeIcon from '@material-ui/icons/YouTube'
+import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
+import ChildCareIcon from '@material-ui/icons/ChildCareOutlined'
 
 const SHOW_SEARCH_BOX_WIDTH = '657px'
 
@@ -82,6 +91,10 @@ const YouTubeLogo = styled.img`
   cursor: pointer;
 `
 
+const YouTubeKidsLogo = styled.img`
+  height: 20px;
+`
+
 const StyledForm = styled.form`
   flex-grow: 1;
   margin-left: 40px;
@@ -123,10 +136,86 @@ const SearchIconContainer = styled(Box)`
 const StyledIconButton = styled(IconButton)`
   height: 30px;
   padding: 1px 6px;
+
+  /* This is to target .MuiIconButton-root:hover{}
+  & :hover {
+    background-color: none;
+  } */
+`
+
+const CreateVideoMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+    borderRadius: 0,
+  },
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    {...props}
+  />
+))
+
+const AppsMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+    borderRadius: 0,
+  },
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'left',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}
+    {...props}
+  />
+))
+
+const StyledMenuItem = withStyles({
+  root: {
+    paddingTop: '8px',
+    paddingBottom: '8px',
+  },
+  gutters: {
+    paddingRight: '32px',
+  },
+})(MenuItem)
+
+const StyledListItemIcon = withStyles({
+  root: {
+    minWidth: '0',
+    marginRight: '16px',
+  },
+})(ListItemIcon)
+
+const RedYouTubeIcon = styled(YouTubeIcon)`
+  color: red;
 `
 
 function DesktopHeader() {
   const showSearchBox = useMediaQuery({ minWidth: SHOW_SEARCH_BOX_WIDTH })
+
+  const [anchorVideoButton, setAnchorVideoButton] = React.useState(null)
+  const [anchorAppsButton, setAnchorAppsButton] = React.useState(null)
+
+  const handleClose = (event) => {
+    setAnchorVideoButton(null)
+    setAnchorAppsButton(null)
+  }
 
   return (
     <>
@@ -175,18 +264,92 @@ function DesktopHeader() {
 
           <RightContainer>
             <IconTooltip title="Create">
-              <IconButton>
+              <IconButton
+                onClick={(event) => setAnchorVideoButton(event.currentTarget)}
+              >
                 <VideoCallIcon />
               </IconButton>
             </IconTooltip>
+            <CreateVideoMenu
+              anchorEl={anchorVideoButton}
+              keepMounted
+              open={Boolean(anchorVideoButton)}
+              onClose={handleClose}
+            >
+              <StyledMenuItem>
+                <StyledListItemIcon>
+                  <PlayArrowIcon fontSize="small" />
+                </StyledListItemIcon>
+                <ListItemText primary="Upload video" />
+              </StyledMenuItem>
+              <StyledMenuItem>
+                <StyledListItemIcon>
+                  <WifiTetheringIcon fontSize="small" />
+                </StyledListItemIcon>
+                <ListItemText primary="Go live" />
+              </StyledMenuItem>
+            </CreateVideoMenu>
 
             <IconTooltip title="YouTube Apps">
-              <IconButton>
+              <IconButton
+                onClick={(event) => setAnchorAppsButton(event.currentTarget)}
+              >
                 <AppsIcon />
               </IconButton>
             </IconTooltip>
 
-            <IconTooltip title='Notifications'>
+            <AppsMenu
+              anchorEl={anchorAppsButton}
+              keepMounted
+              open={Boolean(anchorAppsButton)}
+              onClose={handleClose}
+            >
+              <StyledMenuItem
+                style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.1)' }}
+              >
+                <StyledListItemIcon>
+                  <RedYouTubeIcon fontSize="small" />
+                </StyledListItemIcon>
+                <ListItemText primary="YouTube TV" />
+              </StyledMenuItem>
+
+              <StyledMenuItem>
+                <StyledListItemIcon>
+                  <PlayCircleOutlineIcon
+                    fontSize="small"
+                    style={{ color: 'red' }}
+                  />
+                </StyledListItemIcon>
+                <ListItemText primary="YouTube Music" />
+              </StyledMenuItem>
+
+              <StyledMenuItem
+                style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.1)' }}
+              >
+                <StyledListItemIcon>
+                  <YouTubeKidsLogo src="https://upload.wikimedia.org/wikipedia/commons/4/48/YT_kids.png" />
+                </StyledListItemIcon>
+                <ListItemText primary="YouTube Kids" />
+              </StyledMenuItem>
+
+              <StyledMenuItem>
+                <StyledListItemIcon>
+                  <RedYouTubeIcon fontSize="small" />
+                </StyledListItemIcon>
+                <ListItemText primary="Creator Academy" />
+              </StyledMenuItem>
+
+              <StyledMenuItem>
+                <StyledListItemIcon>
+                  <RedYouTubeIcon fontSize="small" />
+                </StyledListItemIcon>
+                <ListItemText primary="YouTube for Artists" />
+              </StyledMenuItem>
+
+
+            </AppsMenu>
+
+            <IconTooltip title="Notifications">
               <IconButton>
                 <NotificationsNoneSharpIcon />
               </IconButton>
