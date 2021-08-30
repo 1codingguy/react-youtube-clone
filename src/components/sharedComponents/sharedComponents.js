@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { makeStyles } from '@material-ui/core/styles'
 import Tooltip from '@material-ui/core/Tooltip'
+import Box from '@material-ui/core/Box'
+
+export const SHOW_SEARCH_BOX_WIDTH = '657px'
 
 const useStylesLogo = makeStyles({
   tooltip: {
@@ -44,4 +47,23 @@ export const YouTubeLogoContainer = styled.button`
   border: none;
   background-color: transparent;
   height: 100%;
+`
+
+export const YouTubeLogo = styled.img`
+  height: 20px;
+  margin: auto 1rem;
+  cursor: pointer;
+`
+
+export const StyledBox = styled(Box)`
+  color: #030303;
+  padding: ${(props) => props.padding};
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  /* doesn't work if StyledIconButton = styled(IconButton) */
+  .MuiIconButton-root {
+    padding: 8px;
+  }
 `
