@@ -5,8 +5,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
-
-export const CustomMenuItem = withStyles({
+export const StyledMenuItem = withStyles({
   root: {
     paddingTop: '8px',
     paddingBottom: '8px',
@@ -16,25 +15,28 @@ export const CustomMenuItem = withStyles({
   },
 })(MenuItem)
 
-export const CustomListItemIcon = withStyles({
+export const StyledListItemIcon = withStyles({
   root: {
     minWidth: '0',
     marginRight: '16px',
   },
 })(ListItemIcon)
 
-const StyledMenuItem = ({ Icon, fontSize = 'default', text = '', arrow=false }) => {
+export const StyledListItem = ({
+  Icon,
+  fontSize = 'default',
+  text = '',
+  arrow = false,
+}) => {
   return (
-    <CustomMenuItem>
-      <CustomListItemIcon>
+    <>
+      <StyledListItemIcon>
         <Icon fontSize={fontSize} />
-      </CustomListItemIcon>
+      </StyledListItemIcon>
       <ListItemText primary={text} />
 
       {/* The optional arrow at flex-end */}
       {arrow && <ChevronRightIcon />}
-    </CustomMenuItem>
+    </>
   )
 }
-
-export default StyledMenuItem
