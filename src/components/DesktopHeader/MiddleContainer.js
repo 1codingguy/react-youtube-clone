@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import MicIcon from '@material-ui/icons/Mic'
+import FocusableIcon from './FocusableIcon'
 
 import {
   IconTooltip,
@@ -86,17 +87,9 @@ const MiddleContainer = () => {
           </IconTooltip>
         </StyledForm>
       ) : (
-        <IconTooltip title="Search">
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
-        </IconTooltip>
+        <FocusableIcon tooltipTitle="Search" Icon={SearchIcon} />
       )}
-      <IconTooltip title="Search with your voice">
-        <IconButton>
-          <MicIcon />
-        </IconButton>
-      </IconTooltip>
+      <FocusableIcon tooltipTitle="Search with your voice" Icon={MicIcon} />
     </StyledMiddleContainer>
   )
 }

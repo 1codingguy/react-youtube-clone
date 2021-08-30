@@ -43,6 +43,7 @@ export function IconTooltip(props) {
   return <Tooltip classes={classes} {...props} />
 }
 
+// logo as a button so that it is keyboard-focusable
 export const YouTubeLogoContainer = styled.button`
   border: none;
   background-color: transparent;

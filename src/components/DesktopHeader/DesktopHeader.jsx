@@ -4,23 +4,17 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Box from '@material-ui/core/Box'
-import SearchIcon from '@material-ui/icons/Search'
 import AppsIcon from '@material-ui/icons/Apps'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import VideoCallIcon from '@material-ui/icons/VideoCall'
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp'
-import {
-  IconTooltip,
-  StyledBox,
-  SHOW_SEARCH_BOX_WIDTH,
-} from '../sharedComponents/sharedComponents'
+import { StyledBox } from '../sharedComponents/sharedComponents'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import PlayArrowIcon from '@material-ui/icons/PlayArrow'
-import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
+
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
 import Popover from '@material-ui/core/Popover'
@@ -31,6 +25,10 @@ import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneO
 
 import LeftContainer from './LeftContainer'
 import MiddleContainer from './MiddleContainer'
+import FocusableIcon from './FocusableIcon'
+
+// Right Container components, to be re-factor again
+import CreateVideoMenu from './CreateVideoMenu'
 
 const StyledAppBar = styled(AppBar)`
   .MuiToolbar-regular {
@@ -62,28 +60,6 @@ const RightContainer = styled(StyledBox)`
 const YouTubeKidsLogo = styled.img`
   height: 20px;
 `
-
-const CreateVideoMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-    borderTop: 0,
-    borderRadius: 0,
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-))
 
 const AppsMenu = withStyles({
   paper: {
@@ -191,40 +167,22 @@ function DesktopHeader() {
           <MiddleContainer />
 
           <RightContainer>
-            <IconTooltip title="Create">
-              <IconButton
-                onClick={(event) => setAnchorVideoButton(event.currentTarget)}
-              >
-                <VideoCallIcon />
-              </IconButton>
-            </IconTooltip>
-            <CreateVideoMenu
-              anchorEl={anchorVideoButton}
-              keepMounted
-              open={Boolean(anchorVideoButton)}
-              onClose={handleClose}
-            >
-              <StyledMenuItem>
-                <StyledListItemIcon>
-                  <PlayArrowIcon fontSize="small" />
-                </StyledListItemIcon>
-                <ListItemText primary="Upload video" />
-              </StyledMenuItem>
-              <StyledMenuItem>
-                <StyledListItemIcon>
-                  <WifiTetheringIcon fontSize="small" />
-                </StyledListItemIcon>
-                <ListItemText primary="Go live" />
-              </StyledMenuItem>
-            </CreateVideoMenu>
+            <FocusableIcon
+              tooltipTitle="Create"
+              Icon={VideoCallIcon}
+              onClick={(event) => setAnchorVideoButton(event.currentTarget)}
+            />
 
-            <IconTooltip title="YouTube Apps">
-              <IconButton
-                onClick={(event) => setAnchorAppsButton(event.currentTarget)}
-              >
-                <AppsIcon />
-              </IconButton>
-            </IconTooltip>
+            <CreateVideoMenu
+              anchorVideoButton={anchorVideoButton}
+              handleClose={handleClose}
+            />
+
+            <FocusableIcon
+              tooltipTitle="YouTube Apps"
+              Icon={AppsIcon}
+              onClick={(event) => setAnchorAppsButton(event.currentTarget)}
+            />
 
             <AppsMenu
               anchorEl={anchorAppsButton}
@@ -275,15 +233,13 @@ function DesktopHeader() {
               </StyledMenuItem>
             </AppsMenu>
 
-            <IconTooltip title="Notifications">
-              <IconButton
-                onClick={(event) =>
-                  setAnchorNotificationsButton(event.currentTarget)
-                }
-              >
-                <NotificationsNoneSharpIcon />
-              </IconButton>
-            </IconTooltip>
+            <FocusableIcon
+              tooltipTitle="Notifications"
+              Icon={NotificationsNoneSharpIcon}
+              onClick={(event) =>
+                setAnchorNotificationsButton(event.currentTarget)
+              }
+            />
 
             <NotificationsMenu
               anchorEl={anchorNotificationsButton}

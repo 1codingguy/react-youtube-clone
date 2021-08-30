@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
+
 import {
   YouTubeLogoTooltip,
   YouTubeLogoContainer,
@@ -17,6 +18,7 @@ const StyledLeftContainer = styled(StyledBox)`
 function LeftContainer() {
   return (
     <StyledLeftContainer padding={'8px'}>
+
       <IconButton>
         <MenuIcon />
       </IconButton>
