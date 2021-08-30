@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import { withStyles } from '@material-ui/core/styles'
@@ -26,7 +26,12 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
-import ChildCareIcon from '@material-ui/icons/ChildCareOutlined'
+import Popover from '@material-ui/core/Popover'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
+import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 const SHOW_SEARCH_BOX_WIDTH = '657px'
 
@@ -146,6 +151,7 @@ const StyledIconButton = styled(IconButton)`
 const CreateVideoMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
+    borderTop: 0,
     borderRadius: 0,
   },
 })((props) => (
@@ -167,6 +173,7 @@ const CreateVideoMenu = withStyles({
 const AppsMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
+    borderTop: 0,
     borderRadius: 0,
   },
 })((props) => (
@@ -184,6 +191,49 @@ const AppsMenu = withStyles({
     {...props}
   />
 ))
+
+const NotificationsMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+    borderTop: 0,
+    borderRadius: 0,
+    maxWidth: '480px',
+    maxHeight: '481px',
+    opacity: 0.5,
+  },
+})((props) => (
+  <Popover
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'left',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}
+    {...props}
+  />
+))
+
+const NOTIFICATION_MENU_TOP_HEIGHT = '48px'
+
+const NotificationsMenuTop = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: ${NOTIFICATION_MENU_TOP_HEIGHT};
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 16px;
+  padding-right: 16px;
+`
+
+const NotificationsMenuContent = styled(Box)`
+  display: grid;
+  place-items: center;
+  height: calc(100% - ${NOTIFICATION_MENU_TOP_HEIGHT});
+`
 
 const StyledMenuItem = withStyles({
   root: {
@@ -209,12 +259,15 @@ const RedYouTubeIcon = styled(YouTubeIcon)`
 function DesktopHeader() {
   const showSearchBox = useMediaQuery({ minWidth: SHOW_SEARCH_BOX_WIDTH })
 
-  const [anchorVideoButton, setAnchorVideoButton] = React.useState(null)
-  const [anchorAppsButton, setAnchorAppsButton] = React.useState(null)
+  const [anchorVideoButton, setAnchorVideoButton] = useState(null)
+  const [anchorAppsButton, setAnchorAppsButton] = useState(null)
+  const [anchorNotificationsButton, setAnchorNotificationsButton] =
+    useState(null)
 
   const handleClose = (event) => {
     setAnchorVideoButton(null)
     setAnchorAppsButton(null)
+    setAnchorNotificationsButton(null)
   }
 
   return (
@@ -287,6 +340,7 @@ function DesktopHeader() {
                   <WifiTetheringIcon fontSize="small" />
                 </StyledListItemIcon>
                 <ListItemText primary="Go live" />
+
               </StyledMenuItem>
             </CreateVideoMenu>
 
@@ -345,15 +399,56 @@ function DesktopHeader() {
                 </StyledListItemIcon>
                 <ListItemText primary="YouTube for Artists" />
               </StyledMenuItem>
-
-
             </AppsMenu>
 
             <IconTooltip title="Notifications">
-              <IconButton>
+              <IconButton
+                onClick={(event) =>
+                  setAnchorNotificationsButton(event.currentTarget)
+                }
+              >
                 <NotificationsNoneSharpIcon />
               </IconButton>
             </IconTooltip>
+
+            <NotificationsMenu
+              anchorEl={anchorNotificationsButton}
+              keepMounted
+              open={Boolean(anchorNotificationsButton)}
+              onClose={handleClose}
+            >
+              <Paper style={{ width: '450px', height: '450px' }}>
+                <NotificationsMenuTop>
+                  <Typography style={{ color: '#030303' }}>
+                    Notifications
+                  </Typography>
+                  <IconButton>
+                    <SettingsOutlinedIcon />
+                  </IconButton>
+                </NotificationsMenuTop>
+                <NotificationsMenuContent>
+                  <Box style={{ textAlign: 'center' }}>
+                    <NotificationsNoneOutlinedIcon
+                      style={{
+                        fontSize: '120px',
+                        color: 'rgba(0, 0, 0, 0.54)',
+                        fontWeight: '100',
+                        marginBottom: '24px',
+                      }}
+                    />
+                    <Typography
+                      style={{ fontWeight: 'bold', marginBottom: '8px' }}
+                    >
+                      Your notifications live here
+                    </Typography>
+                    <Typography style={{ maxWidth: '60%', margin: 'auto' }}>
+                      Subscribe to your favourite channels to receive
+                      notifications about their latest videos.
+                    </Typography>
+                  </Box>
+                </NotificationsMenuContent>
+              </Paper>
+            </NotificationsMenu>
 
             <IconButton>
               <Avatar>C</Avatar>
