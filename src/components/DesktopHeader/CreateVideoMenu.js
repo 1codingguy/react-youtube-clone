@@ -1,9 +1,9 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Menu from '@material-ui/core/Menu'
+import { StyledListItem, StyledMenuItem } from './StyledMenuItem'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
-import { StyledListItem, StyledMenuItem } from './StyledMenuItem'
 
 const VideoMenu = withStyles({
   paper: {
@@ -38,14 +38,13 @@ const CreateVideoMenu = ({ anchorVideoButton, handleClose }) => {
       <StyledMenuItem>
         <StyledListItem
           Icon={PlayArrowIcon}
-          fontSize="small"
           text="Upload video"
         />
       </StyledMenuItem>
+
       <StyledMenuItem>
         <StyledListItem
           Icon={WifiTetheringIcon}
-          fontSize="small"
           text="Go live"
         />
       </StyledMenuItem>

@@ -24,14 +24,16 @@ export const StyledListItemIcon = withStyles({
 
 export const StyledListItem = ({
   Icon,
-  fontSize = 'default',
+  fontSize = 'small',
   text = '',
   arrow = false,
+  iconColor,
+  src
 }) => {
   return (
     <>
       <StyledListItemIcon>
-        <Icon fontSize={fontSize} />
+        <Icon fontSize={fontSize} style={iconColor} src={src}/>
       </StyledListItemIcon>
       <ListItemText primary={text} />
 
