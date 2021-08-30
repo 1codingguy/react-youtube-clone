@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Box from '@material-ui/core/Box'
-import SearchIcon from '@material-ui/icons/Search'
+// import SearchIcon from '@material-ui/icons/Search'
 import AppsIcon from '@material-ui/icons/Apps'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
@@ -19,8 +19,8 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import PlayArrowIcon from '@material-ui/icons/PlayArrow'
-import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
+// import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+// import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
 import Popover from '@material-ui/core/Popover'
@@ -31,6 +31,10 @@ import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneO
 
 import LeftContainer from './LeftContainer'
 import MiddleContainer from './MiddleContainer'
+
+// Debug
+import { StyledMenuItem, StyledListItemIcon } from './DebugStyledMenuItem'
+import DebugCreateVideoMenu from './DebugCreateVideoMenu'
 
 const StyledAppBar = styled(AppBar)`
   .MuiToolbar-regular {
@@ -62,28 +66,6 @@ const RightContainer = styled(StyledBox)`
 const YouTubeKidsLogo = styled.img`
   height: 20px;
 `
-
-const CreateVideoMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-    borderTop: 0,
-    borderRadius: 0,
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-))
 
 const AppsMenu = withStyles({
   paper: {
@@ -150,22 +132,22 @@ const NotificationsMenuContent = styled(Box)`
   height: calc(100% - ${NOTIFICATION_MENU_TOP_HEIGHT});
 `
 
-const StyledMenuItem = withStyles({
-  root: {
-    paddingTop: '8px',
-    paddingBottom: '8px',
-  },
-  gutters: {
-    paddingRight: '32px',
-  },
-})(MenuItem)
+// const StyledMenuItem = withStyles({
+//   root: {
+//     paddingTop: '8px',
+//     paddingBottom: '8px',
+//   },
+//   gutters: {
+//     paddingRight: '32px',
+//   },
+// })(MenuItem)
 
-const StyledListItemIcon = withStyles({
-  root: {
-    minWidth: '0',
-    marginRight: '16px',
-  },
-})(ListItemIcon)
+// const StyledListItemIcon = withStyles({
+//   root: {
+//     minWidth: '0',
+//     marginRight: '16px',
+//   },
+// })(ListItemIcon)
 
 const RedYouTubeIcon = styled(YouTubeIcon)`
   color: red;
@@ -198,7 +180,12 @@ function DesktopHeader() {
                 <VideoCallIcon />
               </IconButton>
             </IconTooltip>
-            <CreateVideoMenu
+
+            <DebugCreateVideoMenu
+              anchorEl={anchorVideoButton}
+              handleClose={handleClose}
+            />
+            {/* <CreateVideoMenu
               anchorEl={anchorVideoButton}
               keepMounted
               open={Boolean(anchorVideoButton)}
@@ -216,7 +203,7 @@ function DesktopHeader() {
                 </StyledListItemIcon>
                 <ListItemText primary="Go live" />
               </StyledMenuItem>
-            </CreateVideoMenu>
+            </CreateVideoMenu> */}
 
             <IconTooltip title="YouTube Apps">
               <IconButton
