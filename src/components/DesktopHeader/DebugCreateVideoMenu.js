@@ -1,11 +1,17 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Menu from '@material-ui/core/Menu'
-import {StyledMenuItem, StyledListItemIcon} from './DebugStyledMenuItem'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
-import ListItemText from '@material-ui/core/ListItemText'
 
+// Needed if successful in debug
+
+// import CustomMenuItem from './DebugStyledMenuItem'
+import CustomListItem from './DebugStyledMenuItem'
+
+// Not needed after successful refactor
+import { StyledMenuItem, StyledListItemIcon } from './DebugStyledMenuItem'
+import ListItemText from '@material-ui/core/ListItemText'
 
 const CreateVideoMenu = withStyles({
   paper: {
@@ -36,7 +42,26 @@ const DebugCreateVideoMenu = ({ anchorEl, handleClose }) => {
       keepMounted
       open={Boolean(anchorEl)}
       onClose={handleClose}
+      variant="menu"
     >
+      {/* Not re-factoring StyledMenuItem works */}
+      <StyledMenuItem>
+        <CustomListItem
+          Icon={PlayArrowIcon}
+          fontSize="small"
+          text="Upload video"
+        />
+      </StyledMenuItem>
+      <StyledMenuItem>
+        <CustomListItem
+          Icon={WifiTetheringIcon}
+          fontSize="small"
+          text="Go live"
+        />
+      </StyledMenuItem>
+
+      {/* Keyboard focus works on below code */}
+      {/* 
       <StyledMenuItem>
         <StyledListItemIcon>
           <PlayArrowIcon fontSize="small" />
@@ -49,9 +74,8 @@ const DebugCreateVideoMenu = ({ anchorEl, handleClose }) => {
           <WifiTetheringIcon fontSize="small" />
         </StyledListItemIcon>
         <ListItemText primary="Go live" />
-      </StyledMenuItem>
-
-      
+      </StyledMenuItem> 
+      */}
     </CreateVideoMenu>
   )
 }
