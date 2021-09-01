@@ -16,24 +16,6 @@ import CreateVideoMenu from './CreateVideoMenu'
 import AppsMenu from './AppsMenu'
 import NotificationsMenu from './NotificationsMenu'
 
-const StyledRightContainer = styled(StyledBox)`
-  flex-grow: 0;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  
-  /* doesn't work if StyledAvatar = styled(Avatar) */
-  .MuiAvatar-root {
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
-      width: 24px;
-      height: 24px;
-    }
-    width: 32px;
-    height: 32px;
-    font-size: 0.875rem;
-    background-color: #ef6c00;
-  }
-`
-
 const RightContainer = ({ isMobileView }) => {
   const [anchorVideoButton, setAnchorVideoButton] = useState(null)
   const [anchorAppsButton, setAnchorAppsButton] = useState(null)
@@ -89,3 +71,21 @@ const RightContainer = ({ isMobileView }) => {
 }
 
 export default RightContainer
+
+const StyledRightContainer = styled(StyledBox)`
+  flex-grow: 0;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+
+  /* doesn't work if StyledAvatar = styled(Avatar) */
+  .MuiAvatar-root {
+    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
+      width: 24px;
+      height: 24px;
+    }
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+    background-color: #ef6c00;
+  }
+`

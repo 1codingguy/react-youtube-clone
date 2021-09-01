@@ -3,9 +3,36 @@ import styled from 'styled-components'
 import { withStyles } from '@material-ui/core/styles'
 import Menu from '@material-ui/core/Menu'
 import { StyledListItem, StyledMenuItem } from './StyledMenuItem'
+import Divider from '@material-ui/core/Divider'
 
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
+
+const AppsMenu = ({ anchorEl, handleClose }) => {
+  return (
+    <StyledAppsMenu
+      anchorEl={anchorEl}
+      keepMounted
+      open={Boolean(anchorEl)}
+      onClose={handleClose}
+    >
+      {menuItems.map(({ Icon, text }, ind) => {
+        // add divider at position 0 and 2
+        const addDivider = [0, 2].includes(ind)
+        return (
+          <React.Fragment key={text}>
+            <StyledMenuItem>
+              <StyledListItem Icon={Icon} text={text} />
+            </StyledMenuItem>
+            {addDivider && <Divider />}
+          </React.Fragment>
+        )
+      })}
+    </StyledAppsMenu>
+  )
+}
+
+export default AppsMenu
 
 const StyledAppsMenu = withStyles({
   paper: {
@@ -29,53 +56,27 @@ const StyledAppsMenu = withStyles({
   />
 ))
 
-const bottomDividerLine = { borderBottom: '1px solid rgba(0, 0, 0, 0.1)' }
-
 const RedYouTubeIcon = styled(YouTubeIcon)`
   color: red;
 `
-const YouTubeKidsLogo = styled.img`
-  height: 20px;
+const YouTubeMusicLogo = styled(PlayCircleOutlineIcon)`
+  color: red;
 `
-
-const AppsMenu = ({ anchorEl, handleClose }) => {
+const YouTubeKidsLogo = () => {
+  // How to create a component and style it at the same time using styled-components instead of doing inline styling like below?
   return (
-    <StyledAppsMenu
-      anchorEl={anchorEl}
-      keepMounted
-      open={Boolean(anchorEl)}
-      onClose={handleClose}
-    >
-      <StyledMenuItem style={bottomDividerLine}>
-        <StyledListItem Icon={RedYouTubeIcon} text="YouTube TV" />
-      </StyledMenuItem>
-
-      <StyledMenuItem>
-        <StyledListItem
-          Icon={PlayCircleOutlineIcon}
-          text="YouTube Music"
-          iconColor={{ color: 'red' }}
-        />
-      </StyledMenuItem>
-
-      <StyledMenuItem style={bottomDividerLine}>
-        <StyledListItem
-          Icon={YouTubeKidsLogo}
-          text="YouTube Kids"
-          src="https://upload.wikimedia.org/wikipedia/commons/4/48/YT_kids.png"
-        />
-      </StyledMenuItem>
-
-      <StyledMenuItem>
-        <StyledListItem Icon={RedYouTubeIcon} text="Creator Academy" />
-      </StyledMenuItem>
-
-      <StyledMenuItem>
-        <StyledListItem Icon={RedYouTubeIcon} text="YouTube for Artists" />
-      </StyledMenuItem>
-      
-    </StyledAppsMenu>
+    <img
+      style={{ height: '20px' }}
+      src="https://upload.wikimedia.org/wikipedia/commons/4/48/YT_kids.png"
+      alt="YouTube Kids Logo"
+    />
   )
 }
 
-export default AppsMenu
+const menuItems = [
+  { Icon: RedYouTubeIcon, text: 'YouTube TV' },
+  { Icon: YouTubeMusicLogo, text: 'YouTube Music' },
+  { Icon: YouTubeKidsLogo, text: 'YouTube Kids' },
+  { Icon: RedYouTubeIcon, text: 'Creator Academy' },
+  { Icon: RedYouTubeIcon, text: 'YouTube for Artists' },
+]

@@ -10,11 +10,6 @@ import {
   StyledBox,
 } from '../sharedComponents/sharedComponents'
 
-const StyledLeftContainer = styled(StyledBox)`
-  flex-grow: 0;
-  flex-wrap: nowrap;
-`
-
 function LeftContainer({ isMobileView }) {
   return (
     <StyledLeftContainer padding={isMobileView ? 0 : '8px'}>
@@ -36,3 +31,8 @@ function LeftContainer({ isMobileView }) {
   )
 }
 export default LeftContainer
+
+const StyledLeftContainer = styled(StyledBox)`
+  flex-grow: 0;
+  flex-wrap: nowrap;
+`

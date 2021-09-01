@@ -13,6 +13,37 @@ import {
   SHOW_SEARCH_BOX_BREAKPOINT,
 } from '../sharedComponents/sharedComponents'
 
+const MiddleContainer = ({ isMobileView }) => {
+  const showSearchBox = useMediaQuery({ minWidth: SHOW_SEARCH_BOX_BREAKPOINT })
+
+  return (
+    <StyledMiddleContainer>
+      {/* only show search box above SHOW_SEARCH_BOX_BREAKPOINT */}
+      {showSearchBox ? (
+        <StyledForm>
+          <SearchBox placeholder="Search" />
+          <IconTooltip title="Search">
+            <SearchIconContainer>
+              <StyledIconButton>
+                <SearchIcon />
+              </StyledIconButton>
+            </SearchIconContainer>
+          </IconTooltip>
+        </StyledForm>
+      ) : (
+        <FocusableIcon tooltipTitle="Search" Icon={SearchIcon} />
+      )}
+
+      {/* Hide mic icon in mobile view */}
+      {isMobileView || (
+        <FocusableIcon tooltipTitle="Search with your voice" Icon={MicIcon} />
+      )}
+    </StyledMiddleContainer>
+  )
+}
+
+export default MiddleContainer
+
 const StyledMiddleContainer = styled(StyledBox)`
   flex-grow: 1;
   justify-content: flex-end;
@@ -65,37 +96,7 @@ const StyledIconButton = styled(IconButton)`
   padding: 1px 6px;
 
   /* This is to target .MuiIconButton-root:hover{}
-  & :hover {
-    background-color: none;
-  } */
+            & :hover {
+              background-color: none;
+            } */
 `
-
-const MiddleContainer = ({isMobileView}) => {
-  const showSearchBox = useMediaQuery({ minWidth: SHOW_SEARCH_BOX_BREAKPOINT })
-
-  return (
-    <StyledMiddleContainer>
-      {showSearchBox ? (
-        <StyledForm>
-          <SearchBox placeholder="Search" />
-          <IconTooltip title="Search">
-            <SearchIconContainer>
-              <StyledIconButton>
-                <SearchIcon />
-              </StyledIconButton>
-            </SearchIconContainer>
-          </IconTooltip>
-        </StyledForm>
-      ) : (
-        <FocusableIcon tooltipTitle="Search" Icon={SearchIcon} />
-      )}
-
-      {/* Hide mic icon in mobile view */}
-      {isMobileView || (
-        <FocusableIcon tooltipTitle="Search with your voice" Icon={MicIcon} />
-      )}
-    </StyledMiddleContainer>
-  )
-}
-
-export default MiddleContainer

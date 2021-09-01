@@ -9,6 +9,42 @@ import IconButton from '@material-ui/core/IconButton'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined'
 
+const NotificationsMenu = ({ anchorEl, handleClose }) => {
+  return (
+    <StyledNotificationsMenu
+      anchorEl={anchorEl}
+      keepMounted
+      open={Boolean(anchorEl)}
+      onClose={handleClose}
+    >
+      <StyledPaper>
+        <NotificationsMenuTop>
+          <Typography style={{ color: '#030303' }}>Notifications</Typography>
+          <IconButton>
+            <SettingsOutlinedIcon />
+          </IconButton>
+        </NotificationsMenuTop>
+
+        <NotificationsMenuContent>
+          <TextCenterBox>
+            <BigBellIcon />
+            <Typography style={{ fontWeight: 'bold', marginBottom: '8px' }}>
+              Your notifications live here
+            </Typography>
+
+            <Typography style={{ maxWidth: '60%', margin: 'auto' }}>
+              Subscribe to your favourite channels to receive notifications
+              about their latest videos.
+            </Typography>
+          </TextCenterBox>
+        </NotificationsMenuContent>
+      </StyledPaper>
+    </StyledNotificationsMenu>
+  )
+}
+
+export default NotificationsMenu
+
 const NOTIFICATION_MENU_TOP_HEIGHT = '48px'
 
 const StyledNotificationsMenu = withStyles({
@@ -58,7 +94,9 @@ const StyledPaper = styled(Paper)`
 `
 
 const BigBellIcon = styled(NotificationsNoneOutlinedIcon)`
-  font-size: 120px;
+  /* needs !important to override CSS in .MuiSvgIcon-root */
+  height: 100% !important;
+  width: 120px !important;
   color: rgba(0, 0, 0, 0.54);
   font-weight: 100;
   margin-bottom: 24px;
@@ -66,39 +104,3 @@ const BigBellIcon = styled(NotificationsNoneOutlinedIcon)`
 const TextCenterBox = styled(Box)`
   text-align: center;
 `
-
-const NotificationsMenu = ({ anchorEl, handleClose }) => {
-  return (
-    <StyledNotificationsMenu
-      anchorEl={anchorEl}
-      keepMounted
-      open={Boolean(anchorEl)}
-      onClose={handleClose}
-    >
-      <StyledPaper>
-        <NotificationsMenuTop>
-          <Typography style={{ color: '#030303' }}>Notifications</Typography>
-          <IconButton>
-            <SettingsOutlinedIcon />
-          </IconButton>
-        </NotificationsMenuTop>
-
-        <NotificationsMenuContent>
-          <TextCenterBox>
-            <BigBellIcon />
-            <Typography style={{ fontWeight: 'bold', marginBottom: '8px' }}>
-              Your notifications live here
-            </Typography>
-
-            <Typography style={{ maxWidth: '60%', margin: 'auto' }}>
-              Subscribe to your favourite channels to receive notifications
-              about their latest videos.
-            </Typography>
-          </TextCenterBox>
-        </NotificationsMenuContent>
-      </StyledPaper>
-    </StyledNotificationsMenu>
-  )
-}
-
-export default NotificationsMenu

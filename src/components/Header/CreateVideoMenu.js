@@ -5,6 +5,32 @@ import { StyledListItem, StyledMenuItem } from './StyledMenuItem'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
 
+const CreateVideoMenu = ({ anchorVideoButton, handleClose }) => {
+  return (
+    <VideoMenu
+      anchorEl={anchorVideoButton}
+      keepMounted
+      open={Boolean(anchorVideoButton)}
+      onClose={handleClose}
+    >
+      {menuItems.map(({ Icon, text }) => {
+        return (
+          <StyledMenuItem key={text}>
+            <StyledListItem Icon={Icon} text={text} />
+          </StyledMenuItem>
+        )
+      })}
+    </VideoMenu>
+  )
+}
+
+export default CreateVideoMenu
+
+const menuItems = [
+  { Icon: PlayArrowIcon, text: 'Upload video' },
+  { Icon: WifiTetheringIcon, text: 'Go live' },
+]
+
 const VideoMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
@@ -26,30 +52,3 @@ const VideoMenu = withStyles({
     {...props}
   />
 ))
-
-const CreateVideoMenu = ({ anchorVideoButton, handleClose }) => {
-  return (
-    <VideoMenu
-      anchorEl={anchorVideoButton}
-      keepMounted
-      open={Boolean(anchorVideoButton)}
-      onClose={handleClose}
-    >
-      <StyledMenuItem>
-        <StyledListItem
-          Icon={PlayArrowIcon}
-          text="Upload video"
-        />
-      </StyledMenuItem>
-
-      <StyledMenuItem>
-        <StyledListItem
-          Icon={WifiTetheringIcon}
-          text="Go live"
-        />
-      </StyledMenuItem>
-    </VideoMenu>
-  )
-}
-
-export default CreateVideoMenu
