@@ -7,7 +7,10 @@ import VideoCallIcon from '@material-ui/icons/VideoCall'
 import AppsIcon from '@material-ui/icons/Apps'
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp'
 // Custom elements & components
-import { StyledBox } from '../sharedComponents/sharedComponents'
+import {
+  StyledBox,
+  MOBILE_VIEW_BREAKPOINT,
+} from '../sharedComponents/sharedComponents'
 import FocusableIcon from './FocusableIcon'
 import CreateVideoMenu from './CreateVideoMenu'
 import AppsMenu from './AppsMenu'
@@ -17,9 +20,13 @@ const StyledRightContainer = styled(StyledBox)`
   flex-grow: 0;
   flex-wrap: nowrap;
   justify-content: space-between;
-
+  
   /* doesn't work if StyledAvatar = styled(Avatar) */
   .MuiAvatar-root {
+    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
+      width: 24px;
+      height: 24px;
+    }
     width: 32px;
     height: 32px;
     font-size: 0.875rem;
@@ -27,7 +34,7 @@ const StyledRightContainer = styled(StyledBox)`
   }
 `
 
-const RightContainer = () => {
+const RightContainer = ({ isMobileView }) => {
   const [anchorVideoButton, setAnchorVideoButton] = useState(null)
   const [anchorAppsButton, setAnchorAppsButton] = useState(null)
   const [anchorNotificationsButton, setAnchorNotificationsButton] =
@@ -41,32 +48,38 @@ const RightContainer = () => {
 
   return (
     <StyledRightContainer>
-      <FocusableIcon
-        tooltipTitle="Create"
-        Icon={VideoCallIcon}
-        onClick={(event) => setAnchorVideoButton(event.currentTarget)}
-      />
-      <CreateVideoMenu
-        anchorVideoButton={anchorVideoButton}
-        handleClose={handleClose}
-      />
+      {isMobileView || (
+        <>
+          <FocusableIcon
+            tooltipTitle="Create"
+            Icon={VideoCallIcon}
+            onClick={(event) => setAnchorVideoButton(event.currentTarget)}
+          />
+          <CreateVideoMenu
+            anchorVideoButton={anchorVideoButton}
+            handleClose={handleClose}
+          />
 
-      <FocusableIcon
-        tooltipTitle="YouTube Apps"
-        Icon={AppsIcon}
-        onClick={(event) => setAnchorAppsButton(event.currentTarget)}
-      />
-      <AppsMenu anchorEl={anchorAppsButton} handleClose={handleClose} />
+          <FocusableIcon
+            tooltipTitle="YouTube Apps"
+            Icon={AppsIcon}
+            onClick={(event) => setAnchorAppsButton(event.currentTarget)}
+          />
+          <AppsMenu anchorEl={anchorAppsButton} handleClose={handleClose} />
 
-      <FocusableIcon
-        tooltipTitle="Notifications"
-        Icon={NotificationsNoneSharpIcon}
-        onClick={(event) => setAnchorNotificationsButton(event.currentTarget)}
-      />
-      <NotificationsMenu
-        anchorEl={anchorNotificationsButton}
-        handleClose={handleClose}
-      />
+          <FocusableIcon
+            tooltipTitle="Notifications"
+            Icon={NotificationsNoneSharpIcon}
+            onClick={(event) =>
+              setAnchorNotificationsButton(event.currentTarget)
+            }
+          />
+          <NotificationsMenu
+            anchorEl={anchorNotificationsButton}
+            handleClose={handleClose}
+          />
+        </>
+      )}
 
       <IconButton>
         <Avatar>C</Avatar>

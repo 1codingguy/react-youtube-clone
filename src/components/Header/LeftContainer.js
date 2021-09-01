@@ -15,13 +15,14 @@ const StyledLeftContainer = styled(StyledBox)`
   flex-wrap: nowrap;
 `
 
-function LeftContainer() {
+function LeftContainer({ isMobileView }) {
   return (
-    <StyledLeftContainer padding={'8px'}>
-
-      <IconButton>
-        <MenuIcon />
-      </IconButton>
+    <StyledLeftContainer padding={isMobileView ? 0 : '8px'}>
+      {isMobileView || (
+        <IconButton>
+          <MenuIcon />
+        </IconButton>
+      )}
 
       <YouTubeLogoTooltip title="YouTube Home">
         <YouTubeLogoContainer>

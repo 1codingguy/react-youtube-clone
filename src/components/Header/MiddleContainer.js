@@ -10,14 +10,14 @@ import FocusableIcon from './FocusableIcon'
 import {
   IconTooltip,
   StyledBox,
-  SHOW_SEARCH_BOX_WIDTH,
+  SHOW_SEARCH_BOX_BREAKPOINT,
 } from '../sharedComponents/sharedComponents'
 
 const StyledMiddleContainer = styled(StyledBox)`
   flex-grow: 1;
   justify-content: flex-end;
 
-  @media screen and (min-width: ${SHOW_SEARCH_BOX_WIDTH}) {
+  @media screen and (min-width: ${SHOW_SEARCH_BOX_BREAKPOINT}) {
     justify-content: center;
     margin-right: 2rem;
   }
@@ -70,8 +70,8 @@ const StyledIconButton = styled(IconButton)`
   } */
 `
 
-const MiddleContainer = () => {
-  const showSearchBox = useMediaQuery({ minWidth: SHOW_SEARCH_BOX_WIDTH })
+const MiddleContainer = ({isMobileView}) => {
+  const showSearchBox = useMediaQuery({ minWidth: SHOW_SEARCH_BOX_BREAKPOINT })
 
   return (
     <StyledMiddleContainer>
@@ -89,7 +89,11 @@ const MiddleContainer = () => {
       ) : (
         <FocusableIcon tooltipTitle="Search" Icon={SearchIcon} />
       )}
-      <FocusableIcon tooltipTitle="Search with your voice" Icon={MicIcon} />
+
+      {/* Hide mic icon in mobile view */}
+      {isMobileView || (
+        <FocusableIcon tooltipTitle="Search with your voice" Icon={MicIcon} />
+      )}
     </StyledMiddleContainer>
   )
 }
