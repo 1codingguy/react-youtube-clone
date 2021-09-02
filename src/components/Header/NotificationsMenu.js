@@ -20,7 +20,7 @@ const NotificationsMenu = ({ anchorEl, handleClose }) => {
       <StyledPaper>
         <NotificationsMenuTop>
           <Typography style={{ color: '#030303' }}>Notifications</Typography>
-          <IconButton>
+          <IconButton onClick={handleClose}>
             <SettingsOutlinedIcon />
           </IconButton>
         </NotificationsMenuTop>

@@ -15,7 +15,7 @@ const CreateVideoMenu = ({ anchorVideoButton, handleClose }) => {
     >
       {menuItems.map(({ Icon, text }) => {
         return (
-          <StyledMenuItem key={text}>
+          <StyledMenuItem key={text} onClick={handleClose}>
             <StyledListItem Icon={Icon} text={text} />
           </StyledMenuItem>
         )

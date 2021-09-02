@@ -21,7 +21,7 @@ const AppsMenu = ({ anchorEl, handleClose }) => {
         const addDivider = [0, 2].includes(ind)
         return (
           <React.Fragment key={text}>
-            <StyledMenuItem>
+            <StyledMenuItem onClick={handleClose}>
               <StyledListItem Icon={Icon} text={text} />
             </StyledMenuItem>
             {addDivider && <Divider />}
