@@ -22,7 +22,7 @@ export function HideOnScroll({ children }) {
   const displayDesktopHeader = !useMediaQuery(
     `(max-width:${MOBILE_VIEW_BREAKPOINT})`
   )
-// always show Header in desktop view
+  // always show Header in desktop view
   const showHeader = displayDesktopHeader
     ? displayDesktopHeader
     : displayMobileHeader
@@ -86,6 +86,7 @@ export const YouTubeLogo = styled.img`
   }
   height: 20px;
   cursor: pointer;
+  margin: auto 16px;
 `
 
 export const StyledBox = styled(Box)`

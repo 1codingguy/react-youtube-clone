@@ -70,7 +70,11 @@ const RightContainer = ({ isMobileView }) => {
         <Avatar>C</Avatar>
       </IconButton>
 
-      <AvatarMenu anchorEl={anchorAvatar} handleClose={handleClose} />
+      <AvatarMenu
+        anchorEl={anchorAvatar}
+        handleClose={handleClose}
+        isMobileView={isMobileView}
+      />
     </StyledRightContainer>
   )
 }

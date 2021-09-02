@@ -30,16 +30,17 @@ export const StyledListItem = ({
   fontSize = 'small',
   text = '',
   arrow = false,
+  iconStyle,
 }) => {
   return (
     <>
-      <StyledListItemIcon>
+      <StyledListItemIcon style={iconStyle}>
         <Icon fontSize={fontSize} />
       </StyledListItemIcon>
       <ListItemText primary={text} />
 
-      {/* The optional arrow at flex-end */}
-      {arrow && <ChevronRightIcon />}
+      {/* The optional arrow at flex-end, original icon is 24px, but since the icon is a bit bolder, I adjust the font-size to 20px */}
+      {arrow && <ChevronRightIcon style={{ fontSize: '20px' }} />}
     </>
   )
 }
