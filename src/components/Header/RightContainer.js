@@ -15,17 +15,20 @@ import FocusableIcon from './FocusableIcon'
 import CreateVideoMenu from './CreateVideoMenu'
 import AppsMenu from './AppsMenu'
 import NotificationsMenu from './NotificationsMenu'
+import AvatarMenu from './AvatarMenu'
 
 const RightContainer = ({ isMobileView }) => {
   const [anchorVideoButton, setAnchorVideoButton] = useState(null)
   const [anchorAppsButton, setAnchorAppsButton] = useState(null)
   const [anchorNotificationsButton, setAnchorNotificationsButton] =
     useState(null)
+  const [anchorAvatar, setAnchorAvatar] = useState(null)
 
   const handleClose = (event) => {
     setAnchorVideoButton(null)
     setAnchorAppsButton(null)
     setAnchorNotificationsButton(null)
+    setAnchorAvatar(null)
   }
 
   return (
@@ -63,9 +66,11 @@ const RightContainer = ({ isMobileView }) => {
         </>
       )}
 
-      <IconButton>
+      <IconButton onClick={(event) => setAnchorAvatar(event.currentTarget)}>
         <Avatar>C</Avatar>
       </IconButton>
+
+      <AvatarMenu anchorEl={anchorAvatar} handleClose={handleClose} />
     </StyledRightContainer>
   )
 }

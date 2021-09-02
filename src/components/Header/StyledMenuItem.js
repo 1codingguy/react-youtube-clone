@@ -9,12 +9,14 @@ export const StyledMenuItem = withStyles({
   root: {
     paddingTop: '8px',
     paddingBottom: '8px',
+    minHeight: '40px',
   },
   gutters: {
     paddingRight: '32px',
   },
 })(MenuItem)
 
+// The icon on the left of each list item
 export const StyledListItemIcon = withStyles({
   root: {
     minWidth: '0',
@@ -22,18 +24,17 @@ export const StyledListItemIcon = withStyles({
   },
 })(ListItemIcon)
 
+// ListItem = Icon + Text + optional arrow on the right
 export const StyledListItem = ({
   Icon,
   fontSize = 'small',
   text = '',
   arrow = false,
-  iconColor,
-  src
 }) => {
   return (
     <>
       <StyledListItemIcon>
-        <Icon fontSize={fontSize} style={iconColor} src={src}/>
+        <Icon fontSize={fontSize} />
       </StyledListItemIcon>
       <ListItemText primary={text} />
 

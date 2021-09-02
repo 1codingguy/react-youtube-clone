@@ -46,7 +46,7 @@ const StyledAppsMenu = withStyles({
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: 'bottom',
-      horizontal: 'left',
+      horizontal: 'right',
     }}
     transformOrigin={{
       vertical: 'top',
