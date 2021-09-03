@@ -4,6 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import Divider from '@material-ui/core/Divider'
 
 export const StyledMenuItem = withStyles({
   root: {
@@ -44,4 +45,37 @@ export const StyledListItem = ({
       {arrow && <ChevronRightIcon style={{ fontSize: '20px' }} />}
     </>
   )
+}
+
+export function addDivider(
+  dataArray,
+  indexArray,
+  MenuItemComponent,
+  handleClose = undefined,
+  menuItemStyle = undefined,
+  listItemFontSize = undefined,
+  listItemIconStyle = undefined
+) {
+  // the indexArray needs to account for the shifting of index after adding the 1st divider
+  const result = dataArray.map(({ Icon, text, arrow }) => {
+    return (
+      <MenuItemComponent key={text} onClick={handleClose} style={menuItemStyle}>
+        <StyledListItem
+          Icon={Icon}
+          text={text}
+          arrow={arrow}
+          fontSize={listItemFontSize}
+          iconStyle={listItemIconStyle}
+        />
+      </MenuItemComponent>
+    )
+  })
+  // console.log(result)
+
+  for (const index of indexArray) {
+    result.splice(index, 0, <Divider />)
+  }
+  // console.log(result)
+
+  return result
 }

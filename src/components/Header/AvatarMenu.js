@@ -12,48 +12,33 @@ import Divider from '@material-ui/core/Divider'
 
 // custom component and utils
 import { MOBILE_VIEW_BREAKPOINT } from '../sharedComponents/sharedComponents'
-import { StyledListItem, StyledMenuItem } from './StyledMenuItem'
-
-// Icons for menu
-import AccountBoxOutlinedIcon from '@material-ui/icons/AccountBoxOutlined'
-import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined'
-import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
-import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined'
-import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined'
-import Brightness2OutlinedIcon from '@material-ui/icons/Brightness2Outlined'
-import TranslateOutlinedIcon from '@material-ui/icons/TranslateOutlined'
-import LanguageOutlinedIcon from '@material-ui/icons/LanguageOutlined'
-import SecurityOutlinedIcon from '@material-ui/icons/SecurityOutlined'
-import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined'
-import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined'
-import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined'
+import { StyledMenuItem, addDivider } from './StyledMenuItem'
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined'
-
 import Fab from '@material-ui/core/Fab'
 import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined'
-import YouTubeIcon from '@material-ui/icons/YouTube'
-
-const firstMobileMenuItems = [
-  { Icon: AccountBoxOutlinedIcon, text: 'Your channel' },
-  { Icon: YouTubeIcon, text: 'Get YouTube Premium' },
-  { Icon: MonetizationOnOutlinedIcon, text: 'Purchase and memberships' },
-  { Icon: SupervisorAccountOutlinedIcon, text: 'Switch account' },
-]
-const secondMobileMenuItems = [
-  { Icon: SettingsOutlinedIcon, text: 'Settings' },
-  { Icon: SecurityOutlinedIcon, text: 'Your data in YouTube' },
-  { Icon: FeedbackOutlinedIcon, text: 'Feedback' },
-  { Icon: HelpOutlineOutlinedIcon, text: 'Help' },
-]
-
-const MobileAccountHeader = styled(Paper)`
-  display: flex;
-  align-items: center;
-  padding: 6px 4px;
-  min-height: 52px;
-`
+import { desktopMenuItems, mobileMenuItems } from './AvatarMenuData'
 
 const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
+  const desktopAvatarMenu = addDivider(
+    desktopMenuItems,
+    [5],
+    AvatarMenuItem,
+    handleClose,
+    { paddingTop: '0', paddingBottom: '0' }
+  )
+
+  const mobileAvatarMenu = addDivider(
+    mobileMenuItems,
+    [3],
+    StyledMenuItem,
+    handleClose,
+    undefined,
+    '24px',
+    { marginRight: '32px' }
+  )
+  // console.log(desktopAvatarMenu)
+  // console.log(mobileAvatarMenu)
+
   if (isMobileView) {
     return (
       <MobileAvatarMenu
@@ -62,36 +47,16 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MobileAccountHeader square={true}>
-          <CloseOutlinedIcon
-            onClick={handleClose}
-            style={{ cursor: 'pointer', margin: '8px', marginRight: '32px' }}
-          />
-          <Typography>Account</Typography>
-        </MobileAccountHeader>
+        <StyledMobileAccountHeader handleClose={handleClose} />
 
-        <StyledAccountHeader
+        <StyledAccountInfoHeader
           isMobileView={isMobileView}
           handleClose={handleClose}
         />
 
-        <Fab
-          style={{
-            position: 'fixed',
-            top: '142px',
-            right: '20px',
-            backgroundColor: '#FF0000',
-            color: 'white',
-          }}
-          onClick={handleClose}
-        >
-          <ArrowUpwardOutlinedIcon style={{ fontSize: '20px' }} />
-        </Fab>
-
+        <StyledFab handleClose={handleClose} />
         <Divider />
-        <FirstMobileMenu handleClose={handleClose} />
-        <Divider />
-        <SecondMobileMenu handleClose={handleClose} />
+        {mobileAvatarMenu}
       </MobileAvatarMenu>
     )
   }
@@ -102,11 +67,9 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
       open={Boolean(anchorEl)}
       onClose={handleClose}
     >
-      <StyledAccountHeader handleClose={handleClose} />
+      <StyledAccountInfoHeader handleClose={handleClose} />
       <Divider />
-      <FirstMenu handleClose={handleClose} />
-      <Divider />
-      <SecondMenu handleClose={handleClose} />
+      {desktopAvatarMenu}
       <Divider />
 
       <AvatarMenuItem onClick={handleClose}>
@@ -118,6 +81,31 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
 }
 
 export default AvatarMenu
+
+const StyledFab = ({ handleClose }) => (
+  <Fab
+    style={{
+      position: 'fixed',
+      top: '142px',
+      right: '20px',
+      backgroundColor: '#FF0000',
+      color: 'white',
+    }}
+    onClick={handleClose}
+  >
+    <ArrowUpwardOutlinedIcon style={{ fontSize: '20px' }} />
+  </Fab>
+)
+
+const StyledMobileAccountHeader = ({ handleClose }) => (
+  <MobileAccountHeader square={true}>
+    <CloseOutlinedIcon
+      onClick={handleClose}
+      style={{ cursor: 'pointer', margin: '8px', marginRight: '32px' }}
+    />
+    <Typography>Account</Typography>
+  </MobileAccountHeader>
+)
 
 const StyledAvatarMenu = withStyles({
   paper: {
@@ -168,7 +156,7 @@ const MobileAvatarMenu = withStyles({
   />
 ))
 
-const AccountHeader = styled.div`
+const AccountInfoHeader = styled.div`
   display: flex;
   padding: 16px;
 
@@ -188,6 +176,13 @@ const AccountHeader = styled.div`
   }
 `
 
+const MobileAccountHeader = styled(Paper)`
+  display: flex;
+  align-items: center;
+  padding: 6px 4px;
+  min-height: 52px;
+`
+
 const AvatarMenuItem = styled(StyledMenuItem)`
   .MuiMenuItem-root {
     /* Overriding min-height here has no effect */
@@ -199,9 +194,9 @@ const AvatarMenuItem = styled(StyledMenuItem)`
   }
 `
 
-const StyledAccountHeader = ({ handleClose, isMobileView }) => {
+const StyledAccountInfoHeader = ({ handleClose, isMobileView }) => {
   return (
-    <AccountHeader style={isMobileView && { padding: '8px' }}>
+    <AccountInfoHeader style={isMobileView && { padding: '8px' }}>
       <Avatar>c</Avatar>
       <Box>
         <Box>
@@ -225,105 +220,6 @@ const StyledAccountHeader = ({ handleClose, isMobileView }) => {
           Manage your Google Account
         </Typography>
       </Box>
-    </AccountHeader>
-  )
-}
-
-const firstMenuItems = [
-  { Icon: AccountBoxOutlinedIcon, text: 'Create a channel' },
-  { Icon: MonetizationOnOutlinedIcon, text: 'Purchase and memberships' },
-  { Icon: SettingsOutlinedIcon, text: 'YouTube Studio' },
-  { Icon: SupervisorAccountOutlinedIcon, text: 'Switch account', arrow: true },
-  { Icon: ExitToAppOutlinedIcon, text: 'Sign out' },
-]
-
-const secondMenuItems = [
-  {
-    Icon: Brightness2OutlinedIcon,
-    text: 'Appearance: Device theme',
-    arrow: true,
-  },
-  { Icon: TranslateOutlinedIcon, text: 'Language: English', arrow: true },
-  { Icon: LanguageOutlinedIcon, text: 'Location: United Kingdom', arrow: true },
-  { Icon: SettingsOutlinedIcon, text: 'Settings' },
-  { Icon: SecurityOutlinedIcon, text: 'Your data in YouTube' },
-  { Icon: HelpOutlineOutlinedIcon, text: 'Help' },
-  { Icon: FeedbackOutlinedIcon, text: 'Send feedback' },
-  { Icon: KeyboardOutlinedIcon, text: 'Keyboard shortcuts' },
-]
-
-const FirstMenu = ({ handleClose }) => {
-  return (
-    <>
-      {firstMenuItems.map(({ Icon, text, arrow }) => {
-        return (
-          <AvatarMenuItem
-            onClick={handleClose}
-            key={text}
-            // maxHeight: '40px'
-            style={{ paddingTop: '0', paddingBottom: '0' }}
-          >
-            <StyledListItem Icon={Icon} text={text} arrow={arrow} />
-          </AvatarMenuItem>
-        )
-      })}
-    </>
-  )
-}
-
-const SecondMenu = ({ handleClose }) => {
-  return (
-    <>
-      {secondMenuItems.map(({ Icon, text, arrow }) => {
-        return (
-          <AvatarMenuItem
-            onClick={handleClose}
-            key={text}
-            // maxHeight: '40px'
-            style={{ paddingTop: '0', paddingBottom: '0' }}
-          >
-            <StyledListItem Icon={Icon} text={text} arrow={arrow} />
-          </AvatarMenuItem>
-        )
-      })}
-    </>
-  )
-}
-
-const FirstMobileMenu = ({ handleClose }) => {
-  return (
-    <>
-      {firstMobileMenuItems.map(({ Icon, text }) => {
-        return (
-          <StyledMenuItem onClick={handleClose} key={text}>
-            <StyledListItem
-              Icon={Icon}
-              text={text}
-              fontSize={'24px'}
-              iconStyle={{ marginRight: '32px' }}
-            />
-          </StyledMenuItem>
-        )
-      })}
-    </>
-  )
-}
-
-const SecondMobileMenu = ({ handleClose }) => {
-  return (
-    <>
-      {secondMobileMenuItems.map(({ Icon, text }) => {
-        return (
-          <StyledMenuItem onClick={handleClose} key={text}>
-            <StyledListItem
-              Icon={Icon}
-              text={text}
-              fontSize={'24px'}
-              iconStyle={{ marginRight: '32px' }}
-            />
-          </StyledMenuItem>
-        )
-      })}
-    </>
+    </AccountInfoHeader>
   )
 }

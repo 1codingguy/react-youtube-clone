@@ -2,14 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import { withStyles } from '@material-ui/core/styles'
 import Menu from '@material-ui/core/Menu'
-import { StyledListItem, StyledMenuItem } from './StyledMenuItem'
-import Divider from '@material-ui/core/Divider'
+import { StyledMenuItem, addDivider } from './StyledMenuItem'
 
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
 
 const AppsMenu = ({ anchorEl, handleClose }) => {
-  const AppsMenuArray = addDivider(menuItems, [1, 4], handleClose)
+  const AppsMenuArray = addDivider(
+    menuItems,
+    [1, 4],
+    StyledMenuItem,
+    handleClose
+  )
 
   return (
     <StyledAppsMenu
@@ -71,22 +75,3 @@ const menuItems = [
   { Icon: RedYouTubeIcon, text: 'Creator Academy' },
   { Icon: RedYouTubeIcon, text: 'YouTube for Artists' },
 ]
-
-function addDivider(dataArray, indexArray, handleClose) {
-  // the indexArray needs to account for the shifting of index after adding the 1st divider
-  const result = dataArray.map(({ Icon, text }) => {
-    return (
-      <StyledMenuItem key={text} onClick={handleClose}>
-        <StyledListItem Icon={Icon} text={text} />
-      </StyledMenuItem>
-    )
-  })
-  // console.log(result)
-
-  for (const index of indexArray) {
-    result.splice(index, 0, <Divider />)
-  }
-  // console.log(result)
-
-  return result
-}
