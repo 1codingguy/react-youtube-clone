@@ -14,7 +14,7 @@ import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 
 export const desktopMenuArray = [
-  { Icon: AccountBoxOutlinedIcon, text: 'Create a channel' },
+  { Icon: AccountBoxOutlinedIcon, text: 'Your channel' },
   { Icon: MonetizationOnOutlinedIcon, text: 'Purchase and memberships' },
   { Icon: SettingsOutlinedIcon, text: 'YouTube Studio' },
   { Icon: SupervisorAccountOutlinedIcon, text: 'Switch account', arrow: true },

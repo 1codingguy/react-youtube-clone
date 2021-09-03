@@ -21,7 +21,7 @@ const AppsMenu = ({ anchorEl, handleClose }) => {
       <Divider />
       {addMenuItems(1, 3)}
       <Divider />
-      {addMenuItems(3, -1)}
+      {addMenuItems(3)}
     </StyledAppsMenu>
   )
 }

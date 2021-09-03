@@ -56,7 +56,7 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
         <Divider />
         {addMobileMenuChunk(0, 4)}
         <Divider />
-        {addMobileMenuChunk(4, 8)}
+        {addMobileMenuChunk(4)}
       </MobileAvatarMenu>
     )
   }
@@ -71,7 +71,7 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
       <Divider />
       {addDesktopMenuChunk(0, 5)}
       <Divider />
-      {addDesktopMenuChunk(5, -1)}
+      {addDesktopMenuChunk(5)}
       <Divider />
 
       <AvatarMenuItem onClick={handleClose}>
