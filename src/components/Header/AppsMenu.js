@@ -9,6 +9,8 @@ import YouTubeIcon from '@material-ui/icons/YouTube'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
 
 const AppsMenu = ({ anchorEl, handleClose }) => {
+  const AppsMenuArray = addDivider(menuItems, [1, 4], handleClose)
+
   return (
     <StyledAppsMenu
       anchorEl={anchorEl}
@@ -16,18 +18,7 @@ const AppsMenu = ({ anchorEl, handleClose }) => {
       open={Boolean(anchorEl)}
       onClose={handleClose}
     >
-      {menuItems.map(({ Icon, text }, ind) => {
-        // add divider at position 0 and 2
-        const addDivider = [0, 2].includes(ind)
-        return (
-          <React.Fragment key={text}>
-            <StyledMenuItem onClick={handleClose}>
-              <StyledListItem Icon={Icon} text={text} />
-            </StyledMenuItem>
-            {addDivider && <Divider />}
-          </React.Fragment>
-        )
-      })}
+      {AppsMenuArray}
     </StyledAppsMenu>
   )
 }
@@ -80,3 +71,22 @@ const menuItems = [
   { Icon: RedYouTubeIcon, text: 'Creator Academy' },
   { Icon: RedYouTubeIcon, text: 'YouTube for Artists' },
 ]
+
+function addDivider(dataArray, indexArray, handleClose) {
+  // the indexArray needs to account for the shifting of index after adding the 1st divider
+  const result = dataArray.map(({ Icon, text }) => {
+    return (
+      <StyledMenuItem key={text} onClick={handleClose}>
+        <StyledListItem Icon={Icon} text={text} />
+      </StyledMenuItem>
+    )
+  })
+  // console.log(result)
+
+  for (const index of indexArray) {
+    result.splice(index, 0, <Divider />)
+  }
+  // console.log(result)
+
+  return result
+}

@@ -12,7 +12,8 @@ export const StyledMenuItem = withStyles({
     minHeight: '40px',
   },
   gutters: {
-    paddingRight: '32px',
+    // should be 16px or 32px?
+    paddingRight: '16px',
   },
 })(MenuItem)
 
