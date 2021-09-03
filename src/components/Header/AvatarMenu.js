@@ -12,32 +12,30 @@ import Divider from '@material-ui/core/Divider'
 
 // custom component and utils
 import { MOBILE_VIEW_BREAKPOINT } from '../sharedComponents/sharedComponents'
-import { StyledMenuItem, addDivider } from './StyledMenuItem'
+import { StyledMenuItem, addMenuChunk } from './StyledMenuItem'
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined'
 import Fab from '@material-ui/core/Fab'
 import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined'
-import { desktopMenuItems, mobileMenuItems } from './AvatarMenuData'
+import { desktopMenuArray, mobileMenuArray } from './AvatarMenuData'
 
 const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
-  const desktopAvatarMenu = addDivider(
-    desktopMenuItems,
-    [5],
+  const addDesktopMenuChunk = addMenuChunk(
+    desktopMenuArray,
     AvatarMenuItem,
     handleClose,
     { paddingTop: '0', paddingBottom: '0' }
   )
 
-  const mobileAvatarMenu = addDivider(
-    mobileMenuItems,
-    [3],
+  const addMobileMenuChunk = addMenuChunk(
+    mobileMenuArray,
     StyledMenuItem,
     handleClose,
     undefined,
     '24px',
     { marginRight: '32px' }
   )
-  // console.log(desktopAvatarMenu)
-  // console.log(mobileAvatarMenu)
+  // console.log(desktopMenuChunk)
+  // console.log(mobileMenuChunk)
 
   if (isMobileView) {
     return (
@@ -56,7 +54,9 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
 
         <StyledFab handleClose={handleClose} />
         <Divider />
-        {mobileAvatarMenu}
+        {addMobileMenuChunk(0, 4)}
+        <Divider />
+        {addMobileMenuChunk(4, 8)}
       </MobileAvatarMenu>
     )
   }
@@ -69,7 +69,9 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
     >
       <StyledAccountInfoHeader handleClose={handleClose} />
       <Divider />
-      {desktopAvatarMenu}
+      {addDesktopMenuChunk(0, 5)}
+      <Divider />
+      {addDesktopMenuChunk(5, -1)}
       <Divider />
 
       <AvatarMenuItem onClick={handleClose}>

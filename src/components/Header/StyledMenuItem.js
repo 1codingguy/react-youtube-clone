@@ -47,35 +47,32 @@ export const StyledListItem = ({
   )
 }
 
-export function addDivider(
+export function addMenuChunk(
   dataArray,
-  indexArray,
   MenuItemComponent,
   handleClose = undefined,
   menuItemStyle = undefined,
   listItemFontSize = undefined,
   listItemIconStyle = undefined
 ) {
-  // the indexArray needs to account for the shifting of index after adding the 1st divider
-  const result = dataArray.map(({ Icon, text, arrow }) => {
-    return (
-      <MenuItemComponent key={text} onClick={handleClose} style={menuItemStyle}>
-        <StyledListItem
-          Icon={Icon}
-          text={text}
-          arrow={arrow}
-          fontSize={listItemFontSize}
-          iconStyle={listItemIconStyle}
-        />
-      </MenuItemComponent>
-    )
-  })
-  // console.log(result)
-
-  for (const index of indexArray) {
-    result.splice(index, 0, <Divider />)
+  // closure, after calling addMenuChunk with the required parameters for the first time, returns a function that only requires start and end indices, so that those parameters don't have to be repeated.
+  return (startIndex, endIndex) => {
+    return dataArray
+      .slice(startIndex, endIndex)
+      .map(({ Icon, text, arrow }) => (
+        <MenuItemComponent
+          key={text}
+          onClick={handleClose}
+          style={menuItemStyle}
+        >
+          <StyledListItem
+            Icon={Icon}
+            text={text}
+            arrow={arrow}
+            fontSize={listItemFontSize}
+            iconStyle={listItemIconStyle}
+          />
+        </MenuItemComponent>
+      ))
   }
-  // console.log(result)
-
-  return result
 }

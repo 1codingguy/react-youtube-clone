@@ -13,8 +13,7 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined'
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 
-// divider on index 5 for desktopMenu
-export const desktopMenuItems = [
+export const desktopMenuArray = [
   { Icon: AccountBoxOutlinedIcon, text: 'Create a channel' },
   { Icon: MonetizationOnOutlinedIcon, text: 'Purchase and memberships' },
   { Icon: SettingsOutlinedIcon, text: 'YouTube Studio' },
@@ -34,8 +33,7 @@ export const desktopMenuItems = [
   { Icon: KeyboardOutlinedIcon, text: 'Keyboard shortcuts' },
 ]
 
-// divider on index 3 for desktopMenu
-export const mobileMenuItems = [
+export const mobileMenuArray = [
   { Icon: AccountBoxOutlinedIcon, text: 'Your channel' },
   { Icon: YouTubeIcon, text: 'Get YouTube Premium' },
   { Icon: MonetizationOnOutlinedIcon, text: 'Purchase and memberships' },

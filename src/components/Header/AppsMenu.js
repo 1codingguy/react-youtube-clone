@@ -2,18 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { withStyles } from '@material-ui/core/styles'
 import Menu from '@material-ui/core/Menu'
-import { StyledMenuItem, addDivider } from './StyledMenuItem'
-
+import { StyledMenuItem, addMenuChunk } from './StyledMenuItem'
+import Divider from '@material-ui/core/Divider'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
 
 const AppsMenu = ({ anchorEl, handleClose }) => {
-  const AppsMenuArray = addDivider(
-    menuItems,
-    [1, 4],
-    StyledMenuItem,
-    handleClose
-  )
+  const addMenuItems = addMenuChunk(menuItems, StyledMenuItem, handleClose)
 
   return (
     <StyledAppsMenu
@@ -22,7 +17,11 @@ const AppsMenu = ({ anchorEl, handleClose }) => {
       open={Boolean(anchorEl)}
       onClose={handleClose}
     >
-      {AppsMenuArray}
+      {addMenuItems(0, 1)}
+      <Divider />
+      {addMenuItems(1, 3)}
+      <Divider />
+      {addMenuItems(3, -1)}
     </StyledAppsMenu>
   )
 }
