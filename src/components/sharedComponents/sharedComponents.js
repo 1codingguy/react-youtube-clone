@@ -42,7 +42,7 @@ const useStylesLogo = makeStyles({
     border: '1px solid gray',
     fontSize: '0.8rem',
     padding: '0.2rem 0.4rem',
-    border: '0.5px solid black',
+    // border: '0.5px solid black',
     borderRadius: '2px',
   },
 })
@@ -61,7 +61,7 @@ const useStylesIcons = makeStyles({
     border: '1px solid gray',
     fontSize: '0.8rem',
     padding: '0.4rem 0.4rem',
-    border: '0.5px solid gray',
+    // border: '0.5px solid gray',
     borderRadius: '2px',
   },
 })
@@ -91,7 +91,7 @@ export const YouTubeLogo = styled.img`
 
 export const StyledBox = styled(Box)`
   color: #030303;
-  padding: ${(props) => props.padding};
+  /* padding: ${(props) => props.padding}; */
   height: 100%;
   display: flex;
   align-items: center;

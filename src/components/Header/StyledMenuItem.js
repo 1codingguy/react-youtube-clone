@@ -4,7 +4,6 @@ import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import Divider from '@material-ui/core/Divider'
 
 export const StyledMenuItem = withStyles({
   root: {

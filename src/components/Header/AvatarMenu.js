@@ -31,7 +31,7 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
     StyledMenuItem,
     handleClose,
     undefined,
-    '24px',
+    'medium',
     { marginRight: '32px' }
   )
   // console.log(desktopMenuChunk)
@@ -114,9 +114,9 @@ const StyledAvatarMenu = withStyles({
     border: '1px solid #d3d4d5',
     borderTop: 0,
     borderRadius: 0,
-    // change to max-weight and max-height when finished
+    // not sure how to set the height to avoid popover snapping to the top of window when the screen size is small
     width: '300px',
-    maxHeight: '100%',
+    // maxHeight: '500px',
     opacity: 0.5,
   },
 })((props) => (
@@ -131,6 +131,7 @@ const StyledAvatarMenu = withStyles({
       vertical: 'top',
       horizontal: 'right',
     }}
+    marginThreshold={0}
     {...props}
   />
 ))
