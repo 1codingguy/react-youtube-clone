@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
 import Box from '@material-ui/core/Box'
@@ -6,15 +6,22 @@ import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import MicIcon from '@material-ui/icons/Mic'
 import FocusableIcon from './FocusableIcon'
+import Drawer from '@material-ui/core/Drawer'
+import Toolbar from '@material-ui/core/Toolbar'
+import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined'
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
+import TextField from '@material-ui/core/TextField'
 
 import {
   IconTooltip,
   StyledBox,
   SHOW_SEARCH_BOX_BREAKPOINT,
+  MOBILE_VIEW_HEADER_HEIGHT,
 } from '../sharedComponents/sharedComponents'
 
 const MiddleContainer = ({ isMobileView }) => {
   const showSearchBox = useMediaQuery({ minWidth: SHOW_SEARCH_BOX_BREAKPOINT })
+  const [openSearchDrawer, setOpenSearchDrawer] = useState(false)
 
   return (
     <StyledMiddleContainer>
@@ -31,7 +38,40 @@ const MiddleContainer = ({ isMobileView }) => {
           </IconTooltip>
         </StyledForm>
       ) : (
-        <FocusableIcon tooltipTitle="Search" Icon={SearchIcon} />
+        // only show search icon in mobile view
+        <>
+          <FocusableIcon
+            tooltipTitle="Search"
+            Icon={SearchIcon}
+            onClick={() => setOpenSearchDrawer(true)}
+          />
+          <Drawer
+            anchor="top"
+            open={openSearchDrawer}
+            onClose={() => setOpenSearchDrawer(false)}
+          >
+            <Toolbar
+              disableGutters
+              style={{
+                minHeight: MOBILE_VIEW_HEADER_HEIGHT,
+                // backgroundColor: '#f1f1f1',
+              }}
+            >
+              <ArrowBackOutlinedIcon
+                style={{ color: '#606060', margin: '12px' }}
+                onClick={() => setOpenSearchDrawer(false)}
+              />
+              <TextField
+                style={{ flexGrow: 1, fontSize: '14px' }}
+                placeholder="Search YouTube"
+              />
+              <SearchOutlinedIcon
+                style={{ color: '#606060', margin: '8px' }}
+                onClick={() => setOpenSearchDrawer(false)}
+              />
+            </Toolbar>
+          </Drawer>
+        </>
       )}
 
       {/* Hide mic icon in mobile view */}

@@ -24,7 +24,7 @@ const RightContainer = ({ isMobileView }) => {
     useState(null)
   const [anchorAvatar, setAnchorAvatar] = useState(null)
 
-  const handleClose = (event) => {
+  const handleClose = () => {
     setAnchorVideoButton(null)
     setAnchorAppsButton(null)
     setAnchorNotificationsButton(null)
