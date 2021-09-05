@@ -34,6 +34,9 @@ const StyledAppsMenu = withStyles({
     borderTop: 0,
     borderRadius: 0,
   },
+  list: {
+    fontSize: '14px',
+  },
 })((props) => (
   <Menu
     elevation={0}
