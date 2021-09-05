@@ -10,7 +10,7 @@ import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneShar
 import {
   StyledBox,
   MOBILE_VIEW_BREAKPOINT,
-} from '../sharedComponents/sharedComponents'
+} from '../utils/utils'
 import FocusableIcon from './FocusableIcon'
 import CreateVideoMenu from './CreateVideoMenu'
 import AppsMenu from './AppsMenu'

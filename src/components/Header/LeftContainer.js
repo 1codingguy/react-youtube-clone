@@ -8,11 +8,11 @@ import {
   YouTubeLogoContainer,
   YouTubeLogo,
   StyledBox,
-} from '../sharedComponents/sharedComponents'
+} from '../utils/utils'
 
 function LeftContainer({ isMobileView }) {
   return (
-    <StyledLeftContainer padding={isMobileView ? 0 : '8px'}>
+    <StyledLeftContainer padding={0}>
       {isMobileView || (
         <IconButton>
           <MenuIcon />

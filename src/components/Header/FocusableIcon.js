@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconTooltip } from '../sharedComponents/sharedComponents'
+import { IconTooltip } from '../utils/utils'
 import IconButton from '@material-ui/core/IconButton'
 
 const FocusableIcon = ({ tooltipTitle, Icon, onClick = null }) => {
