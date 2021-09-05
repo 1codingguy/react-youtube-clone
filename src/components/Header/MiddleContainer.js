@@ -17,7 +17,7 @@ import {
   StyledBox,
   SHOW_SEARCH_BOX_BREAKPOINT,
   MOBILE_VIEW_HEADER_HEIGHT,
-} from '../sharedComponents/sharedComponents'
+} from '../utils/utils'
 
 const MiddleContainer = ({ isMobileView }) => {
   const showSearchBox = useMediaQuery({ minWidth: SHOW_SEARCH_BOX_BREAKPOINT })

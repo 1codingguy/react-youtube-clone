@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import { useMediaQuery } from '@material-ui/core'
-import { HideOnScroll } from '../sharedComponents/sharedComponents'
+import { HideOnScroll } from '../utils/utils'
 import LeftContainer from './LeftContainer'
 import MiddleContainer from './MiddleContainer'
 import RightContainer from './RightContainer'
@@ -12,7 +12,7 @@ import {
   MOBILE_VIEW_BREAKPOINT,
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
-} from '../sharedComponents/sharedComponents'
+} from '../utils/utils'
 
 function Header() {
   const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT})`)
@@ -21,11 +21,11 @@ function Header() {
     <>
       <HideOnScroll>
         <StyledAppBar elevation={isMobileView ? 1 : 0}>
-          <Toolbar>
+          <StyledToolbar disableGutters>
             <LeftContainer isMobileView={isMobileView} />
             <MiddleContainer isMobileView={isMobileView} />
             <RightContainer isMobileView={isMobileView} />
-          </Toolbar>
+          </StyledToolbar>
         </StyledAppBar>
       </HideOnScroll>
 
@@ -57,15 +57,17 @@ const StyledAppBar = styled(AppBar)`
     height: ${DESKTOP_VIEW_HEADER_HEIGHT};
   }
 
-  .MuiToolbar-root {
-    background-color: white;
-    /* remove the border later */
-    border-bottom: 1px solid lightgray;
+`
+
+const StyledToolbar = styled(Toolbar)`
+  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
+    padding-left: 0;
+    padding-right: 0;
   }
 
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
-    .MuiToolbar-gutters {
-      padding-right: 0;
-    }
-  }
+  background-color: white;
+  /* remove the border later */
+  border-bottom: 1px solid lightgray;
+  padding-left: 16px;
+  padding-right: 16px;
 `

@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 
 // custom component and utils
-import { MOBILE_VIEW_BREAKPOINT } from '../sharedComponents/sharedComponents'
+import { MOBILE_VIEW_BREAKPOINT } from '../utils/utils'
 import { StyledMenuItem, addMenuChunk } from './StyledMenuItem'
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined'
 import Fab from '@material-ui/core/Fab'

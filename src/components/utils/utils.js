@@ -13,6 +13,8 @@ export const DESKTOP_VIEW_HEADER_HEIGHT = '56px'
 // Breakpoints
 export const MOBILE_VIEW_BREAKPOINT = '428px'
 export const SHOW_SEARCH_BOX_BREAKPOINT = '657px'
+export const SHOW_MINI_SIDEBAR = '792px'
+export const SHOW_FULL_SIDEBAR = '1313px'
 
 export function HideOnScroll({ children }) {
   const displayMobileHeader = !useScrollTrigger({
