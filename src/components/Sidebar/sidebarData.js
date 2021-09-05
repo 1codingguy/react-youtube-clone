@@ -38,3 +38,11 @@ export const moreFromYouTubeRows = [
   { Icon: HelpOutlineOutlinedIcon, text: 'Help' },
   { Icon: FeedbackOutlinedIcon, text: 'Send feedback' },
 ]
+
+// mobile footer uses the same array
+export const miniSidebarRows = [
+  { Icon: HomeIcon, text: 'Home' },
+  { Icon: ExploreOutlinedIcon, text: 'Explore' },
+  { Icon: SubscriptionsOutlinedIcon, text: 'Subscriptions' },
+  { Icon: VideoLibraryOutlinedIcon, text: 'Library' },
+]
