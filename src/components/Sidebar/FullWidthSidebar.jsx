@@ -85,7 +85,6 @@ export default FullWidthSidebar
 const StyledFullWidthSidebar = styled.div`
   width: 240px;
   overflow-y: auto;
-  /* background-color: lightcoral; */
 `
 
 const SidebarMenuItem = styled(StyledMenuItem)`

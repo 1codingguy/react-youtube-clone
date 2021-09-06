@@ -15,7 +15,7 @@ import {
   SHOW_FULL_SIDEBAR,
 } from '../utils/utils'
 
-const Main = ({ showFullWidthSidebar }) => {
+const Main = ({ showFullWidthSidebar, setOpenSidebarDrawer }) => {
   const showMiniSidebar = useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR})`)
   // width criteria to show full width sidebar
   const minWidthToShowFullSidebar = useMediaQuery(
@@ -29,7 +29,9 @@ const Main = ({ showFullWidthSidebar }) => {
   return (
     <StyledMain>
       <div className="main-left-container">
-        {(showFullSidebar && <FullWidthSidebar />) ||
+        {(showFullSidebar && (
+          <FullWidthSidebar setOpenSidebarDrawer={setOpenSidebarDrawer} />
+        )) ||
           (showMiniSidebar && <MiniSidebar />)}
       </div>
 

@@ -54,6 +54,9 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
 export default Header
 
 const StyledAppBar = styled(AppBar)`
+  /* increase specificity to override default indigo color */
+  &&{background-color: white};
+
   .MuiToolbar-regular {
     @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
       min-height: ${MOBILE_VIEW_HEADER_HEIGHT};

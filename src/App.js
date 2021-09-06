@@ -50,7 +50,11 @@ function App() {
         setOpenSidebarDrawer={setOpenSidebarDrawer}
         handleHamburgerMenuClick={handleHamburgerMenuClick}
       />
-      <Main showFullWidthSidebar={showFullWidthSidebar} />
+
+      <Main
+        showFullWidthSidebar={showFullWidthSidebar}
+        setOpenSidebarDrawer={setOpenSidebarDrawer}
+      />
       {isMobileView && <Footer />}
     </div>
   )

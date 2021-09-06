@@ -30,7 +30,7 @@ function LeftContainer({
       >
         <HamburgerMenuContainer>
           <HamburgerMenu onClick={handleHamburgerMenuClick} />
-          <Logo />
+          <Logo style={{ height: '40px' }} />
         </HamburgerMenuContainer>
 
         <FullWidthSidebar setOpenSidebarDrawer={setOpenSidebarDrawer} />
@@ -70,8 +70,10 @@ const HamburgerMenuContainer = styled.div`
   display: flex;
   min-height: 56px;
   padding-left: 16px;
+  align-items: center;
 
   .MuiIconButton-root {
     padding: 8px;
+    height: 40px;
   }
 `
