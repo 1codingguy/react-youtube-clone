@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { withStyles } from '@material-ui/core/styles'
 import Menu from '@material-ui/core/Menu'
 import { StyledListItem, StyledMenuItem } from './StyledMenuItem'
@@ -7,7 +8,7 @@ import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
 
 const CreateVideoMenu = ({ anchorVideoButton, handleClose }) => {
   return (
-    <VideoMenu
+    <StyledVideoMenu
       anchorEl={anchorVideoButton}
       keepMounted
       open={Boolean(anchorVideoButton)}
@@ -20,7 +21,7 @@ const CreateVideoMenu = ({ anchorVideoButton, handleClose }) => {
           </StyledMenuItem>
         )
       })}
-    </VideoMenu>
+    </StyledVideoMenu>
   )
 }
 
@@ -52,3 +53,9 @@ const VideoMenu = withStyles({
     {...props}
   />
 ))
+
+const StyledVideoMenu = styled(VideoMenu)`
+  .MuiTypography-body1 {
+    font-size: 14px;
+  }
+`

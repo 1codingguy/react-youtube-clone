@@ -9,11 +9,15 @@ import Avatar from '@material-ui/core/Avatar'
 import { StyledMenuItem, addMenuChunk } from '../Header/StyledMenuItem'
 import { sideBarMenuRows, moreFromYouTubeRows } from './sidebarData'
 
-const FullWidthSidebar = () => {
+const FullWidthSidebar = ({ setOpenSidebarDrawer }) => {
+  const handleSidebarClose = () => {
+    setOpenSidebarDrawer(false)
+  }
+
   const topMenuData = addMenuChunk(
     sideBarMenuRows,
     SidebarMenuItem,
-    undefined,
+    handleSidebarClose,
     undefined,
     'medium',
     { color: '#030303', marginRight: '24px' }
@@ -22,7 +26,7 @@ const FullWidthSidebar = () => {
   const bottomMenuData = addMenuChunk(
     moreFromYouTubeRows,
     SidebarMenuItem,
-    undefined,
+    handleSidebarClose,
     undefined,
     'medium',
     { color: '#030303', marginRight: '24px' }
@@ -42,7 +46,10 @@ const FullWidthSidebar = () => {
         <SubHeading>SUBSCRIPTIONS</SubHeading>
 
         <SidebarMenuItem>
-          <ListItemAvatar style={{ minWidth: '0', marginRight: '24px' }}>
+          <ListItemAvatar
+            style={{ minWidth: '0', marginRight: '24px' }}
+            onClick={handleSidebarClose}
+          >
             <Avatar
               style={{
                 width: '24px',

@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import { useMediaQuery } from '@material-ui/core'
 import { HideOnScroll } from '../utils/utils'
 import LeftContainer from './LeftContainer'
 import MiddleContainer from './MiddleContainer'
@@ -14,15 +13,23 @@ import {
   DESKTOP_VIEW_HEADER_HEIGHT,
 } from '../utils/utils'
 
-function Header() {
-  const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT})`)
-
+function Header({
+  isMobileView,
+  openSidebarDrawer,
+  setOpenSidebarDrawer,
+  handleHamburgerMenuClick,
+}) {
   return (
     <>
       <HideOnScroll>
         <StyledAppBar elevation={isMobileView ? 1 : 0}>
           <StyledToolbar disableGutters>
-            <LeftContainer isMobileView={isMobileView} />
+            <LeftContainer
+              isMobileView={isMobileView}
+              openSidebarDrawer={openSidebarDrawer}
+              setOpenSidebarDrawer={setOpenSidebarDrawer}
+              handleHamburgerMenuClick={handleHamburgerMenuClick}
+            />
             <MiddleContainer isMobileView={isMobileView} />
             <RightContainer isMobileView={isMobileView} />
           </StyledToolbar>
@@ -56,7 +63,6 @@ const StyledAppBar = styled(AppBar)`
     min-height: ${DESKTOP_VIEW_HEADER_HEIGHT};
     height: ${DESKTOP_VIEW_HEADER_HEIGHT};
   }
-
 `
 
 const StyledToolbar = styled(Toolbar)`

@@ -15,16 +15,21 @@ import {
   SHOW_FULL_SIDEBAR,
 } from '../utils/utils'
 
-const Main = () => {
+const Main = ({ showFullWidthSidebar }) => {
   const showMiniSidebar = useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR})`)
-  const showFullWidthSidebar = useMediaQuery(
+  // width criteria to show full width sidebar
+  const minWidthToShowFullSidebar = useMediaQuery(
     `(min-width: ${SHOW_FULL_SIDEBAR})`
   )
+  // combine width criteria and logic criteria
+  const showFullSidebar = minWidthToShowFullSidebar && showFullWidthSidebar
+
+  // console.log(showFullSidebar)
 
   return (
     <StyledMain>
       <div className="main-left-container">
-        {(showFullWidthSidebar && <FullWidthSidebar />) ||
+        {(showFullSidebar && <FullWidthSidebar />) ||
           (showMiniSidebar && <MiniSidebar />)}
       </div>
 

@@ -28,14 +28,11 @@ const AppsMenu = ({ anchorEl, handleClose }) => {
 
 export default AppsMenu
 
-const StyledAppsMenu = withStyles({
+const _styledAppsMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
     borderTop: 0,
     borderRadius: 0,
-  },
-  list: {
-    fontSize: '14px',
   },
 })((props) => (
   <Menu
@@ -77,3 +74,9 @@ const menuItems = [
   { Icon: RedYouTubeIcon, text: 'Creator Academy' },
   { Icon: RedYouTubeIcon, text: 'YouTube for Artists' },
 ]
+
+const StyledAppsMenu = styled(_styledAppsMenu)`
+  .MuiTypography-body1 {
+    font-size: 14px;
+  }
+`

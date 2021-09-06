@@ -27,6 +27,7 @@ export const StyledListItemIcon = withStyles({
 
 // ListItem = Icon + Text + optional arrow on the right
 export const StyledListItem = ({
+  // destructing, not function parameters
   Icon,
   fontSize = 'small',
   text = '',
