@@ -22,7 +22,7 @@ function App() {
     // open drawer only under 1313px, mobile view doesn't have a hamburger menu so not a concern
     if (shouldOpenDrawer) {
       setOpenSidebarDrawer(!openSidebarDrawer)
-    }
+    } //toggle between MiniSidebar and FullWidthSidebar if >= 1313px
     setShowFullWidthSidebar(!showFullWidthSidebar)
   }
 
