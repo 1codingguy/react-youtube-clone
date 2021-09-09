@@ -59,11 +59,11 @@ const StyledAppBar = styled(AppBar)`
 
   .MuiToolbar-regular {
     @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
-      /* min-height: ${MOBILE_VIEW_HEADER_HEIGHT}; */
+      min-height: ${MOBILE_VIEW_HEADER_HEIGHT};
       height: ${MOBILE_VIEW_HEADER_HEIGHT};
     }
 
-    /* min-height: ${DESKTOP_VIEW_HEADER_HEIGHT}; */
+    min-height: ${DESKTOP_VIEW_HEADER_HEIGHT};
     height: ${DESKTOP_VIEW_HEADER_HEIGHT};
   }
 `
