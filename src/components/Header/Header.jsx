@@ -27,12 +27,11 @@ function Header({
         <StyledAppBar elevation={isMobileView ? 1 : 0} color="transparent">
           <StyledToolbar disableGutters>
             <LeftContainer
-              isMobileView={isMobileView}
               openSidebarDrawer={openSidebarDrawer}
               setOpenSidebarDrawer={setOpenSidebarDrawer}
               handleHamburgerMenuClick={handleHamburgerMenuClick}
             />
-            <MiddleContainer isMobileView={isMobileView} />
+            <MiddleContainer />
             <RightContainer isMobileView={isMobileView} />
           </StyledToolbar>
         </StyledAppBar>

@@ -14,20 +14,23 @@ import { useResetShowFullWidthSidebarState } from './components/utils/useResetSh
 function App() {
   const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
 
-  const shouldOpenDrawer = !useMediaQuery(`(min-width:${SHOW_FULL_SIDEBAR}px)`)
+  const shouldOpenSidebarDrawer = !useMediaQuery(
+    `(min-width:${SHOW_FULL_SIDEBAR}px)`
+  )
 
   const [openSidebarDrawer, setOpenSidebarDrawer] = useState(false)
 
   const [showFullWidthSidebar, setShowFullWidthSidebar] = useState(true)
 
   const handleHamburgerMenuClick = () => {
-    // open drawer only under 1313px, mobile view doesn't have a hamburger menu so not a concern
-    if (shouldOpenDrawer) {
+    // open drawer only under 1313px, mobile view doesn't have a hamburger menu so it's not a concern
+    if (shouldOpenSidebarDrawer) {
       setOpenSidebarDrawer(!openSidebarDrawer)
     } //toggle between MiniSidebar and FullWidthSidebar if >= 1313px
     setShowFullWidthSidebar(!showFullWidthSidebar)
   }
 
+  // reset showFullWidthSidebar to true if < 1313px
   useResetShowFullWidthSidebarState(setShowFullWidthSidebar)
 
   return (

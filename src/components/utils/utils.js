@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { makeStyles } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 import Tooltip from '@material-ui/core/Tooltip'
 import Box from '@material-ui/core/Box'
@@ -16,6 +15,8 @@ export const MOBILE_VIEW_BREAKPOINT = 428
 export const SHOW_SEARCH_BOX_BREAKPOINT = 657
 export const SHOW_MINI_SIDEBAR = 792
 export const SHOW_FULL_SIDEBAR = 1313
+// font size
+export const DEFAULT_FONT_SIZE = 14
 
 export function HideOnScroll({ children }) {
   const displayMobileHeader = !useScrollTrigger({
@@ -40,9 +41,9 @@ export function HideOnScroll({ children }) {
 
 // to be deleted after rewrite
 // const useStylesLogo = makeStyles({
-//   tooltip: {
-//     backgroundColor: 'white',
-//     color: 'gray',
+  //   tooltip: {
+    //     backgroundColor: 'white',
+    //     color: 'gray',
 //     border: '1px solid gray',
 //     fontSize: '0.8rem',
 //     padding: '0.2rem 0.4rem',
@@ -53,31 +54,46 @@ export function HideOnScroll({ children }) {
 
 // // to be deleted after rewrite
 // export function YouTubeLogoTooltip(props) {
-//   const classes = useStylesLogo()
+  //   const classes = useStylesLogo()
+  
+  //   return <Tooltip classes={classes} {...props} />
+  // }
+  
+  
+// to be deleted after rewrite
+// const useStylesIcons = makeStyles({
+  //   tooltip: {
+    //     backgroundColor: 'gray',
+    //     color: 'white',
+    //     border: '1px solid gray',
+    //     fontSize: '0.8rem',
+//     padding: '0.4rem 0.4rem',
+//     // border: '0.5px solid gray',
+//     borderRadius: '2px',
+//   },
+// })
+
+// to be deleted after rewrite
+// export function OldIconTooltip(props) {
+//   // `props` is necessary here, but why?
+//   const classes = useStylesIcons()
 
 //   return <Tooltip classes={classes} {...props} />
 // }
 
-
-
-const useStylesIcons = makeStyles({
-  tooltip: {
-    backgroundColor: 'gray',
-    color: 'white',
-    border: '1px solid gray',
-    fontSize: '0.8rem',
-    padding: '0.4rem 0.4rem',
-    // border: '0.5px solid gray',
-    borderRadius: '2px',
-  },
-})
-
-export function IconTooltip(props) {
-  // `props` is necessary here, but why?
-  const classes = useStylesIcons()
-
-  return <Tooltip classes={classes} {...props} />
-}
+// Tooltip styling for all IconButton, expect YouTube logo
+export const IconTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))`
+  .MuiTooltip-tooltip {
+    background: gray;
+    color: white;
+    border: 1px solid gray;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.4rem;
+    border-radius: 2px;
+  }
+`
 
 // logo as a button so that it is keyboard-focusable
 // export const YouTubeLogoContainer = styled.button`

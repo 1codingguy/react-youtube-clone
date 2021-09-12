@@ -4,6 +4,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Drawer from '@material-ui/core/Drawer'
 import FullWidthSidebar from '../Sidebar/FullWidthSidebar'
 import Tooltip from '@material-ui/core/Tooltip'
+import { useMediaQuery } from '@material-ui/core'
 
 import {
   StyledIconButton,
@@ -11,12 +12,13 @@ import {
   DESKTOP_VIEW_HEADER_HEIGHT,
 } from '../utils/utils'
 
-function LeftContainer({
-  isMobileView,
+const LeftContainer = ({
   openSidebarDrawer,
   setOpenSidebarDrawer,
   handleHamburgerMenuClick,
-}) {
+}) => {
+  const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
+
   return (
     <StyledLeftContainer>
       {/* mobile view hides the hamburgerMenu */}

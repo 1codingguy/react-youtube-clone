@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from '@material-ui/core'
 import styled from 'styled-components'
-import Box from '@material-ui/core/Box'
-import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import MicIcon from '@material-ui/icons/Mic'
-import FocusableIcon from './FocusableIcon'
 import Drawer from '@material-ui/core/Drawer'
 import Toolbar from '@material-ui/core/Toolbar'
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined'
@@ -14,78 +11,144 @@ import TextField from '@material-ui/core/TextField'
 
 import {
   IconTooltip,
-  StyledBox,
+  StyledIconButton,
   SHOW_SEARCH_BOX_BREAKPOINT,
+  MOBILE_VIEW_BREAKPOINT,
   MOBILE_VIEW_HEADER_HEIGHT,
+  DESKTOP_VIEW_HEADER_HEIGHT,
+  DEFAULT_FONT_SIZE,
 } from '../utils/utils'
+import useResetOpenSearchDrawer from '../utils/useResetOpenSearchDrawer'
 
-const MiddleContainer = ({ isMobileView }) => {
-  const showSearchBox = useMediaQuery({ minWidth: SHOW_SEARCH_BOX_BREAKPOINT })
+const MiddleContainer = () => {
+  const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
+  const showSearchBox = useMediaQuery(
+    `(min-width: ${SHOW_SEARCH_BOX_BREAKPOINT}px)`
+  )
   const [openSearchDrawer, setOpenSearchDrawer] = useState(false)
+  const handleCloseSearchDrawer = () => {
+    setOpenSearchDrawer(false)
+  }
+  // reset openSearchDrawer to false when >= 657px
+  useResetOpenSearchDrawer(setOpenSearchDrawer)
 
   return (
     <StyledMiddleContainer>
-      {/* only show search box above SHOW_SEARCH_BOX_BREAKPOINT */}
       {showSearchBox ? (
-        <StyledForm>
-          <SearchBox placeholder="Search" />
-          <IconTooltip title="Search">
-            <SearchIconContainer>
-              <StyledIconButton>
-                <SearchIcon />
-              </StyledIconButton>
-            </SearchIconContainer>
-          </IconTooltip>
-        </StyledForm>
+        // only show search box with text field >= 657px
+        <SearchContainer />
       ) : (
-        // only show search icon in mobile view
         <>
-          <FocusableIcon
-            tooltipTitle="Search"
-            Icon={SearchIcon}
-            onClick={() => setOpenSearchDrawer(true)}
+          {/* only show search icon < 657px */}
+          <SearchButton setOpenSearchDrawer={setOpenSearchDrawer} />
+
+          <MobileViewSearchDrawer
+            openSearchDrawer={openSearchDrawer}
+            handleCloseSearchDrawer={handleCloseSearchDrawer}
           />
-          <Drawer
-            anchor="top"
-            open={openSearchDrawer}
-            onClose={() => setOpenSearchDrawer(false)}
-            transitionDuration={0} // disable the transition animation
-          >
-            <Toolbar
-              disableGutters
-              style={{
-                minHeight: MOBILE_VIEW_HEADER_HEIGHT,
-                // backgroundColor: '#f1f1f1',
-              }}
-            >
-              <ArrowBackOutlinedIcon
-                style={{ color: '#606060', margin: '12px' }}
-                onClick={() => setOpenSearchDrawer(false)}
-              />
-              <TextField
-                style={{ flexGrow: 1, fontSize: '14px' }}
-                placeholder="Search YouTube"
-              />
-              <SearchOutlinedIcon
-                style={{ color: '#606060', margin: '8px' }}
-                onClick={() => setOpenSearchDrawer(false)}
-              />
-            </Toolbar>
-          </Drawer>
         </>
       )}
 
-      {/* Hide mic icon in mobile view */}
-      {isMobileView ? null : (
-        <FocusableIcon tooltipTitle="Search with your voice" Icon={MicIcon} />
-      )}
+      {/* only show mic icon in desktop view */}
+      {isMobileView ? null : <MicButton />}
     </StyledMiddleContainer>
   )
 }
 
 export default MiddleContainer
 
-const StyledMiddleContainer = styled(StyledBox)`
+// ------------------------
+// Mobile view components
+
+const MobileViewSearchDrawer = ({
+  openSearchDrawer,
+  handleCloseSearchDrawer,
+}) => {
+  return (
+    <Drawer
+      anchor="top"
+      open={openSearchDrawer}
+      onClose={handleCloseSearchDrawer}
+      transitionDuration={0} // disable the transition animation
+    >
+      <MobileToolbar disableGutters>
+        <MobileBackIcon onClick={handleCloseSearchDrawer} />
+        <MobileSearchField placeholder="Search YouTube" />
+        <MobileSearchIcon onClick={handleCloseSearchDrawer} />
+      </MobileToolbar>
+    </Drawer>
+  )
+}
+
+const MicButton = () => {
+  return (
+    <IconTooltip title="Search with your voice">
+      <StyledIconButton>
+        <MicIcon />
+      </StyledIconButton>
+    </IconTooltip>
+  )
+}
+
+const MobileToolbar = styled(Toolbar)`
+  && {
+    @media screen and (max-width) {
+      min-height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+    }
+    min-height: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
+  }
+`
+const MobileBackIcon = styled(ArrowBackOutlinedIcon)`
+  color: #606060;
+  margin: 12px;
+`
+
+const MobileSearchField = styled(TextField)`
+  flex-grow: 1;
+
+  .MuiInputBase-input {
+    font-size: ${DEFAULT_FONT_SIZE}px;
+  }
+`
+
+const MobileSearchIcon = styled(SearchOutlinedIcon)`
+  color: #606060;
+  margin: 8px;
+`
+
+// ------------------------
+// Desktop view components
+
+const SearchContainer = () => {
+  return (
+    <StyledForm>
+      <SearchBox placeholder="Search" />
+      <IconTooltip title="Search">
+        <SearchIconContainer>
+          <StyledIconButton style={{ height: '30px', width: '30px' }}>
+            <SearchIcon />
+          </StyledIconButton>
+        </SearchIconContainer>
+      </IconTooltip>
+    </StyledForm>
+  )
+}
+
+const SearchButton = ({ setOpenSearchDrawer }) => {
+  return (
+    <IconTooltip title="Search">
+      <StyledIconButton onClick={() => setOpenSearchDrawer(true)}>
+        <SearchIcon />
+      </StyledIconButton>
+    </IconTooltip>
+  )
+}
+
+const StyledMiddleContainer = styled.div`
+  color: #030303;
+  height: 100%;
+  display: flex;
+  align-items: center;
   flex-grow: 1;
   justify-content: flex-end;
 
@@ -112,11 +175,16 @@ const SearchBox = styled.input`
   &::placeholder {
     font-family: $font-default;
     color: #909090;
-    font-size: 1rem;
+    font-size: ${DEFAULT_FONT_SIZE}px;
+  }
+
+  &::-webkit-input-placeholder {
+    /* not sure if it will solve the Safari vertical alignment issue */
+    line-height: revert;
   }
 `
 
-const SearchIconContainer = styled(Box)`
+const SearchIconContainer = styled.div`
   width: 72px;
   height: 30px;
   /* background-color: red; */
@@ -130,14 +198,4 @@ const SearchIconContainer = styled(Box)`
   &:hover {
     background-color: #f0f0f0;
   }
-`
-
-const StyledIconButton = styled(IconButton)`
-  height: 30px;
-  padding: 1px 6px;
-
-  /* This is to target .MuiIconButton-root:hover{}
-            & :hover {
-              background-color: none;
-            } */
 `
