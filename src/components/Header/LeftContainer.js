@@ -1,15 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Drawer from '@material-ui/core/Drawer'
 import FullWidthSidebar from '../Sidebar/FullWidthSidebar'
+import Tooltip from '@material-ui/core/Tooltip'
 
 import {
-  YouTubeLogoTooltip,
-  YouTubeLogoContainer,
-  YouTubeLogo,
-  StyledBox,
+  StyledIconButton,
+  MOBILE_VIEW_BREAKPOINT,
+  DESKTOP_VIEW_HEADER_HEIGHT,
 } from '../utils/utils'
 
 function LeftContainer({
@@ -19,8 +18,11 @@ function LeftContainer({
   handleHamburgerMenuClick,
 }) {
   return (
-    <StyledLeftContainer padding={0}>
-      {isMobileView || <HamburgerMenu onClick={handleHamburgerMenuClick} />}
+    <StyledLeftContainer>
+      {/* mobile view hides the hamburgerMenu */}
+      {isMobileView ? null : (
+        <HamburgerMenuIcon onClick={handleHamburgerMenuClick} />
+      )}
       <Logo />
 
       <Drawer
@@ -29,10 +31,10 @@ function LeftContainer({
         onClose={() => setOpenSidebarDrawer(false)}
         transitionDuration={0}
       >
-        <HamburgerMenuContainer>
-          <HamburgerMenu onClick={handleHamburgerMenuClick} />
-          <Logo style={{ height: '40px' }} />
-        </HamburgerMenuContainer>
+        <DrawerHamburgerMenuContainer>
+          <HamburgerMenuIcon onClick={handleHamburgerMenuClick} />
+          <Logo />
+        </DrawerHamburgerMenuContainer>
 
         <FullWidthSidebar setOpenSidebarDrawer={setOpenSidebarDrawer} />
       </Drawer>
@@ -41,16 +43,20 @@ function LeftContainer({
 }
 export default LeftContainer
 
-const StyledLeftContainer = styled(StyledBox)`
+const StyledLeftContainer = styled.div`
+  color: #030303;
+  height: 100%;
+  display: flex;
+  align-items: center;
   flex-grow: 0;
   flex-wrap: nowrap;
 `
 
-function HamburgerMenu({ onClick }) {
+const HamburgerMenuIcon = ({ onClick }) => {
   return (
-    <IconButton onClick={onClick}>
+    <StyledIconButton onClick={onClick}>
       <MenuIcon />
-    </IconButton>
+    </StyledIconButton>
   )
 }
 
@@ -67,14 +73,38 @@ const Logo = () => {
   )
 }
 
-const HamburgerMenuContainer = styled.div`
+const DrawerHamburgerMenuContainer = styled.div`
   display: flex;
-  min-height: 56px;
+  min-height: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
   padding-left: 16px;
   align-items: center;
+`
 
-  .MuiIconButton-root {
-    padding: 8px;
-    height: 40px;
+const YouTubeLogoTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))`
+  /* it has to be popper in classes, then specify .MuiToolTip-tooltip, not sure why  */
+  .MuiTooltip-tooltip {
+    background-color: white;
+    color: gray;
+    border: 1px solid gray;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 2px;
   }
+`
+
+const YouTubeLogoContainer = styled.button`
+  border: none;
+  background-color: transparent;
+  height: 100%;
+`
+
+const YouTubeLogo = styled.img`
+  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+    margin: auto 1rem;
+  }
+  height: 20px;
+  cursor: pointer;
+  margin: auto 16px;
 `

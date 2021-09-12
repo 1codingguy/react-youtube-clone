@@ -23,7 +23,8 @@ function Header({
   return (
     <>
       <HideOnScroll>
-        <StyledAppBar elevation={isMobileView ? 1 : 0}>
+        {/* not sure if color=transparent will affect the look when scroll */}
+        <StyledAppBar elevation={isMobileView ? 1 : 0} color="transparent">
           <StyledToolbar disableGutters>
             <LeftContainer
               isMobileView={isMobileView}
@@ -38,10 +39,18 @@ function Header({
       </HideOnScroll>
 
       {/* Below text only to test if hiding the AppBar works */}
-      {/* <div>
+      {/* <div
+        style={{
+          paddingTop: `${
+            isMobileView
+              ? MOBILE_VIEW_HEADER_HEIGHT
+              : DESKTOP_VIEW_HEADER_HEIGHT
+          }px`,
+        }}
+      >
         {[...new Array(100)]
           .map(
-            () =>  `Cras mattis consectetur purus sit amet fermentum.
+            () => `Cras mattis consectetur purus sit amet fermentum.
 Cras justo odio, dapibus ac facilisis in, egestas eget quam.
 Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
 Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
@@ -57,7 +66,8 @@ export default Header
 export const StyledAppBar = styled(AppBar)`
   /* increase specificity to override default indigo color */
   && {
-    background-color: white;
+    /* background-color: white; */
+    opacity: 0.9;
     transition: none !important; // can't override without !important
   }
 
@@ -78,9 +88,9 @@ const StyledToolbar = styled(Toolbar)`
     padding-right: 0;
   }
 
-  background-color: white;
   /* remove the border later */
   border-bottom: 1px solid lightgray;
   padding-left: 16px;
   padding-right: 16px;
+  /* background-color: white; */
 `

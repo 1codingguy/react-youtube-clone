@@ -5,6 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Box from '@material-ui/core/Box'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Slide from '@material-ui/core/Slide'
+import IconButton from '@material-ui/core/IconButton'
 
 // useScrollTrigger doesn't need "px" suffix
 const MOBILE_VIEW_SCROLL_THRESHOLD = 48
@@ -37,24 +38,27 @@ export function HideOnScroll({ children }) {
   )
 }
 
-const useStylesLogo = makeStyles({
-  tooltip: {
-    backgroundColor: 'white',
-    color: 'gray',
-    border: '1px solid gray',
-    fontSize: '0.8rem',
-    padding: '0.2rem 0.4rem',
-    // border: '0.5px solid black',
-    borderRadius: '2px',
-  },
-})
+// to be deleted after rewrite
+// const useStylesLogo = makeStyles({
+//   tooltip: {
+//     backgroundColor: 'white',
+//     color: 'gray',
+//     border: '1px solid gray',
+//     fontSize: '0.8rem',
+//     padding: '0.2rem 0.4rem',
+//     // border: '0.5px solid black',
+//     borderRadius: '2px',
+//   },
+// })
 
-export function YouTubeLogoTooltip(props) {
-  // `props` is necessary here, but why?
-  const classes = useStylesLogo()
+// // to be deleted after rewrite
+// export function YouTubeLogoTooltip(props) {
+//   const classes = useStylesLogo()
 
-  return <Tooltip classes={classes} {...props} />
-}
+//   return <Tooltip classes={classes} {...props} />
+// }
+
+
 
 const useStylesIcons = makeStyles({
   tooltip: {
@@ -76,21 +80,21 @@ export function IconTooltip(props) {
 }
 
 // logo as a button so that it is keyboard-focusable
-export const YouTubeLogoContainer = styled.button`
-  border: none;
-  background-color: transparent;
-  height: 100%;
-`
+// export const YouTubeLogoContainer = styled.button`
+//   border: none;
+//   background-color: transparent;
+//   height: 100%;
+// `
 
-export const YouTubeLogo = styled.img`
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
-    margin: auto 1rem;
-  }
-  height: 20px;
-  cursor: pointer;
-  margin: auto 16px;
-`
-
+// export const YouTubeLogo = styled.img`
+//   @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+//     margin: auto 1rem;
+//   }
+//   height: 20px;
+//   cursor: pointer;
+//   margin: auto 16px;
+// `
+// StyledBox to be deleted after rewrite
 export const StyledBox = styled(Box)`
   color: #030303;
   /* padding: ${(props) => props.padding}; */
@@ -100,6 +104,15 @@ export const StyledBox = styled(Box)`
 
   /* doesn't work if StyledIconButton = styled(IconButton) */
   .MuiIconButton-root {
+    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+      padding: 12px;
+    }
+    padding: 8px;
+  }
+`
+// common settings of padding for all IconButton
+export const StyledIconButton = styled(IconButton)`
+  && {
     @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
       padding: 12px;
     }

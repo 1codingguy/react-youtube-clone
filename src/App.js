@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Header from './components/Header/Header.jsx'
 import { useMediaQuery } from '@material-ui/core'
+import TestHeader from './TestHeader'
 
 import {
   MOBILE_VIEW_BREAKPOINT,
@@ -8,11 +9,12 @@ import {
 } from './components/utils/utils'
 import Footer from './components/Sidebar/Footer'
 import Main from './components/Main/Main.jsx'
+import { useResetShowFullWidthSidebarState } from './components/utils/useResetShowFullWidthSidebarState'
 
 function App() {
-  const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT})`)
+  const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
 
-  const shouldOpenDrawer = !useMediaQuery(`(min-width:${SHOW_FULL_SIDEBAR})`)
+  const shouldOpenDrawer = !useMediaQuery(`(min-width:${SHOW_FULL_SIDEBAR}px)`)
 
   const [openSidebarDrawer, setOpenSidebarDrawer] = useState(false)
 
@@ -26,26 +28,13 @@ function App() {
     setShowFullWidthSidebar(!showFullWidthSidebar)
   }
 
-  useEffect(() => {
-    const resizeListener = () => {
-      // if window resized under 1313px, set to true
-      if (window.innerWidth < 1313) {
-        setShowFullWidthSidebar(true)
-      }
-    }
-
-    window.addEventListener('resize', resizeListener)
-
-    // clean up function
-    return () => {
-      window.removeEventListener('resize', resizeListener)
-    }
-  })
+  useResetShowFullWidthSidebarState(setShowFullWidthSidebar)
 
   return (
     <div className="App">
+      {/* <TestHeader /> */}
+
       <Header
-        isMobileView={isMobileView}
         openSidebarDrawer={openSidebarDrawer}
         setOpenSidebarDrawer={setOpenSidebarDrawer}
         handleHamburgerMenuClick={handleHamburgerMenuClick}
@@ -53,6 +42,7 @@ function App() {
 
       <Main
         showFullWidthSidebar={showFullWidthSidebar}
+        px
         setOpenSidebarDrawer={setOpenSidebarDrawer}
       />
       {isMobileView && <Footer />}
