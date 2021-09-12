@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import { HideOnScroll } from '../utils/utils'
-import LeftContainer from './LeftContainer'
+import LeftContainer from './LeftContainer/LeftContainer'
 import MiddleContainer from './MiddleContainer/MiddleContainer'
 import RightContainer from './RightContainer'
 import { useMediaQuery } from '@material-ui/core'
@@ -13,6 +13,7 @@ import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
 } from '../utils/utils'
+import { textForScrollingTest } from '../utils/textForScrollingTest'
 
 function Header({
   openSidebarDrawer,
@@ -38,24 +39,7 @@ function Header({
       </HideOnScroll>
 
       {/* Below text only to test if hiding the AppBar works */}
-      {/* <div
-        style={{
-          paddingTop: `${
-            isMobileView
-              ? MOBILE_VIEW_HEADER_HEIGHT
-              : DESKTOP_VIEW_HEADER_HEIGHT
-          }px`,
-        }}
-      >
-        {[...new Array(100)]
-          .map(
-            () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-          )
-          .join('\n')}
-      </div> */}
+      {/* {textForScrollingTest(isMobileView)} */}
     </>
   )
 }
@@ -63,7 +47,6 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
 export default Header
 
 export const StyledAppBar = styled(AppBar)`
-  /* increase specificity to override default indigo color */
   && {
     /* background-color: white; */
     opacity: 0.9;
