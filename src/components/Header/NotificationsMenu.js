@@ -13,9 +13,10 @@ const NotificationsMenu = ({ anchorEl, handleClose }) => {
   return (
     <StyledNotificationsMenu
       anchorEl={anchorEl}
-      keepMounted
+      // keepMounted
       open={Boolean(anchorEl)}
       onClose={handleClose}
+      transitionDuration={0}
     >
       <StyledPaper>
         <NotificationsMenuTop>
@@ -76,7 +77,7 @@ const NotificationsMenuTop = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: ${NOTIFICATION_MENU_TOP_HEIGHT};
+  height: ${NOTIFICATION_MENU_TOP_HEIGHT}px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-left: 16px;
   padding-right: 16px;
@@ -85,7 +86,7 @@ const NotificationsMenuTop = styled(Box)`
 const NotificationsMenuContent = styled(Box)`
   display: grid;
   place-items: center;
-  height: calc(100% - ${NOTIFICATION_MENU_TOP_HEIGHT});
+  height: calc(100% - ${NOTIFICATION_MENU_TOP_HEIGHT}px);
 `
 
 const StyledPaper = styled(Paper)`

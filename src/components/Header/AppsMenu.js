@@ -13,9 +13,10 @@ const AppsMenu = ({ anchorEl, handleClose }) => {
   return (
     <StyledAppsMenu
       anchorEl={anchorEl}
-      keepMounted
+      // keepMounted
       open={Boolean(anchorEl)}
       onClose={handleClose}
+      transitionDuration={0}
     >
       {addMenuItems(0, 1)}
       <Divider />

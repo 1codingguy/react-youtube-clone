@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 
-import { footerIcons } from './Footer'
+import { FooterIcons } from './Footer'
 
 const MiniSidebar = () => {
   return (
-    <StyledMiniSidebar>{footerIcons({ padding: '16px 0' })}</StyledMiniSidebar>
+    <StyledMiniSidebar>{FooterIcons({ padding: '16px 0' })}</StyledMiniSidebar>
   )
 }
 

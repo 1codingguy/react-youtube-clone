@@ -7,10 +7,7 @@ import VideoCallIcon from '@material-ui/icons/VideoCall'
 import AppsIcon from '@material-ui/icons/Apps'
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp'
 // Custom elements & components
-import {
-  StyledBox,
-  MOBILE_VIEW_BREAKPOINT,
-} from '../utils/utils'
+import { StyledBox, MOBILE_VIEW_BREAKPOINT } from '../utils/utils'
 import FocusableIcon from './FocusableIcon'
 import CreateVideoMenu from './CreateVideoMenu'
 import AppsMenu from './AppsMenu'
@@ -33,7 +30,7 @@ const RightContainer = ({ isMobileView }) => {
 
   return (
     <StyledRightContainer>
-      {isMobileView || (
+      {isMobileView ? null : (
         <>
           <FocusableIcon
             tooltipTitle="Create"
@@ -88,7 +85,7 @@ const StyledRightContainer = styled(StyledBox)`
 
   /* doesn't work if StyledAvatar = styled(Avatar) */
   .MuiAvatar-root {
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
+    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
       width: 24px;
       height: 24px;
     }

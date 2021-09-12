@@ -7,14 +7,14 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Slide from '@material-ui/core/Slide'
 
 // useScrollTrigger doesn't need "px" suffix
-const MOBILE_VIEW_SCROLL_THRESHOLD = '48'
-export const MOBILE_VIEW_HEADER_HEIGHT = '48px'
-export const DESKTOP_VIEW_HEADER_HEIGHT = '56px'
+const MOBILE_VIEW_SCROLL_THRESHOLD = 48
+export const MOBILE_VIEW_HEADER_HEIGHT = 48
+export const DESKTOP_VIEW_HEADER_HEIGHT = 56
 // Breakpoints
-export const MOBILE_VIEW_BREAKPOINT = '428px'
-export const SHOW_SEARCH_BOX_BREAKPOINT = '657px'
-export const SHOW_MINI_SIDEBAR = '792px'
-export const SHOW_FULL_SIDEBAR = '1313px'
+export const MOBILE_VIEW_BREAKPOINT = 428
+export const SHOW_SEARCH_BOX_BREAKPOINT = 657
+export const SHOW_MINI_SIDEBAR = 792
+export const SHOW_FULL_SIDEBAR = 1313
 
 export function HideOnScroll({ children }) {
   const displayMobileHeader = !useScrollTrigger({
@@ -22,7 +22,7 @@ export function HideOnScroll({ children }) {
   })
 
   const displayDesktopHeader = !useMediaQuery(
-    `(max-width:${MOBILE_VIEW_BREAKPOINT})`
+    `(max-width:${MOBILE_VIEW_BREAKPOINT}px)`
   )
   // always show Header in desktop view
   const showHeader = displayDesktopHeader
@@ -83,7 +83,7 @@ export const YouTubeLogoContainer = styled.button`
 `
 
 export const YouTubeLogo = styled.img`
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
+  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
     margin: auto 1rem;
   }
   height: 20px;
@@ -100,7 +100,7 @@ export const StyledBox = styled(Box)`
 
   /* doesn't work if StyledIconButton = styled(IconButton) */
   .MuiIconButton-root {
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
+    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
       padding: 12px;
     }
     padding: 8px;

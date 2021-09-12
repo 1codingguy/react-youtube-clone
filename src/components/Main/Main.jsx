@@ -16,10 +16,10 @@ import {
 } from '../utils/utils'
 
 const Main = ({ showFullWidthSidebar, setOpenSidebarDrawer }) => {
-  const showMiniSidebar = useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR})`)
+  const showMiniSidebar = useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR}px)`)
   // width criteria to show full width sidebar
   const minWidthToShowFullSidebar = useMediaQuery(
-    `(min-width: ${SHOW_FULL_SIDEBAR})`
+    `(min-width: ${SHOW_FULL_SIDEBAR}px)`
   )
   // combine width criteria and logic criteria
   const showFullSidebar = minWidthToShowFullSidebar && showFullWidthSidebar
@@ -36,8 +36,8 @@ const Main = ({ showFullWidthSidebar, setOpenSidebarDrawer }) => {
       </div>
 
       <div className="main-right-container">
-        <CategoriesBar />
-        <Videos />
+        {/* <CategoriesBar />
+        <Videos /> */}
       </div>
     </StyledMain>
   )
@@ -46,13 +46,13 @@ const Main = ({ showFullWidthSidebar, setOpenSidebarDrawer }) => {
 export default Main
 
 const StyledMain = styled.div`
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
-    padding-top: ${MOBILE_VIEW_HEADER_HEIGHT};
-    /* min-height: calc(100vh - ${MOBILE_VIEW_HEADER_HEIGHT}); */
+  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+    padding-top: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+    /* min-height: calc(100vh - ${MOBILE_VIEW_HEADER_HEIGHT}px); */
     min-height: 100vh;
   }
-  padding-top: ${DESKTOP_VIEW_HEADER_HEIGHT};
-  /* min-height: calc(100vh - ${DESKTOP_VIEW_HEADER_HEIGHT}); */
+  padding-top: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
+  /* min-height: calc(100vh - ${DESKTOP_VIEW_HEADER_HEIGHT}px); */
   min-height: 100vh;
 
   display: flex;

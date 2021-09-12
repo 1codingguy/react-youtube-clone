@@ -49,6 +49,7 @@ const MiddleContainer = ({ isMobileView }) => {
             anchor="top"
             open={openSearchDrawer}
             onClose={() => setOpenSearchDrawer(false)}
+            transitionDuration={0} // disable the transition animation
           >
             <Toolbar
               disableGutters
@@ -75,7 +76,7 @@ const MiddleContainer = ({ isMobileView }) => {
       )}
 
       {/* Hide mic icon in mobile view */}
-      {isMobileView || (
+      {isMobileView ? null : (
         <FocusableIcon tooltipTitle="Search with your voice" Icon={MicIcon} />
       )}
     </StyledMiddleContainer>
@@ -88,7 +89,7 @@ const StyledMiddleContainer = styled(StyledBox)`
   flex-grow: 1;
   justify-content: flex-end;
 
-  @media screen and (min-width: ${SHOW_SEARCH_BOX_BREAKPOINT}) {
+  @media screen and (min-width: ${SHOW_SEARCH_BOX_BREAKPOINT}px) {
     justify-content: center;
     margin-right: 2rem;
   }

@@ -10,7 +10,7 @@ const MobileFooter = () => {
 
   return (
     <BottomNavigation showLabels className={classes.root}>
-      {footerIcons()}
+      <FooterIcons />
     </BottomNavigation>
   )
 }
@@ -38,14 +38,17 @@ export const StyledBottomNavigationAction = styled(BottomNavigationAction)`
   }
 `
 
-export const footerIcons = (style = undefined) =>
-  footerColumns.map(({ Icon, text }) => {
-    return (
-      <StyledBottomNavigationAction
-        key={text}
-        label={text}
-        icon={<Icon />}
-        style={style} // To add padding in MiniSidebar
-      />
-    )
-  })
+export const FooterIcons = ({ style = undefined }) => (
+  <>
+    {footerColumns.map(({ Icon, text }) => {
+      return (
+        <StyledBottomNavigationAction
+          key={text}
+          label={text}
+          icon={<Icon />}
+          style={style} // To add padding in MiniSidebar
+        />
+      )
+    })}
+  </>
+)

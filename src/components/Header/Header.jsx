@@ -6,6 +6,7 @@ import { HideOnScroll } from '../utils/utils'
 import LeftContainer from './LeftContainer'
 import MiddleContainer from './MiddleContainer'
 import RightContainer from './RightContainer'
+import { useMediaQuery } from '@material-ui/core'
 
 import {
   MOBILE_VIEW_BREAKPOINT,
@@ -14,11 +15,11 @@ import {
 } from '../utils/utils'
 
 function Header({
-  isMobileView,
   openSidebarDrawer,
   setOpenSidebarDrawer,
   handleHamburgerMenuClick,
 }) {
+  const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
   return (
     <>
       <HideOnScroll>
@@ -53,23 +54,26 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
 
 export default Header
 
-const StyledAppBar = styled(AppBar)`
+export const StyledAppBar = styled(AppBar)`
   /* increase specificity to override default indigo color */
-  &&{background-color: white};
+  && {
+    background-color: white;
+    transition: none !important; // can't override without !important
+  }
 
   .MuiToolbar-regular {
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
-      min-height: ${MOBILE_VIEW_HEADER_HEIGHT};
-      height: ${MOBILE_VIEW_HEADER_HEIGHT};
+    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+      min-height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+      height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
     }
 
-    min-height: ${DESKTOP_VIEW_HEADER_HEIGHT};
-    height: ${DESKTOP_VIEW_HEADER_HEIGHT};
+    min-height: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
+    height: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
   }
 `
 
 const StyledToolbar = styled(Toolbar)`
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
+  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
     padding-left: 0;
     padding-right: 0;
   }

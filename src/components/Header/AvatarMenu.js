@@ -41,9 +41,10 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
     return (
       <MobileAvatarMenu
         anchorEl={anchorEl}
-        keepMounted
+        // keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        transitionDuration={0}
       >
         <StyledMobileAccountHeader handleClose={handleClose} />
 
@@ -63,9 +64,10 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
   return (
     <StyledAvatarMenu
       anchorEl={anchorEl}
-      keepMounted
+      // keepMounted
       open={Boolean(anchorEl)}
       onClose={handleClose}
+      transitionDuration={0}
     >
       <StyledAccountInfoHeader handleClose={handleClose} />
       <Divider />
@@ -155,6 +157,7 @@ const MobileAvatarMenu = withStyles({
       vertical: 'top',
       horizontal: 'left',
     }}
+    transitionDuration={0}
     {...props}
   />
 ))
@@ -163,7 +166,7 @@ const AccountInfoHeader = styled.div`
   display: flex;
   padding: 16px;
 
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
+  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
     padding: 0;
     margin: 12px auto;
   }
@@ -172,7 +175,7 @@ const AccountInfoHeader = styled.div`
     background-color: #ef6c00;
     margin-right: 16px;
 
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
+    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
       width: 48px;
       height: 48px;
     }

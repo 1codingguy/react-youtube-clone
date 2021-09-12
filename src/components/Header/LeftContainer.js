@@ -27,6 +27,7 @@ function LeftContainer({
         anchor="left"
         open={openSidebarDrawer}
         onClose={() => setOpenSidebarDrawer(false)}
+        transitionDuration={0}
       >
         <HamburgerMenuContainer>
           <HamburgerMenu onClick={handleHamburgerMenuClick} />

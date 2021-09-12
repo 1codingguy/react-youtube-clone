@@ -10,9 +10,10 @@ const CreateVideoMenu = ({ anchorVideoButton, handleClose }) => {
   return (
     <StyledVideoMenu
       anchorEl={anchorVideoButton}
-      keepMounted
+      // keepMounted
       open={Boolean(anchorVideoButton)}
       onClose={handleClose}
+      transitionDuration={0}
     >
       {menuItems.map(({ Icon, text }) => {
         return (
