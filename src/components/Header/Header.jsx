@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import { HideOnScroll } from '../utils/utils'
 import LeftContainer from './LeftContainer'
-import MiddleContainer from './MiddleContainer'
+import MiddleContainer from './MiddleContainer/MiddleContainer'
 import RightContainer from './RightContainer'
 import { useMediaQuery } from '@material-ui/core'
 
