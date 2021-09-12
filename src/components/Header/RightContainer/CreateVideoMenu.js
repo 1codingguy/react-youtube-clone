@@ -1,28 +1,34 @@
 import React from 'react'
 import styled from 'styled-components'
-import { withStyles } from '@material-ui/core/styles'
 import Menu from '@material-ui/core/Menu'
-import { StyledListItem, StyledMenuItem } from './StyledMenuItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import {
+  StyledMenuItem,
+  StyledListItemIcon,
+} from '../StyledMenuItem'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
+import { DEFAULT_FONT_SIZE } from '../../utils/utils'
 
 const CreateVideoMenu = ({ anchorVideoButton, handleClose }) => {
   return (
-    <StyledVideoMenu
+    <VideoMenu
       anchorEl={anchorVideoButton}
       // keepMounted
       open={Boolean(anchorVideoButton)}
       onClose={handleClose}
-      transitionDuration={0}
     >
       {menuItems.map(({ Icon, text }) => {
         return (
           <StyledMenuItem key={text} onClick={handleClose}>
-            <StyledListItem Icon={Icon} text={text} />
+            <StyledListItemIcon >
+              <Icon fontSize='small' />
+            </StyledListItemIcon>
+            <ListItemText primary={text} />
           </StyledMenuItem>
         )
       })}
-    </StyledVideoMenu>
+    </VideoMenu>
   )
 }
 
@@ -33,15 +39,10 @@ const menuItems = [
   { Icon: WifiTetheringIcon, text: 'Go live' },
 ]
 
-const VideoMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-    borderTop: 0,
-    borderRadius: 0,
-  },
-})((props) => (
+const VideoMenu = styled(({ className, ...props }) => (
   <Menu
-    elevation={0}
+    {...props}
+    classes={{ paper: className, list: 'list' }}
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: 'bottom',
@@ -51,12 +52,16 @@ const VideoMenu = withStyles({
       vertical: 'top',
       horizontal: 'left',
     }}
-    {...props}
+    PaperProps={{ square: true }}
+    transitionDuration={0}
+    elevation={0}
   />
-))
+))`
+  border: 1px solid #d3d4d5;
+  border-top: 0;
+  /* border-radius: 0; */
 
-const StyledVideoMenu = styled(VideoMenu)`
   .MuiTypography-body1 {
-    font-size: 14px;
+    font-size: ${DEFAULT_FONT_SIZE}px;
   }
 `

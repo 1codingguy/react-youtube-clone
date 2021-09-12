@@ -1,29 +1,25 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import styled from 'styled-components'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
-export const StyledMenuItem = withStyles({
-  root: {
-    paddingTop: '8px',
-    paddingBottom: '8px',
-    minHeight: '40px',
-  },
-  gutters: {
-    // should be 16px or 32px?
-    paddingRight: '16px',
-  },
-})(MenuItem)
+export const StyledMenuItem = styled(MenuItem)`
+  && {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    min-height: 40px;
+  }
+`
 
 // The icon on the left of each list item
-export const StyledListItemIcon = withStyles({
-  root: {
-    minWidth: '0',
-    marginRight: '16px',
-  },
-})(ListItemIcon)
+export const StyledListItemIcon = styled(ListItemIcon)`
+  && {
+    min-width: 0;
+    margin-right: 16px;
+  }
+`
 
 // ListItem = Icon + Text + optional arrow on the right
 export const StyledListItem = ({

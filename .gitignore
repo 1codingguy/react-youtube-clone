@@ -27,3 +27,6 @@ yarn-error.log*
 
 # screenshots for my reference
 /screenshots
+
+# For experiment only
+TestHeader.jsx

@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 import { useMediaQuery } from '@material-ui/core'
 import Tooltip from '@material-ui/core/Tooltip'
-import Box from '@material-ui/core/Box'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Slide from '@material-ui/core/Slide'
 import IconButton from '@material-ui/core/IconButton'
 
-// useScrollTrigger doesn't need "px" suffix
 const MOBILE_VIEW_SCROLL_THRESHOLD = 48
+export const NOTIFICATION_MENU_TOP_HEIGHT = 48
 export const MOBILE_VIEW_HEADER_HEIGHT = 48
 export const DESKTOP_VIEW_HEADER_HEIGHT = 56
 // Breakpoints
@@ -39,48 +38,6 @@ export function HideOnScroll({ children }) {
   )
 }
 
-// to be deleted after rewrite
-// const useStylesLogo = makeStyles({
-  //   tooltip: {
-    //     backgroundColor: 'white',
-    //     color: 'gray',
-//     border: '1px solid gray',
-//     fontSize: '0.8rem',
-//     padding: '0.2rem 0.4rem',
-//     // border: '0.5px solid black',
-//     borderRadius: '2px',
-//   },
-// })
-
-// // to be deleted after rewrite
-// export function YouTubeLogoTooltip(props) {
-  //   const classes = useStylesLogo()
-  
-  //   return <Tooltip classes={classes} {...props} />
-  // }
-  
-  
-// to be deleted after rewrite
-// const useStylesIcons = makeStyles({
-  //   tooltip: {
-    //     backgroundColor: 'gray',
-    //     color: 'white',
-    //     border: '1px solid gray',
-    //     fontSize: '0.8rem',
-//     padding: '0.4rem 0.4rem',
-//     // border: '0.5px solid gray',
-//     borderRadius: '2px',
-//   },
-// })
-
-// to be deleted after rewrite
-// export function OldIconTooltip(props) {
-//   // `props` is necessary here, but why?
-//   const classes = useStylesIcons()
-
-//   return <Tooltip classes={classes} {...props} />
-// }
-
 // Tooltip styling for all IconButton, expect YouTube logo
 export const IconTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -92,38 +49,6 @@ export const IconTooltip = styled(({ className, ...props }) => (
     font-size: 0.8rem;
     padding: 0.4rem 0.4rem;
     border-radius: 2px;
-  }
-`
-
-// logo as a button so that it is keyboard-focusable
-// export const YouTubeLogoContainer = styled.button`
-//   border: none;
-//   background-color: transparent;
-//   height: 100%;
-// `
-
-// export const YouTubeLogo = styled.img`
-//   @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
-//     margin: auto 1rem;
-//   }
-//   height: 20px;
-//   cursor: pointer;
-//   margin: auto 16px;
-// `
-// StyledBox to be deleted after rewrite
-export const StyledBox = styled(Box)`
-  color: #030303;
-  /* padding: ${(props) => props.padding}; */
-  height: 100%;
-  display: flex;
-  align-items: center;
-
-  /* doesn't work if StyledIconButton = styled(IconButton) */
-  .MuiIconButton-root {
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
-      padding: 12px;
-    }
-    padding: 8px;
   }
 `
 // common settings of padding for all IconButton

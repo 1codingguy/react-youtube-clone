@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import IconButton from '@material-ui/core/IconButton'
-import Avatar from '@material-ui/core/Avatar'
-// Icons
-import VideoCallIcon from '@material-ui/icons/VideoCall'
-import AppsIcon from '@material-ui/icons/Apps'
-import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp'
+
 // Custom elements & components
-import { StyledBox, MOBILE_VIEW_BREAKPOINT } from '../utils/utils'
-import FocusableIcon from './FocusableIcon'
+import CreateVideoButton from './CreateVideoButton'
 import CreateVideoMenu from './CreateVideoMenu'
+import AppsButton from './AppsButton'
 import AppsMenu from './AppsMenu'
+import NotificationsButton from './NotificationsButton'
 import NotificationsMenu from './NotificationsMenu'
+import AvatarButton from './AvatarButton'
 import AvatarMenu from './AvatarMenu'
 
 const RightContainer = ({ isMobileView }) => {
@@ -32,29 +29,17 @@ const RightContainer = ({ isMobileView }) => {
     <StyledRightContainer>
       {isMobileView ? null : (
         <>
-          <FocusableIcon
-            tooltipTitle="Create"
-            Icon={VideoCallIcon}
-            onClick={(event) => setAnchorVideoButton(event.currentTarget)}
-          />
+          <CreateVideoButton setAnchorVideoButton={setAnchorVideoButton} />
           <CreateVideoMenu
             anchorVideoButton={anchorVideoButton}
             handleClose={handleClose}
           />
 
-          <FocusableIcon
-            tooltipTitle="YouTube Apps"
-            Icon={AppsIcon}
-            onClick={(event) => setAnchorAppsButton(event.currentTarget)}
-          />
+          <AppsButton setAnchorAppsButton={setAnchorAppsButton} />
           <AppsMenu anchorEl={anchorAppsButton} handleClose={handleClose} />
 
-          <FocusableIcon
-            tooltipTitle="Notifications"
-            Icon={NotificationsNoneSharpIcon}
-            onClick={(event) =>
-              setAnchorNotificationsButton(event.currentTarget)
-            }
+          <NotificationsButton
+            setAnchorNotificationsButton={setAnchorNotificationsButton}
           />
           <NotificationsMenu
             anchorEl={anchorNotificationsButton}
@@ -63,9 +48,7 @@ const RightContainer = ({ isMobileView }) => {
         </>
       )}
 
-      <IconButton onClick={(event) => setAnchorAvatar(event.currentTarget)}>
-        <Avatar>C</Avatar>
-      </IconButton>
+      <AvatarButton setAnchorAvatar={setAnchorAvatar} />
 
       <AvatarMenu
         anchorEl={anchorAvatar}
@@ -78,20 +61,12 @@ const RightContainer = ({ isMobileView }) => {
 
 export default RightContainer
 
-const StyledRightContainer = styled(StyledBox)`
+const StyledRightContainer = styled.div`
+  color: #030303;
+  height: 100%;
+  display: flex;
+  align-items: center;
   flex-grow: 0;
   flex-wrap: nowrap;
   justify-content: space-between;
-
-  /* doesn't work if StyledAvatar = styled(Avatar) */
-  .MuiAvatar-root {
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
-      width: 24px;
-      height: 24px;
-    }
-    width: 32px;
-    height: 32px;
-    font-size: 0.875rem;
-    background-color: #ef6c00;
-  }
 `

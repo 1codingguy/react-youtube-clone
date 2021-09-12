@@ -9,6 +9,18 @@ import Avatar from '@material-ui/core/Avatar'
 import { StyledMenuItem, addMenuChunk } from '../Header/StyledMenuItem'
 import { sideBarMenuRows, moreFromYouTubeRows } from './sidebarData'
 
+// example of turning a chunk into a mini component
+function TopMenu({topMenuData}) {
+  return (
+    <div className="sidebar-top-menu" style={{ padding: '12px 0' }}>
+      {topMenuData(0, 3)}
+      <Divider style={{ margin: '12px 0' }} />
+      {topMenuData(3)}
+    </div>
+  )
+}
+
+
 const FullWidthSidebar = ({ setOpenSidebarDrawer }) => {
   const handleSidebarClose = () => {
     setOpenSidebarDrawer(false)
@@ -34,11 +46,7 @@ const FullWidthSidebar = ({ setOpenSidebarDrawer }) => {
 
   return (
     <StyledFullWidthSidebar>
-      <div className="sidebar-top-menu" style={{ padding: '12px 0' }}>
-        {topMenuData(0, 3)}
-        <Divider style={{ margin: '12px 0' }} />
-        {topMenuData(3)}
-      </div>
+      <TopMenu {...{topMenuData}}/>
 
       <Divider />
 

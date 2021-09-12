@@ -2,16 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import { HideOnScroll } from '../utils/utils'
 import LeftContainer from './LeftContainer/LeftContainer'
 import MiddleContainer from './MiddleContainer/MiddleContainer'
-import RightContainer from './RightContainer'
+import RightContainer from './RightContainer/RightContainer'
 import { useMediaQuery } from '@material-ui/core'
 
 import {
   MOBILE_VIEW_BREAKPOINT,
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
+  HideOnScroll,
 } from '../utils/utils'
 import { textForScrollingTest } from '../utils/textForScrollingTest'
 

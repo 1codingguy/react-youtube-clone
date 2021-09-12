@@ -11,9 +11,12 @@ import SecurityOutlinedIcon from '@material-ui/icons/SecurityOutlined'
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined'
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined'
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined'
-import YouTubeIcon from '@material-ui/icons/YouTube'
 
-export const desktopMenuArray = [
+import styled from 'styled-components'
+import { StyledMenuItem, StyledListItemIcon } from '../StyledMenuItem'
+import ListItemText from '@material-ui/core/ListItemText'
+
+export const menuArray = [
   { Icon: AccountBoxOutlinedIcon, text: 'Your channel' },
   { Icon: MonetizationOnOutlinedIcon, text: 'Purchase and memberships' },
   { Icon: SettingsOutlinedIcon, text: 'YouTube Studio' },
@@ -33,13 +36,34 @@ export const desktopMenuArray = [
   { Icon: KeyboardOutlinedIcon, text: 'Keyboard shortcuts' },
 ]
 
-export const mobileMenuArray = [
-  { Icon: AccountBoxOutlinedIcon, text: 'Your channel' },
-  { Icon: YouTubeIcon, text: 'Get YouTube Premium' },
-  { Icon: MonetizationOnOutlinedIcon, text: 'Purchase and memberships' },
-  { Icon: SupervisorAccountOutlinedIcon, text: 'Switch account' },
-  { Icon: SettingsOutlinedIcon, text: 'Settings' },
-  { Icon: SecurityOutlinedIcon, text: 'Your data in YouTube' },
-  { Icon: FeedbackOutlinedIcon, text: 'Feedback' },
-  { Icon: HelpOutlineOutlinedIcon, text: 'Help' },
-]
+export const AvatarMenuTop = ({ onClick }) => {
+  return menuArray.slice(0, 5).map((item) => {
+    const { Icon, text } = item
+    return <MenuRow key={text} Icon={Icon} text={text} onClick={onClick} />
+  })
+}
+
+export const AvatarMenuMiddle = ({ onClick }) => {
+  return menuArray.slice(5).map((item) => {
+    const { Icon, text } = item
+    return <MenuRow key={text} Icon={Icon} text={text} onClick={onClick} />
+  })
+}
+
+const MenuRow = ({ Icon, text, onClick }) => {
+  return (
+    <MenuItem onClick={onClick}>
+      <StyledListItemIcon>
+        <Icon fontSize="small" />
+      </StyledListItemIcon>
+      <ListItemText primary={text} />
+    </MenuItem>
+  )
+}
+
+const MenuItem = styled(StyledMenuItem)`
+  && {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+`
