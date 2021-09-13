@@ -1,10 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Popover from '@material-ui/core/Popover'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
-import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined'
 import Fab from '@material-ui/core/Fab'
 import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined'
 import { AvatarAccountInfo } from './AvatarAccountInfo'
@@ -12,6 +9,7 @@ import {
   MobileAvatarMenuTop,
   MobileAvatarMenuBottom,
 } from './mobileAvatarMenuData'
+import { MobileAvatarMenuHeader } from './MobileAvatarMenuHeader'
 
 function MobileAvatarPopUpMenu({ anchorEl, handleClose, isMobileView }) {
   return (
@@ -20,7 +18,7 @@ function MobileAvatarPopUpMenu({ anchorEl, handleClose, isMobileView }) {
       open={Boolean(anchorEl)}
       onClose={handleClose}
     >
-      <MobileHeader onClick={handleClose} />
+      <MobileAvatarMenuHeader onClick={handleClose} />
 
       <AvatarAccountInfo isMobileView={isMobileView} onClick={handleClose} />
 
@@ -79,24 +77,4 @@ const StyledFab = styled(Fab)`
     background-color: #ff0000;
     color: white;
   }
-`
-
-const MobileHeader = ({ onClick }) => (
-  <MobileHeaderContainer square={true}>
-    <CloseMobileMenuButton onClick={onClick} />
-    <Typography>Account</Typography>
-  </MobileHeaderContainer>
-)
-
-const CloseMobileMenuButton = styled(CloseOutlinedIcon)`
-  cursor: pointer;
-  margin: 8px;
-  margin-right: 32px;
-`
-
-const MobileHeaderContainer = styled(Paper)`
-  display: flex;
-  align-items: center;
-  padding: 6px 4px;
-  min-height: 52px;
 `

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Header from './components/Header/Header.jsx'
 import { useMediaQuery } from '@material-ui/core'
-import TestHeader from './TestHeader'
 
 import {
   MOBILE_VIEW_BREAKPOINT,
@@ -35,7 +34,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <TestHeader /> */}
 
       <Header
         openSidebarDrawer={openSidebarDrawer}

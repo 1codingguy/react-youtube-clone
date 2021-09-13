@@ -8,7 +8,7 @@ import Divider from '@material-ui/core/Divider'
 // custom component and utils
 import MobileAvatarPopUpMenu from './MobileAvatarPopUpMenu'
 import { AvatarAccountInfo } from './AvatarAccountInfo'
-import { StyledMenuItem } from '../../utils/StyledMenuItem'
+import { StyledMenuItem } from '../../utils/utils'
 import { AvatarMenuTop, AvatarMenuMiddle } from './AvatarMenuData'
 
 const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
@@ -21,7 +21,7 @@ const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
       />
     )
   }
-  return <AvatarPopUpMenu anchorEl={anchorEl} handleClose={handleClose} />
+  return <AvatarPopUpMenu {...{ anchorEl, handleClose }} />
 }
 
 export default AvatarMenu
@@ -75,7 +75,7 @@ const StyledAvatarMenu = styled(({ className, ...props }) => (
   border: 1px solid #d3d4d5;
   border-top: 0;
   border-radius: 0;
-  // not sure how to set the height to avoid popover snapping to the top of window when the screen size is small
+  // not sure how to set the height to avoid Popover snapping to the top of window when the screen size is small
   width: 300px;
   opacity: 0.5;
 

@@ -13,7 +13,7 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined'
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined'
 
 import styled from 'styled-components'
-import { StyledMenuItem, StyledListItemIcon } from '../../utils/StyledMenuItem'
+import { StyledMenuItem, StyledListItemIcon } from '../../utils/utils'
 import ListItemText from '@material-ui/core/ListItemText'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 

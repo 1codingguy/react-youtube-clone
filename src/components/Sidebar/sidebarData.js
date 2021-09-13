@@ -17,7 +17,7 @@ import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined'
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined'
 
 import { SidebarMenuItem } from './FullWidthSidebar'
-import { StyledListItemIcon } from '../utils/StyledMenuItem'
+import { StyledListItemIcon } from '../utils/utils'
 import ListItemText from '@material-ui/core/ListItemText'
 
 export const MoreFromYouTubeSection1 = ({ onClick }) => {

@@ -8,22 +8,18 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import styled from 'styled-components'
 import ListItemText from '@material-ui/core/ListItemText'
-import { StyledMenuItem, StyledListItemIcon } from '../../utils/StyledMenuItem'
+import { StyledMenuItem, StyledListItemIcon } from '../../utils/utils'
 
 export const MobileAvatarMenuTop = ({ onClick }) => {
-  return mobileMenuArray.slice(0, 4).map((item) => {
-    const { Icon, text } = item
-    return (
-      <MobileMenuRow key={text} Icon={Icon} text={text} onClick={onClick} />
-    )
+  return mobileMenuArray.slice(0, 4).map(({ Icon, text }) => {
+    return <MobileMenuRow key={text} {...{ Icon, text, onClick }} />
   })
 }
 
 export const MobileAvatarMenuBottom = ({ onClick }) => {
-  return mobileMenuArray.slice(4).map((item) => {
-    const { Icon, text } = item
+  return mobileMenuArray.slice(4).map(({ Icon, text }) => {
     return (
-      <MobileMenuRow key={text} Icon={Icon} text={text} onClick={onClick} />
+      <MobileMenuRow key={text} {...{ Icon, text, onClick}} />
     )
   })
 }

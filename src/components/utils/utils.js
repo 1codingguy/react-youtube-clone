@@ -4,6 +4,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Slide from '@material-ui/core/Slide'
 import IconButton from '@material-ui/core/IconButton'
+import MenuItem from '@material-ui/core/MenuItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 
 const MOBILE_VIEW_SCROLL_THRESHOLD = 48
 export const NOTIFICATION_MENU_TOP_HEIGHT = 48
@@ -58,5 +60,20 @@ export const StyledIconButton = styled(IconButton)`
       padding: 12px;
     }
     padding: 8px;
+  }
+`
+export const StyledMenuItem = styled(MenuItem)`
+  && {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    min-height: 40px;
+  }
+`
+
+// The icon on the left of each list item
+export const StyledListItemIcon = styled(ListItemIcon)`
+  && {
+    min-width: 0;
+    margin-right: 16px;
   }
 `
