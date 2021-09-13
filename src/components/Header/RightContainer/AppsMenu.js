@@ -26,7 +26,7 @@ export default AppsMenu
 const StyledAppsMenu = styled(({ className, ...props }) => (
   <Menu
     {...props}
-    classes={{ paper: className, list: 'list' }}
+    classes={{ paper: className }}
     anchorOrigin={{
       vertical: 'bottom',
       horizontal: 'right',

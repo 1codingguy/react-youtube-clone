@@ -20,7 +20,7 @@ export const AvatarAccountInfo = ({ onClick, isMobileView }) => {
   )
 }
 const AccountName = styled(Typography)`
-  && {
+  &&& {
     font-size: 16px;
     font-weight: 600;
   }

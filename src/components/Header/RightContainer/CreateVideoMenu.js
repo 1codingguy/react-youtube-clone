@@ -2,10 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Menu from '@material-ui/core/Menu'
 import ListItemText from '@material-ui/core/ListItemText'
-import {
-  StyledMenuItem,
-  StyledListItemIcon,
-} from '../StyledMenuItem'
+import { StyledMenuItem, StyledListItemIcon } from '../../utils/StyledMenuItem'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
 import { DEFAULT_FONT_SIZE } from '../../utils/utils'
@@ -21,8 +18,8 @@ const CreateVideoMenu = ({ anchorVideoButton, handleClose }) => {
       {menuItems.map(({ Icon, text }) => {
         return (
           <StyledMenuItem key={text} onClick={handleClose}>
-            <StyledListItemIcon >
-              <Icon fontSize='small' />
+            <StyledListItemIcon>
+              <Icon fontSize="small" />
             </StyledListItemIcon>
             <ListItemText primary={text} />
           </StyledMenuItem>
@@ -42,7 +39,7 @@ const menuItems = [
 const VideoMenu = styled(({ className, ...props }) => (
   <Menu
     {...props}
-    classes={{ paper: className, list: 'list' }}
+    classes={{ paper: className }}
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: 'bottom',

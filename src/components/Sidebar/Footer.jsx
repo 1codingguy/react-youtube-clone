@@ -2,30 +2,31 @@ import React from 'react'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import styled from 'styled-components'
-import { makeStyles } from '@material-ui/core/styles'
+
 import { miniSidebarRows as footerColumns } from './sidebarData'
 
 const MobileFooter = () => {
-  const classes = useStyles()
-
   return (
-    <BottomNavigation showLabels className={classes.root}>
+    <FooterContainer showLabels>
       <FooterIcons />
-    </BottomNavigation>
+    </FooterContainer>
   )
 }
 
 export default MobileFooter
 
-const useStyles = makeStyles({
-  root: {
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    height: '48px',
-  },
-})
+const FooterContainer = styled(BottomNavigation)`
+  && {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+  }
+  .MuiBottomNavigationAction-root.MuiBottomNavigationAction-iconOnly {
+    padding-top: 8px;
+  }
+`
 
 export const StyledBottomNavigationAction = styled(BottomNavigationAction)`
   .MuiBottomNavigationAction-wrapper {
@@ -38,17 +39,10 @@ export const StyledBottomNavigationAction = styled(BottomNavigationAction)`
   }
 `
 
-export const FooterIcons = ({ style = undefined }) => (
-  <>
-    {footerColumns.map(({ Icon, text }) => {
-      return (
-        <StyledBottomNavigationAction
-          key={text}
-          label={text}
-          icon={<Icon />}
-          style={style} // To add padding in MiniSidebar
-        />
-      )
-    })}
-  </>
-)
+export const FooterIcons = () => {
+  return footerColumns.map(({ Icon, text }) => {
+    return (
+      <StyledBottomNavigationAction key={text} label={text} icon={<Icon />} />
+    )
+  })
+}

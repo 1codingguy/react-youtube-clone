@@ -13,8 +13,9 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined'
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined'
 
 import styled from 'styled-components'
-import { StyledMenuItem, StyledListItemIcon } from '../StyledMenuItem'
+import { StyledMenuItem, StyledListItemIcon } from '../../utils/StyledMenuItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 export const menuArray = [
   { Icon: AccountBoxOutlinedIcon, text: 'Your channel' },
@@ -37,26 +38,25 @@ export const menuArray = [
 ]
 
 export const AvatarMenuTop = ({ onClick }) => {
-  return menuArray.slice(0, 5).map((item) => {
-    const { Icon, text } = item
-    return <MenuRow key={text} Icon={Icon} text={text} onClick={onClick} />
+  return menuArray.slice(0, 5).map(({ Icon, text, arrow }) => {
+    return <MenuRow key={text} {...{ Icon, text, arrow, onClick }} />
   })
 }
 
 export const AvatarMenuMiddle = ({ onClick }) => {
-  return menuArray.slice(5).map((item) => {
-    const { Icon, text } = item
-    return <MenuRow key={text} Icon={Icon} text={text} onClick={onClick} />
+  return menuArray.slice(5).map(({ Icon, text, arrow }) => {
+    return <MenuRow key={text} {...{ Icon, text, arrow, onClick }} />
   })
 }
 
-const MenuRow = ({ Icon, text, onClick }) => {
+const MenuRow = ({ Icon, text, onClick, arrow }) => {
   return (
     <MenuItem onClick={onClick}>
       <StyledListItemIcon>
         <Icon fontSize="small" />
       </StyledListItemIcon>
       <ListItemText primary={text} />
+      {arrow && <ChevronRightIcon style={{ fontSize: '20px' }} />}
     </MenuItem>
   )
 }

@@ -2,19 +2,24 @@ import React from 'react'
 import styled from 'styled-components'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 
-import { FooterIcons } from './Footer'
+import { FooterIcons as MiniSidebarIcons } from './Footer'
 
 const MiniSidebar = () => {
   return (
-    <StyledMiniSidebar>{FooterIcons({ padding: '16px 0' })}</StyledMiniSidebar>
+    <MiniSidebarContainer>
+      <MiniSidebarIcons />
+    </MiniSidebarContainer>
   )
 }
 
 export default MiniSidebar
 
-const StyledMiniSidebar = styled(BottomNavigation)`
+const MiniSidebarContainer = styled(BottomNavigation)`
+  && {
+    // to override default height:56px which also mess up flex-box
+    height: auto;
+  }
   width: 72px;
-  height: auto !important; // to override default height:56px which also mess up flex-box
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

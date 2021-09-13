@@ -4,7 +4,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {
   StyledMenuItem,
   StyledListItemIcon
-} from '../StyledMenuItem';
+} from '../../utils/StyledMenuItem';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 

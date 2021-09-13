@@ -49,7 +49,7 @@ const StyledMain = styled.div`
   @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
     padding-top: ${MOBILE_VIEW_HEADER_HEIGHT}px;
     /* min-height: calc(100vh - ${MOBILE_VIEW_HEADER_HEIGHT}px); */
-    min-height: 100vh;
+    /* min-height: 100vh; */
   }
   padding-top: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
   /* min-height: calc(100vh - ${DESKTOP_VIEW_HEADER_HEIGHT}px); */

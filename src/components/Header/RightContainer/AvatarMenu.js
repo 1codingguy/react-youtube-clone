@@ -8,7 +8,7 @@ import Divider from '@material-ui/core/Divider'
 // custom component and utils
 import MobileAvatarPopUpMenu from './MobileAvatarPopUpMenu'
 import { AvatarAccountInfo } from './AvatarAccountInfo'
-import { StyledMenuItem } from '../StyledMenuItem'
+import { StyledMenuItem } from '../../utils/StyledMenuItem'
 import { AvatarMenuTop, AvatarMenuMiddle } from './AvatarMenuData'
 
 const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
@@ -56,7 +56,7 @@ const AvatarMenuBottom = ({ onClick }) => {
 const StyledAvatarMenu = styled(({ className, ...props }) => (
   <Popover
     {...props}
-    classes={{ paper: className, list: 'list' }}
+    classes={{ paper: className }}
     anchorOrigin={{
       vertical: 'bottom',
       horizontal: 'right',

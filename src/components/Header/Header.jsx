@@ -13,7 +13,7 @@ import {
   DESKTOP_VIEW_HEADER_HEIGHT,
   HideOnScroll,
 } from '../utils/utils'
-import { textForScrollingTest } from '../utils/textForScrollingTest'
+// import { textForScrollingTest } from '../utils/textForScrollingTest'
 
 function Header({
   openSidebarDrawer,
@@ -25,7 +25,7 @@ function Header({
     <>
       <HideOnScroll>
         {/* not sure if color=transparent will affect the look when scroll */}
-        <StyledAppBar elevation={isMobileView ? 1 : 0} color="transparent">
+        <StyledAppBar elevation={isMobileView ? 1 : 0}>
           <StyledToolbar disableGutters>
             <LeftContainer
               openSidebarDrawer={openSidebarDrawer}
@@ -48,8 +48,8 @@ export default Header
 
 export const StyledAppBar = styled(AppBar)`
   && {
-    /* background-color: white; */
-    opacity: 0.9;
+    background-color: white;
+    /* opacity: 0.9; */
     transition: none !important; // can't override without !important
   }
 

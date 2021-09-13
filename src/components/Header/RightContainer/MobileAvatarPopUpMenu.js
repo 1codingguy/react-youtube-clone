@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider'
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined'
 import Fab from '@material-ui/core/Fab'
 import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined'
-import { AvatarAccountInfo } from "./AvatarAccountInfo"
+import { AvatarAccountInfo } from './AvatarAccountInfo'
 import {
   MobileAvatarMenuTop,
   MobileAvatarMenuBottom,
@@ -40,7 +40,7 @@ export default MobileAvatarPopUpMenu
 const MobileAvatarMenuContainer = styled(({ className, ...props }) => (
   <Popover
     {...props}
-    classes={{ paper: className, list: 'list' }}
+    classes={{ paper: className }}
     anchorReference="anchorPosition"
     anchorPosition={{ top: 0, left: 0 }}
     anchorOrigin={{

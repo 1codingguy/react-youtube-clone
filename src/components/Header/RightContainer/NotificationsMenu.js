@@ -25,7 +25,7 @@ export default NotificationsMenu
 const PopUpMenu = styled(({ className, ...props }) => (
   <Popover
     {...props}
-    classes={{ paper: className, list: 'list' }}
+    classes={{ paper: className }}
     anchorOrigin={{
       vertical: 'bottom',
       horizontal: 'right',
