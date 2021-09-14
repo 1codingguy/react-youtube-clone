@@ -2,16 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import Popover from '@material-ui/core/Popover'
 import Divider from '@material-ui/core/Divider'
-import Fab from '@material-ui/core/Fab'
-import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined'
 import { AvatarAccountInfo } from './AvatarAccountInfo'
 import {
   MobileAvatarMenuTop,
   MobileAvatarMenuBottom,
 } from './mobileAvatarMenuData'
 import { MobileAvatarMenuHeader } from './MobileAvatarMenuHeader'
-
-import { useGlobalContext } from '../../../context'
+import { useGlobalContext } from '../../../../context'
+import { MobileUpButton } from './MobileUpButton'
 
 function MobileAvatarPopUpMenu() {
   const { anchorAvatarButton, handleRightContainerMenusClose } =
@@ -25,13 +23,10 @@ function MobileAvatarPopUpMenu() {
     >
       <MobileAvatarMenuHeader />
       <AvatarAccountInfo />
-
       <MobileUpButton />
       <Divider />
-
       <MobileAvatarMenuTop />
       <Divider />
-
       <MobileAvatarMenuBottom />
     </MobileAvatarMenuContainer>
   )
@@ -64,24 +59,5 @@ const MobileAvatarMenuContainer = styled(({ className, ...props }) => (
     min-height: 100vh;
     top: 0px !important;
     left: 0px !important;
-  }
-`
-
-const MobileUpButton = () => {
-  const { handleRightContainerMenusClose } = useGlobalContext()
-  return (
-    <StyledFab onClick={handleRightContainerMenusClose}>
-      <ArrowUpwardOutlinedIcon style={{ fontSize: '20px' }} />
-    </StyledFab>
-  )
-}
-
-const StyledFab = styled(Fab)`
-  && {
-    position: fixed;
-    top: 142px;
-    right: 20px;
-    background-color: #ff0000;
-    color: white;
   }
 `

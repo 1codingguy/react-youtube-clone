@@ -3,14 +3,13 @@ import styled from 'styled-components'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined'
-import { NOTIFICATION_MENU_TOP_HEIGHT } from '../../utils/utils'
+import { NOTIFICATION_MENU_TOP_HEIGHT } from '../../../utils/utils'
 
 export const NotificationsContent = () => {
   return (
     <ContentContainer>
       <BigBellIcon />
       <Title>Your notifications live here</Title>
-
       <Content>
         Subscribe to your favourite channels to receive notifications about
         their latest videos.
@@ -27,7 +26,6 @@ const ContentContainer = styled(Box)`
 `
 
 const BigBellIcon = styled(NotificationsNoneOutlinedIcon)`
-  /* needs !important to override CSS in .MuiSvgIcon-root */
   && {
     height: 100%;
     width: 120px;

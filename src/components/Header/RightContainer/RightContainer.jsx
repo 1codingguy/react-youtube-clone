@@ -1,15 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-
-// Custom elements & components
-import CreateVideoButton from './CreateVideoButton'
-import CreateVideoMenu from './CreateVideoMenu'
-import AppsButton from './AppsButton'
-import AppsMenu from './AppsMenu'
-import NotificationsButton from './NotificationsButton'
-import NotificationsMenu from './NotificationsMenu'
-import AvatarButton from './AvatarButton'
-import AvatarMenu from './AvatarMenu'
+import CreateVideoButton from './CreateVideoButton/CreateVideoButton'
+import CreateVideoMenu from './CreateVideoButton/CreateVideoMenu'
+import AppsButton from './AppsButton/AppsButton'
+import AppsMenu from './AppsButton/AppsMenu'
+import NotificationsButton from './NotificationsButton/NotificationsButton'
+import NotificationsMenu from './NotificationsButton/NotificationsMenu'
+import AvatarButton from './AvatarButton/AvatarButton'
+import AvatarMenu from './AvatarButton/AvatarMenu'
 import { useGlobalContext } from '../../../context'
 
 const RightContainer = () => {

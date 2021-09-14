@@ -1,5 +1,6 @@
 import React from 'react'
-import { SidebarTopMenuSection1, SidebarTopMenuSection2 } from './sidebarData'
+import { SidebarTopMenuSection2 } from "./SidebarTopMenuSection2"
+import { SidebarTopMenuSection1 } from "./SidebarTopMenuSection1"
 import { DividerWithMargin } from './FullWidthSidebar'
 
 export const SidebarFirstPart = () => {

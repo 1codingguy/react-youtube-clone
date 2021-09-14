@@ -4,8 +4,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
-import { NOTIFICATION_MENU_TOP_HEIGHT } from '../../utils/utils';
-import { useGlobalContext } from '../../../context'
+import { NOTIFICATION_MENU_TOP_HEIGHT } from '../../../utils/utils';
+import { useGlobalContext } from '../../../../context'
 
 export function NotificationsHeader() {
   const { handleRightContainerMenusClose } =

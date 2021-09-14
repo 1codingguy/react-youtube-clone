@@ -7,7 +7,6 @@ import {
   DEFAULT_FONT_SIZE,
 } from '../../utils/utils'
 
-
 export const SearchContainerWithTextField = () => {
   return (
     <StyledForm>

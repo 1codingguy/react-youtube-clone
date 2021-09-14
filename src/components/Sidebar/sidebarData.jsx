@@ -16,51 +16,7 @@ import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined'
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined'
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined'
 
-import { SidebarMenuItem } from './FullWidthSidebar'
-import { StyledListItemIcon } from '../utils/utils'
-import ListItemText from '@material-ui/core/ListItemText'
-
-import { useGlobalContext } from '../../context'
-
-export const MoreFromYouTubeSection1 = () => {
-  return moreFromYouTubeRows.slice(0, 4).map(({ Icon, text }) => {
-    return <SidebarRow key={text} {...{ Icon, text }} />
-  })
-}
-export const MoreFromYouTubeSection2 = () => {
-  return moreFromYouTubeRows.slice(4).map(({ Icon, text }) => {
-    return <SidebarRow key={text} {...{ Icon, text }} />
-  })
-}
-export const SidebarTopMenuSection1 = () => {
-  return sideBarMenuRows.slice(0, 3).map(({ Icon, text }) => {
-    return <SidebarRow key={text} {...{ Icon, text }} />
-  })
-}
-export const SidebarTopMenuSection2 = () => {
-  return sideBarMenuRows.slice(3).map(({ Icon, text }) => {
-    return <SidebarRow key={text} {...{ Icon, text }} />
-  })
-}
-export const ShowMoreRow = () => {
-  const { Icon, text } = sideBarMenuRows.at(-1)
-  return <SidebarRow {...{ Icon, text }} />
-}
-
-const SidebarRow = ({ Icon, text }) => {
-  const { setOpenSidebarDrawer } = useGlobalContext()
-
-  return (
-    <SidebarMenuItem onClick={() => setOpenSidebarDrawer(false)}>
-      <StyledListItemIcon>
-        <Icon fontSize="medium" />
-      </StyledListItemIcon>
-      <ListItemText primary={text} />
-    </SidebarMenuItem>
-  )
-}
-
-const sideBarMenuRows = [
+export const sideBarMenuRows = [
   { Icon: HomeIcon, text: 'Home' },
   { Icon: ExploreOutlinedIcon, text: 'Explore' },
   { Icon: SubscriptionsOutlinedIcon, text: 'Subscriptions' },
@@ -72,7 +28,7 @@ const sideBarMenuRows = [
   { Icon: ExpandMoreOutlinedIcon, text: 'Show more' },
 ]
 
-const moreFromYouTubeRows = [
+export const moreFromYouTubeRows = [
   { Icon: YouTubeIcon, text: 'YouTube Premium' },
   { Icon: VideogameAssetOutlinedIcon, text: 'Gaming' },
   { Icon: SettingsInputAntennaIcon, text: 'Live' },

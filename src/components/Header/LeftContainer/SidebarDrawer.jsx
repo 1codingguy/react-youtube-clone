@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import Drawer from '@material-ui/core/Drawer'
 import FullWidthSidebar from '../../Sidebar/FullWidthSidebar'
 import YouTubeLogo from './YouTubeLogo'
-
 import { DESKTOP_VIEW_HEADER_HEIGHT } from '../../utils/utils'
 import HamburgerMenuIcon from './HamburgerMenuIcon'
 import { useGlobalContext } from '../../../context'
@@ -22,7 +21,6 @@ const SidebarDrawer = () => {
         <HamburgerMenuIcon />
         <YouTubeLogo />
       </DrawerHeader>
-
       <FullWidthSidebar />
     </Drawer>
   )

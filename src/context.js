@@ -9,10 +9,9 @@ import useResetOpenSearchDrawer from './components/utils/useResetOpenSearchDrawe
 
 const YouTubeContext = React.createContext()
 
-// Create a Provider that wraps components that need to access the data
+// Provider
 export const ContextProvider = ({ children }) => {
   const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
-
   const shouldOpenSidebarDrawer = !useMediaQuery(
     `(min-width:${SHOW_FULL_SIDEBAR}px)`
   )

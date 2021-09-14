@@ -33,10 +33,8 @@ export function HideOnScroll({ children }) {
     : displayMobileHeader
 
   return (
-    <Slide in={showHeader}>
-      {/* previously added wrap a <div> around {children, the hide animation didn't work as a result} */}
-      {children}
-    </Slide>
+    // previously added wrap a <div> around {children, the hide animation didn't work as a result}
+    <Slide in={showHeader}>{children}</Slide>
   )
 }
 

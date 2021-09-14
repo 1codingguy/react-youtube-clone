@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import YouTubeLogo from './YouTubeLogo'
 import SidebarDrawer from './SidebarDrawer'
 import HamburgerMenuIcon from './HamburgerMenuIcon'
-
 import { useGlobalContext } from '../../../context'
 
 const LeftContainer = () => {
@@ -14,7 +13,6 @@ const LeftContainer = () => {
       {/* mobile view hides the hamburgerMenu */}
       {isMobileView ? null : <HamburgerMenuIcon />}
       <YouTubeLogo />
-
       <SidebarDrawer />
     </StyledLeftContainer>
   )

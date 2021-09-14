@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import Avatar from '@material-ui/core/Avatar'
-import { MOBILE_VIEW_BREAKPOINT, StyledIconButton } from '../../utils/utils'
-import { useGlobalContext } from '../../../context'
+import { MOBILE_VIEW_BREAKPOINT, StyledIconButton } from '../../../utils/utils'
+import { useGlobalContext } from '../../../../context'
 
 function AvatarButton() {
   const { setAnchorAvatarButton } = useGlobalContext()

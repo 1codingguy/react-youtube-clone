@@ -1,5 +1,6 @@
 import React from 'react'
-import { MoreFromYouTubeSection1, MoreFromYouTubeSection2 } from './sidebarData'
+import { MoreFromYouTubeSection2 } from "./MoreFromYouTubeSection2"
+import { MoreFromYouTubeSection1 } from "./MoreFromYouTubeSection1"
 import { SubHeading, DividerWithMargin } from './FullWidthSidebar'
 
 export const SidebarThirdPart = () => {

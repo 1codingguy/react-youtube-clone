@@ -1,7 +1,7 @@
 import React from 'react'
 import VideoCallIcon from '@material-ui/icons/VideoCall'
-import { IconTooltip, StyledIconButton } from '../../utils/utils'
-import { useGlobalContext } from '../../../context'
+import { IconTooltip, StyledIconButton } from '../../../utils/utils'
+import { useGlobalContext } from '../../../../context'
 
 function CreateVideoButton() {
   const { setAnchorVideoButton } = useGlobalContext()

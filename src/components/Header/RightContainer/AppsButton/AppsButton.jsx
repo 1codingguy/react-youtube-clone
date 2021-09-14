@@ -1,7 +1,7 @@
 import React from 'react'
 import AppsIcon from '@material-ui/icons/Apps'
-import { StyledIconButton, IconTooltip } from '../../utils/utils'
-import { useGlobalContext } from '../../../context'
+import { StyledIconButton, IconTooltip } from '../../../utils/utils'
+import { useGlobalContext } from '../../../../context'
 
 function AppsButton() {
   const { setAnchorAppsButton } = useGlobalContext()

@@ -1,7 +1,7 @@
 import React from 'react'
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp'
-import { StyledIconButton, IconTooltip } from '../../utils/utils'
-import { useGlobalContext } from '../../../context'
+import { StyledIconButton, IconTooltip } from '../../../utils/utils'
+import { useGlobalContext } from '../../../../context'
 
 function NotificationsButton() {
   const { setAnchorNotificationsButton } = useGlobalContext()

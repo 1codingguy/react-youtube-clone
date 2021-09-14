@@ -1,4 +1,3 @@
-// Icons for menu
 import AccountBoxOutlinedIcon from '@material-ui/icons/AccountBoxOutlined'
 import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
@@ -11,12 +10,6 @@ import SecurityOutlinedIcon from '@material-ui/icons/SecurityOutlined'
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined'
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined'
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-
-import styled from 'styled-components'
-import { StyledMenuItem, StyledListItemIcon } from '../../utils/utils'
-import ListItemText from '@material-ui/core/ListItemText'
-import { useGlobalContext } from '../../../context'
 
 export const menuArray = [
   { Icon: AccountBoxOutlinedIcon, text: 'Your channel' },
@@ -37,36 +30,3 @@ export const menuArray = [
   { Icon: FeedbackOutlinedIcon, text: 'Send feedback' },
   { Icon: KeyboardOutlinedIcon, text: 'Keyboard shortcuts' },
 ]
-
-export const AvatarMenuTop = () => {
-  return menuArray.slice(0, 5).map(({ Icon, text, arrow }) => {
-    return <MenuRow key={text} {...{ Icon, text, arrow }} />
-  })
-}
-
-export const AvatarMenuMiddle = () => {
-  return menuArray.slice(5).map(({ Icon, text, arrow }) => {
-    return <MenuRow key={text} {...{ Icon, text, arrow }} />
-  })
-}
-
-const MenuRow = ({ Icon, text, arrow }) => {
-  const { handleRightContainerMenusClose } = useGlobalContext()
-
-  return (
-    <MenuItem onClick={handleRightContainerMenusClose}>
-      <StyledListItemIcon>
-        <Icon fontSize="small" />
-      </StyledListItemIcon>
-      <ListItemText primary={text} />
-      {arrow && <ChevronRightIcon style={{ fontSize: '20px' }} />}
-    </MenuItem>
-  )
-}
-
-const MenuItem = styled(StyledMenuItem)`
-  && {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-`

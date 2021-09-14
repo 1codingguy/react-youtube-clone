@@ -3,21 +3,19 @@ import styled from 'styled-components'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import Avatar from '@material-ui/core/Avatar'
-import { ShowMoreRow } from './sidebarData'
+import { ShowMoreRow } from "./ShowMoreRow"
 import { SubHeading, SidebarMenuItem } from './FullWidthSidebar'
 
 export const SidebarSecondPart = () => {
   return (
     <>
       <SubHeading>SUBSCRIPTIONS</SubHeading>
-
       <SidebarMenuItem>
         <StyledListItemAvatar>
           <StyledAvatar>C</StyledAvatar>
         </StyledListItemAvatar>
         <ListItemText primary="coding-guy" />
       </SidebarMenuItem>
-
       <ShowMoreRow />
     </>
   )

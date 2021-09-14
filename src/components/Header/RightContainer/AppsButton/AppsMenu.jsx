@@ -2,9 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import Menu from '@material-ui/core/Menu'
 import Divider from '@material-ui/core/Divider'
-import { DEFAULT_FONT_SIZE } from '../../utils/utils'
-import { AppsMenuTop, AppsMenuMiddle, AppsMenuBottom } from './appsMenuData'
-import { useGlobalContext } from '../../../context'
+import { DEFAULT_FONT_SIZE } from '../../../utils/utils'
+import { AppsMenuTop } from './AppsMenuTop'
+import { AppsMenuBottom } from './AppsMenuBottom'
+import { AppsMenuMiddle } from './AppsMenuMiddle'
+import { useGlobalContext } from '../../../../context'
 
 const AppsMenu = () => {
   const { anchorAppsButton, handleRightContainerMenusClose } =
