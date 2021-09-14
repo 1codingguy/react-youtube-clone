@@ -1,17 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-import Avatar from '@material-ui/core/Avatar';
-import {
-  MOBILE_VIEW_BREAKPOINT,
-  StyledIconButton
-} from '../../utils/utils';
+import React from 'react'
+import styled from 'styled-components'
+import Avatar from '@material-ui/core/Avatar'
+import { MOBILE_VIEW_BREAKPOINT, StyledIconButton } from '../../utils/utils'
+import { useGlobalContext } from '../../../context'
 
-function AvatarButton({ setAnchorAvatar }) {
+function AvatarButton() {
+  const { setAnchorAvatarButton } = useGlobalContext()
+
   return (
-    <StyledIconButton onClick={(event) => setAnchorAvatar(event.currentTarget)}>
+    <StyledIconButton
+      onClick={(event) => setAnchorAvatarButton(event.currentTarget)}
+    >
       <StyledAvatar>C</StyledAvatar>
     </StyledIconButton>
-  );
+  )
 }
 
 export default AvatarButton
@@ -27,4 +29,4 @@ const StyledAvatar = styled(Avatar)`
     font-size: 0.875rem;
     background-color: #ef6c00;
   }
-`;
+`

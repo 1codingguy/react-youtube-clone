@@ -7,18 +7,14 @@ import { SidebarFirstPart } from './SidebarFirstPart'
 import { SidebarSecondPart } from './SidebarSecondPart'
 import { SidebarThirdPart } from './SidebarThirdPart'
 
-const FullWidthSidebar = ({ setOpenSidebarDrawer }) => {
-  const handleSidebarClose = () => {
-    setOpenSidebarDrawer(false)
-  }
-
+const FullWidthSidebar = () => {
   return (
     <StyledFullWidthSidebar>
-      <SidebarFirstPart onClick={handleSidebarClose} />
+      <SidebarFirstPart />
       <Divider />
-      <SidebarSecondPart onClick={handleSidebarClose} />
+      <SidebarSecondPart />
       <DividerWithMargin />
-      <SidebarThirdPart onClick={handleSidebarClose} />
+      <SidebarThirdPart />
     </StyledFullWidthSidebar>
   )
 }

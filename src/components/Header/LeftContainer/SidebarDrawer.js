@@ -6,12 +6,11 @@ import YouTubeLogo from './YouTubeLogo'
 
 import { DESKTOP_VIEW_HEADER_HEIGHT } from '../../utils/utils'
 import HamburgerMenuIcon from './HamburgerMenuIcon'
+import { useGlobalContext } from '../../../context'
 
-const SidebarDrawer = ({
-  openSidebarDrawer,
-  setOpenSidebarDrawer,
-  handleHamburgerMenuClick,
-}) => {
+const SidebarDrawer = () => {
+  const { openSidebarDrawer, setOpenSidebarDrawer } = useGlobalContext()
+
   return (
     <Drawer
       anchor="left"
@@ -20,11 +19,11 @@ const SidebarDrawer = ({
       transitionDuration={0}
     >
       <DrawerHeader>
-        <HamburgerMenuIcon onClick={handleHamburgerMenuClick} />
+        <HamburgerMenuIcon />
         <YouTubeLogo />
       </DrawerHeader>
 
-      <FullWidthSidebar setOpenSidebarDrawer={setOpenSidebarDrawer} />
+      <FullWidthSidebar />
     </Drawer>
   )
 }

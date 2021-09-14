@@ -6,18 +6,20 @@ import { StyledMenuItem, StyledListItemIcon } from '../../utils/utils'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import WifiTetheringIcon from '@material-ui/icons/WifiTethering'
 import { DEFAULT_FONT_SIZE } from '../../utils/utils'
+import { useGlobalContext } from '../../../context'
 
-const CreateVideoMenu = ({ anchorVideoButton, handleClose }) => {
+const CreateVideoMenu = () => {
+  const { anchorVideoButton, handleRightContainerMenusClose } =
+    useGlobalContext()
   return (
     <VideoMenu
       anchorEl={anchorVideoButton}
-      // keepMounted
       open={Boolean(anchorVideoButton)}
-      onClose={handleClose}
+      onClose={handleRightContainerMenusClose}
     >
       {menuItems.map(({ Icon, text }) => {
         return (
-          <StyledMenuItem key={text} onClick={handleClose}>
+          <StyledMenuItem key={text} onClick={handleRightContainerMenusClose}>
             <StyledListItemIcon>
               <Icon fontSize="small" />
             </StyledListItemIcon>

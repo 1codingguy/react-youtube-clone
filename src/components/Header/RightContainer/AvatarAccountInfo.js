@@ -4,15 +4,18 @@ import Avatar from '@material-ui/core/Avatar'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import { DEFAULT_FONT_SIZE, MOBILE_VIEW_BREAKPOINT } from '../../utils/utils'
+import { useGlobalContext } from '../../../context'
 
-export const AvatarAccountInfo = ({ onClick, isMobileView }) => {
+export const AvatarAccountInfo = () => {
+  const { isMobileView, handleRightContainerMenusClose } = useGlobalContext()
+
   return (
-    <AccountInfoHeader style={isMobileView && { padding: '8px' }}>
+    <AccountInfoHeader style={isMobileView ? { padding: '8px' } : null}>
       <Avatar>c</Avatar>
       <Box>
         <AccountName>coding-guy</AccountName>
         <AccountEmail>1codingguy@gmail.com</AccountEmail>
-        <ManageAccountButton onClick={onClick}>
+        <ManageAccountButton onClick={handleRightContainerMenusClose}>
           Manage your Google Account
         </ManageAccountButton>
       </Box>

@@ -9,24 +9,25 @@ import YouTubeIcon from '@material-ui/icons/YouTube'
 import styled from 'styled-components'
 import ListItemText from '@material-ui/core/ListItemText'
 import { StyledMenuItem, StyledListItemIcon } from '../../utils/utils'
+import { useGlobalContext } from '../../../context'
 
-export const MobileAvatarMenuTop = ({ onClick }) => {
+export const MobileAvatarMenuTop = () => {
   return mobileMenuArray.slice(0, 4).map(({ Icon, text }) => {
-    return <MobileMenuRow key={text} {...{ Icon, text, onClick }} />
+    return <MobileMenuRow key={text} {...{ Icon, text }} />
   })
 }
 
-export const MobileAvatarMenuBottom = ({ onClick }) => {
+export const MobileAvatarMenuBottom = () => {
   return mobileMenuArray.slice(4).map(({ Icon, text }) => {
-    return (
-      <MobileMenuRow key={text} {...{ Icon, text, onClick}} />
-    )
+    return <MobileMenuRow key={text} {...{ Icon, text }} />
   })
 }
 
-const MobileMenuRow = ({ Icon, text, onClick }) => {
+const MobileMenuRow = ({ Icon, text }) => {
+  const { handleRightContainerMenusClose } = useGlobalContext()
+
   return (
-    <StyledMenuItem onClick={onClick}>
+    <StyledMenuItem onClick={handleRightContainerMenusClose}>
       <RowIcon>
         <Icon fontSize="medium" />
       </RowIcon>

@@ -20,34 +20,38 @@ import { SidebarMenuItem } from './FullWidthSidebar'
 import { StyledListItemIcon } from '../utils/utils'
 import ListItemText from '@material-ui/core/ListItemText'
 
-export const MoreFromYouTubeSection1 = ({ onClick }) => {
+import { useGlobalContext } from '../../context'
+
+export const MoreFromYouTubeSection1 = () => {
   return moreFromYouTubeRows.slice(0, 4).map(({ Icon, text }) => {
-    return <SidebarRow key={text} {...{ Icon, text, onClick }} />
+    return <SidebarRow key={text} {...{ Icon, text }} />
   })
 }
-export const MoreFromYouTubeSection2 = ({ onClick }) => {
+export const MoreFromYouTubeSection2 = () => {
   return moreFromYouTubeRows.slice(4).map(({ Icon, text }) => {
-    return <SidebarRow key={text} {...{ Icon, text, onClick }} />
+    return <SidebarRow key={text} {...{ Icon, text }} />
   })
 }
-export const SidebarTopMenuSection1 = ({ onClick }) => {
+export const SidebarTopMenuSection1 = () => {
   return sideBarMenuRows.slice(0, 3).map(({ Icon, text }) => {
-    return <SidebarRow key={text} {...{ Icon, text, onClick }} />
+    return <SidebarRow key={text} {...{ Icon, text }} />
   })
 }
-export const SidebarTopMenuSection2 = ({ onClick }) => {
+export const SidebarTopMenuSection2 = () => {
   return sideBarMenuRows.slice(3).map(({ Icon, text }) => {
-    return <SidebarRow key={text} {...{ Icon, text, onClick }} />
+    return <SidebarRow key={text} {...{ Icon, text }} />
   })
 }
-export const ShowMoreRow = ({ onClick }) => {
+export const ShowMoreRow = () => {
   const { Icon, text } = sideBarMenuRows.at(-1)
-  return <SidebarRow {...{ Icon, text, onClick }} />
+  return <SidebarRow {...{ Icon, text }} />
 }
 
-const SidebarRow = ({ Icon, text, onClick }) => {
+const SidebarRow = ({ Icon, text }) => {
+  const { setOpenSidebarDrawer } = useGlobalContext()
+
   return (
-    <SidebarMenuItem onClick={onClick}>
+    <SidebarMenuItem onClick={() => setOpenSidebarDrawer(false)}>
       <StyledListItemIcon>
         <Icon fontSize="medium" />
       </StyledListItemIcon>

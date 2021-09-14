@@ -6,19 +6,19 @@ import Avatar from '@material-ui/core/Avatar'
 import { ShowMoreRow } from './sidebarData'
 import { SubHeading, SidebarMenuItem } from './FullWidthSidebar'
 
-export const SidebarSecondPart = ({ onClick }) => {
+export const SidebarSecondPart = () => {
   return (
     <>
       <SubHeading>SUBSCRIPTIONS</SubHeading>
 
-      <SidebarMenuItem onClick={onClick}>
+      <SidebarMenuItem>
         <StyledListItemAvatar>
           <StyledAvatar>C</StyledAvatar>
         </StyledListItemAvatar>
         <ListItemText primary="coding-guy" />
       </SidebarMenuItem>
 
-      <ShowMoreRow onClick={onClick} />
+      <ShowMoreRow />
     </>
   )
 }

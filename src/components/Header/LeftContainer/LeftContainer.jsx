@@ -1,32 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useMediaQuery } from '@material-ui/core'
-
-import { MOBILE_VIEW_BREAKPOINT } from '../../utils/utils'
 import YouTubeLogo from './YouTubeLogo'
 import SidebarDrawer from './SidebarDrawer'
 import HamburgerMenuIcon from './HamburgerMenuIcon'
 
-const LeftContainer = ({
-  openSidebarDrawer,
-  setOpenSidebarDrawer,
-  handleHamburgerMenuClick,
-}) => {
-  const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
+import { useGlobalContext } from '../../../context'
+
+const LeftContainer = () => {
+  const { isMobileView } = useGlobalContext()
 
   return (
     <StyledLeftContainer>
       {/* mobile view hides the hamburgerMenu */}
-      {isMobileView ? null : (
-        <HamburgerMenuIcon onClick={handleHamburgerMenuClick} />
-      )}
+      {isMobileView ? null : <HamburgerMenuIcon />}
       <YouTubeLogo />
 
-      <SidebarDrawer
-        openSidebarDrawer={openSidebarDrawer}
-        setOpenSidebarDrawer={setOpenSidebarDrawer}
-        handleHamburgerMenuClick={handleHamburgerMenuClick}
-      />
+      <SidebarDrawer />
     </StyledLeftContainer>
   )
 }

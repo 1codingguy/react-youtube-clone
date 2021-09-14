@@ -4,19 +4,23 @@ import Menu from '@material-ui/core/Menu'
 import Divider from '@material-ui/core/Divider'
 import { DEFAULT_FONT_SIZE } from '../../utils/utils'
 import { AppsMenuTop, AppsMenuMiddle, AppsMenuBottom } from './appsMenuData'
+import { useGlobalContext } from '../../../context'
 
-const AppsMenu = ({ anchorEl, handleClose }) => {
+const AppsMenu = () => {
+  const { anchorAppsButton, handleRightContainerMenusClose } =
+    useGlobalContext()
+
   return (
     <StyledAppsMenu
-      anchorEl={anchorEl}
-      open={Boolean(anchorEl)}
-      onClose={handleClose}
+      anchorEl={anchorAppsButton}
+      open={Boolean(anchorAppsButton)}
+      onClose={handleRightContainerMenusClose}
     >
-      <AppsMenuTop onClick={handleClose} />
+      <AppsMenuTop />
       <Divider />
-      <AppsMenuMiddle onClick={handleClose} />
+      <AppsMenuMiddle />
       <Divider />
-      <AppsMenuBottom onClick={handleClose} />
+      <AppsMenuBottom />
     </StyledAppsMenu>
   )
 }

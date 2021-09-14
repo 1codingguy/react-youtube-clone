@@ -11,24 +11,28 @@ import {
 } from './mobileAvatarMenuData'
 import { MobileAvatarMenuHeader } from './MobileAvatarMenuHeader'
 
-function MobileAvatarPopUpMenu({ anchorEl, handleClose, isMobileView }) {
+import { useGlobalContext } from '../../../context'
+
+function MobileAvatarPopUpMenu() {
+  const { anchorAvatarButton, handleRightContainerMenusClose } =
+    useGlobalContext()
+
   return (
     <MobileAvatarMenuContainer
-      anchorEl={anchorEl}
-      open={Boolean(anchorEl)}
-      onClose={handleClose}
+      anchorEl={anchorAvatarButton}
+      open={Boolean(anchorAvatarButton)}
+      onClose={handleRightContainerMenusClose}
     >
-      <MobileAvatarMenuHeader onClick={handleClose} />
+      <MobileAvatarMenuHeader />
+      <AvatarAccountInfo />
 
-      <AvatarAccountInfo isMobileView={isMobileView} onClick={handleClose} />
-
-      <MobileUpButton onClick={handleClose} />
+      <MobileUpButton />
       <Divider />
 
-      <MobileAvatarMenuTop onClick={handleClose} />
+      <MobileAvatarMenuTop />
       <Divider />
 
-      <MobileAvatarMenuBottom onClick={handleClose} />
+      <MobileAvatarMenuBottom />
     </MobileAvatarMenuContainer>
   )
 }
@@ -63,11 +67,14 @@ const MobileAvatarMenuContainer = styled(({ className, ...props }) => (
   }
 `
 
-const MobileUpButton = ({ onClick }) => (
-  <StyledFab onClick={onClick}>
-    <ArrowUpwardOutlinedIcon style={{ fontSize: '20px' }} />
-  </StyledFab>
-)
+const MobileUpButton = () => {
+  const { handleRightContainerMenusClose } = useGlobalContext()
+  return (
+    <StyledFab onClick={handleRightContainerMenusClose}>
+      <ArrowUpwardOutlinedIcon style={{ fontSize: '20px' }} />
+    </StyledFab>
+  )
+}
 
 const StyledFab = styled(Fab)`
   && {

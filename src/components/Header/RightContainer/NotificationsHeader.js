@@ -5,16 +5,19 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import { NOTIFICATION_MENU_TOP_HEIGHT } from '../../utils/utils';
+import { useGlobalContext } from '../../../context'
 
-export function NotificationsHeader({ onClick }) {
+export function NotificationsHeader() {
+  const { handleRightContainerMenusClose } =
+    useGlobalContext()
   return (
     <NotificationsMenuTop>
       <Typography>Notifications</Typography>
-      <IconButton onClick={onClick}>
+      <IconButton onClick={handleRightContainerMenusClose}>
         <SettingsOutlinedIcon />
       </IconButton>
     </NotificationsMenuTop>
-  );
+  )
 }
 const NotificationsMenuTop = styled(Box)`
   display: flex;

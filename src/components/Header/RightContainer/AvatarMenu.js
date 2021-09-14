@@ -10,43 +10,45 @@ import MobileAvatarPopUpMenu from './MobileAvatarPopUpMenu'
 import { AvatarAccountInfo } from './AvatarAccountInfo'
 import { StyledMenuItem } from '../../utils/utils'
 import { AvatarMenuTop, AvatarMenuMiddle } from './AvatarMenuData'
+import { useGlobalContext } from '../../../context'
 
-const AvatarMenu = ({ anchorEl, handleClose, isMobileView }) => {
+const AvatarMenu = () => {
+  const { isMobileView } = useGlobalContext()
+
   if (isMobileView) {
-    return (
-      <MobileAvatarPopUpMenu
-        anchorEl={anchorEl}
-        handleClose={handleClose}
-        isMobileView={isMobileView}
-      />
-    )
+    return <MobileAvatarPopUpMenu />
   }
-  return <AvatarPopUpMenu {...{ anchorEl, handleClose }} />
+  return <AvatarPopUpMenu />
 }
 
 export default AvatarMenu
 
-function AvatarPopUpMenu({ anchorEl, handleClose }) {
+function AvatarPopUpMenu() {
+  const { anchorAvatarButton, handleRightContainerMenusClose } =
+    useGlobalContext()
+
   return (
     <StyledAvatarMenu
-      anchorEl={anchorEl}
-      open={Boolean(anchorEl)}
-      onClose={handleClose}
+      anchorEl={anchorAvatarButton}
+      open={Boolean(anchorAvatarButton)}
+      onClose={handleRightContainerMenusClose}
     >
-      <AvatarAccountInfo onClick={handleClose} />
+      <AvatarAccountInfo />
       <Divider />
-      <AvatarMenuTop onClick={handleClose} />
+      <AvatarMenuTop />
       <Divider />
-      <AvatarMenuMiddle onClick={handleClose} />
+      <AvatarMenuMiddle />
       <Divider />
-      <AvatarMenuBottom onClick={handleClose} />
+      <AvatarMenuBottom />
     </StyledAvatarMenu>
   )
 }
 
-const AvatarMenuBottom = ({ onClick }) => {
+const AvatarMenuBottom = () => {
+  const { handleRightContainerMenusClose } = useGlobalContext()
+
   return (
-    <StyledMenuItem onClick={onClick}>
+    <StyledMenuItem onClick={handleRightContainerMenusClose}>
       <ListItemText>Restricted Mode: Off</ListItemText>
       <ChevronRightIcon style={{ fontSize: '20px' }} />
     </StyledMenuItem>

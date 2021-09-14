@@ -7,6 +7,8 @@ import FullWidthSidebar from '../Sidebar/FullWidthSidebar'
 import CategoriesBar from '../CategoriesBar/CategoriesBar'
 import Videos from '../Videos/Videos'
 
+import { useGlobalContext } from '../../context'
+
 import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
@@ -15,7 +17,9 @@ import {
   SHOW_FULL_SIDEBAR,
 } from '../utils/utils'
 
-const Main = ({ showFullWidthSidebar, setOpenSidebarDrawer }) => {
+const Main = () => {
+  const { showFullWidthSidebar } = useGlobalContext()
+
   const showMiniSidebar = useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR}px)`)
   // width criteria to show full width sidebar
   const minWidthToShowFullSidebar = useMediaQuery(
@@ -24,14 +28,10 @@ const Main = ({ showFullWidthSidebar, setOpenSidebarDrawer }) => {
   // combine width criteria and logic criteria
   const showFullSidebar = minWidthToShowFullSidebar && showFullWidthSidebar
 
-  // console.log(showFullSidebar)
-
   return (
     <StyledMain>
       <div className="main-left-container">
-        {(showFullSidebar && (
-          <FullWidthSidebar setOpenSidebarDrawer={setOpenSidebarDrawer} />
-        )) ||
+        {(showFullSidebar && <FullWidthSidebar />) ||
           (showMiniSidebar && <MiniSidebar />)}
       </div>
 

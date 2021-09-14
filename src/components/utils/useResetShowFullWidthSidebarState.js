@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { SHOW_FULL_SIDEBAR } from './utils'
 
-export function useResetShowFullWidthSidebarState(setShowFullWidthSidebar) {
+export default function useResetShowFullWidthSidebarState(setShowFullWidthSidebar) {
   useEffect(() => {
     const resizeListener = () => {
       // if window resized under 1313px, set to true

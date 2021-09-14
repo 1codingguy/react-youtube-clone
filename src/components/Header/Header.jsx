@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import LeftContainer from './LeftContainer/LeftContainer'
 import MiddleContainer from './MiddleContainer/MiddleContainer'
 import RightContainer from './RightContainer/RightContainer'
-import { useMediaQuery } from '@material-ui/core'
 
 import {
   MOBILE_VIEW_BREAKPOINT,
@@ -14,32 +13,25 @@ import {
   HideOnScroll,
 } from '../utils/utils'
 // import { textForScrollingTest } from '../utils/textForScrollingTest'
+import { useGlobalContext } from '../../context'
 
-function Header({
-  openSidebarDrawer,
-  setOpenSidebarDrawer,
-  handleHamburgerMenuClick,
-}) {
-  const isMobileView = useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
+function Header() {
+  const { isMobileView } = useGlobalContext()
   return (
     <>
       <HideOnScroll>
         {/* not sure if color=transparent will affect the look when scroll */}
         <StyledAppBar elevation={isMobileView ? 1 : 0}>
           <StyledToolbar disableGutters>
-            <LeftContainer
-              openSidebarDrawer={openSidebarDrawer}
-              setOpenSidebarDrawer={setOpenSidebarDrawer}
-              handleHamburgerMenuClick={handleHamburgerMenuClick}
-            />
+            <LeftContainer />
             <MiddleContainer />
-            <RightContainer isMobileView={isMobileView} />
+            <RightContainer />
           </StyledToolbar>
         </StyledAppBar>
       </HideOnScroll>
 
       {/* Below text only to test if hiding the AppBar works */}
-      {/* {textForScrollingTest(isMobileView)} */}
+      {/* {textForScrollingTest()} */}
     </>
   )
 }

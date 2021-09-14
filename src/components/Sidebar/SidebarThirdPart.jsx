@@ -1,18 +1,15 @@
-import React from 'react';
-import {
-  MoreFromYouTubeSection1,
-  MoreFromYouTubeSection2
-} from './sidebarData';
-import { SubHeading, DividerWithMargin } from './FullWidthSidebar';
+import React from 'react'
+import { MoreFromYouTubeSection1, MoreFromYouTubeSection2 } from './sidebarData'
+import { SubHeading, DividerWithMargin } from './FullWidthSidebar'
 
-export const SidebarThirdPart = ({ onClick }) => {
+export const SidebarThirdPart = () => {
   return (
     <>
       <SubHeading>MORE FROM YOUTUBE</SubHeading>
-      <MoreFromYouTubeSection1 onClick={onClick} />
+      <MoreFromYouTubeSection1 />
       <DividerWithMargin />
-      <MoreFromYouTubeSection2 onClick={onClick} />
+      <MoreFromYouTubeSection2 />
       <DividerWithMargin />
     </>
-  );
-};
+  )
+}

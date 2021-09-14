@@ -4,16 +4,20 @@ import Popover from '@material-ui/core/Popover'
 import Paper from '@material-ui/core/Paper'
 import { NotificationsContent } from './NotificationsContent'
 import { NotificationsHeader } from './NotificationsHeader'
+import { useGlobalContext } from '../../../context'
 
-const NotificationsMenu = ({ anchorEl, handleClose }) => {
+const NotificationsMenu = () => {
+  const { anchorNotificationsButton, handleRightContainerMenusClose } =
+    useGlobalContext()
+
   return (
     <PopUpMenu
-      anchorEl={anchorEl}
-      open={Boolean(anchorEl)}
-      onClose={handleClose}
+      anchorEl={anchorNotificationsButton}
+      open={Boolean(anchorNotificationsButton)}
+      onClose={handleRightContainerMenusClose}
     >
       <NotificationsContainer>
-        <NotificationsHeader onClick={handleClose} />
+        <NotificationsHeader />
         <NotificationsContent />
       </NotificationsContainer>
     </PopUpMenu>

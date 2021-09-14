@@ -1,11 +1,11 @@
-import React from 'react';
-import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
-import {
-  StyledIconButton,
-  IconTooltip
-} from '../../utils/utils';
+import React from 'react'
+import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp'
+import { StyledIconButton, IconTooltip } from '../../utils/utils'
+import { useGlobalContext } from '../../../context'
 
-function NotificationsButton({ setAnchorNotificationsButton }) {
+function NotificationsButton() {
+  const { setAnchorNotificationsButton } = useGlobalContext()
+
   return (
     <IconTooltip title="Notifications">
       <StyledIconButton
@@ -14,8 +14,7 @@ function NotificationsButton({ setAnchorNotificationsButton }) {
         <NotificationsNoneSharpIcon />
       </StyledIconButton>
     </IconTooltip>
-  );
+  )
 }
-
 
 export default NotificationsButton

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 // Custom elements & components
@@ -10,51 +10,28 @@ import NotificationsButton from './NotificationsButton'
 import NotificationsMenu from './NotificationsMenu'
 import AvatarButton from './AvatarButton'
 import AvatarMenu from './AvatarMenu'
+import { useGlobalContext } from '../../../context'
 
-const RightContainer = ({ isMobileView }) => {
-  const [anchorVideoButton, setAnchorVideoButton] = useState(null)
-  const [anchorAppsButton, setAnchorAppsButton] = useState(null)
-  const [anchorNotificationsButton, setAnchorNotificationsButton] =
-    useState(null)
-  const [anchorAvatar, setAnchorAvatar] = useState(null)
-
-  const handleClose = () => {
-    setAnchorVideoButton(null)
-    setAnchorAppsButton(null)
-    setAnchorNotificationsButton(null)
-    setAnchorAvatar(null)
-  }
+const RightContainer = () => {
+  const { isMobileView } = useGlobalContext()
 
   return (
     <StyledRightContainer>
       {isMobileView ? null : (
         <>
-          <CreateVideoButton setAnchorVideoButton={setAnchorVideoButton} />
-          <CreateVideoMenu
-            anchorVideoButton={anchorVideoButton}
-            handleClose={handleClose}
-          />
+          <CreateVideoButton />
+          <CreateVideoMenu />
 
-          <AppsButton setAnchorAppsButton={setAnchorAppsButton} />
-          <AppsMenu anchorEl={anchorAppsButton} handleClose={handleClose} />
+          <AppsButton />
+          <AppsMenu />
 
-          <NotificationsButton
-            setAnchorNotificationsButton={setAnchorNotificationsButton}
-          />
-          <NotificationsMenu
-            anchorEl={anchorNotificationsButton}
-            handleClose={handleClose}
-          />
+          <NotificationsButton />
+          <NotificationsMenu />
         </>
       )}
 
-      <AvatarButton setAnchorAvatar={setAnchorAvatar} />
-
-      <AvatarMenu
-        anchorEl={anchorAvatar}
-        handleClose={handleClose}
-        isMobileView={isMobileView}
-      />
+      <AvatarButton />
+      <AvatarMenu />
     </StyledRightContainer>
   )
 }

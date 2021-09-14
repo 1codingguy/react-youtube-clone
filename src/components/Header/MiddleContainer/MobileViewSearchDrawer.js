@@ -5,28 +5,26 @@ import Toolbar from '@material-ui/core/Toolbar'
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
 import TextField from '@material-ui/core/TextField'
-
 import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
   DEFAULT_FONT_SIZE,
 } from '../../utils/utils'
+import { useGlobalContext } from '../../../context'
 
-const MobileViewSearchDrawer = ({
-  openSearchDrawer,
-  handleCloseSearchDrawer,
-}) => {
+const MobileViewSearchDrawer = () => {
+  const { openSearchDrawer, setOpenSearchDrawer } = useGlobalContext()
   return (
     <Drawer
       anchor="top"
       open={openSearchDrawer}
-      onClose={handleCloseSearchDrawer}
+      onClose={() => setOpenSearchDrawer(false)}
       transitionDuration={0} // disable the transition animation
     >
       <MobileToolbar disableGutters>
-        <MobileBackIcon onClick={handleCloseSearchDrawer} />
+        <MobileBackIcon onClick={() => setOpenSearchDrawer(false)} />
         <MobileSearchField placeholder="Search YouTube" />
-        <MobileSearchIcon onClick={handleCloseSearchDrawer} />
+        <MobileSearchIcon onClick={() => setOpenSearchDrawer(false)} />
       </MobileToolbar>
     </Drawer>
   )
