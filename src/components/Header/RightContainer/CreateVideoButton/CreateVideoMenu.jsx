@@ -7,22 +7,18 @@ import {
   StyledMenuItem,
   StyledListItemIcon,
 } from '../../../utils/utils'
-import { useGlobalContext } from '../../../../context'
 import { createVideoMenuItems } from './createVideoMenuItems'
 
-const CreateVideoMenu = () => {
-  // create a parent component for CreateVideoMenu and CreateVideoButton, states defined in parent component and pass to children
-  const { anchorVideoButton, handleRightContainerMenusClose } =
-    useGlobalContext()
+const CreateVideoMenu = ({ anchorVideoButton, handleVideoMenuClose }) => {
   return (
     <VideoMenu
       anchorEl={anchorVideoButton}
       open={Boolean(anchorVideoButton)}
-      onClose={handleRightContainerMenusClose}
+      onClose={handleVideoMenuClose}
     >
       {createVideoMenuItems.map(({ Icon, text }) => {
         return (
-          <StyledMenuItem key={text} onClick={handleRightContainerMenusClose}>
+          <StyledMenuItem key={text} onClick={handleVideoMenuClose}>
             <StyledListItemIcon>
               <Icon fontSize="small" />
             </StyledListItemIcon>

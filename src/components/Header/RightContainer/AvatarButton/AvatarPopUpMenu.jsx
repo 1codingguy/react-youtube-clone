@@ -1,31 +1,28 @@
-import React from 'react';
-import styled from 'styled-components';
-import Popover from '@material-ui/core/Popover';
-import Divider from '@material-ui/core/Divider';
-import { useGlobalContext } from '../../../../context';
-import { AvatarAccountInfo } from './AvatarAccountInfo';
-import { AvatarMenuTop  } from './AvatarMenuTop'
-import { AvatarMenuMiddle } from './AvatarMenuMiddle';
-import { AvatarMenuBottom } from './AvatarMenuBottom';
+import React from 'react'
+import styled from 'styled-components'
+import Popover from '@material-ui/core/Popover'
+import Divider from '@material-ui/core/Divider'
+import { AvatarAccountInfo } from './AvatarAccountInfo'
+import { AvatarMenuTop } from './AvatarMenuTop'
+import { AvatarMenuMiddle } from './AvatarMenuMiddle'
+import { AvatarMenuBottom } from './AvatarMenuBottom'
 
-export function AvatarPopUpMenu() {
-  const { anchorAvatarButton, handleRightContainerMenusClose } = useGlobalContext();
-
+export function AvatarPopUpMenu({ anchorAvatarButton, handleAvatarMenuClose }) {
   return (
     <StyledAvatarMenu
       anchorEl={anchorAvatarButton}
       open={Boolean(anchorAvatarButton)}
-      onClose={handleRightContainerMenusClose}
+      onClose={handleAvatarMenuClose}
     >
-      <AvatarAccountInfo />
+      <AvatarAccountInfo onClick={handleAvatarMenuClose} />
       <Divider />
-      <AvatarMenuTop />
+      <AvatarMenuTop onClick={handleAvatarMenuClose}/>
       <Divider />
-      <AvatarMenuMiddle />
+      <AvatarMenuMiddle onClick={handleAvatarMenuClose}/>
       <Divider />
-      <AvatarMenuBottom />
+      <AvatarMenuBottom onClick={handleAvatarMenuClose}/>
     </StyledAvatarMenu>
-  );
+  )
 }
 const StyledAvatarMenu = styled(({ className, ...props }) => (
   <Popover
@@ -43,7 +40,8 @@ const StyledAvatarMenu = styled(({ className, ...props }) => (
     transitionDuration={0}
     getContentAnchorEl={null}
     PaperProps={{ square: true }}
-    elevation={0} />
+    elevation={0}
+  />
 ))`
   border: 1px solid #d3d4d5;
   border-top: 0;
@@ -55,4 +53,4 @@ const StyledAvatarMenu = styled(({ className, ...props }) => (
   .MuiTypography-body1 {
     font-size: 14px;
   }
-`;
+`

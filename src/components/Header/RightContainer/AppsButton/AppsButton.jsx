@@ -1,19 +1,17 @@
-import React from 'react'
-import AppsIcon from '@material-ui/icons/Apps'
-import { StyledIconButton, IconTooltip } from '../../../utils/utils'
-import { useGlobalContext } from '../../../../context'
+import React, { useState } from 'react'
+import AppsMenu from './AppsMenu'
+import AppsIconButton from './AppsIconButton'
 
-function AppsButton() {
-  const { setAnchorAppsButton } = useGlobalContext()
-
+const AppsButton = () => {
+  const [anchorAppsButton, setAnchorAppsButton] = useState(null)
+  const handleAppsMenuClose = () => {
+    setAnchorAppsButton(null)
+  }
   return (
-    <IconTooltip title="YouTube Apps">
-      <StyledIconButton
-        onClick={(event) => setAnchorAppsButton(event.currentTarget)}
-      >
-        <AppsIcon />
-      </StyledIconButton>
-    </IconTooltip>
+    <>
+      <AppsIconButton {...{ setAnchorAppsButton }} />
+      <AppsMenu {...{ anchorAppsButton, handleAppsMenuClose }} />
+    </>
   )
 }
 

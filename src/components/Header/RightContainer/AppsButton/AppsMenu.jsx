@@ -6,23 +6,19 @@ import { DEFAULT_FONT_SIZE } from '../../../utils/utils'
 import { AppsMenuTop } from './AppsMenuTop'
 import { AppsMenuBottom } from './AppsMenuBottom'
 import { AppsMenuMiddle } from './AppsMenuMiddle'
-import { useGlobalContext } from '../../../../context'
 
-const AppsMenu = () => {
-  const { anchorAppsButton, handleRightContainerMenusClose } =
-    useGlobalContext()
-
+const AppsMenu = ({ anchorAppsButton, handleAppsMenuClose }) => {
   return (
     <StyledAppsMenu
       anchorEl={anchorAppsButton}
       open={Boolean(anchorAppsButton)}
-      onClose={handleRightContainerMenusClose}
+      onClose={handleAppsMenuClose}
     >
-      <AppsMenuTop />
+      <AppsMenuTop onClick={handleAppsMenuClose} />
       <Divider />
-      <AppsMenuMiddle />
+      <AppsMenuMiddle onClick={handleAppsMenuClose}/>
       <Divider />
-      <AppsMenuBottom />
+      <AppsMenuBottom onClick={handleAppsMenuClose}/>
     </StyledAppsMenu>
   )
 }

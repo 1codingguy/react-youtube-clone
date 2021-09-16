@@ -8,11 +8,9 @@ import {
   MOBILE_VIEW_BREAKPOINT,
   useIsMobileView,
 } from '../../../utils/utils'
-import { useGlobalContext } from '../../../../context'
 
-export const AvatarAccountInfo = () => {
+export const AvatarAccountInfo = ({ onClick }) => {
   const isMobileView = useIsMobileView()
-  const { handleRightContainerMenusClose } = useGlobalContext()
 
   return (
     <AccountInfoHeader style={isMobileView ? { padding: '8px' } : null}>
@@ -20,7 +18,7 @@ export const AvatarAccountInfo = () => {
       <Box>
         <AccountName>coding-guy</AccountName>
         <AccountEmail>1codingguy@gmail.com</AccountEmail>
-        <ManageAccountButton onClick={handleRightContainerMenusClose}>
+        <ManageAccountButton onClick={onClick}>
           Manage your Google Account
         </ManageAccountButton>
       </Box>

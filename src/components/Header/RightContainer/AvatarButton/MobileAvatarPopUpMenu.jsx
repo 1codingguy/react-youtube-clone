@@ -3,31 +3,27 @@ import styled from 'styled-components'
 import Popover from '@material-ui/core/Popover'
 import Divider from '@material-ui/core/Divider'
 import { AvatarAccountInfo } from './AvatarAccountInfo'
-import {
-  MobileAvatarMenuTop,
-  MobileAvatarMenuBottom,
-} from './mobileAvatarMenuData'
+import { MobileAvatarMenuBottom } from "./MobileAvatarMenuBottom"
+import { MobileAvatarMenuTop } from "./MobileAvatarMenuTop"
 import { MobileAvatarMenuHeader } from './MobileAvatarMenuHeader'
-import { useGlobalContext } from '../../../../context'
 import { MobileUpButton } from './MobileUpButton'
 
-function MobileAvatarPopUpMenu() {
-  const { anchorAvatarButton, handleRightContainerMenusClose } =
-    useGlobalContext()
+function MobileAvatarPopUpMenu({ anchorAvatarButton, handleAvatarMenuClose }) {
+  
 
   return (
     <MobileAvatarMenuContainer
       anchorEl={anchorAvatarButton}
       open={Boolean(anchorAvatarButton)}
-      onClose={handleRightContainerMenusClose}
+      onClose={handleAvatarMenuClose}
     >
-      <MobileAvatarMenuHeader />
-      <AvatarAccountInfo />
-      <MobileUpButton />
+      <MobileAvatarMenuHeader onClick={handleAvatarMenuClose} />
+      <AvatarAccountInfo onClick={handleAvatarMenuClose} />
+      <MobileUpButton onClick={handleAvatarMenuClose} />
       <Divider />
-      <MobileAvatarMenuTop />
+      <MobileAvatarMenuTop onClick={handleAvatarMenuClose}/>
       <Divider />
-      <MobileAvatarMenuBottom />
+      <MobileAvatarMenuBottom onClick={handleAvatarMenuClose}/>
     </MobileAvatarMenuContainer>
   )
 }

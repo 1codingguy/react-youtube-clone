@@ -15,8 +15,8 @@ const Main = () => {
     <StyledMain>
       <SidebarToShow />
 
-      {/* <CategoriesBar />
-      <Videos /> */}
+      <CategoriesBar />
+      <Videos />
     </StyledMain>
   )
 }

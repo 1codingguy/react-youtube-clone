@@ -3,13 +3,11 @@ import styled from 'styled-components'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined'
-import { useGlobalContext } from '../../../../context'
 
-export const MobileAvatarMenuHeader = () => {
-  const { handleRightContainerMenusClose } = useGlobalContext()
+export const MobileAvatarMenuHeader = ({ onClick }) => {
   return (
     <MobileHeaderContainer square={true}>
-      <CloseMobileMenuButton onClick={handleRightContainerMenusClose} />
+      <CloseMobileMenuButton onClick={onClick} />
       <Typography>Account</Typography>
     </MobileHeaderContainer>
   )

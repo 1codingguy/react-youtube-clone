@@ -1,19 +1,17 @@
-import React from 'react'
-import VideoCallIcon from '@material-ui/icons/VideoCall'
-import { IconTooltip, StyledIconButton } from '../../../utils/utils'
-import { useGlobalContext } from '../../../../context'
+import React, { useState } from 'react'
+import CreateVideoIconButton from './CreateVideoIconButton'
+import CreateVideoMenu from './CreateVideoMenu'
 
-function CreateVideoButton() {
-  const { setAnchorVideoButton } = useGlobalContext()
-
+const CreateVideoButton = () => {
+  const [anchorVideoButton, setAnchorVideoButton] = useState(null)
+  const handleVideoMenuClose = () => {
+    setAnchorVideoButton(null)
+  }
   return (
-    <IconTooltip title="Create">
-      <StyledIconButton
-        onClick={(event) => setAnchorVideoButton(event.currentTarget)}
-      >
-        <VideoCallIcon />
-      </StyledIconButton>
-    </IconTooltip>
+    <>
+      <CreateVideoIconButton {...{ setAnchorVideoButton }} />
+      <CreateVideoMenu {...{ anchorVideoButton, handleVideoMenuClose }} />
+    </>
   )
 }
 

@@ -1,19 +1,20 @@
-import React from 'react'
-import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp'
-import { StyledIconButton, IconTooltip } from '../../../utils/utils'
-import { useGlobalContext } from '../../../../context'
+import React, { useState } from 'react'
+import NotificationsIconButton from './NotificationsIconButton'
+import NotificationsMenu from './NotificationsMenu'
 
-function NotificationsButton() {
-  const { setAnchorNotificationsButton } = useGlobalContext()
-
+const NotificationsButton = () => {
+  const [anchorNotificationsButton, setAnchorNotificationsButton] =
+    useState(null)
+  const handleNotificationsMenuClose = () => {
+    setAnchorNotificationsButton(null)
+  }
   return (
-    <IconTooltip title="Notifications">
-      <StyledIconButton
-        onClick={(event) => setAnchorNotificationsButton(event.currentTarget)}
-      >
-        <NotificationsNoneSharpIcon />
-      </StyledIconButton>
-    </IconTooltip>
+    <>
+      <NotificationsIconButton {...{ setAnchorNotificationsButton }} />
+      <NotificationsMenu
+        {...{ anchorNotificationsButton, handleNotificationsMenuClose }}
+      />
+    </>
   )
 }
 

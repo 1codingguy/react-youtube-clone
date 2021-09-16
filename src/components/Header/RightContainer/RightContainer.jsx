@@ -1,15 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import CreateVideoButton from './CreateVideoButton/CreateVideoButton'
-import CreateVideoMenu from './CreateVideoButton/CreateVideoMenu'
 import AppsButton from './AppsButton/AppsButton'
-import AppsMenu from './AppsButton/AppsMenu'
 import NotificationsButton from './NotificationsButton/NotificationsButton'
-import NotificationsMenu from './NotificationsButton/NotificationsMenu'
 import AvatarButton from './AvatarButton/AvatarButton'
-import AvatarMenu from './AvatarButton/AvatarMenu'
 import { useIsMobileView } from '../../utils/utils'
-
 
 const RightContainer = () => {
   const isMobileView = useIsMobileView()
@@ -19,18 +14,12 @@ const RightContainer = () => {
       {isMobileView ? null : (
         <>
           <CreateVideoButton />
-          <CreateVideoMenu />
-
           <AppsButton />
-          <AppsMenu />
-
           <NotificationsButton />
-          <NotificationsMenu />
         </>
       )}
 
       <AvatarButton />
-      <AvatarMenu />
     </StyledRightContainer>
   )
 }

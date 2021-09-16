@@ -35,6 +35,7 @@ export const useMinWidthToShowFullSidebar = () =>
 export const useShouldShowMiniSidebar = () =>
   useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR}px)`)
 
+// To hide AppBar when scroll passed threshold
 export function HideOnScroll({ children }) {
   const displayMobileHeader = !useScrollTrigger({
     threshold: MOBILE_VIEW_SCROLL_THRESHOLD,
@@ -49,7 +50,7 @@ export function HideOnScroll({ children }) {
     : displayMobileHeader
 
   return (
-    // previously added wrap a <div> around {children, the hide animation didn't work as a result}
+    // previously added a <div> to wrap around {children}, the hide animation didn't work as a result}
     <Slide in={showHeader}>{children}</Slide>
   )
 }

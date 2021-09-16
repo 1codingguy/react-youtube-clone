@@ -2,12 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined'
 import Fab from '@material-ui/core/Fab'
-import { useGlobalContext } from '../../../../context'
 
-export const MobileUpButton = () => {
-  const { handleRightContainerMenusClose } = useGlobalContext()
+export const MobileUpButton = ({ onClick }) => {
   return (
-    <StyledFab onClick={handleRightContainerMenusClose}>
+    <StyledFab onClick={onClick}>
       <ArrowUpwardOutlinedIcon style={{ fontSize: '20px' }} />
     </StyledFab>
   )

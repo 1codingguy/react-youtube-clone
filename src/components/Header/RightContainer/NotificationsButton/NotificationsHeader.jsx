@@ -1,19 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
-import { NOTIFICATION_MENU_TOP_HEIGHT } from '../../../utils/utils';
-import { useGlobalContext } from '../../../../context'
+import React from 'react'
+import styled from 'styled-components'
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
+import { NOTIFICATION_MENU_TOP_HEIGHT } from '../../../utils/utils'
 
-export function NotificationsHeader() {
-  const { handleRightContainerMenusClose } =
-    useGlobalContext()
+export function NotificationsHeader({ onClick }) {
   return (
     <NotificationsMenuTop>
       <Typography>Notifications</Typography>
-      <IconButton onClick={handleRightContainerMenusClose}>
+      <IconButton onClick={onClick}>
         <SettingsOutlinedIcon />
       </IconButton>
     </NotificationsMenuTop>
@@ -27,4 +24,4 @@ const NotificationsMenuTop = styled(Box)`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-left: 16px;
   padding-right: 16px;
-`;
+`
