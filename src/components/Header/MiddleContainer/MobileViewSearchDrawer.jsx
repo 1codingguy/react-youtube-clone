@@ -10,10 +10,11 @@ import {
   DESKTOP_VIEW_HEADER_HEIGHT,
   DEFAULT_FONT_SIZE,
 } from '../../utils/utils'
-import { useGlobalContext } from '../../../context'
 
-const MobileViewSearchDrawer = () => {
-  const { isSearchDrawerOpen, setIsSearchDrawerOpen } = useGlobalContext()
+const MobileViewSearchDrawer = ({
+  isSearchDrawerOpen,
+  setIsSearchDrawerOpen,
+}) => {
   return (
     <Drawer
       anchor="top"

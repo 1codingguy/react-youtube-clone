@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from '@material-ui/core'
 import styled from 'styled-components'
 import { SHOW_SEARCH_BOX_BREAKPOINT } from '../../utils/utils'
@@ -15,6 +15,23 @@ const MiddleContainer = () => {
     `(min-width: ${SHOW_SEARCH_BOX_BREAKPOINT}px)`
   )
 
+  const [isSearchDrawerOpen, setIsSearchDrawerOpen] = useState(false)
+
+  // reset isSearchDrawerOpen to false when >= 657px
+  useEffect(() => {
+    const resizeListener = () => {
+      if (window.innerWidth >= SHOW_SEARCH_BOX_BREAKPOINT) {
+        setIsSearchDrawerOpen(false)
+      }
+    }
+
+    window.addEventListener('resize', resizeListener)
+
+    return () => {
+      window.removeEventListener('resize', resizeListener)
+    }
+  })
+
   return (
     <StyledMiddleContainer>
       {showSearchBox ? (
@@ -23,8 +40,10 @@ const MiddleContainer = () => {
       ) : (
         <>
           {/* only show search icon < 657px */}
-          <SearchButton />
-          <MobileViewSearchDrawer />
+          <SearchButton {...{ setIsSearchDrawerOpen }} />
+          <MobileViewSearchDrawer
+            {...{ isSearchDrawerOpen, setIsSearchDrawerOpen }}
+          />
         </>
       )}
 

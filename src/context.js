@@ -10,7 +10,6 @@ import {
   FULL_SIDEBAR_WIDTH,
 } from './components/utils/utils'
 import useResetUserSettingToShowFullSidebar from './components/utils/useResetUserSettingToShowFullSidebar'
-import useResetIsSearchDrawerOpen from './components/utils/useResetIsSearchDrawerOpen'
 import MiniSidebar from './components/Sidebar/MiniSidebar'
 import FullWidthSidebar from './components/Sidebar/FullWidthSidebar'
 
@@ -63,7 +62,7 @@ export const ContextProvider = ({ children }) => {
 
   // --------------------------------------------------------------
   const [isSidebarDrawerOpen, setIsSidebarDrawerOpen] = useState(false)
-  const [isSearchDrawerOpen, setIsSearchDrawerOpen] = useState(false)
+  
   const [anchorVideoButton, setAnchorVideoButton] = useState(null)
   const [anchorAppsButton, setAnchorAppsButton] = useState(null)
   const [anchorNotificationsButton, setAnchorNotificationsButton] =
@@ -92,9 +91,6 @@ export const ContextProvider = ({ children }) => {
     setIsSidebarDrawerOpen
   )
 
-  // reset isSearchDrawerOpen to false when >= 657px
-  useResetIsSearchDrawerOpen(setIsSearchDrawerOpen)
-
   return (
     <YouTubeContext.Provider
       value={{
@@ -105,8 +101,6 @@ export const ContextProvider = ({ children }) => {
         userSettingToShowFullSidebar,
         setUserSettingToShowFullSidebar,
         handleHamburgerMenuClick,
-        isSearchDrawerOpen,
-        setIsSearchDrawerOpen,
         anchorVideoButton,
         setAnchorVideoButton,
         anchorAppsButton,
