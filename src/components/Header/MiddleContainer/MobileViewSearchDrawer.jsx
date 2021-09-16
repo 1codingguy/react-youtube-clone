@@ -13,18 +13,18 @@ import {
 import { useGlobalContext } from '../../../context'
 
 const MobileViewSearchDrawer = () => {
-  const { openSearchDrawer, setOpenSearchDrawer } = useGlobalContext()
+  const { isSearchDrawerOpen, setIsSearchDrawerOpen } = useGlobalContext()
   return (
     <Drawer
       anchor="top"
-      open={openSearchDrawer}
-      onClose={() => setOpenSearchDrawer(false)}
+      open={isSearchDrawerOpen}
+      onClose={() => setIsSearchDrawerOpen(false)}
       transitionDuration={0} // disable the transition animation
     >
       <MobileToolbar disableGutters>
-        <MobileBackIcon onClick={() => setOpenSearchDrawer(false)} />
+        <MobileBackIcon onClick={() => setIsSearchDrawerOpen(false)} />
         <MobileSearchField placeholder="Search YouTube" />
-        <MobileSearchIcon onClick={() => setOpenSearchDrawer(false)} />
+        <MobileSearchIcon onClick={() => setIsSearchDrawerOpen(false)} />
       </MobileToolbar>
     </Drawer>
   )

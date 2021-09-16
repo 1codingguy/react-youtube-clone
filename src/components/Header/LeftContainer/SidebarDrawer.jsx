@@ -8,13 +8,13 @@ import HamburgerMenuIcon from './HamburgerMenuIcon'
 import { useGlobalContext } from '../../../context'
 
 const SidebarDrawer = () => {
-  const { openSidebarDrawer, setOpenSidebarDrawer } = useGlobalContext()
+  const { isSidebarDrawerOpen, setIsSidebarDrawerOpen } = useGlobalContext()
 
   return (
     <Drawer
       anchor="left"
-      open={openSidebarDrawer}
-      onClose={() => setOpenSidebarDrawer(false)}
+      open={isSidebarDrawerOpen}
+      onClose={() => setIsSidebarDrawerOpen(false)}
       transitionDuration={0}
     >
       <DrawerHeader>

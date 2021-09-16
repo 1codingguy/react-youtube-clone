@@ -4,10 +4,10 @@ import { IconTooltip, StyledIconButton } from '../../utils/utils'
 import { useGlobalContext } from '../../../context'
 
 export const SearchButton = () => {
-  const { setOpenSearchDrawer } = useGlobalContext()
+  const { setIsSearchDrawerOpen } = useGlobalContext()
   return (
     <IconTooltip title="Search">
-      <StyledIconButton onClick={() => setOpenSearchDrawer(true)}>
+      <StyledIconButton onClick={() => setIsSearchDrawerOpen(true)}>
         <SearchIcon />
       </StyledIconButton>
     </IconTooltip>

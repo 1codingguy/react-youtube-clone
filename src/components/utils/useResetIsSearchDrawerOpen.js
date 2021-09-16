@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { SHOW_SEARCH_BOX_BREAKPOINT } from './utils'
 
-export default function useResetOpenSearchDrawer(setOpenSearchDrawer) {
+export default function useResetIsSearchDrawerOpen(setIsSearchDrawerOpen) {
   useEffect(() => {
     const resizeListener = () => {
       if (window.innerWidth >= SHOW_SEARCH_BOX_BREAKPOINT) {
-        setOpenSearchDrawer(false)
+        setIsSearchDrawerOpen(false)
       }
     }
 

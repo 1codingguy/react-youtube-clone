@@ -10,7 +10,7 @@ import {
   FULL_SIDEBAR_WIDTH,
 } from './components/utils/utils'
 import useResetUserSettingToShowFullSidebar from './components/utils/useResetUserSettingToShowFullSidebar'
-import useResetOpenSearchDrawer from './components/utils/useResetOpenSearchDrawer'
+import useResetIsSearchDrawerOpen from './components/utils/useResetIsSearchDrawerOpen'
 import MiniSidebar from './components/Sidebar/MiniSidebar'
 import FullWidthSidebar from './components/Sidebar/FullWidthSidebar'
 
@@ -62,8 +62,8 @@ export const ContextProvider = ({ children }) => {
     : '0px'
 
   // --------------------------------------------------------------
-  const [openSidebarDrawer, setOpenSidebarDrawer] = useState(false)
-  const [openSearchDrawer, setOpenSearchDrawer] = useState(false)
+  const [isSidebarDrawerOpen, setIsSidebarDrawerOpen] = useState(false)
+  const [isSearchDrawerOpen, setIsSearchDrawerOpen] = useState(false)
   const [anchorVideoButton, setAnchorVideoButton] = useState(null)
   const [anchorAppsButton, setAnchorAppsButton] = useState(null)
   const [anchorNotificationsButton, setAnchorNotificationsButton] =
@@ -73,7 +73,7 @@ export const ContextProvider = ({ children }) => {
   const handleHamburgerMenuClick = () => {
     // open drawer only under 1313px, mobile view doesn't have a hamburger menu so it's not a concern
     if (shouldOpenSidebarDrawer) {
-      setOpenSidebarDrawer(!openSidebarDrawer)
+      setIsSidebarDrawerOpen(!isSidebarDrawerOpen)
     } //toggle between MiniSidebar and FullWidthSidebar if >= 1313px
     setUserSettingToShowFullSidebar(!userSettingToShowFullSidebar)
   }
@@ -86,26 +86,27 @@ export const ContextProvider = ({ children }) => {
   }
 
   // reset showFullWidthSidebar to true if < 1313px
+  // need to rename as it now does two things
   useResetUserSettingToShowFullSidebar(
     setUserSettingToShowFullSidebar,
-    setOpenSidebarDrawer
+    setIsSidebarDrawerOpen
   )
 
-  // reset openSearchDrawer to false when >= 657px
-  useResetOpenSearchDrawer(setOpenSearchDrawer)
+  // reset isSearchDrawerOpen to false when >= 657px
+  useResetIsSearchDrawerOpen(setIsSearchDrawerOpen)
 
   return (
     <YouTubeContext.Provider
       value={{
         isMobileView,
         shouldOpenSidebarDrawer,
-        openSidebarDrawer,
-        setOpenSidebarDrawer,
+        isSidebarDrawerOpen,
+        setIsSidebarDrawerOpen,
         userSettingToShowFullSidebar,
         setUserSettingToShowFullSidebar,
         handleHamburgerMenuClick,
-        openSearchDrawer,
-        setOpenSearchDrawer,
+        isSearchDrawerOpen,
+        setIsSearchDrawerOpen,
         anchorVideoButton,
         setAnchorVideoButton,
         anchorAppsButton,

@@ -19,6 +19,9 @@ const Videos = () => {
 
 export default Videos
 
+// How to use the move to calculation of marginTopToOffset, marginLeftToOffset outside a React components?
+// All the states used for calculation must be inside React functional components/ hooks
+
 const VideoContainer = styled.div`
   min-height: 200vh;
   background-color: teal;
