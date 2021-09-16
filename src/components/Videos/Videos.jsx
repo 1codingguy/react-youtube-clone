@@ -1,11 +1,27 @@
 import React from 'react'
+import styled from 'styled-components'
+import { useGlobalContext } from '../../context'
 
 const Videos = () => {
+  const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
   return (
-    <div>
-      {/* <h1>This is Videos container</h1> */}
-    </div>
+    <VideoContainer
+      style={{
+        marginTop: marginTopToOffset,
+        marginLeft: marginLeftToOffset,
+        width: `calc(100% - ${marginLeftToOffset} )`,
+      }}
+    >
+      <h1>This is Videos container</h1>
+    </VideoContainer>
   )
 }
 
 export default Videos
+
+const VideoContainer = styled.div`
+  min-height: 200vh;
+  background-color: teal;
+  /* width: 100%; */
+  display: inline-block;
+`

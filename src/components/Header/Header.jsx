@@ -5,15 +5,14 @@ import Toolbar from '@material-ui/core/Toolbar'
 import LeftContainer from './LeftContainer/LeftContainer'
 import MiddleContainer from './MiddleContainer/MiddleContainer'
 import RightContainer from './RightContainer/RightContainer'
-
 import {
   MOBILE_VIEW_BREAKPOINT,
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
   HideOnScroll,
 } from '../utils/utils'
-// import { textForScrollingTest } from '../utils/textForScrollingTest'
 import { useGlobalContext } from '../../context'
+// import { TextForScrollingTest } from '../utils/TextForScrollingTest'
 
 function Header() {
   const { isMobileView } = useGlobalContext()
@@ -31,7 +30,7 @@ function Header() {
       </HideOnScroll>
 
       {/* Below text only to test if hiding the AppBar works */}
-      {/* {textForScrollingTest()} */}
+      {/* <TextForScrollingTest /> */}
     </>
   )
 }
@@ -42,7 +41,9 @@ export const StyledAppBar = styled(AppBar)`
   && {
     background-color: white;
     /* opacity: 0.9; */
-    transition: none !important; // can't override without !important
+    @media screen and (min-width: ${MOBILE_VIEW_BREAKPOINT + 1}px) {
+      transition: none !important; // can't override without !important
+    }
   }
 
   .MuiToolbar-regular {

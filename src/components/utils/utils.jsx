@@ -7,10 +7,13 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 
+// heights and widths of components
 const MOBILE_VIEW_SCROLL_THRESHOLD = 48
 export const NOTIFICATION_MENU_TOP_HEIGHT = 48
 export const MOBILE_VIEW_HEADER_HEIGHT = 48
 export const DESKTOP_VIEW_HEADER_HEIGHT = 56
+export const MINI_SIDEBAR_WIDTH = 72
+export const FULL_SIDEBAR_WIDTH = 240
 // Breakpoints
 export const MOBILE_VIEW_BREAKPOINT = 428
 export const SHOW_SEARCH_BOX_BREAKPOINT = 657

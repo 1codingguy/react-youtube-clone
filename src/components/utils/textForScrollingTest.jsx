@@ -2,7 +2,7 @@ import React from 'react'
 import { MOBILE_VIEW_HEADER_HEIGHT, DESKTOP_VIEW_HEADER_HEIGHT } from './utils'
 import { useGlobalContext } from '../../context'
 
-export function textForScrollingTest() {
+export function TextForScrollingTest() {
   const { isMobileView } = useGlobalContext()
 
   return (

@@ -6,10 +6,17 @@ import { StyledMenuItem } from '../utils/utils'
 import { SidebarFirstPart } from './SidebarFirstPart'
 import { SidebarSecondPart } from './SidebarSecondPart'
 import { SidebarThirdPart } from './SidebarThirdPart'
+import { FULL_SIDEBAR_WIDTH } from '../utils/utils'
+import { useGlobalContext } from '../../context'
 
 const FullWidthSidebar = () => {
+  const { shouldOpenSidebarDrawer } = useGlobalContext()
+
   return (
-    <StyledFullWidthSidebar>
+    <StyledFullWidthSidebar
+    // no position fixed for FullWidthSidebar in a drawer
+      style={shouldOpenSidebarDrawer ? null : { position: 'fixed' }}
+    >
       <SidebarFirstPart />
       <Divider />
       <SidebarSecondPart />
@@ -22,8 +29,9 @@ const FullWidthSidebar = () => {
 export default FullWidthSidebar
 
 const StyledFullWidthSidebar = styled.div`
-  width: 240px;
-  overflow-y: auto;
+  width: ${FULL_SIDEBAR_WIDTH}px;
+  height: 100%;
+  overflow-y: scroll;
 `
 
 export const DividerWithMargin = styled(Divider)`
