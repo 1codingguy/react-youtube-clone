@@ -11,6 +11,7 @@ import { useGlobalContext } from '../../../../context'
 import { createVideoMenuItems } from './createVideoMenuItems'
 
 const CreateVideoMenu = () => {
+  // create a parent component for CreateVideoMenu and CreateVideoButton, states defined in parent component and pass to children
   const { anchorVideoButton, handleRightContainerMenusClose } =
     useGlobalContext()
   return (

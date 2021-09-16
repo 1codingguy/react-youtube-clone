@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import YouTubeLogo from './YouTubeLogo'
-import SidebarDrawer from './SidebarDrawer'
+import SidebarDrawer from '../../Sidebar/SidebarDrawer'
 import HamburgerMenuIcon from './HamburgerMenuIcon'
 import { useGlobalContext } from '../../../context'
 
