@@ -8,10 +8,11 @@ import NotificationsButton from './NotificationsButton/NotificationsButton'
 import NotificationsMenu from './NotificationsButton/NotificationsMenu'
 import AvatarButton from './AvatarButton/AvatarButton'
 import AvatarMenu from './AvatarButton/AvatarMenu'
-import { useGlobalContext } from '../../../context'
+import { useIsMobileView } from '../../utils/utils'
+
 
 const RightContainer = () => {
-  const { isMobileView } = useGlobalContext()
+  const isMobileView = useIsMobileView()
 
   return (
     <StyledRightContainer>

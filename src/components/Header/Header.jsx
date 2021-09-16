@@ -10,12 +10,12 @@ import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
   HideOnScroll,
+  useIsMobileView,
 } from '../utils/utils'
-import { useGlobalContext } from '../../context'
 // import { TextForScrollingTest } from '../utils/TextForScrollingTest'
 
 function Header() {
-  const { isMobileView } = useGlobalContext()
+  const isMobileView = useIsMobileView()
   return (
     <>
       <HideOnScroll>

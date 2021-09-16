@@ -1,10 +1,10 @@
 import React from 'react'
 import MobileAvatarPopUpMenu from './MobileAvatarPopUpMenu'
-import { useGlobalContext } from '../../../../context'
 import { AvatarPopUpMenu } from './AvatarPopUpMenu'
+import { useIsMobileView } from '../../../utils/utils'
 
 const AvatarMenu = () => {
-  const { isMobileView } = useGlobalContext()
+  const isMobileView = useIsMobileView()
 
   if (isMobileView) {
     return <MobileAvatarPopUpMenu />

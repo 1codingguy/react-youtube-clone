@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from '@material-ui/core'
 import styled from 'styled-components'
-import { SHOW_SEARCH_BOX_BREAKPOINT } from '../../utils/utils'
+import { SHOW_SEARCH_BOX_BREAKPOINT, useIsMobileView } from '../../utils/utils'
 import MobileViewSearchDrawer from './MobileViewSearchDrawer'
 import { SearchContainerWithTextField } from './SearchContainerWithTextField'
 import { MicButton } from './MicButton'
 import { SearchButton } from './SearchButton'
-import { useGlobalContext } from '../../../context'
 
 const MiddleContainer = () => {
-  const { isMobileView } = useGlobalContext()
+  const isMobileView = useIsMobileView()
 
   const showSearchBox = useMediaQuery(
     `(min-width: ${SHOW_SEARCH_BOX_BREAKPOINT}px)`

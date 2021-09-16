@@ -3,11 +3,16 @@ import styled from 'styled-components'
 import Avatar from '@material-ui/core/Avatar'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
-import { DEFAULT_FONT_SIZE, MOBILE_VIEW_BREAKPOINT } from '../../../utils/utils'
+import {
+  DEFAULT_FONT_SIZE,
+  MOBILE_VIEW_BREAKPOINT,
+  useIsMobileView,
+} from '../../../utils/utils'
 import { useGlobalContext } from '../../../../context'
 
 export const AvatarAccountInfo = () => {
-  const { isMobileView, handleRightContainerMenusClose } = useGlobalContext()
+  const isMobileView = useIsMobileView()
+  const { handleRightContainerMenusClose } = useGlobalContext()
 
   return (
     <AccountInfoHeader style={isMobileView ? { padding: '8px' } : null}>

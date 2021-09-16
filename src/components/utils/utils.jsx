@@ -22,6 +22,19 @@ export const SHOW_FULL_SIDEBAR = 1313
 // font size
 export const DEFAULT_FONT_SIZE = 14
 
+// useMediaQuery hooks
+export const useIsMobileView = () =>
+  useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
+
+export const useShouldOpenSidebarDrawer = () =>
+  !useMediaQuery(`(min-width:${SHOW_FULL_SIDEBAR}px)`)
+
+export const useMinWidthToShowFullSidebar = () =>
+  useMediaQuery(`(min-width: ${SHOW_FULL_SIDEBAR}px)`)
+
+export const useShouldShowMiniSidebar = () =>
+  useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR}px)`)
+
 export function HideOnScroll({ children }) {
   const displayMobileHeader = !useScrollTrigger({
     threshold: MOBILE_VIEW_SCROLL_THRESHOLD,

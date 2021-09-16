@@ -2,19 +2,21 @@ import React from 'react'
 import styled from 'styled-components'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
-import { StyledMenuItem } from '../utils/utils'
+import {
+  FULL_SIDEBAR_WIDTH,
+  StyledMenuItem,
+  useShouldOpenSidebarDrawer,
+} from '../utils/utils'
 import { SidebarFirstPart } from './SidebarFirstPart'
 import { SidebarSecondPart } from './SidebarSecondPart'
 import { SidebarThirdPart } from './SidebarThirdPart'
-import { FULL_SIDEBAR_WIDTH } from '../utils/utils'
-import { useGlobalContext } from '../../context'
 
 const FullWidthSidebar = () => {
-  const { shouldOpenSidebarDrawer } = useGlobalContext()
+  const shouldOpenSidebarDrawer = useShouldOpenSidebarDrawer()
 
   return (
     <StyledFullWidthSidebar
-    // no position fixed for FullWidthSidebar in a drawer
+      // no position fixed for FullWidthSidebar in a drawer
       style={shouldOpenSidebarDrawer ? null : { position: 'fixed' }}
     >
       <SidebarFirstPart />

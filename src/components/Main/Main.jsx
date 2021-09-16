@@ -7,17 +7,16 @@ import {
   DESKTOP_VIEW_HEADER_HEIGHT,
   MOBILE_VIEW_BREAKPOINT,
 } from '../utils/utils'
-import { useGlobalContext } from '../../context'
+import SidebarToShow from '../Sidebar/SidebarToShow' 
 
 const Main = () => {
-  const { SidebarToShow } = useGlobalContext()
 
   return (
     <StyledMain>
       <SidebarToShow />
 
-      <CategoriesBar />
-      <Videos />
+      {/* <CategoriesBar />
+      <Videos /> */}
     </StyledMain>
   )
 }

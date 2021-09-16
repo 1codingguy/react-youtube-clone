@@ -1,10 +1,11 @@
 import { SidebarMenuItem } from './FullWidthSidebar'
 import { StyledListItemIcon } from '../utils/utils'
 import ListItemText from '@material-ui/core/ListItemText'
-import { useGlobalContext } from '../../context'
+import { isSidebarDrawerOpenAtom } from '../../store'
+import { useAtom } from 'jotai'
 
 export const SidebarRow = ({ Icon, text }) => {
-  const { setIsSidebarDrawerOpen } = useGlobalContext()
+  const [_, setIsSidebarDrawerOpen] = useAtom(isSidebarDrawerOpenAtom)
 
   return (
     <SidebarMenuItem onClick={() => setIsSidebarDrawerOpen(false)}>

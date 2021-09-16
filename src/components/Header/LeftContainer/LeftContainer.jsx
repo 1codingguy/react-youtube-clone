@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import YouTubeLogo from './YouTubeLogo'
 import SidebarDrawer from '../../Sidebar/SidebarDrawer'
 import HamburgerMenuIcon from './HamburgerMenuIcon'
-import { useGlobalContext } from '../../../context'
+import { useIsMobileView } from '../../utils/utils'
 
 const LeftContainer = () => {
-  const { isMobileView } = useGlobalContext()
+  const isMobileView = useIsMobileView()
 
   return (
     <StyledLeftContainer>
