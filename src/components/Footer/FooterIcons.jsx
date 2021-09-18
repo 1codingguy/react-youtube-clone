@@ -11,7 +11,7 @@ export const FooterIcons = () => {
   })
 }
 
-export const StyledBottomNavigationAction = styled(BottomNavigationAction)`
+const StyledBottomNavigationAction = styled(BottomNavigationAction)`
   .MuiBottomNavigationAction-wrapper {
     color: #030303;
   }

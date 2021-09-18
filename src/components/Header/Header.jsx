@@ -64,7 +64,7 @@ const StyledToolbar = styled(Toolbar)`
   }
 
   /* remove the border later */
-  border-bottom: 1px solid lightgray;
+  /* border-bottom: 1px solid lightgray; */
   padding-left: 16px;
   padding-right: 16px;
   /* background-color: white; */

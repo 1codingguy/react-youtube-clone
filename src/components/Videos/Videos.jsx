@@ -19,7 +19,7 @@ export default Videos
 
 const VideoContainer = styled.div`
   min-height: 200vh;
-  background-color: lightsteelblue;
+  background-color: none;
   /* width: 100%; */
   display: inline-block;
   margin-top: ${(props) => props.marginTopToOffset}px;

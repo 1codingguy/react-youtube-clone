@@ -3,7 +3,10 @@ import styled from 'styled-components'
 import Drawer from '@material-ui/core/Drawer'
 import FullWidthSidebar from './FullWidthSidebar'
 import YouTubeLogo from '../Header/LeftContainer/YouTubeLogo'
-import { DESKTOP_VIEW_HEADER_HEIGHT, SHOW_FULL_SIDEBAR } from '../utils/utils'
+import {
+  DESKTOP_VIEW_HEADER_HEIGHT,
+  SHOW_FULL_SIDEBAR_BREAKPOINT,
+} from '../utils/utils'
 import HamburgerMenuIcon from '../Header/LeftContainer/HamburgerMenuIcon'
 import { isSidebarDrawerOpenAtom } from '../../store'
 import { useAtom } from 'jotai'
@@ -16,7 +19,7 @@ const SidebarDrawer = () => {
   // close sidebar drawer if currently opened and resized to >= 1313px
   useEffect(() => {
     const resizeListener = () => {
-      if (window.innerWidth >= SHOW_FULL_SIDEBAR) {
+      if (window.innerWidth >= SHOW_FULL_SIDEBAR_BREAKPOINT) {
         setIsSidebarDrawerOpen(false)
       }
     }
