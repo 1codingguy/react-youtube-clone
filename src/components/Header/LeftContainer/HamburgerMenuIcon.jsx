@@ -4,7 +4,7 @@ import { useAtom } from 'jotai'
 import {
   StyledIconButton,
   useShouldOpenSidebarDrawer,
-  SHOW_FULL_SIDEBAR,
+  SHOW_FULL_SIDEBAR_BREAKPOINT,
 } from '../../utils/utils'
 import {
   isSidebarDrawerOpenAtom,
@@ -30,7 +30,7 @@ const HamburgerMenuIcon = () => {
   // Reset userSettingToShowFullSidebar to default if resized under 1313px
   useEffect(() => {
     const resizeListener = () => {
-      if (window.innerWidth < SHOW_FULL_SIDEBAR) {
+      if (window.innerWidth < SHOW_FULL_SIDEBAR_BREAKPOINT) {
         setUserSettingToShowFullSidebar(true)
       }
     }

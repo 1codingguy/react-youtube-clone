@@ -1,21 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
-import CategoriesBar from '../CategoriesBar/CategoriesBar'
+import ChipsBar from '../ChipsBar/ChipsBar'
 import Videos from '../Videos/Videos'
 import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
   MOBILE_VIEW_BREAKPOINT,
 } from '../utils/utils'
-import SidebarToShow from '../Sidebar/SidebarToShow' 
+import SidebarToShow from '../Sidebar/SidebarToShow'
 
 const Main = () => {
-
   return (
     <StyledMain>
       <SidebarToShow />
 
-      <CategoriesBar />
+      <ChipsBar />
       <Videos />
     </StyledMain>
   )

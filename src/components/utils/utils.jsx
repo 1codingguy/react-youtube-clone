@@ -17,8 +17,8 @@ export const FULL_SIDEBAR_WIDTH = 240
 // Breakpoints
 export const MOBILE_VIEW_BREAKPOINT = 428
 export const SHOW_SEARCH_BOX_BREAKPOINT = 657
-export const SHOW_MINI_SIDEBAR = 792
-export const SHOW_FULL_SIDEBAR = 1313
+export const SHOW_MINI_SIDEBAR_BREAKPOINT = 792
+export const SHOW_FULL_SIDEBAR_BREAKPOINT = 1313
 // font size
 export const DEFAULT_FONT_SIZE = 14
 
@@ -27,13 +27,13 @@ export const useIsMobileView = () =>
   useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
 
 export const useShouldOpenSidebarDrawer = () =>
-  !useMediaQuery(`(min-width:${SHOW_FULL_SIDEBAR}px)`)
+  !useMediaQuery(`(min-width:${SHOW_FULL_SIDEBAR_BREAKPOINT}px)`)
 
 export const useMinWidthToShowFullSidebar = () =>
-  useMediaQuery(`(min-width: ${SHOW_FULL_SIDEBAR}px)`)
+  useMediaQuery(`(min-width: ${SHOW_FULL_SIDEBAR_BREAKPOINT}px)`)
 
 export const useShouldShowMiniSidebar = () =>
-  useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR}px)`)
+  useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR_BREAKPOINT}px)`)
 
 // To hide AppBar when scroll passed threshold
 export function HideOnScroll({ children }) {
