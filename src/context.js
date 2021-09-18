@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { useAtom } from 'jotai'
 import {
   useIsMobileView,
@@ -33,10 +33,10 @@ export const ContextProvider = ({ children }) => {
     : DESKTOP_VIEW_HEADER_HEIGHT
 
   const marginLeftToOffset = shouldShowFullSidebar
-    ? `${FULL_SIDEBAR_WIDTH}px`
+    ? FULL_SIDEBAR_WIDTH
     : shouldShowMiniSidebar
-    ? `${MINI_SIDEBAR_WIDTH}px`
-    : '0px'
+    ? MINI_SIDEBAR_WIDTH
+    : 0
 
   return (
     <YouTubeContext.Provider

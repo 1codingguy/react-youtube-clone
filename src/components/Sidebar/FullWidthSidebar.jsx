@@ -33,7 +33,7 @@ export default FullWidthSidebar
 const StyledFullWidthSidebar = styled.div`
   width: ${FULL_SIDEBAR_WIDTH}px;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
 `
 
 export const DividerWithMargin = styled(Divider)`

@@ -4,14 +4,11 @@ import { useGlobalContext } from '../../context'
 
 const Videos = () => {
   const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
-  
+
   return (
     <VideoContainer
-      style={{
-        marginTop: marginTopToOffset,
-        marginLeft: marginLeftToOffset,
-        width: `calc(100% - ${marginLeftToOffset} )`,
-      }}
+      marginTopToOffset={marginTopToOffset}
+      marginLeftToOffset={marginLeftToOffset}
     >
       <h1>This is Videos container</h1>
     </VideoContainer>
@@ -20,12 +17,12 @@ const Videos = () => {
 
 export default Videos
 
-// How to move the calculation of marginTopToOffset, marginLeftToOffset outside a React components?
-// All the states used for calculation must be inside React functional components/ hooks
-
 const VideoContainer = styled.div`
   min-height: 200vh;
-  background-color: teal;
+  background-color: lightsteelblue;
   /* width: 100%; */
   display: inline-block;
+  margin-top: ${(props) => props.marginTopToOffset}px;
+  margin-left: ${(props) => props.marginLeftToOffset}px;
+  width: calc(100% - ${(props) => props.marginLeftToOffset}px);
 `

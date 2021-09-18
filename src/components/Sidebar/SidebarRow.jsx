@@ -5,7 +5,7 @@ import { isSidebarDrawerOpenAtom } from '../../store'
 import { useAtom } from 'jotai'
 
 export const SidebarRow = ({ Icon, text }) => {
-  const [_, setIsSidebarDrawerOpen] = useAtom(isSidebarDrawerOpenAtom)
+  const [, setIsSidebarDrawerOpen] = useAtom(isSidebarDrawerOpenAtom)
 
   return (
     <SidebarMenuItem onClick={() => setIsSidebarDrawerOpen(false)}>

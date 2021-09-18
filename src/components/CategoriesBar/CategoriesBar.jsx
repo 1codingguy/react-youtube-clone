@@ -11,7 +11,6 @@ import {
 import { useGlobalContext } from '../../context'
 import AppBar from '@material-ui/core/AppBar'
 
-
 /** topbar under the search that shows category filter chips that scroll left/right */
 const CategoriesBar = () => {
   const { marginLeftToOffset } = useGlobalContext()
@@ -24,7 +23,7 @@ const CategoriesBar = () => {
 
   return (
     <HideOnScroll>
-      <TestAppBar style={{ marginLeft: marginLeftToOffset }}>
+      <TestAppBar marginLeftToOffset={marginLeftToOffset}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -57,7 +56,7 @@ const TestAppBar = styled.div`
   height: ${DESKTOP_CATEGORIES_BAR_HEIGHT}px;
   width: auto;
   position: fixed;
-
+  margin-left: ${(props) => props.marginLeftToOffset}px;
   background-color: salmon;
   /* overflow-x: scroll; */
   /* transition: none !important; */
