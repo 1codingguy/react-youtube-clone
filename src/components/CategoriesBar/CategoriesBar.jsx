@@ -50,7 +50,7 @@ const CategoriesBar = () => {
 export default CategoriesBar
 
 const TestAppBar = styled.div`
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}) {
+  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
     height: ${MOBILE_CATEGORIES_BAR_HEIGHT}px;
   }
   height: ${DESKTOP_CATEGORIES_BAR_HEIGHT}px;
