@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
 import styled from 'styled-components'
 import {
   HideOnScroll,
@@ -9,70 +8,44 @@ import {
   DESKTOP_VIEW_HEADER_HEIGHT as DESKTOP_CATEGORIES_BAR_HEIGHT,
 } from '../utils/utils'
 import { useGlobalContext } from '../../context'
-// import AppBar from '@material-ui/core/AppBar'
 import Chip from '@material-ui/core/Chip'
 
 /** topbar under the search that shows category filter chips that scroll left/right */
 const ChipsBar = () => {
   const { marginLeftToOffset } = useGlobalContext()
-
-  // const [value, setValue] = useState(0)
-
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue)
-  // }
-
   const [activeChipIndex, setActiveChipIndex] = useState(0)
 
   return (
     <HideOnScroll>
-      <TestAppBar marginLeftToOffset={marginLeftToOffset}>
+      <ChipsContainer marginLeftToOffset={marginLeftToOffset}>
         <StyledTabs
           marginLeftToOffset={marginLeftToOffset}
           variant="scrollable"
-          scrollButtons="on"
+          scrollButtons="off"
           indicatorColor="none"
           textColor="primary"
           value={0}
         >
-          {[...new Array(20)].map((_, index) => {
-            return (
-              <TestChip
-                key={`Chip #${index}`}
-                label={`Chip #${index}`}
-                active={index === activeChipIndex && true}
-                onClick={() => setActiveChipIndex(index)}
-              />
-            )
-          })}
-
-          {/* <Tab label="Tab 1" /> */}
-          {/* <TestChip label="Live" active />
-          <TestChip label="Jazz" />
-          <TestChip label="Sonatas" />
-          <TestChip label="Chip #4" />
-          <TestChip label="Chip #5" />
-          <TestChip label="Chip #6" />
-          <TestChip label="Chip #7" />
-          <TestChip label="Chip #8" />
-          <TestChip label="Chip #9" />
-          <TestChip label="Chip #10" />
-          <TestChip label="Chip #11" />
-          <TestChip label="Chip #12" />
-          <TestChip label="Chip #13" />
-          <TestChip label="Chip #14" />
-          <TestChip label="Chip #15" /> */}
+          <Chips {...{ activeChipIndex, setActiveChipIndex }} />
         </StyledTabs>
-      </TestAppBar>
+      </ChipsContainer>
     </HideOnScroll>
   )
 }
 
 export default ChipsBar
 
-const Chips = () => {
-  return [...new Array(20)].map((test, index) => {
-    console.log(test, index)
+const Chips = ({ activeChipIndex, setActiveChipIndex }) => {
+  return [...new Array(20)].map((_, index) => {
+    return (
+      <TestChip
+        key={`Chip #${index}`}
+        label={`Chip #${index}`}
+        active={index === activeChipIndex && true}
+        onClick={() => setActiveChipIndex(index)}
+        component="li"
+      />
+    )
   })
 }
 
@@ -92,61 +65,14 @@ const TestChip = styled(Chip)`
 `
 
 const StyledTabs = styled(Tabs)`
-  /* .Mui-disabled {
-    width: 20px
-  } */
-
   .MuiTabs-scrollable {
     display: flex;
     align-items: center;
-    /* padding-left: 1rem; */
-  }
-
-  .MuiTabs-scrollButtons:first-of-type {
-    /* background-color: red; */
-
-    &::before {
-      @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
-        height: calc(${MOBILE_CATEGORIES_BAR_HEIGHT}px - 4px);
-      }
-      height: calc(${DESKTOP_CATEGORIES_BAR_HEIGHT}px - 6px);
-      width: 50px;
-      position: fixed;
-      left: calc(40px + ${(props) => props.marginLeftToOffset}px);
-      pointer-events: none;
-      content: '';
-      /* doesn't do the fade out effect as intented */
-      background: linear-gradient(
-        to right,
-        white 20%,
-        rgba(255, 255, 255, 0) 80%
-      );
-      /* background-color: red; */
-    }
-  }
-  .MuiTabScrollButton-root:last-of-type {
-    /* background-color: yellow; */
-
-    &::before {
-      @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
-        height: calc(${MOBILE_CATEGORIES_BAR_HEIGHT}px - 4px);
-      }
-      height: calc(${DESKTOP_CATEGORIES_BAR_HEIGHT}px - 6px);
-      width: 50px;
-      position: fixed;
-      right: 40px;
-      content: '';
-      pointer-events: none;
-      background: linear-gradient(
-        to left,
-        white 20%,
-        rgba(255, 255, 255, 0) 80%
-      );
-    }
+    padding-left: 12px;
   }
 `
 
-const TestAppBar = styled.div`
+const ChipsContainer = styled.div`
   @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
     height: ${MOBILE_CATEGORIES_BAR_HEIGHT}px;
   }
@@ -160,6 +86,70 @@ const TestAppBar = styled.div`
   border-bottom: 1px solid lightgray;
   /* This doesn't even show in dev-tool if defined under StyledTabs */
   .MuiTabs-root {
-    min-height: 100%;
+    height: 100%;
   }
 `
+
+// Unable to style the arrows as I like, thus not using
+// const TabsWithArrows = styled(Tabs)`
+//   .Mui-disabled {
+//     /* width: 10px;
+//     transition: all 0.2s cubic-bezier(0.05, 0, 0, 1); */
+//     /* transform: scaleX(0.5);
+//     transform: translateX(-20px); */
+//   }
+
+//   .MuiTabs-scrollable {
+//     display: flex;
+//     align-items: center;
+//     /* padding-left: 1rem; */
+//   }
+
+//   .MuiTabs-scrollButtons:first-of-type {
+//     /* background-color: red; */
+
+//     &.Mui-disabled {
+//       flex-shrink: 1;
+//       transition: flex 0.3s ease;
+//     }
+
+//     &::before {
+//       @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+//         height: calc(${MOBILE_CATEGORIES_BAR_HEIGHT}px - 4px);
+//       }
+//       height: calc(${DESKTOP_CATEGORIES_BAR_HEIGHT}px - 6px);
+//       width: 50px;
+//       position: fixed;
+//       left: calc(40px + ${(props) => props.marginLeftToOffset}px);
+//       pointer-events: none;
+//       content: '';
+//       /* doesn't do the fade out effect as intended */
+//       background: linear-gradient(
+//         to right,
+//         white 20%,
+//         rgba(255, 255, 255, 0) 80%
+//       );
+//       /* background-color: red; */
+//     }
+//   }
+//   .MuiTabScrollButton-root:last-of-type {
+//     /* background-color: yellow; */
+
+//     &::before {
+//       @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+//         height: calc(${MOBILE_CATEGORIES_BAR_HEIGHT}px - 4px);
+//       }
+//       height: calc(${DESKTOP_CATEGORIES_BAR_HEIGHT}px - 6px);
+//       width: 50px;
+//       position: fixed;
+//       right: 40px;
+//       content: '';
+//       pointer-events: none;
+//       background: linear-gradient(
+//         to left,
+//         white 20%,
+//         rgba(255, 255, 255, 0) 80%
+//       );
+//     }
+//   }
+// `
