@@ -18,8 +18,9 @@ const FooterContainer = styled(BottomNavigation)`
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 48px;
+    overflow-x: hidden;
   }
   .MuiBottomNavigationAction-root.MuiBottomNavigationAction-iconOnly {
     padding-top: 8px;

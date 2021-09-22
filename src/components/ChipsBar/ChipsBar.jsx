@@ -19,7 +19,6 @@ const ChipsBar = () => {
     <HideOnScroll>
       <ChipsContainer marginLeftToOffset={marginLeftToOffset}>
         <StyledTabs
-          marginLeftToOffset={marginLeftToOffset}
           variant="scrollable"
           scrollButtons="off"
           indicatorColor="none"
@@ -41,7 +40,8 @@ const Chips = ({ activeChipIndex, setActiveChipIndex }) => {
       <TestChip
         key={`Chip #${index}`}
         label={`Chip #${index}`}
-        active={index === activeChipIndex && true}
+        // console says it's an error to have boolean value of true
+        active={index === activeChipIndex && true} 
         onClick={() => setActiveChipIndex(index)}
         component="li"
       />
@@ -77,13 +77,14 @@ const ChipsContainer = styled.div`
     height: ${MOBILE_CATEGORIES_BAR_HEIGHT}px;
   }
   height: ${DESKTOP_CATEGORIES_BAR_HEIGHT}px;
-  width: calc(100% - ${(props) => props.marginLeftToOffset}px);
+  width: calc(100vw - ${(props) => props.marginLeftToOffset}px);
   position: fixed;
   margin-left: ${(props) => props.marginLeftToOffset}px;
   background-color: white;
   transition: none !important;
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
+  z-index: 1100; // same-level as AppBar, otherwise Avatar and IconButton appears on top of the ChipsBar
   /* This doesn't even show in dev-tool if defined under StyledTabs */
   .MuiTabs-root {
     height: 100%;
