@@ -1,4 +1,4 @@
-import { createTheme } from '@material-ui/core';
+import { createTheme } from '@material-ui/core'
 
 export const columnBreakpoints = createTheme({
   breakpoints: {
@@ -11,4 +11,4 @@ export const columnBreakpoints = createTheme({
       xl: 2288, // 6 column - 2 grids
     },
   },
-});
+})

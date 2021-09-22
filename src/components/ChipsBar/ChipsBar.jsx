@@ -62,7 +62,7 @@ const TestChip = styled(Chip)`
       background-color: black;
       color: white;
     }
-    
+
     /* active chip in mobile view has grey background */
     @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
       background-color: ${(props) =>
@@ -100,7 +100,8 @@ const ChipsContainer = styled.div`
   position: fixed;
   margin-left: ${(props) => props.marginLeftToOffset}px;
   background-color: white;
-  transition: none !important;
+  /* Header is using transition, so shouldn't disable here otherwise HideOnScroll not in sync */
+  /* transition: none !important; */
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   z-index: 1000; // 100 less than AppBar, to show the AppBar shadow, as well as to prevent Avatar and IconButton appears on top of the ChipsBar

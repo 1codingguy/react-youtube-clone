@@ -6,10 +6,11 @@ import { ThemeProvider } from '@material-ui/styles'
 import VideoCard from './VideoCard'
 import { Grid } from '@material-ui/core'
 import { columnBreakpoints } from './columnBreakpoints'
+import { useIsMobileView } from '../utils/utils'
 
 const Videos = () => {
   const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
-
+  const isMobileView = useIsMobileView()
   return (
     <>
       <OuterVideoContainer
@@ -18,7 +19,7 @@ const Videos = () => {
       >
         <ThemeProvider theme={columnBreakpoints}>
           <InnerVideoContainer>
-            <Grid container spacing={1}>
+            <Grid container spacing={isMobileView ? 0 : 1}>
               <SampleGridItem />
               <SampleGridItem />
               <SampleGridItem />
@@ -80,7 +81,6 @@ const InnerVideoContainer = styled.div`
   }
   @media screen and (min-width: 2288px) {
     max-width: 2256px;
-    
   }
   @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
     margin: 0;

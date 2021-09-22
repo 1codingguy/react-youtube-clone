@@ -51,11 +51,17 @@ const SubHeader = () => {
 
 const MobileSubHeader = () => {
   return (
-    <div style={{ lineHeight: '18px', color: 'rgb(96, 96, 96)' }}>
+    <div
+      style={{
+        lineHeight: '18px',
+        color: 'rgb(96, 96, 96)',
+        fontSize: '12px',
+      }}
+    >
       <p>
-        <span>Channel name</span>
+        <span style={{ marginRight: '4px' }}>Channel name</span>
         <Separator />
-        <span>10K views</span>
+        <span style={{ marginRight: '4px' }}>10K views</span>
         <Separator />
         <span>2 weeks ago</span>
       </p>
@@ -83,7 +89,7 @@ const StyledCard = styled(Card)`
 `
 
 const Separator = () => {
-  return <span>&nbsp;•&nbsp;</span>
+  return <span style={{ marginRight: '4px' }}>&nbsp;•&nbsp;</span>
 }
 
 const StyledCardHeader = styled(CardHeader)`
