@@ -20,7 +20,7 @@ function Header() {
     <>
       <HideOnScroll>
         {/* not sure if color=transparent will affect the look when scroll */}
-        <StyledAppBar elevation={isMobileView ? 1 : 0}>
+        <StyledAppBar elevation={isMobileView ? 2 : 0}>
           <StyledToolbar disableGutters>
             <LeftContainer />
             <MiddleContainer />

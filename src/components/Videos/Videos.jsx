@@ -84,7 +84,7 @@ const InnerVideoContainer = styled.div`
   }
   @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
     margin: 0;
-    margin-top: 12px;
+    /* margin-top: 12px; */
   }
   margin: 24px 8px;
   margin-bottom: 0;

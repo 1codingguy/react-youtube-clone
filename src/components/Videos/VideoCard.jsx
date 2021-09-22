@@ -8,8 +8,10 @@ import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { Typography } from '@material-ui/core'
 import { MOBILE_VIEW_BREAKPOINT } from '../utils/utils'
+import { useIsMobileView } from '../utils/utils'
 
 const VideoCard = () => {
+  const isMobileView = useIsMobileView()
   return (
     <StyledCard square={true} elevation={0}>
       <CardMedia image={imgUrl} component="img" style={{ width: '100%' }} />
@@ -18,7 +20,7 @@ const VideoCard = () => {
         avatar={<StyledAvatar>c</StyledAvatar>}
         action={<MoreButton />}
         title={<Title variant="h3">Video Title</Title>}
-        subheader={<SubHeader />}
+        subheader={isMobileView ? <MobileSubHeader /> : <SubHeader />}
       />
     </StyledCard>
   )
@@ -37,8 +39,22 @@ const MoreButton = () => {
 const SubHeader = () => {
   return (
     <div style={{ lineHeight: '18px', color: 'rgb(96, 96, 96)' }}>
-      <p >Channel name</p>
-      <p >
+      <p>Channel name</p>
+      <p>
+        <span>10K views</span>
+        <Separator />
+        <span>2 weeks ago</span>
+      </p>
+    </div>
+  )
+}
+
+const MobileSubHeader = () => {
+  return (
+    <div style={{ lineHeight: '18px', color: 'rgb(96, 96, 96)' }}>
+      <p>
+        <span>Channel name</span>
+        <Separator />
         <span>10K views</span>
         <Separator />
         <span>2 weeks ago</span>
@@ -56,6 +72,9 @@ const StyledCard = styled(Card)`
     padding-left: 12px;
   }
 
+  .MuiCardHeader-root {
+    padding: 10px;
+  }
   @media screen and (min-width: ${MOBILE_VIEW_BREAKPOINT + 1}px) {
     .MuiCardHeader-root {
       padding: 10px 0;

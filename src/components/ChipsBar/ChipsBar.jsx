@@ -41,7 +41,7 @@ const Chips = ({ activeChipIndex, setActiveChipIndex }) => {
         key={`Chip #${index}`}
         label={`Chip #${index}`}
         // console says it's an error to have boolean value of true
-        active={index === activeChipIndex && true} 
+        active={index === activeChipIndex && true}
         onClick={() => setActiveChipIndex(index)}
         component="li"
       />
@@ -50,12 +50,31 @@ const Chips = ({ activeChipIndex, setActiveChipIndex }) => {
 }
 
 const TestChip = styled(Chip)`
+  /* active chip in desktop view has black background */
   && {
     margin-right: 12px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     background-color: ${(props) =>
       props.active ? 'black' : 'rgba(0, 0, 0, 0.05)'};
     color: ${(props) => (props.active ? 'white' : '#030303')};
+    &:hover,
+    &:focus {
+      background-color: black;
+      color: white;
+    }
+    
+    /* active chip in mobile view has grey background */
+    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+      background-color: ${(props) =>
+        props.active ? '#606060' : 'rgba(0, 0, 0, 0.05)'};
+      color: ${(props) => (props.active ? 'white' : '#030303')};
+
+      &:hover,
+      &:focus {
+        background-color: #606060;
+        color: white;
+      }
+    }
   }
 
   .MuiChip-label {
@@ -84,7 +103,7 @@ const ChipsContainer = styled.div`
   transition: none !important;
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
-  z-index: 1100; // same-level as AppBar, otherwise Avatar and IconButton appears on top of the ChipsBar
+  z-index: 1000; // 100 less than AppBar, to show the AppBar shadow, as well as to prevent Avatar and IconButton appears on top of the ChipsBar
   /* This doesn't even show in dev-tool if defined under StyledTabs */
   .MuiTabs-root {
     height: 100%;

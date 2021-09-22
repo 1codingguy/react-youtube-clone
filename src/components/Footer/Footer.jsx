@@ -2,12 +2,17 @@ import React from 'react'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import styled from 'styled-components'
 import { FooterIcons } from './FooterIcons'
+import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+import Slide from '@material-ui/core/Slide'
+import { MOBILE_VIEW_SCROLL_THRESHOLD } from '../utils/utils'
 
 const MobileFooter = () => {
   return (
-    <FooterContainer showLabels>
-      <FooterIcons />
-    </FooterContainer>
+    <HideFooterOnScroll>
+      <FooterContainer showLabels>
+        <FooterIcons />
+      </FooterContainer>
+    </HideFooterOnScroll>
   )
 }
 
@@ -26,3 +31,14 @@ const FooterContainer = styled(BottomNavigation)`
     padding-top: 8px;
   }
 `
+export function HideFooterOnScroll({ children }) {
+  const shouldShowFooter = !useScrollTrigger({
+    threshold: MOBILE_VIEW_SCROLL_THRESHOLD,
+  })
+
+  return (
+    <Slide in={shouldShowFooter} direction="up">
+      {children}
+    </Slide>
+  )
+}

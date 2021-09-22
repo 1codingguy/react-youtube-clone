@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 
 // heights and widths of components
-const MOBILE_VIEW_SCROLL_THRESHOLD = 48
+export const MOBILE_VIEW_SCROLL_THRESHOLD = 48
 export const NOTIFICATION_MENU_TOP_HEIGHT = 48
 export const MOBILE_VIEW_HEADER_HEIGHT = 48
 export const DESKTOP_VIEW_HEADER_HEIGHT = 56
