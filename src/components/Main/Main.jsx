@@ -5,7 +5,7 @@ import Videos from '../Videos/Videos'
 import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
-  MOBILE_VIEW_BREAKPOINT,
+  MOBILE_VIEW_MAX_WIDTH,
 } from '../utils/utils'
 import SidebarToShow from '../Sidebar/SidebarToShow'
 
@@ -23,17 +23,9 @@ const Main = () => {
 export default Main
 
 const StyledMain = styled.div`
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
     padding-top: ${MOBILE_VIEW_HEADER_HEIGHT}px;
   }
   padding-top: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
   min-height: 100vh;
-  /* display: flex; */
-
-  /* .main-right-container {
-    width: auto;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-  } */
 `

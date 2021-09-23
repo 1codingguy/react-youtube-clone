@@ -7,7 +7,7 @@ import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { Typography } from '@material-ui/core'
-import { MOBILE_VIEW_BREAKPOINT } from '../utils/utils'
+import { MOBILE_VIEW_MAX_WIDTH } from '../utils/utils'
 import { useIsMobileView } from '../utils/utils'
 
 const VideoCard = () => {
@@ -42,7 +42,7 @@ const SubHeader = () => {
       <p>Channel name</p>
       <p>
         <span>10K views</span>
-        <Separator />
+        <DotSeparator />
         <span>2 weeks ago</span>
       </p>
     </div>
@@ -60,9 +60,9 @@ const MobileSubHeader = () => {
     >
       <p>
         <span style={{ marginRight: '4px' }}>Channel name</span>
-        <Separator />
+        <DotSeparator />
         <span style={{ marginRight: '4px' }}>10K views</span>
-        <Separator />
+        <DotSeparator />
         <span>2 weeks ago</span>
       </p>
     </div>
@@ -72,30 +72,31 @@ const MobileSubHeader = () => {
 const StyledCard = styled(Card)`
   && {
     background-color: transparent;
-  }
-
-  .MuiCardHeader-content {
-    padding-left: 12px;
-  }
-
-  .MuiCardHeader-root {
-    padding: 10px;
-  }
-  @media screen and (min-width: ${MOBILE_VIEW_BREAKPOINT + 1}px) {
-    .MuiCardHeader-root {
-      padding: 10px 0;
+    margin-bottom: 40px;
+    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
+      margin-bottom: 0;
     }
   }
 `
 
-const Separator = () => {
+const DotSeparator = () => {
   return <span style={{ marginRight: '4px' }}>&nbsp;•&nbsp;</span>
 }
 
 const StyledCardHeader = styled(CardHeader)`
+  && {
+    padding: 10px 0;
+
+    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
+      padding: 10px;
+    }
+  }
   .MuiCardHeader-avatar {
     align-self: flex-start;
     margin-right: 0;
+  }
+  .MuiCardHeader-content {
+    padding-left: 12px;
   }
 `
 
@@ -110,7 +111,7 @@ const Title = styled(Typography)`
 `
 
 const StyledAvatar = styled(Avatar)`
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
     &&& {
       width: 40px;
       height: 40px;

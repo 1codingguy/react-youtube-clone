@@ -1,16 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useGlobalContext } from '../../context'
-import { MOBILE_VIEW_BREAKPOINT } from '../utils/utils'
 import { ThemeProvider } from '@material-ui/styles'
 import VideoCard from './VideoCard'
 import { Grid } from '@material-ui/core'
 import { columnBreakpoints } from './columnBreakpoints'
-import { useIsMobileView } from '../utils/utils'
+import {
+  useIsMobileView,
+  TWO_COL_MIN_WIDTH,
+  TWO_COL_MAX_WIDTH,
+  THREE_COL_MIN_WIDTH,
+  THREE_COL_MAX_WIDTH,
+  FOUR_COL_MIN_WIDTH,
+  FOUR_COL_MAX_WIDTH,
+  SIX_COL_MIN_WIDTH,
+  SIX_COL_MAX_WIDTH,
+} from '../utils/utils'
 
 const Videos = () => {
   const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
   const isMobileView = useIsMobileView()
+
   return (
     <>
       <OuterVideoContainer
@@ -64,28 +74,31 @@ const OuterVideoContainer = styled.div`
 `
 
 const InnerVideoContainer = styled.div`
-  @media screen and (min-width: 496px) {
-    max-width: 672px;
+  /* mobile view has 0 margin */
+  margin: 0;
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    max-width: ${TWO_COL_MAX_WIDTH}px;
+    margin-top: 24px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  @media screen and (min-width: 872px) {
-    max-width: 1008px;
+  @media screen and (min-width: ${THREE_COL_MIN_WIDTH}px) {
+    max-width: ${THREE_COL_MAX_WIDTH}px;
+    // from 872 px up there's padding left and right
+    padding-left: 16px;
+    padding-right: 16px;
   }
-  @media screen and (min-width: 1128px) {
-    max-width: 1504px;
+  @media screen and (min-width: ${FOUR_COL_MIN_WIDTH}px) {
+    max-width: ${FOUR_COL_MAX_WIDTH}px;
   }
+  /* There's no five columns with MUI Grid 
   @media screen and (min-width: 1952px) {
     max-width: 1804px;
+  } */
+  @media screen and (min-width: ${SIX_COL_MIN_WIDTH}px) {
+    max-width: ${SIX_COL_MAX_WIDTH}px;
   }
-  @media screen and (min-width: 2288px) {
-    max-width: 2256px;
-  }
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
-    margin: 0;
-    /* margin-top: 12px; */
-  }
-  margin: 24px 8px;
-  margin-bottom: 0;
+  
+  
 `

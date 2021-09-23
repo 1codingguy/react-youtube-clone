@@ -15,7 +15,15 @@ export const DESKTOP_VIEW_HEADER_HEIGHT = 56
 export const MINI_SIDEBAR_WIDTH = 72
 export const FULL_SIDEBAR_WIDTH = 240
 // Breakpoints
-export const MOBILE_VIEW_BREAKPOINT = 495
+export const MOBILE_VIEW_MAX_WIDTH = 495
+export const TWO_COL_MIN_WIDTH = 496
+export const TWO_COL_MAX_WIDTH = 672
+export const THREE_COL_MIN_WIDTH = 872
+export const THREE_COL_MAX_WIDTH = 1008
+export const FOUR_COL_MIN_WIDTH = 1128
+export const FOUR_COL_MAX_WIDTH = 1504
+export const SIX_COL_MIN_WIDTH = 2288
+export const SIX_COL_MAX_WIDTH = 2256
 export const SHOW_SEARCH_BOX_BREAKPOINT = 657
 export const SHOW_MINI_SIDEBAR_BREAKPOINT = 792
 export const SHOW_FULL_SIDEBAR_BREAKPOINT = 1313
@@ -24,7 +32,7 @@ export const DEFAULT_FONT_SIZE = 14
 
 // useMediaQuery hooks
 export const useIsMobileView = () =>
-  useMediaQuery(`(max-width: ${MOBILE_VIEW_BREAKPOINT}px)`)
+  useMediaQuery(`(max-width: ${MOBILE_VIEW_MAX_WIDTH}px)`)
 
 export const useShouldOpenSidebarDrawer = () =>
   !useMediaQuery(`(min-width:${SHOW_FULL_SIDEBAR_BREAKPOINT}px)`)
@@ -42,7 +50,7 @@ export function HideOnScroll({ children }) {
   })
 
   const displayDesktopHeader = !useMediaQuery(
-    `(max-width:${MOBILE_VIEW_BREAKPOINT}px)`
+    `(max-width:${MOBILE_VIEW_MAX_WIDTH}px)`
   )
   // always show Header in desktop view
   const showHeader = displayDesktopHeader
@@ -71,7 +79,7 @@ export const IconTooltip = styled(({ className, ...props }) => (
 // common settings of padding for all IconButton
 export const StyledIconButton = styled(IconButton)`
   && {
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
       padding: 12px;
     }
     padding: 8px;

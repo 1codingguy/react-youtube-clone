@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { FooterIcons } from './FooterIcons'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Slide from '@material-ui/core/Slide'
-import { MOBILE_VIEW_SCROLL_THRESHOLD } from '../utils/utils'
 
 const MobileFooter = () => {
   return (
@@ -23,7 +22,7 @@ const FooterContainer = styled(BottomNavigation)`
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100vw;
+    width: 100vw; // 100vw instead of % because Grid spacing adds width to the container 
     height: 48px;
     overflow-x: hidden;
   }
@@ -31,7 +30,7 @@ const FooterContainer = styled(BottomNavigation)`
     padding-top: 8px;
   }
 `
-export function HideFooterOnScroll({ children }) {
+function HideFooterOnScroll({ children }) {
   const shouldShowFooter = !useScrollTrigger({
     threshold: 100,
   })

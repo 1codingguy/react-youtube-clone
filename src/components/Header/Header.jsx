@@ -6,7 +6,8 @@ import LeftContainer from './LeftContainer/LeftContainer'
 import MiddleContainer from './MiddleContainer/MiddleContainer'
 import RightContainer from './RightContainer/RightContainer'
 import {
-  MOBILE_VIEW_BREAKPOINT,
+  MOBILE_VIEW_MAX_WIDTH,
+  TWO_COL_MIN_WIDTH,
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
   HideOnScroll,
@@ -41,13 +42,13 @@ export const StyledAppBar = styled(AppBar)`
   && {
     background-color: white;
     /* opacity: 0.9; */
-    @media screen and (min-width: ${MOBILE_VIEW_BREAKPOINT + 1}px) {
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
       transition: none !important; // can't override without !important
     }
   }
 
   .MuiToolbar-regular {
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
       min-height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
       height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
     }
@@ -58,7 +59,7 @@ export const StyledAppBar = styled(AppBar)`
 `
 
 const StyledToolbar = styled(Toolbar)`
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
     padding-left: 0;
     padding-right: 0;
   }

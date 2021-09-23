@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Tooltip from '@material-ui/core/Tooltip'
-import { MOBILE_VIEW_BREAKPOINT } from '../../utils/utils'
+import { MOBILE_VIEW_MAX_WIDTH } from '../../utils/utils'
 
 const YouTubeLogo = () => {
   return (
@@ -39,7 +39,7 @@ const YouTubeLogoContainer = styled.button`
 `
 
 const Logo = styled.img`
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
     margin: auto 1rem;
   }
   height: 20px;

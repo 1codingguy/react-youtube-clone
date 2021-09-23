@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import {
   DEFAULT_FONT_SIZE,
-  MOBILE_VIEW_BREAKPOINT,
+  MOBILE_VIEW_MAX_WIDTH,
   useIsMobileView,
 } from '../../../utils/utils'
 
@@ -49,7 +49,7 @@ const AccountInfoHeader = styled.div`
   display: flex;
   padding: 16px;
 
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
     padding: 0;
     margin: 12px auto;
   }
@@ -58,7 +58,7 @@ const AccountInfoHeader = styled.div`
     background-color: #ef6c00;
     margin-right: 16px;
 
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
       width: 48px;
       height: 48px;
     }

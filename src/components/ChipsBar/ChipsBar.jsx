@@ -3,9 +3,10 @@ import Tabs from '@material-ui/core/Tabs'
 import styled from 'styled-components'
 import {
   HideOnScroll,
-  MOBILE_VIEW_BREAKPOINT,
+  MOBILE_VIEW_MAX_WIDTH,
   MOBILE_VIEW_HEADER_HEIGHT as MOBILE_CATEGORIES_BAR_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT as DESKTOP_CATEGORIES_BAR_HEIGHT,
+  TWO_COL_MIN_WIDTH,
 } from '../utils/utils'
 import { useGlobalContext } from '../../context'
 import Chip from '@material-ui/core/Chip'
@@ -37,7 +38,7 @@ export default ChipsBar
 const Chips = ({ activeChipIndex, setActiveChipIndex }) => {
   return [...new Array(20)].map((_, index) => {
     return (
-      <TestChip
+      <StyledChip
         key={`Chip #${index}`}
         label={`Chip #${index}`}
         // console says it's an error to have boolean value of true
@@ -49,7 +50,7 @@ const Chips = ({ activeChipIndex, setActiveChipIndex }) => {
   })
 }
 
-const TestChip = styled(Chip)`
+const StyledChip = styled(Chip)`
   /* active chip in desktop view has black background */
   && {
     margin-right: 12px;
@@ -64,7 +65,7 @@ const TestChip = styled(Chip)`
     }
 
     /* active chip in mobile view has grey background */
-    @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
       background-color: ${(props) =>
         props.active ? '#606060' : 'rgba(0, 0, 0, 0.05)'};
       color: ${(props) => (props.active ? 'white' : '#030303')};
@@ -92,19 +93,20 @@ const StyledTabs = styled(Tabs)`
 `
 
 const ChipsContainer = styled.div`
-  @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
-    height: ${MOBILE_CATEGORIES_BAR_HEIGHT}px;
+  height: ${MOBILE_CATEGORIES_BAR_HEIGHT}px;
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    height: ${DESKTOP_CATEGORIES_BAR_HEIGHT}px;
+    /* Header is using transition, so shouldn't disable here otherwise HideOnScroll not in sync */
+    transition: none !important;
   }
-  height: ${DESKTOP_CATEGORIES_BAR_HEIGHT}px;
   width: calc(100vw - ${(props) => props.marginLeftToOffset}px);
   position: fixed;
   margin-left: ${(props) => props.marginLeftToOffset}px;
   background-color: white;
-  /* Header is using transition, so shouldn't disable here otherwise HideOnScroll not in sync */
-  /* transition: none !important; */
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   z-index: 1000; // 100 less than AppBar, to show the AppBar shadow, as well as to prevent Avatar and IconButton appears on top of the ChipsBar
+  
   /* This doesn't even show in dev-tool if defined under StyledTabs */
   .MuiTabs-root {
     height: 100%;
@@ -135,7 +137,7 @@ const ChipsContainer = styled.div`
 //     }
 
 //     &::before {
-//       @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+//       @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
 //         height: calc(${MOBILE_CATEGORIES_BAR_HEIGHT}px - 4px);
 //       }
 //       height: calc(${DESKTOP_CATEGORIES_BAR_HEIGHT}px - 6px);
@@ -157,7 +159,7 @@ const ChipsContainer = styled.div`
 //     /* background-color: yellow; */
 
 //     &::before {
-//       @media screen and (max-width: ${MOBILE_VIEW_BREAKPOINT}px) {
+//       @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
 //         height: calc(${MOBILE_CATEGORIES_BAR_HEIGHT}px - 4px);
 //       }
 //       height: calc(${DESKTOP_CATEGORIES_BAR_HEIGHT}px - 6px);
