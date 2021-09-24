@@ -30,3 +30,6 @@ yarn-error.log*
 
 # For experiment only
 TestHeader.jsx
+
+# API key
+.env

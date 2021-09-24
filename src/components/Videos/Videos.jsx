@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useGlobalContext } from '../../context'
 import { ThemeProvider } from '@material-ui/styles'
@@ -16,49 +16,76 @@ import {
   SIX_COL_MIN_WIDTH,
   SIX_COL_MAX_WIDTH,
 } from '../utils/utils'
+import { request } from '../utils/api'
 
 const Videos = () => {
   const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
   const isMobileView = useIsMobileView()
+  const [landingPageVideos, setLandingPageVideos] = useState(null)
+
+  // after finished styling, turn getKittenVideos() into a function to query initial data/ videos to display when the page first loaded
+  // if placing this function in a separated module, setLandingPageVideos needs to be a global state
+  const getKittenVideos = async () => {
+    const response = await request('/search', {
+      params: {
+        part: 'snippet',
+        maxResults: 6,
+        q: 'kitten',
+      },
+    })
+    localStorage.setItem('kittenVideos', JSON.stringify(response.data.items))
+    setLandingPageVideos(response.data.items)
+  }
+
+  // when app start, either load the kittenVideos in localStorage, or run getKittenVideos() to query data from YouTube API
+  useEffect(() => {
+    const storedKittenVideos = JSON.parse(localStorage.getItem('kittenVideos')) 
+    if (storedKittenVideos) {
+      console.log(storedKittenVideos)
+      setLandingPageVideos(storedKittenVideos)
+      console.log('using stored Videos data')
+    } else {
+      getKittenVideos()
+    }
+  }, [])
+
+  // console.log(landingPageVideos)
 
   return (
-    <>
-      <OuterVideoContainer
-        marginTopToOffset={marginTopToOffset}
-        marginLeftToOffset={marginLeftToOffset}
-      >
-        <ThemeProvider theme={columnBreakpoints}>
-          <InnerVideoContainer>
-            <Grid container spacing={isMobileView ? 0 : 1}>
-              <SampleGridItem />
-              <SampleGridItem />
-              <SampleGridItem />
-              <SampleGridItem />
-              <SampleGridItem />
-              <SampleGridItem />
-            </Grid>
-          </InnerVideoContainer>
-        </ThemeProvider>
-      </OuterVideoContainer>
-    </>
+    <OuterVideoContainer
+      marginTopToOffset={marginTopToOffset}
+      marginLeftToOffset={marginLeftToOffset}
+    >
+      <ThemeProvider theme={columnBreakpoints}>
+        <InnerVideoContainer>
+          <Grid container spacing={isMobileView ? 0 : 1}>
+            {landingPageVideos &&
+              landingPageVideos.map((result) => {
+                return <GridItem video={result} />
+              })}
+          </Grid>
+        </InnerVideoContainer>
+      </ThemeProvider>
+    </OuterVideoContainer>
   )
 }
 
 export default Videos
 
-const SampleGridItem = () => {
+const GridItem = ({ video }) => {
   return (
     <Grid
       container
-      justifyContent="center"
       item
+      // not sure if justifyContent is needed if MuiPaper-root had width: 100%, need to test 
+      justifyContent="center"
       xs={12}
       sm={6}
       md={4}
       lg={3}
       xl={2}
     >
-      <VideoCard />
+      <VideoCard video={video} />
     </Grid>
   )
 }
@@ -99,6 +126,22 @@ const InnerVideoContainer = styled.div`
   @media screen and (min-width: ${SIX_COL_MIN_WIDTH}px) {
     max-width: ${SIX_COL_MAX_WIDTH}px;
   }
-  
-  
 `
+// To test the layout when all the data is hard-coded instead of query from YouTube API
+// Can be deleted after finished 
+const SampleGridItem = () => {
+  return (
+    <Grid
+      container
+      justifyContent="center"
+      item
+      xs={12}
+      sm={6}
+      md={4}
+      lg={3}
+      xl={2}
+    >
+      <VideoCard />
+    </Grid>
+  )
+}
