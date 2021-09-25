@@ -7,18 +7,14 @@ import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { Typography } from '@material-ui/core'
-import {
-  MOBILE_VIEW_MAX_WIDTH,
-  TWO_COL_MIN_WIDTH,
-  useIsMobileView,
-} from '../utils/utils'
+import { TWO_COL_MIN_WIDTH } from '../utils/utils'
 import { request } from '../utils/api'
 import moment from 'moment'
-import numeral from 'numeral'
 import he from 'he'
+import { ChannelDetails } from './ChannelDetails'
 
 const VideoCard = ({ video }) => {
-  const isMobileView = useIsMobileView()
+  // const isMobileView = useIsMobileView()
 
   const {
     id: { videoId },
@@ -35,14 +31,6 @@ const VideoCard = ({ video }) => {
   const [views, setViews] = useState(null)
   const [duration, setDuration] = useState(null)
   const [channelAvatar, setChannelAvatar] = useState(null)
-
-  // // the following 3 lines can be moved inside useEffect() to have duration processed, so that data loaded from localStorage can be used right away
-  // const seconds = moment.duration(duration).asSeconds()
-  // // what is there's hours?
-  // let _duration = moment.utc(seconds * 1000).format('mm:ss')
-
-  // // To get rid of leading 0 if there is
-  // _duration = _duration[0] === '0' ? _duration.slice(1) : _duration
 
   useEffect(() => {
     // the stored data is string, not sure what to do to return original type
@@ -84,7 +72,7 @@ const VideoCard = ({ video }) => {
     if (storedDuration && storedViews) {
       setDuration(storedDuration)
       setViews(storedViews)
-      console.log('using stored duration and views')
+      // console.log('using stored duration and views')
     } else {
       get_video_details()
     }
@@ -104,7 +92,6 @@ const VideoCard = ({ video }) => {
           id: channelId,
         },
       })
-
       // retrieve the url property inside component, just stringify in localStorage
       localStorage.setItem(
         `${videoId}_channelAvatar`,
@@ -115,11 +102,11 @@ const VideoCard = ({ video }) => {
 
     if (storedChannelAvatar) {
       setChannelAvatar(storedChannelAvatar)
-      console.log('using local stored channelAvatar')
+      // console.log('using local stored channelAvatar')
     } else {
       get_channel_icon()
     }
-  }, [channelId])
+  }, [channelId, videoId])
 
   return (
     <StyledCard square={true} elevation={0}>
@@ -127,16 +114,16 @@ const VideoCard = ({ video }) => {
         <CardMedia
           image={medium.url}
           component="img"
-          style={{ width: '100%' }}
+          style={{ width: '100%', cursor: 'pointer' }}
         />
-        <Duration variant="body2">{duration}</Duration>
+        <DurationContainer variant="body2">{duration}</DurationContainer>
       </ImageContainer>
 
       <StyledCardHeader
         avatar={<StyledAvatar src={channelAvatar ? channelAvatar.url : ''} />}
         action={<MoreButton />}
-        title={<Title variant="h3">{he.decode(title)}</Title>}
-        subheader={<SubHeader {...{ channelTitle, publishedAt, views }} />}
+        title={<VideoTitle variant="h3">{he.decode(title)}</VideoTitle>}
+        subheader={<ChannelDetails {...{ channelTitle, publishedAt, views }} />}
       />
     </StyledCard>
   )
@@ -144,112 +131,65 @@ const VideoCard = ({ video }) => {
 
 export default VideoCard
 
+const MoreButton = () => {
+  return (
+    <StyledIconButton disableRipple={true}>
+      <MoreVertIcon />
+    </StyledIconButton>
+  )
+}
+
+const StyledIconButton = styled(IconButton)`
+  && {
+    padding: 8px;
+    color: #030303;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+`
+
 const ImageContainer = styled.div`
   /* for the duration container in bottom right corner */
   position: relative;
 `
 
-const Duration = styled(Typography)`
+const DurationContainer = styled(Typography)`
   && {
     position: absolute;
     right: 0;
     bottom: 0;
     margin: 4px;
-    padding: 2px 6px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
     font-size: 12px;
+    font-weight: 500;
     border-radius: 2px;
-  }
-`
-
-const MoreButton = () => {
-  return (
-    <IconButton disableRipple={true} style={{ padding: '8px' }}>
-      <MoreVertIcon />
-    </IconButton>
-  )
-}
-
-const ChannelDetailsContainer = styled.div`
-  && {
-    line-height: 14px;
-    color: rgb(96, 96, 96);
-
+    padding: 1px 4px;
     @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
-      line-height: 18px;
+      padding: 2px 6px;
     }
   }
 `
-
-const ChannelTitle = styled(Typography)`
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-    && {
-      font-size: 12px;
-      margin-right: 4px;
-    }
-  }
-`
-
-const StatsContainer = styled.div`
-  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
-    display: flex;
-    flex-wrap: wrap;
-  }
-`
-
-const SubHeader = ({ channelTitle, publishedAt, views }) => {
-  const isMobileView = useIsMobileView()
-  return (
-    <ChannelDetailsContainer style={isMobileView ? { fontSize: '12px' } : null}>
-      {/* ChannelTitle is outside StatsContainer in desktop view */}
-      {isMobileView ? null : (
-        <ChannelTitle variant="subtitle2">{channelTitle}</ChannelTitle>
-      )}
-
-      <StatsContainer>
-        {isMobileView && (
-          <ChannelTitle variant="span">
-            {channelTitle} <DotSeparator />
-          </ChannelTitle>
-        )}
-        <span>
-          {numeral(views).format('0.a')} views <DotSeparator />
-        </span>
-
-        <span>{moment(publishedAt).fromNow()}</span>
-      </StatsContainer>
-    </ChannelDetailsContainer>
-  )
-}
 
 const StyledCard = styled(Card)`
   && {
-    background-color: transparent;
-    margin-bottom: 30px; // original is 40px but 30px here account for padding
-    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-      margin-bottom: 0;
-    }
     width: 100%;
+    margin-bottom: 0;
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      background-color: transparent;
+      margin-bottom: 30px; // original is 40px but 30px here account for padding
+    }
   }
 `
 
-const DotSeparator = () => {
-  return <span>&nbsp;•&nbsp;</span>
-}
-
 const StyledCardHeader = styled(CardHeader)`
   && {
-    padding: 10px 0;
+    padding: 10px;
 
-    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-      padding: 10px;
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      padding: 10px 0;
     }
   }
   .MuiCardHeader-avatar {
@@ -261,7 +201,7 @@ const StyledCardHeader = styled(CardHeader)`
   }
 `
 
-const Title = styled(Typography)`
+const VideoTitle = styled(Typography)`
   /* 1rem in original YouTube in 10px */
   && {
     font-size: 14px;
@@ -275,6 +215,8 @@ const Title = styled(Typography)`
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
+
     @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
       margin-bottom: 6px;
     }
@@ -282,39 +224,21 @@ const Title = styled(Typography)`
 `
 
 const StyledAvatar = styled(Avatar)`
-  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-    &&& {
-      width: 40px;
-      height: 40px;
-    }
-  }
+  &&& {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
 
-  && {
-    width: 36px;
-    height: 36px;
-    background-color: #ef6c00;
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      width: 36px;
+      height: 36px;
+      background-color: #ef6c00;
+    }
   }
 `
 
 // imgUrl and imgUrl2 only for test without querying data from YouTube API, can be deleted when finished
-const imgUrl =
-  'https://i.ytimg.com/vi/F3Bar3rty_4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAnuEiB52zi3CJmpBk9QXJqxeZq3Q'
+// const imgUrl =
+//   'https://i.ytimg.com/vi/F3Bar3rty_4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAnuEiB52zi3CJmpBk9QXJqxeZq3Q'
 
-const imgUrl2 = 'https://i.ytimg.com/vi/F3Bar3rty_4/hqdefault.jpg'
-
-// MobileSubheader is no longer needed as SubHeader has logic for mobile view styling
-// const MobileSubHeader = ({ channelTitle, publishedAt, views }) => {
-//   return (
-//     <ChannelDetailsContainer style={{ fontSize: '12px' }}>
-//       <p>
-//         <span style={{ marginRight: '4px' }}>{channelTitle}</span>
-//         <DotSeparator />
-//         <span style={{ marginRight: '4px' }}>
-//           {numeral(views).format('0.a')} views
-//         </span>
-//         <DotSeparator />
-//         <span>{moment(publishedAt).fromNow()}</span>
-//       </p>
-//     </ChannelDetailsContainer>
-//   )
-// }
+// const imgUrl2 = 'https://i.ytimg.com/vi/F3Bar3rty_4/hqdefault.jpg'

@@ -6,6 +6,7 @@ import {
   FULL_SIDEBAR_WIDTH,
   StyledMenuItem,
   useShouldOpenSidebarDrawer,
+  DESKTOP_VIEW_HEADER_HEIGHT,
 } from '../utils/utils'
 import { SidebarFirstPart } from './SidebarFirstPart'
 import { SidebarSecondPart } from './SidebarSecondPart'
@@ -32,8 +33,10 @@ export default FullWidthSidebar
 
 const StyledFullWidthSidebar = styled.div`
   width: ${FULL_SIDEBAR_WIDTH}px;
-  height: 100%;
-  overflow-y: auto;
+  height: ${(props) =>
+    props.drawer ? '100%' : `calc(100% - ${DESKTOP_VIEW_HEADER_HEIGHT}px)`};
+  overflow-y: scroll;
+  background-color: white;
 `
 
 export const DividerWithMargin = styled(Divider)`

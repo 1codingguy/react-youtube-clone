@@ -29,6 +29,7 @@ export const SHOW_MINI_SIDEBAR_BREAKPOINT = 792
 export const SHOW_FULL_SIDEBAR_BREAKPOINT = 1313
 // font size
 export const DEFAULT_FONT_SIZE = 14
+export const HEADER_OPACITY = 0.98
 
 // useMediaQuery hooks
 export const useIsMobileView = () =>

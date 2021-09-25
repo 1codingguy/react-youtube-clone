@@ -41,7 +41,8 @@ const SidebarDrawer = () => {
         <HamburgerMenuIcon />
         <YouTubeLogo />
       </DrawerHeader>
-      <FullWidthSidebar />
+      {/* drawer prop to change height calculation */}
+      <FullWidthSidebar drawer />
     </Drawer>
   )
 }
