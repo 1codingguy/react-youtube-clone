@@ -7,6 +7,7 @@ import {
   MOBILE_VIEW_HEADER_HEIGHT as MOBILE_CATEGORIES_BAR_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT as DESKTOP_CATEGORIES_BAR_HEIGHT,
   TWO_COL_MIN_WIDTH,
+  HEADER_OPACITY,
 } from '../utils/utils'
 import { useGlobalContext } from '../../context'
 import Chip from '@material-ui/core/Chip'
@@ -22,7 +23,7 @@ const ChipsBar = () => {
         <StyledTabs
           variant="scrollable"
           scrollButtons="off"
-          indicatorColor="none"
+          // indicatorColor="none"
           textColor="primary"
           value={0}
         >
@@ -42,7 +43,7 @@ const Chips = ({ activeChipIndex, setActiveChipIndex }) => {
         key={`Chip #${index}`}
         label={`Chip #${index}`}
         // console says it's an error to have boolean value of true
-        active={index === activeChipIndex && true}
+        active={index === activeChipIndex ? `true` : null}
         onClick={() => setActiveChipIndex(index)}
         component="li"
       />
@@ -85,10 +86,19 @@ const StyledChip = styled(Chip)`
 `
 
 const StyledTabs = styled(Tabs)`
+  /* to make the tabs indicator invisible */
+  .PrivateTabIndicator-colorSecondary-3 {
+    background-color: transparent;
+  }
+
   .MuiTabs-scrollable {
     display: flex;
     align-items: center;
     padding-left: 12px;
+
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      padding-left: 24px;
+    }
   }
 `
 
@@ -98,6 +108,7 @@ const ChipsContainer = styled.div`
     height: ${DESKTOP_CATEGORIES_BAR_HEIGHT}px;
     /* Header is using transition, so shouldn't disable here otherwise HideOnScroll not in sync */
     transition: none !important;
+    opacity: ${HEADER_OPACITY};
   }
   width: calc(100vw - ${(props) => props.marginLeftToOffset}px);
   position: fixed;
@@ -106,7 +117,7 @@ const ChipsContainer = styled.div`
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   z-index: 1000; // 100 less than AppBar, to show the AppBar shadow, as well as to prevent Avatar and IconButton appears on top of the ChipsBar
-  
+
   /* This doesn't even show in dev-tool if defined under StyledTabs */
   .MuiTabs-root {
     height: 100%;

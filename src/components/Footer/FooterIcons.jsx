@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import { miniSidebarRows as footerColumns } from '../Sidebar/sidebarData'
+import { TWO_COL_MIN_WIDTH } from '../utils/utils'
 
 export const FooterIcons = () => {
   return footerColumns.map(({ Icon, text }) => {
@@ -16,8 +17,10 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)`
     color: #030303;
   }
   .MuiBottomNavigationAction-label {
-    font-size: 10px;
-    opacity: 1 !important; // to override MiniSidebar opacity=0
-    margin-top: 6px;
+    font-size: 11px;
+    opacity: 1 !important; // to override MiniSidebar 
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      margin-top: 6px;
+    }
   }
 `

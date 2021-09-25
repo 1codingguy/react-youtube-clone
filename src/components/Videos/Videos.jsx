@@ -29,7 +29,7 @@ const Videos = () => {
     const response = await request('/search', {
       params: {
         part: 'snippet',
-        maxResults: 6,
+        maxResults: 24,
         q: 'kitten',
       },
     })
@@ -41,9 +41,9 @@ const Videos = () => {
   useEffect(() => {
     const storedKittenVideos = JSON.parse(localStorage.getItem('kittenVideos')) 
     if (storedKittenVideos) {
-      console.log(storedKittenVideos)
+      // console.log(storedKittenVideos)
       setLandingPageVideos(storedKittenVideos)
-      console.log('using stored Videos data')
+      // console.log('using stored Videos data')
     } else {
       getKittenVideos()
     }
@@ -61,7 +61,7 @@ const Videos = () => {
           <Grid container spacing={isMobileView ? 0 : 1}>
             {landingPageVideos &&
               landingPageVideos.map((result) => {
-                return <GridItem video={result} />
+                return <GridItem key={result.id.videoId} video={result} />
               })}
           </Grid>
         </InnerVideoContainer>
@@ -129,19 +129,19 @@ const InnerVideoContainer = styled.div`
 `
 // To test the layout when all the data is hard-coded instead of query from YouTube API
 // Can be deleted after finished 
-const SampleGridItem = () => {
-  return (
-    <Grid
-      container
-      justifyContent="center"
-      item
-      xs={12}
-      sm={6}
-      md={4}
-      lg={3}
-      xl={2}
-    >
-      <VideoCard />
-    </Grid>
-  )
-}
+// const SampleGridItem = () => {
+//   return (
+//     <Grid
+//       container
+//       justifyContent="center"
+//       item
+//       xs={12}
+//       sm={6}
+//       md={4}
+//       lg={3}
+//       xl={2}
+//     >
+//       <VideoCard />
+//     </Grid>
+//   )
+// }

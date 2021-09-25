@@ -12,6 +12,7 @@ import {
   DESKTOP_VIEW_HEADER_HEIGHT,
   HideOnScroll,
   useIsMobileView,
+  HEADER_OPACITY,
 } from '../utils/utils'
 // import { TextForScrollingTest } from '../utils/TextForScrollingTest'
 
@@ -41,9 +42,9 @@ export default Header
 export const StyledAppBar = styled(AppBar)`
   && {
     background-color: white;
-    /* opacity: 0.9; */
     @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
       transition: none !important; // can't override without !important
+      opacity: ${HEADER_OPACITY};
     }
   }
 

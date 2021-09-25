@@ -1,11 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import SearchIcon from '@material-ui/icons/Search'
-import {
-  IconTooltip,
-  StyledIconButton,
-  DEFAULT_FONT_SIZE,
-} from '../../utils/utils'
+import { IconTooltip, StyledIconButton } from '../../utils/utils'
 
 export const SearchContainerWithTextField = () => {
   return (
@@ -13,7 +9,7 @@ export const SearchContainerWithTextField = () => {
       <SearchBox placeholder="Search" />
       <IconTooltip title="Search">
         <SearchIconContainer>
-          <StyledIconButton style={{ height: '30px', width: '30px' }}>
+          <StyledIconButton>
             <SearchIcon />
           </StyledIconButton>
         </SearchIconContainer>
@@ -25,6 +21,7 @@ export const SearchContainerWithTextField = () => {
 export const StyledForm = styled.form`
   flex-grow: 1;
   margin-left: 40px;
+  margin-right: 4px;
   display: flex;
   max-width: 640px;
   border: 0.2px solid lightgray;
@@ -34,13 +31,13 @@ export const SearchBox = styled.input`
   border: none;
   padding: 1px 2px;
   padding-left: 12px;
-  height: 30px;
+  height: 40px;
   width: 100%;
 
   &::placeholder {
     font-family: $font-default;
     color: #909090;
-    font-size: ${DEFAULT_FONT_SIZE}px;
+    font-size: 16px;
   }
 
   &::-webkit-input-placeholder {
@@ -51,7 +48,7 @@ export const SearchBox = styled.input`
 
 export const SearchIconContainer = styled.div`
   width: 72px;
-  height: 30px;
+  height: 40px;
   /* background-color: red; */
   display: grid;
   place-items: center;
