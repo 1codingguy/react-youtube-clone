@@ -23,8 +23,10 @@ const HamburgerMenuIcon = () => {
     // open drawer only under 1313px, mobile view doesn't have a hamburger menu so it's not a concern
     if (shouldOpenSidebarDrawer) {
       setIsSidebarDrawerOpen(!isSidebarDrawerOpen)
-    } //toggle between MiniSidebar and FullWidthSidebar if >= 1313px
-    setUserSettingToShowFullSidebar(!userSettingToShowFullSidebar)
+    } else {
+      //toggle between MiniSidebar and FullWidthSidebar if >= 1313px
+      setUserSettingToShowFullSidebar(!userSettingToShowFullSidebar)
+    }
   }
 
   // Reset userSettingToShowFullSidebar to default if resized under 1313px

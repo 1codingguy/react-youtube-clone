@@ -5,13 +5,13 @@ import CardMedia from '@material-ui/core/CardMedia'
 import CardHeader from '@material-ui/core/CardHeader'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { Typography } from '@material-ui/core'
 import { TWO_COL_MIN_WIDTH } from '../utils/utils'
 import { request } from '../utils/api'
 import moment from 'moment'
 import he from 'he'
 import { ChannelDetails } from './ChannelDetails'
+import { MoreButton } from './MoreButton'
 
 const VideoCard = ({ video }) => {
   // const isMobileView = useIsMobileView()
@@ -131,15 +131,7 @@ const VideoCard = ({ video }) => {
 
 export default VideoCard
 
-const MoreButton = () => {
-  return (
-    <StyledIconButton disableRipple={true}>
-      <MoreVertIcon />
-    </StyledIconButton>
-  )
-}
-
-const StyledIconButton = styled(IconButton)`
+export const StyledIconButton = styled(IconButton)`
   && {
     padding: 8px;
     color: #030303;

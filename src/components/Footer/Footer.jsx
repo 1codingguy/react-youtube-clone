@@ -32,7 +32,7 @@ const FooterContainer = styled(BottomNavigation)`
 `
 function HideFooterOnScroll({ children }) {
   const shouldShowFooter = !useScrollTrigger({
-    threshold: 100,
+    threshold: 200,
   })
 
   return (
