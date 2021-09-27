@@ -27,5 +27,5 @@ const StyledMain = styled.div`
     padding-top: ${MOBILE_VIEW_HEADER_HEIGHT}px;
   }
   padding-top: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 `

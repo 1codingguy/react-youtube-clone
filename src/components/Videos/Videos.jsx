@@ -105,7 +105,7 @@ const GridItem = ({ video }) => {
 }
 
 const OuterVideoContainer = styled.div`
-  min-height: 200vh;
+  /* min-height: 200vh; */
   background-color: #f9f9f9;
   display: inline-block;
   padding-top: ${(props) => props.marginTopToOffset}px;
