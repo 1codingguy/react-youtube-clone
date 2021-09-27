@@ -27,7 +27,7 @@ moment.updateLocale('en', {
   },
 })
 
-export const ChannelDetails = ({ channelTitle, publishedAt, views }) => {
+export const ChannelDetails = ({ channelTitle, publishedAt, viewCount }) => {
   const isMobileView = useIsMobileView()
   return (
     <ChannelDetailsContainer style={isMobileView ? { fontSize: '12px' } : null}>
@@ -42,8 +42,8 @@ export const ChannelDetails = ({ channelTitle, publishedAt, views }) => {
             {channelTitle} <DotSeparator />
           </ChannelName>
         )}
-        <span style={{marginRight: '4px'}}>
-          {numeral(views).format('0.a')} views <DotSeparator />
+        <span style={{ marginRight: '4px' }}>
+          {numeral(viewCount).format('0.a')} views <DotSeparator />
         </span>
 
         <span>{moment(publishedAt).fromNow()}</span>

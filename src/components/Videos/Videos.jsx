@@ -17,39 +17,53 @@ import {
   SIX_COL_MAX_WIDTH,
 } from '../utils/utils'
 import { request } from '../utils/api'
+import { selectedChipIndexAtom } from '../../store'
+import { useAtom } from 'jotai'
+import countries from '../ChipsBar/chipsArray'
 
 const Videos = () => {
   const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
   const isMobileView = useIsMobileView()
   const [landingPageVideos, setLandingPageVideos] = useState(null)
 
-  // after finished styling, turn getKittenVideos() into a function to query initial data/ videos to display when the page first loaded
-  // if placing this function in a separated module, setLandingPageVideos needs to be a global state
-  const getKittenVideos = async () => {
-    const response = await request('/search', {
-      params: {
-        part: 'snippet',
-        maxResults: 24,
-        q: 'kitten',
-      },
-    })
-    localStorage.setItem('kittenVideos', JSON.stringify(response.data.items))
-    setLandingPageVideos(response.data.items)
+  const [selectedChipIndex] = useAtom(selectedChipIndexAtom)
+  const selectedCountry = countries[selectedChipIndex].country
+  const selectedRegionCode = countries[selectedChipIndex].regionCode
+
+  const getPopularVideos = async () => {
+    try {
+      const { data } = await request('/videos', {
+        params: {
+          part: 'snippet,contentDetails,statistics',
+          chart: 'mostPopular',
+          regionCode: selectedRegionCode,
+          maxResults: 24,
+        },
+      })
+      // nextPageToken available at data.nextPageToken
+      // totalResults at data.pageInfo.totalResults  
+      // console.log(data)
+
+      localStorage.setItem(selectedCountry, JSON.stringify(data.items))
+      setLandingPageVideos(data.items)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  // when app start, either load the kittenVideos in localStorage, or run getKittenVideos() to query data from YouTube API
+  // when app start, either load the popular videos of selectedCountry in localStorage, or run getPopularVideos() to query data from YouTube API
   useEffect(() => {
-    const storedKittenVideos = JSON.parse(localStorage.getItem('kittenVideos')) 
-    if (storedKittenVideos) {
-      // console.log(storedKittenVideos)
-      setLandingPageVideos(storedKittenVideos)
+    const storedPopularVideos = JSON.parse(
+      localStorage.getItem(selectedCountry)
+    )
+    if (storedPopularVideos) {
+      // console.log(storedPopularVideos)
+      setLandingPageVideos(storedPopularVideos)
       // console.log('using stored Videos data')
     } else {
-      getKittenVideos()
+      getPopularVideos()
     }
-  }, [])
-
-  // console.log(landingPageVideos)
+  }, [selectedCountry])
 
   return (
     <OuterVideoContainer
@@ -60,8 +74,8 @@ const Videos = () => {
         <InnerVideoContainer>
           <Grid container spacing={isMobileView ? 0 : 1}>
             {landingPageVideos &&
-              landingPageVideos.map((result) => {
-                return <GridItem key={result.id.videoId} video={result} />
+              landingPageVideos.map((video) => {
+                return <GridItem key={video.id} video={video} />
               })}
           </Grid>
         </InnerVideoContainer>
@@ -77,7 +91,7 @@ const GridItem = ({ video }) => {
     <Grid
       container
       item
-      // not sure if justifyContent is needed if MuiPaper-root had width: 100%, need to test 
+      // not sure if justifyContent is needed if MuiPaper-root had width: 100%, need to test
       justifyContent="center"
       xs={12}
       sm={6}
@@ -128,7 +142,7 @@ const InnerVideoContainer = styled.div`
   }
 `
 // To test the layout when all the data is hard-coded instead of query from YouTube API
-// Can be deleted after finished 
+// Can be deleted after finished
 // const SampleGridItem = () => {
 //   return (
 //     <Grid
@@ -145,3 +159,31 @@ const InnerVideoContainer = styled.div`
 //     </Grid>
 //   )
 // }
+
+// // after finished styling, turn getKittenVideos() into a function to query initial data/ videos to display when the page first loaded
+// // if placing this function in a separated module, setLandingPageVideos needs to be a global state
+// const getKittenVideos = async () => {
+//   const response = await request('/search', {
+//     params: {
+//       part: 'snippet',
+//       maxResults: 24,
+//       q: 'kitten',
+//     },
+//   })
+//   localStorage.setItem('kittenVideos', JSON.stringify(response.data.items))
+//   setLandingPageVideos(response.data.items)
+// }
+
+// // when app start, either load the kittenVideos in localStorage, or run getKittenVideos() to query data from YouTube API
+// useEffect(() => {
+//   const storedKittenVideos = JSON.parse(localStorage.getItem('kittenVideos'))
+//   if (storedKittenVideos) {
+//     // console.log(storedKittenVideos)
+//     setLandingPageVideos(storedKittenVideos)
+//     // console.log('using stored Videos data')
+//   } else {
+//     getKittenVideos()
+//   }
+// }, [])
+
+// // console.log(landingPageVideos)

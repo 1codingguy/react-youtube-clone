@@ -15,98 +15,63 @@ import { MoreButton } from './MoreButton'
 
 const VideoCard = ({ video }) => {
   // const isMobileView = useIsMobileView()
-
   const {
-    id: { videoId },
+    id: videoId,
+    contentDetails: { duration },
     snippet: {
       channelId,
       channelTitle,
       title,
       publishedAt,
-      // thumbnails,
       thumbnails: { medium },
     },
+    statistics: { viewCount },
   } = video
 
-  const [views, setViews] = useState(null)
-  const [duration, setDuration] = useState(null)
+  let formattedDuration = moment.duration(duration).asSeconds()
+  formattedDuration = moment.utc(formattedDuration * 1000).format('mm:ss')
+  // remove leading '0'
+  formattedDuration =
+    formattedDuration[0] === '0'
+      ? formattedDuration.slice(1)
+      : formattedDuration
+
   const [channelAvatar, setChannelAvatar] = useState(null)
 
-  useEffect(() => {
-    // the stored data is string, not sure what to do to return original type
-    // or simply do some processing when first get the data to make sure the data retrieve from localStorage can be a string, and can be used right away without further processing?
-    const storedDuration = JSON.parse(
-      localStorage.getItem(`${videoId}_duration`)
-    )
-    const storedViews = JSON.parse(localStorage.getItem(`${videoId}_views`))
-
-    const get_video_details = async () => {
-      const {
-        data: { items },
-      } = await request('/videos', {
-        params: {
-          part: 'contentDetails,statistics',
-          id: videoId,
-        },
-      })
-
-      const seconds = moment
-        .duration(items[0].contentDetails.duration)
-        .asSeconds()
-      let time = moment.utc(seconds * 1000).format('mm:ss')
-      // To get rid of leading 0 if there is
-      time = time[0] === '0' ? time.slice(1) : time
-
-      localStorage.setItem(`${videoId}_duration`, JSON.stringify(time))
-      setDuration(time)
-
-      // views is processed with numeral inside component, just stringify into storage
-      localStorage.setItem(
-        `${videoId}_views`,
-        JSON.stringify(items[0].statistics.viewCount)
-      )
-      setViews(items[0].statistics.viewCount)
-    }
-
-    // if duration and views are in localStorage then no need to query from YouTube API
-    if (storedDuration && storedViews) {
-      setDuration(storedDuration)
-      setViews(storedViews)
-      // console.log('using stored duration and views')
-    } else {
-      get_video_details()
-    }
-  }, [videoId])
-
+  // Get channelAvatar by querying './channels' of YouTube API
   useEffect(() => {
     const storedChannelAvatar = JSON.parse(
       localStorage.getItem(`${videoId}_channelAvatar`)
     )
 
-    const get_channel_icon = async () => {
-      const {
-        data: { items },
-      } = await request('/channels', {
-        params: {
-          part: 'snippet',
-          id: channelId,
-        },
-      })
-      // retrieve the url property inside component, just stringify in localStorage
-      localStorage.setItem(
-        `${videoId}_channelAvatar`,
-        JSON.stringify(items[0].snippet.thumbnails.default)
-      )
-      setChannelAvatar(items[0].snippet.thumbnails.default)
+    const queryChannelAvatar = async () => {
+      try {
+        const {
+          data: { items },
+        } = await request('/channels', {
+          params: {
+            part: 'snippet',
+            id: channelId,
+          },
+        })
+        // retrieve the url property inside component, just stringify in localStorage
+        localStorage.setItem(
+          `${videoId}_channelAvatar`,
+          JSON.stringify(items[0].snippet.thumbnails.default)
+        )
+        setChannelAvatar(items[0].snippet.thumbnails.default)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     if (storedChannelAvatar) {
       setChannelAvatar(storedChannelAvatar)
       // console.log('using local stored channelAvatar')
     } else {
-      get_channel_icon()
+      queryChannelAvatar()
     }
-  }, [channelId, videoId])
+  }, [videoId, channelId])
 
   return (
     <StyledCard square={true} elevation={0}>
@@ -116,14 +81,18 @@ const VideoCard = ({ video }) => {
           component="img"
           style={{ width: '100%', cursor: 'pointer' }}
         />
-        <DurationContainer variant="body2">{duration}</DurationContainer>
+        <DurationContainer variant="body2">
+          {formattedDuration}
+        </DurationContainer>
       </ImageContainer>
 
       <StyledCardHeader
         avatar={<StyledAvatar src={channelAvatar ? channelAvatar.url : ''} />}
         action={<MoreButton />}
         title={<VideoTitle variant="h3">{he.decode(title)}</VideoTitle>}
-        subheader={<ChannelDetails {...{ channelTitle, publishedAt, views }} />}
+        subheader={
+          <ChannelDetails {...{ channelTitle, publishedAt, viewCount }} />
+        }
       />
     </StyledCard>
   )
@@ -234,3 +203,51 @@ const StyledAvatar = styled(Avatar)`
 //   'https://i.ytimg.com/vi/F3Bar3rty_4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAnuEiB52zi3CJmpBk9QXJqxeZq3Q'
 
 // const imgUrl2 = 'https://i.ytimg.com/vi/F3Bar3rty_4/hqdefault.jpg'
+
+// Original useEffect to query viewCount and video duration
+
+// useEffect(() => {
+//   // the stored data is string, not sure what to do to return original type
+//   // or simply do some processing when first get the data to make sure the data retrieve from localStorage can be a string, and can be used right away without further processing?
+//   const storedDuration = JSON.parse(
+//     localStorage.getItem(`${videoId}_duration`)
+//   )
+//   const storedViews = JSON.parse(localStorage.getItem(`${videoId}_views`))
+
+//   const get_video_details = async () => {
+//     const {
+//       data: { items },
+//     } = await request('/videos', {
+//       params: {
+//         part: 'contentDetails,statistics',
+//         id: videoId,
+//       },
+//     })
+
+//     const seconds = moment
+//       .duration(items[0].contentDetails.duration)
+//       .asSeconds()
+//     let time = moment.utc(seconds * 1000).format('mm:ss')
+//     // To get rid of leading 0 if there is
+//     time = time[0] === '0' ? time.slice(1) : time
+
+//     localStorage.setItem(`${videoId}_duration`, JSON.stringify(time))
+//     setDuration(time)
+
+//     // views is processed with numeral inside component, just stringify into storage
+//     localStorage.setItem(
+//       `${videoId}_views`,
+//       JSON.stringify(items[0].statistics.viewCount)
+//     )
+//     setViews(items[0].statistics.viewCount)
+//   }
+
+//   // if duration and views are in localStorage then no need to query from YouTube API
+//   if (storedDuration && storedViews) {
+//     setDuration(storedDuration)
+//     setViews(storedViews)
+//     // console.log('using stored duration and views')
+//   } else {
+//     get_video_details()
+//   }
+// }, [videoId])

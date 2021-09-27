@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Tabs from '@material-ui/core/Tabs'
 import styled from 'styled-components'
 import {
@@ -11,12 +11,14 @@ import {
 } from '../utils/utils'
 import { useGlobalContext } from '../../context'
 import Chip from '@material-ui/core/Chip'
+import countries from './chipsArray'
+import { selectedChipIndexAtom } from '../../store'
+import { useAtom } from 'jotai'
 
 /** topbar under the search that shows category filter chips that scroll left/right */
 const ChipsBar = () => {
   const { marginLeftToOffset } = useGlobalContext()
-  const [activeChipIndex, setActiveChipIndex] = useState(0)
-
+  
   return (
     <HideOnScroll>
       <ChipsContainer marginLeftToOffset={marginLeftToOffset}>
@@ -27,7 +29,7 @@ const ChipsBar = () => {
           textColor="primary"
           value={0}
         >
-          <Chips {...{ activeChipIndex, setActiveChipIndex }} />
+          <Chips/>
         </StyledTabs>
       </ChipsContainer>
     </HideOnScroll>
@@ -36,15 +38,18 @@ const ChipsBar = () => {
 
 export default ChipsBar
 
-const Chips = ({ activeChipIndex, setActiveChipIndex }) => {
-  return [...new Array(20)].map((_, index) => {
+const Chips = () => {
+  const [selectedChipIndex, setSelectedChipIndex] = useAtom(
+    selectedChipIndexAtom
+  )
+  return countries.map(({country}, index) => {
     return (
       <StyledChip
-        key={`Chip #${index}`}
-        label={`Chip #${index}`}
+        key={country}
+        label={country}
         // console says it's an error to have boolean value of true
-        active={index === activeChipIndex ? `true` : null}
-        onClick={() => setActiveChipIndex(index)}
+        active={index === selectedChipIndex ? `true` : null}
+        onClick={() => setSelectedChipIndex(index)}
         component="li"
       />
     )
