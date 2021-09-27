@@ -1,65 +1,55 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { StyledIconButton } from './VideoCard'
-import Modal from '@material-ui/core/Modal'
-import styled from 'styled-components'
 import { useIsMobileView } from '../utils/utils'
-import { List, ListItem, Typography } from '@material-ui/core'
+import { MobileModal } from './MobileModal'
+import { DesktopPopper } from './DesktopPopper'
 
 export const MoreButton = () => {
   const isMobileView = useIsMobileView()
+  // states for Modal in mobile view
   const [isModalOpen, setIsModalOpen] = useState(false)
-  
+  const handleModalClose = () => setIsModalOpen(false)
+
+  // states for popup menu in desktop view
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const anchorRef = useRef(null)
+
+  const handlePopupClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return
+    }
+    setIsPopupOpen(false)
+  }
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault()
+      setIsPopupOpen(false)
+    }
+  }
+
+  // what is triggered onClick depends on the view
   const handleMoreIconClick = () => {
     if (isMobileView) {
       setIsModalOpen(true)
+    } else {
+      // toggle if desktop view
+      setIsPopupOpen((prevOpen) => !prevOpen)
     }
   }
-  const handleModalClose = () => setIsModalOpen(false)
 
   return (
     <StyledIconButton disableRipple={true}>
-      <MoreVertIcon onClick={handleMoreIconClick} />
+      <MoreVertIcon ref={anchorRef} onClick={handleMoreIconClick} />
+
+      {/* desktop view popper */}
+      <DesktopPopper
+        {...{ isPopupOpen, anchorRef, handlePopupClose, handleListKeyDown }}
+      />
+
+      {/* mobile view modal */}
       <MobileModal {...{ isModalOpen, handleModalClose }} />
     </StyledIconButton>
-  )
-}
-
-const StyledListItem = styled(ListItem)`
-  && {
-    padding: 9px 12px;
-    color: #030303;
-    cursor: pointer;
-  }
-`
-
-const MobileModalMenu = ['Not interested', 'Save to Watch Later', 'Cancel']
-
-const ModalContainer = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 250px;
-  max-width: 356px;
-  max-height: 100%;
-  background-color: rgb(249, 249, 249);
-`
-const MobileModal = ({ isModalOpen, handleModalClose }) => {
-  return (
-    <Modal open={isModalOpen} onClose={handleModalClose}>
-      <ModalContainer>
-        <List>
-          {MobileModalMenu.map((item) => {
-            return (
-              <StyledListItem key={item} onClick={handleModalClose}>
-                {/* add a <ListItemText /> here renders nothing for unknown reason  */}
-                <Typography variant="body1">{item}</Typography>
-              </StyledListItem>
-            )
-          })}
-        </List>
-      </ModalContainer>
-    </Modal>
   )
 }
