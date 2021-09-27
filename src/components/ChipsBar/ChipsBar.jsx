@@ -3,11 +3,11 @@ import Tabs from '@material-ui/core/Tabs'
 import styled from 'styled-components'
 import {
   HideOnScroll,
-  MOBILE_VIEW_MAX_WIDTH,
   MOBILE_VIEW_HEADER_HEIGHT as MOBILE_CATEGORIES_BAR_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT as DESKTOP_CATEGORIES_BAR_HEIGHT,
   TWO_COL_MIN_WIDTH,
   HEADER_OPACITY,
+  CHIPS_BAR_MAX_WIDTH,
 } from '../utils/utils'
 import { useGlobalContext } from '../../context'
 import Chip from '@material-ui/core/Chip'
@@ -18,7 +18,7 @@ import { useAtom } from 'jotai'
 /** topbar under the search that shows category filter chips that scroll left/right */
 const ChipsBar = () => {
   const { marginLeftToOffset } = useGlobalContext()
-  
+
   return (
     <HideOnScroll>
       <ChipsContainer marginLeftToOffset={marginLeftToOffset}>
@@ -29,7 +29,7 @@ const ChipsBar = () => {
           textColor="primary"
           value={0}
         >
-          <Chips/>
+          <Chips />
         </StyledTabs>
       </ChipsContainer>
     </HideOnScroll>
@@ -42,7 +42,7 @@ const Chips = () => {
   const [selectedChipIndex, setSelectedChipIndex] = useAtom(
     selectedChipIndexAtom
   )
-  return countries.map(({country}, index) => {
+  return countries.map(({ country }, index) => {
     return (
       <StyledChip
         key={country}
@@ -57,29 +57,29 @@ const Chips = () => {
 }
 
 const StyledChip = styled(Chip)`
-  /* active chip in desktop view has black background */
   && {
     margin-right: 12px;
     border: 1px solid rgba(0, 0, 0, 0.1);
+    /* active chip in mobile view has grey background */
     background-color: ${(props) =>
-      props.active ? 'black' : 'rgba(0, 0, 0, 0.05)'};
+      props.active ? '#606060' : 'rgba(0, 0, 0, 0.05)'};
     color: ${(props) => (props.active ? 'white' : '#030303')};
+
     &:hover,
     &:focus {
-      background-color: black;
-      color: white;
+      background-color: ${(props) => props.active && '#606060'};
+      color: ${(props) => props.active && 'white'};
     }
 
-    /* active chip in mobile view has grey background */
-    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      /* active chip in desktop view has black background */
       background-color: ${(props) =>
-        props.active ? '#606060' : 'rgba(0, 0, 0, 0.05)'};
+        props.active ? 'black' : 'rgba(0, 0, 0, 0.05)'};
       color: ${(props) => (props.active ? 'white' : '#030303')};
-
       &:hover,
       &:focus {
-        background-color: #606060;
-        color: white;
+        background-color: ${(props) => props.active && 'black'};
+        color: ${(props) => props.active && 'white'};
       }
     }
   }
@@ -126,6 +126,15 @@ const ChipsContainer = styled.div`
   /* This doesn't even show in dev-tool if defined under StyledTabs */
   .MuiTabs-root {
     height: 100%;
+  }
+
+  /* ChipsBar has a max-width of 1680px because it's hard-coded */
+  /* Above lg screen size, the ChipsBar should be in the center */
+  @media screen and (min-width: calc(${CHIPS_BAR_MAX_WIDTH}px - ${(props) =>
+      props.marginLeftToOffset}px)) {
+    .MuiTabs-scroller {
+      justify-content: center;
+    }
   }
 `
 

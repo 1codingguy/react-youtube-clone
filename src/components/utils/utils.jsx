@@ -27,6 +27,7 @@ export const SIX_COL_MAX_WIDTH = 2256
 export const SHOW_SEARCH_BOX_BREAKPOINT = 657
 export const SHOW_MINI_SIDEBAR_BREAKPOINT = 792
 export const SHOW_FULL_SIDEBAR_BREAKPOINT = 1313
+export const CHIPS_BAR_MAX_WIDTH = 1680
 // font size
 export const DEFAULT_FONT_SIZE = 14
 export const HEADER_OPACITY = 0.98

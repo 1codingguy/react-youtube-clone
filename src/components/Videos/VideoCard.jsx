@@ -18,13 +18,7 @@ const VideoCard = ({ video }) => {
   const {
     id: videoId,
     contentDetails: { duration },
-    snippet: {
-      channelId,
-      channelTitle,
-      title,
-      publishedAt,
-      thumbnails: { medium },
-    },
+    snippet: { channelId, channelTitle, title, publishedAt, thumbnails },
     statistics: { viewCount },
   } = video
 
@@ -77,7 +71,10 @@ const VideoCard = ({ video }) => {
     <StyledCard square={true} elevation={0}>
       <ImageContainer>
         <CardMedia
-          image={medium.url}
+        // every video has medium size thumbnail, use as fallback if maxres not available
+          image={
+            thumbnails.maxres ? thumbnails.maxres.url : thumbnails.medium.url
+          }
           component="img"
           style={{ width: '100%', cursor: 'pointer' }}
         />
@@ -137,7 +134,7 @@ const DurationContainer = styled(Typography)`
 const StyledCard = styled(Card)`
   && {
     width: 100%;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
       background-color: transparent;
       margin-bottom: 30px; // original is 40px but 30px here account for padding
