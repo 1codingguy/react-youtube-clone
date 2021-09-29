@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useGlobalContext } from '../../context'
 import { ThemeProvider } from '@material-ui/styles'
@@ -26,12 +26,14 @@ import {
 import { useAtom } from 'jotai'
 import countries from '../ChipsBar/chipsArray'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 const Videos = () => {
   const VIDEOS_PER_QUERY = 24
-
   const isMobileView = useIsMobileView()
   const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const [selectedChipIndex] = useAtom(selectedChipIndexAtom)
   const { regionCode: selectedRegionCode } = countries[selectedChipIndex]
@@ -43,9 +45,9 @@ const Videos = () => {
 
   const [totalResults, setTotalResults] = useAtom(totalResultsAtom)
 
-
   const getPopularVideos = async () => {
     try {
+      setIsLoading(true)
       const { data } = await request('/videos', {
         params: {
           part: 'snippet,contentDetails,statistics',
@@ -62,22 +64,25 @@ const Videos = () => {
       // infinite scroll needs previous page + current page data
       setLandingPageVideos([...landingPageVideos, ...data.items])
       setNextPageToken(data.nextPageToken)
+      setIsLoading(false)
     } catch (error) {
       console.log(error)
+      setIsLoading(false)
     }
   }
 
-  // get selectedCountry popular videos when app starts
-  // useEffect(() => {
-  //   console.log(`in useEffect`)
-  //   console.log(`selectedChipIndex: ${selectedChipIndex}`)
-  //   console.log(`selectedRegionCode: ${selectedRegionCode}`)
+  // get selectedCountry popular videos when app starts and click on another chip
+  useEffect(() => {
+    // console.log(`in useEffect`)
+    // console.log(`selectedChipIndex: ${selectedChipIndex}`)
+    // console.log(`selectedRegionCode: ${selectedRegionCode}`)
 
-  //   getPopularVideos()
-  // }, [selectedChipIndex])
+    getPopularVideos()
+  }, [selectedChipIndex])
 
   // logic to determine if more query needed for infinite scroll
-  let shouldGetMoreResults = (totalResults - landingPageVideos.length) / VIDEOS_PER_QUERY >= 1
+  let shouldGetMoreResults =
+    (totalResults - landingPageVideos.length) / VIDEOS_PER_QUERY >= 1
 
   return (
     <OuterVideoContainer
@@ -94,10 +99,13 @@ const Videos = () => {
             style={{ overflow: 'unset' }}
           >
             <Grid container spacing={isMobileView ? 0 : 1}>
-              {landingPageVideos &&
-                landingPageVideos.map((video) => {
-                  return <GridItem key={video.id} video={video} />
-                })}
+              {isLoading
+                ? [...Array(VIDEOS_PER_QUERY)].map(() => {
+                    return <GridItem />
+                  })
+                : landingPageVideos.map((video) => {
+                    return <GridItem key={video.id} video={video} />
+                  })}
             </Grid>
           </InfiniteScroll>
         </InnerVideoContainer>
@@ -121,8 +129,27 @@ const GridItem = ({ video }) => {
       lg={3}
       xl={2}
     >
-      <VideoCard video={video} />
+      {video ? <VideoCard video={video} /> : <VideoSkeleton />}
     </Grid>
+  )
+}
+
+const VideoSkeleton = () => {
+  return (
+    <div style={{ width: '100%', margin: '1rem ' }}>
+      <SkeletonTheme>
+        <Skeleton height={180} />
+        <div>
+          <Skeleton
+            style={{ margin: '0.5rem 0' }}
+            circle
+            height={40}
+            width={40}
+          />
+          <Skeleton height={40} width="75%" style={{ marginLeft: '0.5rem' }} />
+        </div>
+      </SkeletonTheme>
+    </div>
   )
 }
 
