@@ -17,33 +17,26 @@ import {
   SIX_COL_MAX_WIDTH,
 } from '../utils/utils'
 import { request } from '../utils/api'
-import {
-  selectedChipIndexAtom,
-  landingPageVideosAtom,
-  nextPageTokenAtom,
-  totalResultsAtom,
-} from '../../store'
-import { useAtom } from 'jotai'
 import countries from '../ChipsBar/chipsArray'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
-const Videos = () => {
+const Videos = ({
+  selectedChipIndex,
+  setSelectedChipIndex,
+  landingPageVideos,
+  setLandingPageVideos,
+  nextPageToken,
+  setNextPageToken,
+}) => {
   const VIDEOS_PER_QUERY = 24
   const isMobileView = useIsMobileView()
   const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
 
+  // total number of videos returned by API query
+  const [totalResults, setTotalResults] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
-
-  const [selectedChipIndex] = useAtom(selectedChipIndexAtom)
   const { regionCode: selectedRegionCode } = countries[selectedChipIndex]
-
-  const [landingPageVideos, setLandingPageVideos] = useAtom(
-    landingPageVideosAtom
-  )
-  const [nextPageToken, setNextPageToken] = useAtom(nextPageTokenAtom)
-
-  const [totalResults, setTotalResults] = useAtom(totalResultsAtom)
 
   const getPopularVideos = async () => {
     try {

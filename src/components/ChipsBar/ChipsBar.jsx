@@ -12,15 +12,14 @@ import {
 import { useGlobalContext } from '../../context'
 import Chip from '@material-ui/core/Chip'
 import countries from './chipsArray'
-import {
-  selectedChipIndexAtom,
-  landingPageVideosAtom,
-  nextPageTokenAtom,
-} from '../../store'
-import { useAtom } from 'jotai'
 
 /** topbar under the search that shows category filter chips that scroll left/right */
-const ChipsBar = () => {
+const ChipsBar = ({
+  selectedChipIndex,
+  setSelectedChipIndex,
+  setLandingPageVideos,
+  setNextPageToken,
+}) => {
   const { marginLeftToOffset } = useGlobalContext()
 
   return (
@@ -33,7 +32,14 @@ const ChipsBar = () => {
           textColor="primary"
           value={0}
         >
-          <Chips />
+          <Chips
+            {...{
+              selectedChipIndex,
+              setSelectedChipIndex,
+              setLandingPageVideos,
+              setNextPageToken,
+            }}
+          />
         </StyledTabs>
       </ChipsContainer>
     </HideOnScroll>
@@ -42,14 +48,14 @@ const ChipsBar = () => {
 
 export default ChipsBar
 
-const Chips = () => {
-  const [selectedChipIndex, setSelectedChipIndex] = useAtom(
-    selectedChipIndexAtom
-  )
-  const [, setLandingPageVideos] = useAtom(landingPageVideosAtom)
-  const [, setNextPageToken] = useAtom(nextPageTokenAtom)
+const Chips = ({
+  selectedChipIndex,
+  setSelectedChipIndex,
+  setLandingPageVideos,
+  setNextPageToken,
+}) => {
 
-  const handleSingleChipClick = (index) => {
+  const handleChipClick = (index) => {
     setSelectedChipIndex(index)
     // reset landingPageVideos & nextPageToken to default when select another chip
     setLandingPageVideos([])
@@ -63,7 +69,7 @@ const Chips = () => {
         label={country}
         // console says it's an error to have boolean value of true
         active={index === selectedChipIndex ? `true` : null}
-        onClick={() => handleSingleChipClick(index)}
+        onClick={() => handleChipClick(index)}
         component="li"
       />
     )

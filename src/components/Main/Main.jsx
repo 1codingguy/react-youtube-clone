@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import ChipsBar from '../ChipsBar/ChipsBar'
 import Videos from '../Videos/Videos'
@@ -10,12 +10,32 @@ import {
 import SidebarToShow from '../Sidebar/SidebarToShow'
 
 const Main = () => {
+  const [selectedChipIndex, setSelectedChipIndex] = useState(0)
+  const [landingPageVideos, setLandingPageVideos] = useState([])
+  const [nextPageToken, setNextPageToken] = useState(null)
+
   return (
     <StyledMain>
       <SidebarToShow />
 
-      <ChipsBar />
-      <Videos />
+      <ChipsBar
+        {...{
+          selectedChipIndex,
+          setSelectedChipIndex,
+          setLandingPageVideos,
+          setNextPageToken,
+        }}
+      />
+      <Videos
+        {...{
+          selectedChipIndex,
+          setSelectedChipIndex,
+          landingPageVideos,
+          setLandingPageVideos,
+          nextPageToken,
+          setNextPageToken,
+        }}
+      />
     </StyledMain>
   )
 }
