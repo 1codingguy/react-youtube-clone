@@ -6,7 +6,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import { Typography } from '@material-ui/core'
-import { TWO_COL_MIN_WIDTH } from '../utils/utils'
+import { useIsMobileView, TWO_COL_MIN_WIDTH } from '../utils/utils'
 import { request } from '../utils/api'
 import moment from 'moment'
 import he from 'he'
@@ -14,13 +14,19 @@ import { ChannelDetails } from './ChannelDetails'
 import { MoreButton } from './MoreButton'
 
 const VideoCard = ({ video }) => {
-  // const isMobileView = useIsMobileView()
+  const isMobileView = useIsMobileView()
   const {
     id: videoId,
     contentDetails: { duration },
     snippet: { channelId, channelTitle, title, publishedAt, thumbnails },
     statistics: { viewCount },
   } = video
+
+  const thumbnailImage = isMobileView
+    ? thumbnails.medium.url
+    : thumbnails.maxres
+    ? thumbnails.maxres.url
+    : thumbnails.medium.url
 
   let formattedDuration = moment.duration(duration).asSeconds()
   formattedDuration = moment.utc(formattedDuration * 1000).format('mm:ss')
@@ -71,10 +77,8 @@ const VideoCard = ({ video }) => {
     <StyledCard square={true} elevation={0}>
       <ImageContainer>
         <CardMedia
-        // every video has medium size thumbnail, use as fallback if maxres not available
-          image={
-            thumbnails.maxres ? thumbnails.maxres.url : thumbnails.medium.url
-          }
+          // every video has medium size thumbnail, use as fallback if maxres not available
+          image={thumbnailImage}
           component="img"
           style={{ width: '100%', cursor: 'pointer' }}
         />

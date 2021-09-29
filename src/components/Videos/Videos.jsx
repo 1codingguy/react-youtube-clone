@@ -23,7 +23,6 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 const Videos = ({
   selectedChipIndex,
-  setSelectedChipIndex,
   landingPageVideos,
   setLandingPageVideos,
   nextPageToken,
