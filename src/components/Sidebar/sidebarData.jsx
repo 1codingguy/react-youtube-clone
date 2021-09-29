@@ -15,6 +15,15 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined'
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined'
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined'
+import ExpandLessOutlinedIcon from '@material-ui/icons/ExpandLessOutlined'
+
+export const sideBarShowMore = [
+  { Icon: ExpandMoreOutlinedIcon, text: 'Show more' },
+]
+
+export const sideBarShowLess = [
+  { Icon: ExpandLessOutlinedIcon, text: 'Show less' },
+]
 
 export const sideBarMenuRows = [
   { Icon: HomeIcon, text: 'Home' },
@@ -25,7 +34,6 @@ export const sideBarMenuRows = [
   { Icon: ShopOutlinedIcon, text: 'Your videos' },
   { Icon: QueryBuilderOutlinedIcon, text: 'Watch later' },
   { Icon: PlaylistPlayOutlinedIcon, text: 'Music' },
-  { Icon: ExpandMoreOutlinedIcon, text: 'Show more' },
 ]
 
 export const moreFromYouTubeRows = [

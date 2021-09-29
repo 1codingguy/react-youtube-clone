@@ -1,8 +1,7 @@
-import { sideBarMenuRows } from './sidebarData';
-import { SidebarRow } from "./SidebarRow";
+import { sideBarShowMore } from './sidebarData'
+import { SidebarRow } from './SidebarRow'
 
-
-export const ShowMoreRow = () => {
-  const { Icon, text } = sideBarMenuRows.at(-1);
-  return <SidebarRow {...{ Icon, text }} />;
-};
+export const ShowMoreRow = ({ onClick }) => {
+  const { Icon, text } = sideBarShowMore[0]
+  return <SidebarRow {...{ Icon, text, onClick }} />
+}

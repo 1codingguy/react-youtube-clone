@@ -1,24 +1,3 @@
-// const catBreed = [
-//   'Kitten',
-//   'Tabby',
-//   'Bengal',
-//   'Siamese',
-//   'Norwegian Forest Cat',
-//   'Maine Coon',
-//   'British Shorthair',
-//   'Puma',
-//   'Canadian Lynx',
-//   'Savannah',
-//   'Persian cat',
-//   'Caracal',
-//   'Courgar',
-//   'Leopard',
-//   'Abyssinian',
-//   'Scottish Fold',
-//   'Panther',
-//   'Burmese cat',
-// ]
-
 const countries = [
   { country: 'United Kingdom', regionCode: 'GB' },
   { country: 'Ukraine', regionCode: 'UA' },

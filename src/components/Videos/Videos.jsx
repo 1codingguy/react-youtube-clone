@@ -91,10 +91,11 @@ const Videos = ({
             // overflow: auto from infinite scroll default causes scrolling problem
             style={{ overflow: 'unset' }}
           >
+            {/* change from here if remove loading-skeleton */}
             <Grid container spacing={isMobileView ? 0 : 1}>
               {isLoading
-                ? [...Array(VIDEOS_PER_QUERY)].map(() => {
-                    return <GridItem />
+                ? [...Array(VIDEOS_PER_QUERY)].map((_, index) => {
+                    return <GridItem key={`skeleton-${index}`} />
                   })
                 : landingPageVideos.map((video) => {
                     return <GridItem key={video.id} video={video} />
@@ -122,6 +123,7 @@ const GridItem = ({ video }) => {
       lg={3}
       xl={2}
     >
+      {/* change from here if remove loading-skeleton */}
       {video ? <VideoCard video={video} /> : <VideoSkeleton />}
     </Grid>
   )
