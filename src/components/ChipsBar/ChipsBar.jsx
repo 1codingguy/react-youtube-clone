@@ -12,7 +12,11 @@ import {
 import { useGlobalContext } from '../../context'
 import Chip from '@material-ui/core/Chip'
 import countries from './chipsArray'
-import { selectedChipIndexAtom } from '../../store'
+import {
+  selectedChipIndexAtom,
+  landingPageVideosAtom,
+  nextPageTokenAtom,
+} from '../../store'
 import { useAtom } from 'jotai'
 
 /** topbar under the search that shows category filter chips that scroll left/right */
@@ -42,6 +46,16 @@ const Chips = () => {
   const [selectedChipIndex, setSelectedChipIndex] = useAtom(
     selectedChipIndexAtom
   )
+  const [, setLandingPageVideos] = useAtom(landingPageVideosAtom)
+  const [, setNextPageToken] = useAtom(nextPageTokenAtom)
+
+  const handleSingleChipClick = (index) => {
+    setSelectedChipIndex(index)
+    // reset landingPageVideos & nextPageToken to default when select another chip
+    setLandingPageVideos([])
+    setNextPageToken(null)
+  }
+
   return countries.map(({ country }, index) => {
     return (
       <StyledChip
@@ -49,7 +63,7 @@ const Chips = () => {
         label={country}
         // console says it's an error to have boolean value of true
         active={index === selectedChipIndex ? `true` : null}
-        onClick={() => setSelectedChipIndex(index)}
+        onClick={() => handleSingleChipClick(index)}
         component="li"
       />
     )

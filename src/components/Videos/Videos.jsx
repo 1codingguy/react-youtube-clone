@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useGlobalContext } from '../../context'
 import { ThemeProvider } from '@material-ui/styles'
@@ -17,18 +17,32 @@ import {
   SIX_COL_MAX_WIDTH,
 } from '../utils/utils'
 import { request } from '../utils/api'
-import { selectedChipIndexAtom } from '../../store'
+import {
+  selectedChipIndexAtom,
+  landingPageVideosAtom,
+  nextPageTokenAtom,
+  totalResultsAtom,
+} from '../../store'
 import { useAtom } from 'jotai'
 import countries from '../ChipsBar/chipsArray'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 const Videos = () => {
-  const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
+  const VIDEOS_PER_QUERY = 24
+
   const isMobileView = useIsMobileView()
-  const [landingPageVideos, setLandingPageVideos] = useState(null)
+  const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
 
   const [selectedChipIndex] = useAtom(selectedChipIndexAtom)
-  const selectedCountry = countries[selectedChipIndex].country
-  const selectedRegionCode = countries[selectedChipIndex].regionCode
+  const { regionCode: selectedRegionCode } = countries[selectedChipIndex]
+
+  const [landingPageVideos, setLandingPageVideos] = useAtom(
+    landingPageVideosAtom
+  )
+  const [nextPageToken, setNextPageToken] = useAtom(nextPageTokenAtom)
+
+  const [totalResults, setTotalResults] = useAtom(totalResultsAtom)
+
 
   const getPopularVideos = async () => {
     try {
@@ -37,33 +51,33 @@ const Videos = () => {
           part: 'snippet,contentDetails,statistics',
           chart: 'mostPopular',
           regionCode: selectedRegionCode,
-          maxResults: 24,
+          maxResults: VIDEOS_PER_QUERY,
+          // initial value is null so should be fine for 1st request
+          pageToken: nextPageToken,
         },
       })
-      // nextPageToken available at data.nextPageToken
-      // totalResults at data.pageInfo.totalResults  
       // console.log(data)
+      setTotalResults(data.pageInfo.totalResults)
 
-      localStorage.setItem(selectedCountry, JSON.stringify(data.items))
-      setLandingPageVideos(data.items)
+      // infinite scroll needs previous page + current page data
+      setLandingPageVideos([...landingPageVideos, ...data.items])
+      setNextPageToken(data.nextPageToken)
     } catch (error) {
       console.log(error)
     }
   }
 
-  // when app start, either load the popular videos of selectedCountry in localStorage, or run getPopularVideos() to query data from YouTube API
-  useEffect(() => {
-    const storedPopularVideos = JSON.parse(
-      localStorage.getItem(selectedCountry)
-    )
-    if (storedPopularVideos) {
-      // console.log(storedPopularVideos)
-      setLandingPageVideos(storedPopularVideos)
-      // console.log('using stored Videos data')
-    } else {
-      getPopularVideos()
-    }
-  }, [selectedCountry])
+  // get selectedCountry popular videos when app starts
+  // useEffect(() => {
+  //   console.log(`in useEffect`)
+  //   console.log(`selectedChipIndex: ${selectedChipIndex}`)
+  //   console.log(`selectedRegionCode: ${selectedRegionCode}`)
+
+  //   getPopularVideos()
+  // }, [selectedChipIndex])
+
+  // logic to determine if more query needed for infinite scroll
+  let shouldGetMoreResults = (totalResults - landingPageVideos.length) / VIDEOS_PER_QUERY >= 1
 
   return (
     <OuterVideoContainer
@@ -72,12 +86,20 @@ const Videos = () => {
     >
       <ThemeProvider theme={columnBreakpoints}>
         <InnerVideoContainer>
-          <Grid container spacing={isMobileView ? 0 : 1}>
-            {landingPageVideos &&
-              landingPageVideos.map((video) => {
-                return <GridItem key={video.id} video={video} />
-              })}
-          </Grid>
+          <InfiniteScroll
+            dataLength={landingPageVideos.length}
+            next={getPopularVideos}
+            hasMore={shouldGetMoreResults}
+            // overflow: auto from infinite scroll default causes scrolling problem
+            style={{ overflow: 'unset' }}
+          >
+            <Grid container spacing={isMobileView ? 0 : 1}>
+              {landingPageVideos &&
+                landingPageVideos.map((video) => {
+                  return <GridItem key={video.id} video={video} />
+                })}
+            </Grid>
+          </InfiniteScroll>
         </InnerVideoContainer>
       </ThemeProvider>
     </OuterVideoContainer>
