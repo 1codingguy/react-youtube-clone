@@ -147,10 +147,10 @@ const VideoSkeleton = () => {
   )
 }
 
-const OuterVideoContainer = styled.div`
+export const OuterVideoContainer = styled.div`
   /* min-height: 200vh; */
   background-color: #f9f9f9;
-  display: inline-block;
+  /* display: inline-block; */
   padding-top: ${(props) => props.marginTopToOffset}px;
   padding-left: ${(props) => props.marginLeftToOffset}px;
   /* width: calc(100% - ${(props) => props.marginLeftToOffset}px); */

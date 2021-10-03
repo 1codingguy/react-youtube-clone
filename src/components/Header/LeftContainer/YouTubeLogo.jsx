@@ -1,10 +1,12 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import Tooltip from '@material-ui/core/Tooltip'
 import { MOBILE_VIEW_MAX_WIDTH } from '../../utils/utils'
 
 const YouTubeLogo = () => {
   return (
+    <Link to='/'>
     <YouTubeLogoTooltip title="YouTube Home">
       <YouTubeLogoContainer>
         <Logo
@@ -13,6 +15,7 @@ const YouTubeLogo = () => {
         />
       </YouTubeLogoContainer>
     </YouTubeLogoTooltip>
+    </Link>
   )
 }
 

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { createGlobalStyle } from 'styled-components'
 import { ContextProvider } from './context'
+import { BrowserRouter } from 'react-router-dom'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -14,10 +15,12 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
   <React.StrictMode>
-    <ContextProvider>
-      <GlobalStyle />
-      <App />
-    </ContextProvider>
+    <BrowserRouter>
+      <ContextProvider>
+        <GlobalStyle />
+        <App />
+      </ContextProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )

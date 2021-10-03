@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import ChipsBar from '../ChipsBar/ChipsBar'
 import Videos from '../Videos/Videos'
@@ -8,6 +9,7 @@ import {
   MOBILE_VIEW_MAX_WIDTH,
 } from '../utils/utils'
 import SidebarToShow from '../Sidebar/SidebarToShow'
+import Search from '../Search/Search'
 
 const Main = () => {
   const [selectedChipIndex, setSelectedChipIndex] = useState(0)
@@ -17,25 +19,35 @@ const Main = () => {
   return (
     <StyledMain>
       <SidebarToShow />
-
-      <ChipsBar
-        {...{
-          selectedChipIndex,
-          setSelectedChipIndex,
-          setLandingPageVideos,
-          setNextPageToken,
-        }}
-      />
-      <Videos
-        {...{
-          selectedChipIndex,
-          setSelectedChipIndex,
-          landingPageVideos,
-          setLandingPageVideos,
-          nextPageToken,
-          setNextPageToken,
-        }}
-      />
+      <Switch>
+        <Route path="/" exact>
+          <ChipsBar
+            {...{
+              selectedChipIndex,
+              setSelectedChipIndex,
+              setLandingPageVideos,
+              setNextPageToken,
+            }}
+          />
+          <Videos
+            {...{
+              selectedChipIndex,
+              setSelectedChipIndex,
+              landingPageVideos,
+              setLandingPageVideos,
+              nextPageToken,
+              setNextPageToken,
+            }}
+          />
+        </Route>
+        <Route path="/results">
+          <Search />
+        </Route>
+        {/* original YouTube has a 'something went wrong' page instead of redirecting back to the homepage */}
+        <Route path='*'>
+          <Redirect to='/'/>
+        </Route>
+      </Switch>
     </StyledMain>
   )
 }

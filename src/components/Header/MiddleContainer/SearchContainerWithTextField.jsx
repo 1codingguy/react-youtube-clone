@@ -2,14 +2,35 @@ import React from 'react'
 import styled from 'styled-components'
 import SearchIcon from '@material-ui/icons/Search'
 import { IconTooltip, StyledIconButton } from '../../utils/utils'
+import { searchTermAtom } from '../../../store'
+import { useAtom } from 'jotai'
+import { useHistory } from 'react-router'
 
 export const SearchContainerWithTextField = () => {
+  const [searchTerm, setSearchTerm] = useAtom(searchTermAtom)
+  const history = useHistory()
+
+  const handleSubmit = (e) => {
+    console.log(e)
+    e.preventDefault()
+    console.log(`now in handleSubmit`)
+    // query API with the searchTerm
+
+    // jump to the search Page
+    history.push('/results?search_query=' + searchTerm)
+    
+  }
+
   return (
-    <StyledForm>
-      <SearchBox placeholder="Search" />
+    <StyledForm onSubmit={handleSubmit}>
+      <SearchBox
+        placeholder="Search"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       <IconTooltip title="Search">
         <SearchIconContainer>
-          <StyledIconButton>
+          <StyledIconButton type='submit'>
             <SearchIcon />
           </StyledIconButton>
         </SearchIconContainer>
@@ -33,6 +54,7 @@ export const SearchBox = styled.input`
   padding-left: 12px;
   height: 40px;
   width: 100%;
+  font-size: 16px;
 
   &::placeholder {
     font-family: $font-default;
