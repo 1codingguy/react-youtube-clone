@@ -52,7 +52,7 @@ const MiddleContainer = () => {
       ) : (
         <>
           {/* only show search icon < 657px */}
-          {isInSearchResultsPage ? (
+          {isInSearchResultsPage && isMobileView ? (
             <ResultsHeaderBar>
               {/* button with searchTerm that opens up the SearchDrawer */}
               <MobileHeaderSearchTermButton

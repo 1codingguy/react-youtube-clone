@@ -24,7 +24,7 @@ const RightContainer = () => {
         </>
       )}
       {/* in mobile search result page a more button on the right */}
-      {isInSearchResultsPage ? (
+      {isInSearchResultsPage && isMobileView ? (
         <HeaderMoreButton />
       ) : (
         // in mobile landing page an avatar button on the right

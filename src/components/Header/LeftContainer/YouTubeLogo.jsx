@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Tooltip from '@material-ui/core/Tooltip'
 import { MOBILE_VIEW_MAX_WIDTH } from '../../utils/utils'
+import { useIsMobileView } from '../../utils/utils'
 
 const YouTubeLogo = () => {
   const fullLogoUrl =
@@ -11,6 +12,8 @@ const YouTubeLogo = () => {
     'https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg'
 
   const currentLocation = useLocation()
+  const isMobileView = useIsMobileView()
+
   const isInSearchResultsPage = currentLocation.pathname === '/results'
 
   return (
@@ -18,7 +21,9 @@ const YouTubeLogo = () => {
       <YouTubeLogoTooltip title="YouTube Home">
         <YouTubeLogoContainer>
           <Logo
-            src={isInSearchResultsPage ? smallLogoUrl : fullLogoUrl}
+            src={
+              isInSearchResultsPage && isMobileView ? smallLogoUrl : fullLogoUrl
+            }
             alt="logo"
           />
         </YouTubeLogoContainer>
