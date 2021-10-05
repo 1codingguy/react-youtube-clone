@@ -11,8 +11,7 @@ const Search = () => {
 
   // load result directly from localStorage for now to test the layout
   const results = JSON.parse(localStorage.getItem('kitten')).items
-
-  console.log(results)
+  // console.log(results)
 
   return (
     <SearchContainer marginLeftToOffset={marginLeftToOffset}>

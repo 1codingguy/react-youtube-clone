@@ -5,9 +5,14 @@ import AppsButton from './AppsButton/AppsButton'
 import NotificationsButton from './NotificationsButton/NotificationsButton'
 import AvatarButton from './AvatarButton/AvatarButton'
 import { useIsMobileView } from '../../utils/utils'
+import { useLocation } from 'react-router-dom'
+import { HeaderMoreButton } from './HeaderMoreButton'
 
 const RightContainer = () => {
   const isMobileView = useIsMobileView()
+  const currentLocation = useLocation()
+  // console.log(currentLocation)
+  const isInSearchResultsPage = currentLocation.pathname === '/results'
 
   return (
     <StyledRightContainer>
@@ -18,8 +23,13 @@ const RightContainer = () => {
           <NotificationsButton />
         </>
       )}
-
-      <AvatarButton />
+      {/* in mobile search result page a more button on the right */}
+      {isInSearchResultsPage ? (
+        <HeaderMoreButton />
+      ) : (
+        // in mobile landing page an avatar button on the right
+        <AvatarButton />
+      )}
     </StyledRightContainer>
   )
 }

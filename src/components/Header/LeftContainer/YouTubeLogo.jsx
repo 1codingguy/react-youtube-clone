@@ -1,20 +1,28 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Tooltip from '@material-ui/core/Tooltip'
 import { MOBILE_VIEW_MAX_WIDTH } from '../../utils/utils'
 
 const YouTubeLogo = () => {
+  const fullLogoUrl =
+    'https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg'
+  const smallLogoUrl =
+    'https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg'
+
+  const currentLocation = useLocation()
+  const isInSearchResultsPage = currentLocation.pathname === '/results'
+
   return (
-    <Link to='/'>
-    <YouTubeLogoTooltip title="YouTube Home">
-      <YouTubeLogoContainer>
-        <Logo
-          src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
-          alt="logo"
-        />
-      </YouTubeLogoContainer>
-    </YouTubeLogoTooltip>
+    <Link to="/">
+      <YouTubeLogoTooltip title="YouTube Home">
+        <YouTubeLogoContainer>
+          <Logo
+            src={isInSearchResultsPage ? smallLogoUrl : fullLogoUrl}
+            alt="logo"
+          />
+        </YouTubeLogoContainer>
+      </YouTubeLogoTooltip>
     </Link>
   )
 }

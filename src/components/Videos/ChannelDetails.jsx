@@ -31,7 +31,7 @@ export const ChannelDetails = ({
   channelTitle,
   publishedAt,
   viewCount,
-  searchPage,
+  isSearchPage,
 }) => {
   const isMobileView = useIsMobileView()
 
@@ -44,13 +44,13 @@ export const ChannelDetails = ({
 
       <StatsContainer>
         {/* mobile view landing page */}
-        {isMobileView && !searchPage && (
+        {isMobileView && !isSearchPage && (
           <ChannelName variant="h3">
             {channelTitle} <DotSeparator />
           </ChannelName>
         )}
         {/* no DotSeparator on mobile search result page, channelTitle on its own line */}
-        {isMobileView && searchPage && (
+        {isMobileView && isSearchPage && (
           <SearchChannelName variant="h3">{channelTitle}</SearchChannelName>
         )}
         <span style={{ marginRight: '4px' }}>

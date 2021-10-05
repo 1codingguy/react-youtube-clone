@@ -49,7 +49,7 @@ export const ContextProvider = ({ children }) => {
   const [searchResults, setSearchResults] = useState()
 
   const getSearchTermVideos = async () => {
-    const {data} = await request('/search', {
+    const { data } = await request('/search', {
       params: {
         part: 'snippet',
         maxResults: 25,
@@ -70,10 +70,9 @@ export const ContextProvider = ({ children }) => {
   const handleSearchFormSubmit = (e) => {
     e.preventDefault()
     // temporary if then statement to load search results from localStorage
-    console.log(`in handleSubmit`)
     const storedResults = JSON.parse(localStorage.getItem(searchTerm))
     if (storedResults) {
-      console.log('there is stored results')
+      // console.log('there is stored results')
       setSearchTermNextPageToken(storedResults.pageInfo.nextPageToken)
       setSearchTermTotalResults(storedResults.pageInfo.totalResults)
       setSearchResults(storedResults.items)

@@ -3,14 +3,23 @@ import Modal from '@material-ui/core/Modal'
 import styled from 'styled-components'
 import { List, ListItem, Typography } from '@material-ui/core'
 
-export const MobileModal = ({ isModalOpen, handleModalClose, searchPage }) => {
+export const MobileModal = ({
+  isModalOpen,
+  handleModalClose,
+  isSearchPage,
+  isMobileHeaderMoreButton,
+}) => {
   // Only 'Save to Watch Later', 'Cancel' on search page modal
-  const MenuToLoop = searchPage ? MobileModalMenu.slice(1) : MobileModalMenu
+  const MenuToLoop = isMobileHeaderMoreButton
+    ? MobileHeaderModalMenu
+    : isSearchPage
+    ? MobileModalMenu.slice(1)
+    : MobileModalMenu
 
   return (
     <Modal open={isModalOpen} onClose={handleModalClose}>
       <ModalContainer>
-        <List>
+        <List style={{ padding: '3px 0' }}>
           {MenuToLoop.map((item) => {
             return (
               <StyledListItem key={item} onClick={handleModalClose}>
@@ -42,3 +51,11 @@ const ModalContainer = styled.div`
   background-color: rgb(249, 249, 249);
 `
 const MobileModalMenu = ['Not interested', 'Save to Watch Later', 'Cancel']
+
+const MobileHeaderModalMenu = [
+  'Settings',
+  'Your data in YouTube',
+  'Feedback',
+  'Help',
+  'Cancel',
+]

@@ -66,13 +66,13 @@ const ResultsVideoCard = ({ video }) => {
       </ImageContainer>
       <SearchCardHeader
         style={{ flexGrow: 1, padding: '0 8px' }}
-        action={<MoreButton searchPage={true} />}
+        action={<MoreButton isSearchPage={true} />}
         title={
           <SearchVideoTitle variant="h4">{he.decode(title)}</SearchVideoTitle>
         }
         subheader={
           <ChannelDetails
-            {...{ channelTitle, publishedAt, viewCount, searchPage: true }}
+            {...{ channelTitle, publishedAt, viewCount, isSearchPage: true }}
           />
         }
       />
