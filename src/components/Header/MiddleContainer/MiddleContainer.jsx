@@ -58,7 +58,11 @@ const MiddleContainer = () => {
               <MobileHeaderSearchTermButton
                 onClick={() => setIsSearchDrawerOpen(true)}
               >
-                <MobileHeaderText>{searchTermFromUrl}</MobileHeaderText>
+                <MobileHeaderText
+                  style={{ lineHeight: '48px', fontSize: '14px' }}
+                >
+                  {searchTermFromUrl}
+                </MobileHeaderText>
               </MobileHeaderSearchTermButton>
               {/* IconButton */}
               <MobileHeaderFilterButton />
@@ -92,11 +96,6 @@ const MobileHeaderText = styled(Typography)`
   height: 48px;
   line-height: 48px;
   text-align: initial;
-
-  .MuiTypography-body1 {
-    font-size: 15px;
-    line-height: unset;
-  }
 `
 
 const MobileHeaderSearchTermButton = styled.button`
