@@ -12,7 +12,7 @@ import {
   StyledIconButton,
 } from '../../utils/utils'
 import { useGlobalContext } from '../../../context'
-import IconButton from '@material-ui/core/IconButton'
+import ClearIcon from '@material-ui/icons/Clear'
 
 const MobileViewSearchDrawer = ({
   isSearchDrawerOpen,
@@ -44,7 +44,16 @@ const MobileViewSearchDrawer = ({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <StyledIconButton type="submit">
+          {/* add a clear icon to clear the searchTerm if searchTerm is not empty*/}
+          {searchTerm && (
+            <StyledIconButton
+              style={{ padding: '8px' }}
+              onClick={() => setSearchTerm('')}
+            >
+              <ClearIcon />
+            </StyledIconButton>
+          )}
+          <StyledIconButton type="submit" style={{ padding: '8px' }}>
             <MobileSearchIcon />
           </StyledIconButton>
         </form>
