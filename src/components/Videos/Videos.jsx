@@ -25,15 +25,15 @@ const Videos = ({
   selectedChipIndex,
   landingPageVideos,
   setLandingPageVideos,
-  nextPageToken,
-  setNextPageToken,
+  popularVideosNextPageToken,
+  setPopularVideosNextPageToken,
 }) => {
   const VIDEOS_PER_QUERY = 24
   const isMobileView = useIsMobileView()
   const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
 
-  // total number of videos returned by API query
-  const [totalResults, setTotalResults] = useState(0)
+  // total number of videos returned by API querycontent
+  const [popularVideosTotalResults, setPopularVideosTotalResults] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const { regionCode: selectedRegionCode } = countries[selectedChipIndex]
 
@@ -47,15 +47,15 @@ const Videos = ({
           regionCode: selectedRegionCode,
           maxResults: VIDEOS_PER_QUERY,
           // initial value is null so should be fine for 1st request
-          pageToken: nextPageToken,
+          pageToken: popularVideosNextPageToken,
         },
       })
       // console.log(data)
-      setTotalResults(data.pageInfo.totalResults)
+      setPopularVideosTotalResults(data.pageInfo.popularVideosTotalResults)
 
       // infinite scroll needs previous page + current page data
       setLandingPageVideos([...landingPageVideos, ...data.items])
-      setNextPageToken(data.nextPageToken)
+      setPopularVideosNextPageToken(data.popularVideosNextPageToken)
       setIsLoading(false)
     } catch (error) {
       console.log(error)
@@ -65,16 +65,13 @@ const Videos = ({
 
   // get selectedCountry popular videos when app starts and click on another chip
   useEffect(() => {
-    // console.log(`in useEffect`)
-    // console.log(`selectedChipIndex: ${selectedChipIndex}`)
-    // console.log(`selectedRegionCode: ${selectedRegionCode}`)
-
     getPopularVideos()
   }, [selectedChipIndex])
 
   // logic to determine if more query needed for infinite scroll
   let shouldGetMoreResults =
-    (totalResults - landingPageVideos.length) / VIDEOS_PER_QUERY >= 1
+    (popularVideosTotalResults - landingPageVideos.length) / VIDEOS_PER_QUERY >=
+    1
 
   return (
     <OuterVideoContainer

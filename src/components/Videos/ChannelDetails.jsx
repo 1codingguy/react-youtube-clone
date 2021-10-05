@@ -27,8 +27,14 @@ moment.updateLocale('en', {
   },
 })
 
-export const ChannelDetails = ({ channelTitle, publishedAt, viewCount }) => {
+export const ChannelDetails = ({
+  channelTitle,
+  publishedAt,
+  viewCount,
+  searchPage,
+}) => {
   const isMobileView = useIsMobileView()
+
   return (
     <ChannelDetailsContainer style={isMobileView ? { fontSize: '12px' } : null}>
       {/* ChannelName is outside StatsContainer in desktop view */}
@@ -37,15 +43,19 @@ export const ChannelDetails = ({ channelTitle, publishedAt, viewCount }) => {
       )}
 
       <StatsContainer>
-        {isMobileView && (
+        {/* mobile view landing page */}
+        {isMobileView && !searchPage && (
           <ChannelName variant="h3">
             {channelTitle} <DotSeparator />
           </ChannelName>
         )}
+        {/* no DotSeparator on mobile search result page, channelTitle on its own line */}
+        {isMobileView && searchPage && (
+          <SearchChannelName variant="h3">{channelTitle}</SearchChannelName>
+        )}
         <span style={{ marginRight: '4px' }}>
           {numeral(viewCount).format('0.a')} views <DotSeparator />
         </span>
-
         <span>{moment(publishedAt).fromNow()}</span>
       </StatsContainer>
     </ChannelDetailsContainer>
@@ -77,6 +87,12 @@ const ChannelName = styled(Typography)`
       overflow: hidden;
       text-overflow: ellipsis;
     }
+  }
+`
+
+const SearchChannelName = styled(ChannelName)`
+  && {
+    display: block;
   }
 `
 

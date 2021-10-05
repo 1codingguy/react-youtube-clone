@@ -9,12 +9,18 @@ import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
   DEFAULT_FONT_SIZE,
+  StyledIconButton,
 } from '../../utils/utils'
+import { useGlobalContext } from '../../../context'
+import IconButton from '@material-ui/core/IconButton'
 
 const MobileViewSearchDrawer = ({
   isSearchDrawerOpen,
   setIsSearchDrawerOpen,
 }) => {
+  const { searchTerm, setSearchTerm, handleSearchFormSubmit } =
+    useGlobalContext()
+
   return (
     <Drawer
       anchor="top"
@@ -24,8 +30,24 @@ const MobileViewSearchDrawer = ({
     >
       <MobileToolbar disableGutters>
         <MobileBackIcon onClick={() => setIsSearchDrawerOpen(false)} />
-        <MobileSearchField placeholder="Search YouTube" />
-        <MobileSearchIcon onClick={() => setIsSearchDrawerOpen(false)} />
+
+        <form
+          style={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
+          onSubmit={(e) => {
+            setIsSearchDrawerOpen(false)
+            handleSearchFormSubmit(e)
+          }}
+        >
+          <MobileSearchField
+            fullWidth
+            placeholder="Search YouTube"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <StyledIconButton type="submit">
+            <MobileSearchIcon />
+          </StyledIconButton>
+        </form>
       </MobileToolbar>
     </Drawer>
   )
@@ -48,8 +70,6 @@ const MobileBackIcon = styled(ArrowBackOutlinedIcon)`
 `
 
 const MobileSearchField = styled(TextField)`
-  flex-grow: 1;
-
   .MuiInputBase-input {
     font-size: ${DEFAULT_FONT_SIZE}px;
   }
@@ -57,5 +77,5 @@ const MobileSearchField = styled(TextField)`
 
 const MobileSearchIcon = styled(SearchOutlinedIcon)`
   color: #606060;
-  margin: 8px;
+  /* margin: 8px; */
 `

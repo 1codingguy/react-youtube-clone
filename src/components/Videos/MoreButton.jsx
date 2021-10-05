@@ -5,7 +5,7 @@ import { useIsMobileView } from '../utils/utils'
 import { MobileModal } from './MobileModal'
 import { DesktopPopper } from './DesktopPopper'
 
-export const MoreButton = () => {
+export const MoreButton = ({ searchPage }) => {
   const isMobileView = useIsMobileView()
   // states for Modal in mobile view
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -41,7 +41,11 @@ export const MoreButton = () => {
 
   return (
     <StyledIconButton disableRipple={true}>
-      <MoreVertIcon ref={anchorRef} onClick={handleMoreIconClick} />
+      <MoreVertIcon
+        ref={anchorRef}
+        onClick={handleMoreIconClick}
+        style={{ color: 'rgb(144, 144, 144)' }}
+      />
 
       {/* desktop view popper */}
       <DesktopPopper
@@ -49,7 +53,7 @@ export const MoreButton = () => {
       />
 
       {/* mobile view modal */}
-      <MobileModal {...{ isModalOpen, handleModalClose }} />
+      <MobileModal {...{ isModalOpen, handleModalClose, searchPage }} />
     </StyledIconButton>
   )
 }

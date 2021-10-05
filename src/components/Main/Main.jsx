@@ -14,7 +14,8 @@ import Search from '../Search/Search'
 const Main = () => {
   const [selectedChipIndex, setSelectedChipIndex] = useState(0)
   const [landingPageVideos, setLandingPageVideos] = useState([])
-  const [nextPageToken, setNextPageToken] = useState(null)
+  const [popularVideosNextPageToken, setPopularVideosNextPageToken] =
+    useState(null)
 
   return (
     <StyledMain>
@@ -26,7 +27,7 @@ const Main = () => {
               selectedChipIndex,
               setSelectedChipIndex,
               setLandingPageVideos,
-              setNextPageToken,
+              setPopularVideosNextPageToken,
             }}
           />
           <Videos
@@ -35,8 +36,8 @@ const Main = () => {
               setSelectedChipIndex,
               landingPageVideos,
               setLandingPageVideos,
-              nextPageToken,
-              setNextPageToken,
+              popularVideosNextPageToken,
+              setPopularVideosNextPageToken,
             }}
           />
         </Route>
@@ -44,8 +45,8 @@ const Main = () => {
           <Search />
         </Route>
         {/* original YouTube has a 'something went wrong' page instead of redirecting back to the homepage */}
-        <Route path='*'>
-          <Redirect to='/'/>
+        <Route path="*">
+          <Redirect to="/" />
         </Route>
       </Switch>
     </StyledMain>

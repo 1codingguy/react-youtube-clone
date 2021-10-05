@@ -1,27 +1,36 @@
 import React from 'react'
-import { useParams, useHistory, useLocation } from 'react-router-dom'
+// import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { OuterVideoContainer as SearchContainer } from '../Videos/Videos'
 import { useGlobalContext } from '../../context'
-import { Typography } from '@material-ui/core'
+import { List } from '@material-ui/core'
+import styled from 'styled-components'
+import ResultsVideoCard from './ResultsVideoCard'
 
 const Search = () => {
-  const { marginLeftToOffset } = useGlobalContext()
+  const { marginLeftToOffset, searchResults } = useGlobalContext()
 
-  // const history = useHistory()
-  // const location = useLocation()
+  // load result directly from localStorage for now to test the layout
+  const results = JSON.parse(localStorage.getItem('kitten')).items
 
-  // console.log(history)
-  // console.log(location)
-
-  // const queries = new URLSearchParams(location.search)
-  // console.log(queries.toString())
-  // console.log(queries.get('search_query'))
+  console.log(results)
 
   return (
     <SearchContainer marginLeftToOffset={marginLeftToOffset}>
-      <Typography variant="h1">Search page</Typography>
+      {/* FILTERS button here */}
+      <InnerSearchContainer>
+        <List>
+          {results.map((video) => {
+            return <ResultsVideoCard key={video.id.videoId} video={video} />
+          })}
+        </List>
+      </InnerSearchContainer>
     </SearchContainer>
   )
 }
 
 export default Search
+
+const InnerSearchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`

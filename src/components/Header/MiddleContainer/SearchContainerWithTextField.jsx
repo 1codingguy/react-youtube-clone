@@ -2,27 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import SearchIcon from '@material-ui/icons/Search'
 import { IconTooltip, StyledIconButton } from '../../utils/utils'
-import { searchTermAtom } from '../../../store'
-import { useAtom } from 'jotai'
-import { useHistory } from 'react-router'
+import { useGlobalContext } from '../../../context'
 
 export const SearchContainerWithTextField = () => {
-  const [searchTerm, setSearchTerm] = useAtom(searchTermAtom)
-  const history = useHistory()
-
-  const handleSubmit = (e) => {
-    console.log(e)
-    e.preventDefault()
-    console.log(`now in handleSubmit`)
-    // query API with the searchTerm
-
-    // jump to the search Page
-    history.push('/results?search_query=' + searchTerm)
-    
-  }
+  const { searchTerm, setSearchTerm, handleSearchFormSubmit } =
+    useGlobalContext()
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSearchFormSubmit}>
       <SearchBox
         placeholder="Search"
         value={searchTerm}
@@ -30,7 +17,7 @@ export const SearchContainerWithTextField = () => {
       />
       <IconTooltip title="Search">
         <SearchIconContainer>
-          <StyledIconButton type='submit'>
+          <StyledIconButton type="submit">
             <SearchIcon />
           </StyledIconButton>
         </SearchIconContainer>

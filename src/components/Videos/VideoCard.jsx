@@ -40,9 +40,10 @@ const VideoCard = ({ video }) => {
 
   // Get channelAvatar by querying './channels' of YouTube API
   useEffect(() => {
-    const storedChannelAvatar = JSON.parse(
-      localStorage.getItem(`${videoId}_channelAvatar`)
-    )
+    // localStorage, to be deleted when finished.
+    // const storedChannelAvatar = JSON.parse(
+    //   localStorage.getItem(`${videoId}_channelAvatar`)
+    // )
 
     const queryChannelAvatar = async () => {
       try {
@@ -55,22 +56,25 @@ const VideoCard = ({ video }) => {
           },
         })
         // retrieve the url property inside component, just stringify in localStorage
-        localStorage.setItem(
-          `${videoId}_channelAvatar`,
-          JSON.stringify(items[0].snippet.thumbnails.default)
-        )
+        // localStorage.setItem(
+        //   `${videoId}_channelAvatar`,
+        //   JSON.stringify(items[0].snippet.thumbnails.default)
+        // )
         setChannelAvatar(items[0].snippet.thumbnails.default)
       } catch (error) {
         console.log(error)
       }
     }
 
-    if (storedChannelAvatar) {
-      setChannelAvatar(storedChannelAvatar)
-      // console.log('using local stored channelAvatar')
-    } else {
-      queryChannelAvatar()
-    }
+    queryChannelAvatar()
+
+    // // localStorage, to be deleted when finished
+    // if (storedChannelAvatar) {
+    //   setChannelAvatar(storedChannelAvatar)
+    //   // console.log('using local stored channelAvatar')
+    // } else {
+    //   queryChannelAvatar()
+    // }
   }, [videoId, channelId])
 
   return (
@@ -112,12 +116,12 @@ export const StyledIconButton = styled(IconButton)`
   }
 `
 
-const ImageContainer = styled.div`
+export const ImageContainer = styled.div`
   /* for the duration container in bottom right corner */
   position: relative;
 `
 
-const DurationContainer = styled(Typography)`
+export const DurationContainer = styled(Typography)`
   && {
     position: absolute;
     right: 0;
@@ -146,7 +150,7 @@ const StyledCard = styled(Card)`
   }
 `
 
-const StyledCardHeader = styled(CardHeader)`
+export const StyledCardHeader = styled(CardHeader)`
   && {
     padding: 10px;
 
@@ -163,7 +167,7 @@ const StyledCardHeader = styled(CardHeader)`
   }
 `
 
-const VideoTitle = styled(Typography)`
+export const VideoTitle = styled(Typography)`
   /* 1rem in original YouTube in 10px */
   && {
     font-size: 14px;
@@ -185,7 +189,7 @@ const VideoTitle = styled(Typography)`
   }
 `
 
-const StyledAvatar = styled(Avatar)`
+export const StyledAvatar = styled(Avatar)`
   &&& {
     cursor: pointer;
     width: 40px;

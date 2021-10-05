@@ -18,7 +18,7 @@ const ChipsBar = ({
   selectedChipIndex,
   setSelectedChipIndex,
   setLandingPageVideos,
-  setNextPageToken,
+  setPopularVideosNextPageToken,
 }) => {
   const { marginLeftToOffset } = useGlobalContext()
 
@@ -37,7 +37,7 @@ const ChipsBar = ({
               selectedChipIndex,
               setSelectedChipIndex,
               setLandingPageVideos,
-              setNextPageToken,
+              setPopularVideosNextPageToken,
             }}
           />
         </StyledTabs>
@@ -52,14 +52,13 @@ const Chips = ({
   selectedChipIndex,
   setSelectedChipIndex,
   setLandingPageVideos,
-  setNextPageToken,
+  setPopularVideosNextPageToken,
 }) => {
-
   const handleChipClick = (index) => {
     setSelectedChipIndex(index)
-    // reset landingPageVideos & nextPageToken to default when select another chip
+    // reset landingPageVideos & popularVideosNextPageToken to default when select another chip
     setLandingPageVideos([])
-    setNextPageToken(null)
+    setPopularVideosNextPageToken(null)
   }
 
   return countries.map(({ country }, index) => {
