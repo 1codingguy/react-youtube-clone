@@ -106,6 +106,6 @@ const StatsContainer = styled.div`
   }
 `
 
-const DotSeparator = () => {
+export const DotSeparator = () => {
   return <span>•</span>
 }
