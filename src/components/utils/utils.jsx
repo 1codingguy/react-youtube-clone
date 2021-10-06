@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useMediaQuery } from '@material-ui/core'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -47,6 +48,21 @@ export const useMinWidthToShowFullSidebar = () =>
 export const useShouldShowMiniSidebar = () =>
   useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR_BREAKPOINT}px)`)
 
+// clear the searchTerm when navigate back to home screen
+export const useClearSearchTerm = (history, searchTermSetterFunction) => {
+  useEffect(() => {
+    const unListen = history.listen((location) => {
+      // console.log('new location: ', location)
+      if (location.pathname === '/') {
+        searchTermSetterFunction('')
+      }
+    })
+    return () => {
+      unListen()
+    }
+  }, [])
+}
+
 export const handleSearchFormSubmit = async (
   event,
   queryString,
@@ -56,15 +72,9 @@ export const handleSearchFormSubmit = async (
   history
 ) => {
   event.preventDefault()
-  // checked the following was called 
-  // console.log('inside handleSearchFormSubmit() in utils')
-
   // temporary if then statement to load search results from localStorage
   const storedResults = JSON.parse(localStorage.getItem(queryString))
-  
-  // checked storedResults was loaded
-  // console.log(storedResults)
-  
+
   if (storedResults) {
     searchTermNextPageTokenSetterFunction(storedResults.pageInfo.nextPageToken)
     searchTermTotalResultsSetterFunction(storedResults.pageInfo.totalResults)

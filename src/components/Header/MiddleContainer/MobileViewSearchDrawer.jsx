@@ -11,6 +11,7 @@ import {
   DEFAULT_FONT_SIZE,
   StyledIconButton,
   handleSearchFormSubmit,
+  useClearSearchTerm,
 } from '../../utils/utils'
 import ClearIcon from '@material-ui/icons/Clear'
 import { useAtom } from 'jotai'
@@ -42,6 +43,9 @@ const MobileViewSearchDrawer = ({
       history
     )
   }
+
+  // reset searchTerm when click on Home button and goes to landing page
+  useClearSearchTerm(history, setSearchTerm)
 
   return (
     <Drawer

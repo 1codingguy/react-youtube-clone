@@ -5,6 +5,7 @@ import {
   IconTooltip,
   StyledIconButton,
   handleSearchFormSubmit,
+  useClearSearchTerm,
 } from '../../utils/utils'
 import { useAtom } from 'jotai'
 import {
@@ -23,8 +24,6 @@ export const SearchContainerWithTextField = () => {
   const history = useHistory()
 
   const handleSubmit = (event) => {
-    // checked, this was called when form is submitted
-    // console.log('inside handleSubmit in SearchContainerWithTextField')
     handleSearchFormSubmit(
       event,
       searchTerm,
@@ -35,8 +34,11 @@ export const SearchContainerWithTextField = () => {
     )
   }
 
+  // reset searchTerm when click on Home button and goes to landing page
+  useClearSearchTerm(history, setSearchTerm)
+
   return (
-    <StyledForm onSubmit={(event)=> handleSubmit(event)}>
+    <StyledForm onSubmit={(event) => handleSubmit(event)}>
       <SearchBox
         placeholder="Search"
         value={searchTerm}
