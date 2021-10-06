@@ -47,6 +47,55 @@ export const useMinWidthToShowFullSidebar = () =>
 export const useShouldShowMiniSidebar = () =>
   useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR_BREAKPOINT}px)`)
 
+export const handleSearchFormSubmit = async (
+  event,
+  queryString,
+  searchTermNextPageTokenSetterFunction,
+  searchTermTotalResultsSetterFunction,
+  searchResultsSetterFunction,
+  history
+) => {
+  event.preventDefault()
+  // checked the following was called 
+  // console.log('inside handleSearchFormSubmit() in utils')
+
+  // temporary if then statement to load search results from localStorage
+  const storedResults = JSON.parse(localStorage.getItem(queryString))
+  
+  // checked storedResults was loaded
+  // console.log(storedResults)
+  
+  if (storedResults) {
+    searchTermNextPageTokenSetterFunction(storedResults.pageInfo.nextPageToken)
+    searchTermTotalResultsSetterFunction(storedResults.pageInfo.totalResults)
+    searchResultsSetterFunction(storedResults.items)
+  } else {
+    // query API with the searchTerm
+    try {
+      const { data } = await request('/search', {
+        params: {
+          part: 'snippet',
+          maxResults: 25,
+          regionCode: 'GB',
+          q: queryString,
+        },
+      })
+      // console.log(data)
+      // store nextPageToken and totalResults into a state variable
+      searchTermNextPageTokenSetterFunction(data.pageInfo.nextPageToken)
+      searchTermTotalResultsSetterFunction(data.pageInfo.totalResults)
+      // store data into localStorage, not just `items`
+      localStorage.setItem(queryString, JSON.stringify(data))
+      // store the items into a state variable
+      searchResultsSetterFunction(data.items)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  // jump to the search Page
+  history.push('/results?search_query=' + queryString)
+}
+
 export const queryChannelAvatar = async (
   setAvatarFunction,
   channelId,

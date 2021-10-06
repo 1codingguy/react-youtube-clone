@@ -1,15 +1,42 @@
 import React from 'react'
 import styled from 'styled-components'
 import SearchIcon from '@material-ui/icons/Search'
-import { IconTooltip, StyledIconButton } from '../../utils/utils'
-import { useGlobalContext } from '../../../context'
+import {
+  IconTooltip,
+  StyledIconButton,
+  handleSearchFormSubmit,
+} from '../../utils/utils'
+import { useAtom } from 'jotai'
+import {
+  searchTermAtom,
+  searchTermNextPageTokenAtom,
+  searchTermTotalResultsAtom,
+  searchResultsAtom,
+} from '../../../store'
+import { useHistory } from 'react-router'
 
 export const SearchContainerWithTextField = () => {
-  const { searchTerm, setSearchTerm, handleSearchFormSubmit } =
-    useGlobalContext()
+  const [searchTerm, setSearchTerm] = useAtom(searchTermAtom)
+  const [, setSearchTermNextPageToken] = useAtom(searchTermNextPageTokenAtom)
+  const [, setSearchTermTotalResults] = useAtom(searchTermTotalResultsAtom)
+  const [, setSearchResults] = useAtom(searchResultsAtom)
+  const history = useHistory()
+
+  const handleSubmit = (event) => {
+    // checked, this was called when form is submitted
+    // console.log('inside handleSubmit in SearchContainerWithTextField')
+    handleSearchFormSubmit(
+      event,
+      searchTerm,
+      setSearchTermNextPageToken,
+      setSearchTermTotalResults,
+      setSearchResults,
+      history
+    )
+  }
 
   return (
-    <StyledForm onSubmit={handleSearchFormSubmit}>
+    <StyledForm onSubmit={(event)=> handleSubmit(event)}>
       <SearchBox
         placeholder="Search"
         value={searchTerm}

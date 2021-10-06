@@ -10,16 +10,38 @@ import {
   DESKTOP_VIEW_HEADER_HEIGHT,
   DEFAULT_FONT_SIZE,
   StyledIconButton,
+  handleSearchFormSubmit,
 } from '../../utils/utils'
-import { useGlobalContext } from '../../../context'
 import ClearIcon from '@material-ui/icons/Clear'
+import { useAtom } from 'jotai'
+import {
+  searchTermAtom,
+  searchTermNextPageTokenAtom,
+  searchTermTotalResultsAtom,
+  searchResultsAtom,
+} from '../../../store'
+import { useHistory } from 'react-router'
 
 const MobileViewSearchDrawer = ({
   isSearchDrawerOpen,
   setIsSearchDrawerOpen,
 }) => {
-  const { searchTerm, setSearchTerm, handleSearchFormSubmit } =
-    useGlobalContext()
+  const [searchTerm, setSearchTerm] = useAtom(searchTermAtom)
+  const [, setSearchTermNextPageToken] = useAtom(searchTermNextPageTokenAtom)
+  const [, setSearchTermTotalResults] = useAtom(searchTermTotalResultsAtom)
+  const [, setSearchResults] = useAtom(searchResultsAtom)
+  const history = useHistory()
+
+  const handleSubmit = (event) => {
+    handleSearchFormSubmit(
+      event,
+      searchTerm,
+      setSearchTermNextPageToken,
+      setSearchTermTotalResults,
+      setSearchResults,
+      history
+    )
+  }
 
   return (
     <Drawer
@@ -35,7 +57,7 @@ const MobileViewSearchDrawer = ({
           style={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
           onSubmit={(e) => {
             setIsSearchDrawerOpen(false)
-            handleSearchFormSubmit(e)
+            handleSubmit(e)
           }}
         >
           <MobileSearchField

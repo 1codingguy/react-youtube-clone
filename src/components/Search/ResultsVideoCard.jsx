@@ -96,7 +96,7 @@ const ResultsVideoCard = ({ video }) => {
     if (storedChannelAvatar) {
       // console.log(storedChannelAvatar)
       setChannelAvatar(storedChannelAvatar)
-      console.log('using local stored channelAvatar')
+      // console.log('using local stored channelAvatar')
     } else {
       // no need videoId if not using localStorage
       queryChannelAvatar(setChannelAvatar, channelId, videoId)
@@ -114,8 +114,8 @@ const ResultsVideoCard = ({ video }) => {
         </DurationContainer>
       </StyledImageContainer>
 
-      {/* change to ternary operator when desktop component is finished */}
       {isMobileView ? (
+        // Mobile view can make sure of CardHeader from MUI
         <SearchCardHeader
           action={<MoreButton isSearchPage={true} />}
           title={
@@ -128,6 +128,7 @@ const ResultsVideoCard = ({ video }) => {
           }
         />
       ) : (
+        // desktop view can't use MUI CardHeader because position of elements inside CardHeader can't be changed.
         <ContentContainer>
           <VideoContentTop>
             <SearchVideoTitle variant="h3">{he.decode(title)}</SearchVideoTitle>

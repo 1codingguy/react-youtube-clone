@@ -23,7 +23,7 @@ export const SidebarRow = ({ Icon, text, onClick }) => {
   return (
     <SidebarMenuItem
       onClick={handleClick}
-      component={isHomeButton && Link}
+      component={isHomeButton ? Link : null}
       to={'/'}
     >
       <StyledListItemIcon>

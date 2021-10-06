@@ -42,46 +42,46 @@ export const ContextProvider = ({ children }) => {
 
   // React Router, Search form submit related
 
-  const history = useHistory()
-  const [searchTerm, setSearchTerm] = useState('')
-  const [searchTermNextPageToken, setSearchTermNextPageToken] = useState(null)
-  const [searchTermTotalResults, setSearchTermTotalResults] = useState(null)
-  const [searchResults, setSearchResults] = useState()
+  // const history = useHistory()
+  // const [searchTerm, setSearchTerm] = useState('')
+  // const [searchTermNextPageToken, setSearchTermNextPageToken] = useState(null)
+  // const [searchTermTotalResults, setSearchTermTotalResults] = useState(null)
+  // const [searchResults, setSearchResults] = useState()
 
-  const getSearchTermVideos = async () => {
-    const { data } = await request('/search', {
-      params: {
-        part: 'snippet',
-        maxResults: 25,
-        regionCode: 'GB',
-        q: searchTerm,
-      },
-    })
-    console.log(data)
-    // store nextPageToken and totalResults into a state variable
-    setSearchTermNextPageToken(data.pageInfo.nextPageToken)
-    setSearchTermTotalResults(data.pageInfo.totalResults)
-    // store data into localStorage, not just `items`
-    localStorage.setItem(searchTerm, JSON.stringify(data))
-    // store the items into a state variable
-    setSearchResults(data.items)
-  }
+  // const getSearchTermVideos = async () => {
+  //   const { data } = await request('/search', {
+  //     params: {
+  //       part: 'snippet',
+  //       maxResults: 25,
+  //       regionCode: 'GB',
+  //       q: searchTerm,
+  //     },
+  //   })
+  //   console.log(data)
+  //   // store nextPageToken and totalResults into a state variable
+  //   setSearchTermNextPageToken(data.pageInfo.nextPageToken)
+  //   setSearchTermTotalResults(data.pageInfo.totalResults)
+  //   // store data into localStorage, not just `items`
+  //   localStorage.setItem(searchTerm, JSON.stringify(data))
+  //   // store the items into a state variable
+  //   setSearchResults(data.items)
+  // }
 
-  const handleSearchFormSubmit = (e) => {
-    e.preventDefault()
-    // temporary if then statement to load search results from localStorage
-    const storedResults = JSON.parse(localStorage.getItem(searchTerm))
-    if (storedResults) {
-      setSearchTermNextPageToken(storedResults.pageInfo.nextPageToken)
-      setSearchTermTotalResults(storedResults.pageInfo.totalResults)
-      setSearchResults(storedResults.items)
-    } else {
-      // query API with the searchTerm
-      getSearchTermVideos(searchTerm)
-    }
-    // jump to the search Page
-    history.push('/results?search_query=' + searchTerm)
-  }
+  // const handleSearchFormSubmit = (e) => {
+  //   e.preventDefault()
+  //   // temporary if then statement to load search results from localStorage
+  //   const storedResults = JSON.parse(localStorage.getItem(searchTerm))
+  //   if (storedResults) {
+  //     setSearchTermNextPageToken(storedResults.pageInfo.nextPageToken)
+  //     setSearchTermTotalResults(storedResults.pageInfo.totalResults)
+  //     setSearchResults(storedResults.items)
+  //   } else {
+  //     // query API with the searchTerm
+  //     getSearchTermVideos(searchTerm)
+  //   }
+  //   // jump to the search Page
+  //   history.push('/results?search_query=' + searchTerm)
+  // }
 
   return (
     <YouTubeContext.Provider
@@ -90,10 +90,10 @@ export const ContextProvider = ({ children }) => {
         marginLeftToOffset,
         shouldShowFullSidebar,
         shouldShowMiniSidebar,
-        searchTerm,
-        setSearchTerm,
-        handleSearchFormSubmit,
-        searchResults,
+        // searchTerm,
+        // setSearchTerm,
+        // handleSearchFormSubmit,
+        // searchResults,
       }}
     >
       {children}

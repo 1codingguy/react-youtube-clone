@@ -5,15 +5,18 @@ import { useGlobalContext } from '../../context'
 import { List } from '@material-ui/core'
 import styled from 'styled-components'
 import ResultsVideoCard from './ResultsVideoCard'
+import { searchResultsAtom } from '../../store'
+import { useAtom } from 'jotai'
 
 const Search = () => {
-  const { marginLeftToOffset, searchResults } = useGlobalContext()
+  const { marginLeftToOffset } = useGlobalContext()
 
   // load result directly from localStorage for now to test the layout
   // const results = JSON.parse(localStorage.getItem('kitten')).items
   // console.log(results)
 
-  console.log(searchResults)
+  const [searchResults] = useAtom(searchResultsAtom)
+  // console.log(searchResults)
 
   return (
     <SearchContainer marginLeftToOffset={marginLeftToOffset}>
