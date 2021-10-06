@@ -32,7 +32,7 @@ const Videos = ({
   const isMobileView = useIsMobileView()
   const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
 
-  // total number of videos returned by API querycontent
+  // total number of videos returned by API query
   const [popularVideosTotalResults, setPopularVideosTotalResults] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const { regionCode: selectedRegionCode } = countries[selectedChipIndex]

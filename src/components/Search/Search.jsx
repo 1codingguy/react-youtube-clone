@@ -10,17 +10,20 @@ const Search = () => {
   const { marginLeftToOffset, searchResults } = useGlobalContext()
 
   // load result directly from localStorage for now to test the layout
-  const results = JSON.parse(localStorage.getItem('kitten')).items
+  // const results = JSON.parse(localStorage.getItem('kitten')).items
   // console.log(results)
+
+  console.log(searchResults)
 
   return (
     <SearchContainer marginLeftToOffset={marginLeftToOffset}>
       {/* FILTERS button here */}
       <InnerSearchContainer>
         <List>
-          {results.map((video) => {
-            return <ResultsVideoCard key={video.id.videoId} video={video} />
-          })}
+          {searchResults &&
+            searchResults.map((video) => {
+              return <ResultsVideoCard key={video.id.videoId} video={video} />
+            })}
         </List>
       </InnerSearchContainer>
     </SearchContainer>

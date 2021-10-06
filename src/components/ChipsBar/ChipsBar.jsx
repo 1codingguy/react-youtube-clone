@@ -149,8 +149,11 @@ const ChipsContainer = styled.div`
 
   /* ChipsBar has a max-width of 1680px because it's hard-coded */
   /* Above lg screen size, the ChipsBar should be in the center */
-  @media screen and (min-width: calc(${CHIPS_BAR_MAX_WIDTH}px - ${(props) =>
-      props.marginLeftToOffset}px)) {
+  /* below formula doesn't seem to be correct */
+  /* calc(${CHIPS_BAR_MAX_WIDTH}px - ${(props) =>
+    props.marginLeftToOffset}px)) */
+
+  @media screen and (min-width: ${CHIPS_BAR_MAX_WIDTH}px) {
     .MuiTabs-scroller {
       justify-content: center;
     }

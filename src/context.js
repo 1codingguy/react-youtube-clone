@@ -72,7 +72,6 @@ export const ContextProvider = ({ children }) => {
     // temporary if then statement to load search results from localStorage
     const storedResults = JSON.parse(localStorage.getItem(searchTerm))
     if (storedResults) {
-      // console.log('there is stored results')
       setSearchTermNextPageToken(storedResults.pageInfo.nextPageToken)
       setSearchTermTotalResults(storedResults.pageInfo.totalResults)
       setSearchResults(storedResults.items)

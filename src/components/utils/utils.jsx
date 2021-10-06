@@ -6,6 +6,8 @@ import Slide from '@material-ui/core/Slide'
 import IconButton from '@material-ui/core/IconButton'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
+import moment from 'moment'
+import { request } from './api'
 
 // heights and widths of components
 export const MOBILE_VIEW_SCROLL_THRESHOLD = 48
@@ -44,6 +46,44 @@ export const useMinWidthToShowFullSidebar = () =>
 
 export const useShouldShowMiniSidebar = () =>
   useMediaQuery(`(min-width: ${SHOW_MINI_SIDEBAR_BREAKPOINT}px)`)
+
+export const queryChannelAvatar = async (
+  setAvatarFunction,
+  channelId,
+  // no need videoId if not using localStorage
+  videoId
+) => {
+  try {
+    const {
+      data: { items },
+    } = await request('/channels', {
+      params: {
+        part: 'snippet',
+        id: channelId,
+      },
+    })
+
+    // retrieve the url property inside component, just stringify in localStorage
+    localStorage.setItem(
+      `${videoId}_channelAvatar`,
+      JSON.stringify(items[0].snippet.thumbnails.default.url)
+    )
+    setAvatarFunction(items[0].snippet.thumbnails.default.url)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getFormattedDurationString = (duration) => {
+  let formattedDuration = moment.duration(duration).asSeconds()
+  formattedDuration = moment.utc(formattedDuration * 1000).format('mm:ss')
+  // remove leading '0'
+  formattedDuration =
+    formattedDuration[0] === '0'
+      ? formattedDuration.slice(1)
+      : formattedDuration
+  return formattedDuration
+}
 
 // To hide AppBar when scroll passed threshold
 export function HideOnScroll({ children }) {

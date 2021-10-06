@@ -12,7 +12,12 @@ import he from 'he'
 import { request } from '../utils/api'
 import moment from 'moment'
 import numeral from 'numeral'
-import { TWO_COL_MIN_WIDTH, useIsMobileView } from '../utils/utils'
+import {
+  TWO_COL_MIN_WIDTH,
+  useIsMobileView,
+  getFormattedDurationString,
+  queryChannelAvatar,
+} from '../utils/utils'
 import { Typography, Avatar } from '@material-ui/core'
 
 const ResultsVideoCard = ({ video }) => {
@@ -34,6 +39,7 @@ const ResultsVideoCard = ({ video }) => {
 
   const [viewCount, setViewCount] = useState(null)
   const [duration, setDuration] = useState(null)
+  const [channelAvatar, setChannelAvatar] = useState(null)
 
   // this is unique to searchResults, because popular videos no need to get more details from 'contentDetails,statistics'
   useEffect(() => {
@@ -49,21 +55,55 @@ const ResultsVideoCard = ({ video }) => {
         })
         setDuration(items[0].contentDetails.duration)
         setViewCount(items[0].statistics.viewCount)
+
+        // temp localStorage snippet
+        localStorage.setItem(
+          `${videoId}_duration`,
+          JSON.stringify(items[0].contentDetails.duration)
+        )
+        localStorage.setItem(
+          `${videoId}_viewCount`,
+          JSON.stringify(items[0].statistics.viewCount)
+        )
       } catch (error) {
         console.log(error)
       }
     }
 
-    getVideoDetails()
+    // temp if...else and localStorage snippet
+    const storedDuration = JSON.parse(
+      localStorage.getItem(`${videoId}_duration`)
+    )
+    const storedViewCount = JSON.parse(
+      localStorage.getItem(`${videoId}_viewCount`)
+    )
+
+    if (storedDuration && storedViewCount) {
+      setDuration(storedDuration)
+      setViewCount(storedViewCount)
+    } else {
+      getVideoDetails()
+    }
   }, [videoId])
 
-  let formattedDuration = moment.duration(duration).asSeconds()
-  formattedDuration = moment.utc(formattedDuration * 1000).format('mm:ss')
-  // remove leading '0'
-  formattedDuration =
-    formattedDuration[0] === '0'
-      ? formattedDuration.slice(1)
-      : formattedDuration
+  // to get channelAvatar
+  useEffect(() => {
+    // localStorage, to be deleted when finished.
+    const storedChannelAvatar = JSON.parse(
+      localStorage.getItem(`${videoId}_channelAvatar`)
+    )
+
+    if (storedChannelAvatar) {
+      // console.log(storedChannelAvatar)
+      setChannelAvatar(storedChannelAvatar)
+      console.log('using local stored channelAvatar')
+    } else {
+      // no need videoId if not using localStorage
+      queryChannelAvatar(setChannelAvatar, channelId, videoId)
+    }
+  }, [channelId])
+
+  const formattedDuration = getFormattedDurationString(duration)
 
   return (
     <StyledCard>
@@ -104,7 +144,7 @@ const ResultsVideoCard = ({ video }) => {
           </StatsContainer>
 
           <AvatarContainer>
-            <StyledAvatar>c</StyledAvatar>
+            <StyledAvatar src={channelAvatar} />
             <ContentText variant="subtitle1" style={{ paddingLeft: '8px' }}>
               {channelTitle}
             </ContentText>

@@ -6,9 +6,13 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import { Typography } from '@material-ui/core'
-import { useIsMobileView, TWO_COL_MIN_WIDTH } from '../utils/utils'
+import {
+  useIsMobileView,
+  TWO_COL_MIN_WIDTH,
+  getFormattedDurationString,
+  queryChannelAvatar,
+} from '../utils/utils'
 import { request } from '../utils/api'
-import moment from 'moment'
 import he from 'he'
 import { ChannelDetails } from './ChannelDetails'
 import { MoreButton } from './MoreButton'
@@ -28,54 +32,48 @@ const VideoCard = ({ video }) => {
     ? thumbnails.maxres.url
     : thumbnails.medium.url
 
-  let formattedDuration = moment.duration(duration).asSeconds()
-  formattedDuration = moment.utc(formattedDuration * 1000).format('mm:ss')
-  // remove leading '0'
-  formattedDuration =
-    formattedDuration[0] === '0'
-      ? formattedDuration.slice(1)
-      : formattedDuration
+  const formattedDuration = getFormattedDurationString(duration)
 
   const [channelAvatar, setChannelAvatar] = useState(null)
 
   // Get channelAvatar by querying './channels' of YouTube API
   useEffect(() => {
+    // moved to utils
+    // const queryChannelAvatar = async () => {
+    //   try {
+    //     const {
+    //       data: { items },
+    //     } = await request('/channels', {
+    //       params: {
+    //         part: 'snippet',
+    //         id: channelId,
+    //       },
+    //     })
+    //     // retrieve the url property inside component, just stringify in localStorage
+    //     // localStorage.setItem(
+    //     //   `${videoId}_channelAvatar`,
+    //     //   JSON.stringify(items[0].snippet.thumbnails.default)
+    //     // )
+    //     setChannelAvatar(items[0].snippet.thumbnails.default)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }
+
+    queryChannelAvatar(setChannelAvatar, channelId)
+
     // localStorage, to be deleted when finished.
     // const storedChannelAvatar = JSON.parse(
     //   localStorage.getItem(`${videoId}_channelAvatar`)
     // )
 
-    const queryChannelAvatar = async () => {
-      try {
-        const {
-          data: { items },
-        } = await request('/channels', {
-          params: {
-            part: 'snippet',
-            id: channelId,
-          },
-        })
-        // retrieve the url property inside component, just stringify in localStorage
-        // localStorage.setItem(
-        //   `${videoId}_channelAvatar`,
-        //   JSON.stringify(items[0].snippet.thumbnails.default)
-        // )
-        setChannelAvatar(items[0].snippet.thumbnails.default)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    queryChannelAvatar()
-
-    // // localStorage, to be deleted when finished
     // if (storedChannelAvatar) {
     //   setChannelAvatar(storedChannelAvatar)
     //   // console.log('using local stored channelAvatar')
     // } else {
-    //   queryChannelAvatar()
+    //   queryChannelAvatar(setChannelAvatar, channelId)
     // }
-  }, [videoId, channelId])
+  }, [channelId])
 
   return (
     <StyledCard square={true} elevation={0}>
