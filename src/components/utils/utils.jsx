@@ -63,44 +63,65 @@ export const useClearSearchTerm = (history, searchTermSetterFunction) => {
   }, [])
 }
 
-export const handleSearchFormSubmit = async (
+export const getSearchTermVideos = async (
+  queryString,
+  searchTermNextPageTokenSetterFunction,
+  searchTermTotalResultsSetterFunction,
+  searchResultsSetterFunction,
+  shouldQueryAndStore = true
+) => {
+  try {
+    const { data } = await request('/search', {
+      params: {
+        part: 'snippet',
+        maxResults: 25,
+        regionCode: 'GB',
+        q: queryString,
+      },
+    })
+    if (shouldQueryAndStore) {
+      // store data into localStorage, not just `items`
+      localStorage.setItem(queryString, JSON.stringify(data))
+    }
+    // store nextPageToken and totalResults into a state variable
+    searchTermNextPageTokenSetterFunction(data.pageInfo.nextPageToken)
+    searchTermTotalResultsSetterFunction(data.pageInfo.totalResults)
+    searchResultsSetterFunction(data.items)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const handleSearchFormSubmit = (
   event,
   queryString,
   searchTermNextPageTokenSetterFunction,
   searchTermTotalResultsSetterFunction,
   searchResultsSetterFunction,
-  history
+  history,
+  useLocalData = true,
+  shouldQueryAndStore = true
 ) => {
   event.preventDefault()
-  // temporary if then statement to load search results from localStorage
-  const storedResults = JSON.parse(localStorage.getItem(queryString))
 
-  if (storedResults) {
+  if (useLocalData) {
+    // temporary if then statement to load search results from localStorage
+    var storedResults = JSON.parse(localStorage.getItem(queryString))
+  }
+
+  if (useLocalData && storedResults) {
     searchTermNextPageTokenSetterFunction(storedResults.pageInfo.nextPageToken)
     searchTermTotalResultsSetterFunction(storedResults.pageInfo.totalResults)
     searchResultsSetterFunction(storedResults.items)
   } else {
     // query API with the searchTerm
-    try {
-      const { data } = await request('/search', {
-        params: {
-          part: 'snippet',
-          maxResults: 25,
-          regionCode: 'GB',
-          q: queryString,
-        },
-      })
-      // console.log(data)
-      // store nextPageToken and totalResults into a state variable
-      searchTermNextPageTokenSetterFunction(data.pageInfo.nextPageToken)
-      searchTermTotalResultsSetterFunction(data.pageInfo.totalResults)
-      // store data into localStorage, not just `items`
-      localStorage.setItem(queryString, JSON.stringify(data))
-      // store the items into a state variable
-      searchResultsSetterFunction(data.items)
-    } catch (error) {
-      console.log(error)
-    }
+    getSearchTermVideos(
+      queryString,
+      searchTermNextPageTokenSetterFunction,
+      searchTermTotalResultsSetterFunction,
+      searchResultsSetterFunction,
+      shouldQueryAndStore
+    )
   }
   // jump to the search Page
   history.push('/results?search_query=' + queryString)

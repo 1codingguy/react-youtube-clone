@@ -30,7 +30,9 @@ export const SearchContainerWithTextField = () => {
       setSearchTermNextPageToken,
       setSearchTermTotalResults,
       setSearchResults,
-      history
+      history,
+      true, //useLocalData
+      true //shouldQueryAndStore
     )
   }
 

@@ -22,7 +22,7 @@ const Search = () => {
     <SearchContainer marginLeftToOffset={marginLeftToOffset}>
       {/* FILTERS button here */}
       <InnerSearchContainer>
-        <List>
+        <List component='div'>
           {searchResults &&
             searchResults.map((video) => {
               return <ResultsVideoCard key={video.id.videoId} video={video} />

@@ -40,7 +40,9 @@ const MobileViewSearchDrawer = ({
       setSearchTermNextPageToken,
       setSearchTermTotalResults,
       setSearchResults,
-      history
+      history,
+      true, //useLocalData
+      true, //shouldQueryAndStore
     )
   }
 
