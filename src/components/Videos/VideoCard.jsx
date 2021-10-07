@@ -10,7 +10,7 @@ import {
   useIsMobileView,
   TWO_COL_MIN_WIDTH,
   getFormattedDurationString,
-  queryChannelAvatar,
+  queryChannelDetails,
 } from '../utils/utils'
 import he from 'he'
 import { ChannelDetails } from './ChannelDetails'
@@ -37,7 +37,13 @@ const VideoCard = ({ video }) => {
 
   // Get channelAvatar by querying './channels' of YouTube API
   useEffect(() => {
-    queryChannelAvatar(setChannelAvatar, channelId)
+    queryChannelDetails(
+      setChannelAvatar,
+      null, //setChannelInfo
+      channelId,
+      null, //videoId
+      true //isVideo
+    )
 
     // localStorage, to be deleted when finished.
     // const storedChannelAvatar = JSON.parse(
@@ -48,7 +54,7 @@ const VideoCard = ({ video }) => {
     //   setChannelAvatar(storedChannelAvatar)
     //   // console.log('using local stored channelAvatar')
     // } else {
-    //   queryChannelAvatar(setChannelAvatar, channelId)
+    //   queryChannelDetails(setChannelAvatar, channelId)
     // }
   }, [channelId])
 

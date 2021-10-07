@@ -16,7 +16,7 @@ import {
   TWO_COL_MIN_WIDTH,
   useIsMobileView,
   getFormattedDurationString,
-  queryChannelAvatar,
+  queryChannelDetails,
 } from '../utils/utils'
 import { Typography, Avatar } from '@material-ui/core'
 
@@ -35,11 +35,14 @@ const ResultsVideoCard = ({ video }) => {
     },
   } = video
 
+  const isVideo = kind === 'youtube#video'
   const thumbnailImage = thumbnails.medium.url
 
   const [viewCount, setViewCount] = useState(null)
   const [duration, setDuration] = useState(null)
   const [channelAvatar, setChannelAvatar] = useState(null)
+  // const [isChannel, setIsChannel] = useState(false)
+  const [channelInfo, setChannelInfo] = useState({})
 
   // this is unique to searchResults, because popular videos no need to get more details from 'contentDetails,statistics'
   useEffect(() => {
@@ -86,20 +89,38 @@ const ResultsVideoCard = ({ video }) => {
     }
   }, [videoId])
 
-  // to get channelAvatar
+  // to get channelAvatar for video, get channel details for channel
   useEffect(() => {
     // localStorage, to be deleted when finished.
-    const storedChannelAvatar = JSON.parse(
-      localStorage.getItem(`${videoId}_channelAvatar`)
-    )
+    let storedChannelAvatar
+    let storedChannelInfo
+
+    if (isVideo) {
+      storedChannelAvatar = JSON.parse(
+        localStorage.getItem(`${videoId}_channelAvatar`)
+      )
+    } else {
+      storedChannelInfo = JSON.parse(
+        localStorage.getItem(`${channelId}_channelInfo`)
+      )
+    }
 
     if (storedChannelAvatar) {
-      // console.log(storedChannelAvatar)
       setChannelAvatar(storedChannelAvatar)
-      // console.log('using local stored channelAvatar')
+    } else if (storedChannelInfo) {
+      // confirm the data type stored in this var
+      console.log(`inside useEffect, retrieve storedChannelInfo`)
+      console.log(storedChannelInfo)
+      setChannelInfo(storedChannelInfo)
     } else {
       // no need videoId if not using localStorage
-      queryChannelAvatar(setChannelAvatar, channelId, videoId)
+      queryChannelDetails(
+        setChannelAvatar,
+        setChannelInfo,
+        channelId,
+        videoId,
+        isVideo
+      )
     }
   }, [channelId])
 
@@ -107,14 +128,21 @@ const ResultsVideoCard = ({ video }) => {
 
   return (
     <StyledCard>
-      <StyledImageContainer>
-        <StyledImg src={thumbnailImage} />
-        <DurationContainer variant="body2">
-          {formattedDuration}
-        </DurationContainer>
-      </StyledImageContainer>
+      {/* if data point is a returned channel, img is rounded, no duration */}
+      {!isVideo ? (
+        <MobileChannelImageContainer>
+          <MobileChannelImg src={thumbnailImage} />
+        </MobileChannelImageContainer>
+      ) : (
+        <StyledImageContainer>
+          <StyledImg src={thumbnailImage} />
+          <DurationContainer variant="body2">
+            {formattedDuration}
+          </DurationContainer>
+        </StyledImageContainer>
+      )}
 
-      {isMobileView ? (
+      {isMobileView && isVideo && (
         // Mobile view can make sure of CardHeader from MUI
         <SearchCardHeader
           action={<MoreButton isSearchPage={true} />}
@@ -123,11 +151,39 @@ const ResultsVideoCard = ({ video }) => {
           }
           subheader={
             <ChannelDetails
-              {...{ channelTitle, publishedAt, viewCount, isSearchPage: true }}
+              {...{
+                channelTitle,
+                publishedAt,
+                viewCount,
+                isSearchPage: true,
+              }}
             />
           }
         />
-      ) : (
+      )}
+
+      {isMobileView && !isVideo && (
+        <SearchCardHeader
+          title={
+            <SearchVideoTitle variant="h4">
+              {he.decode(channelTitle)}
+            </SearchVideoTitle>
+          }
+          subheader={
+            <ChannelStatsContainer
+              style={isMobileView ? { fontSize: '12px' } : null}
+            >
+              <p>{channelInfo.statistics.videoCount} videos</p>
+              <p>
+                {numeral(channelInfo.statistics.subscriberCount).format('0.a')}{' '}
+                subscribers
+              </p>
+            </ChannelStatsContainer>
+          }
+        />
+      )}
+
+      {!isMobileView && isVideo && (
         // desktop view can't use MUI CardHeader because position of elements inside CardHeader can't be changed.
         <ContentContainer>
           <VideoContentTop>
@@ -154,11 +210,48 @@ const ResultsVideoCard = ({ video }) => {
           <DescriptionsContainer>{description}</DescriptionsContainer>
         </ContentContainer>
       )}
+
+      {!isMobileView && !isVideo && (
+        <ContentContainer>
+          <VideoContentTop>
+            <SearchVideoTitle variant="h3">
+              {he.decode(channelTitle)}
+            </SearchVideoTitle>
+          </VideoContentTop>
+
+          <StatsContainer>
+            <ContentText variant="body2">
+              <span style={{ marginRight: '4px' }}>
+                {numeral(channelInfo.statistics.subscriberCount).format('0.a')}{' '}
+                subscribers
+              </span>
+              <DotSeparator />{' '}
+              <span>{channelInfo.statistics.videoCount} videos</span>
+            </ContentText>
+          </StatsContainer>
+
+          <DescriptionsContainer>
+            {channelInfo.snippet.description}
+          </DescriptionsContainer>
+        </ContentContainer>
+      )}
     </StyledCard>
   )
 }
 
 export default ResultsVideoCard
+
+const ChannelStatsContainer = styled.div`
+  opacity: 0.6;
+  line-height: 14px;
+  color: rgb(96, 96, 96);
+  /* letter-spacing: 0.3px; */
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    opacity: 1;
+    display: flex;
+    flex-wrap: wrap;
+  }
+`
 
 const DescriptionsContainer = styled(Typography)`
   && {
@@ -235,6 +328,26 @@ const StyledImageContainer = styled(ImageContainer)`
     flex: 1 0 50%;
     width: 100%;
   }
+`
+
+const MobileChannelImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    min-width: 240px;
+    max-width: 360px;
+    margin-right: 12px;
+    flex: 1 0 50%;
+    width: 100%;
+  }
+`
+
+const MobileChannelImg = styled.img`
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
 `
 
 const SearchVideoTitle = styled(VideoTitle)`

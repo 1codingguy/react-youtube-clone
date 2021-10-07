@@ -127,28 +127,41 @@ export const handleSearchFormSubmit = (
   history.push('/results?search_query=' + queryString)
 }
 
-export const queryChannelAvatar = async (
+export const queryChannelDetails = async (
   setAvatarFunction,
+  setChannelInfoFunction,
   channelId,
   // no need videoId if not using localStorage
-  videoId
+  videoId,
+  isVideo
 ) => {
+  // if (!isVideo) {
+  //   console.log('not a video, getting channel info')
+  // }
   try {
     const {
       data: { items },
     } = await request('/channels', {
       params: {
-        part: 'snippet',
+        part: isVideo ? 'snippet' : 'snippet,statistics',
         id: channelId,
       },
     })
+    
+    // console.log(items)
 
-    // retrieve the url property inside component, just stringify in localStorage
-    localStorage.setItem(
-      `${videoId}_channelAvatar`,
-      JSON.stringify(items[0].snippet.thumbnails.default.url)
-    )
-    setAvatarFunction(items[0].snippet.thumbnails.default.url)
+    if (isVideo) {
+      localStorage.setItem(
+        `${videoId}_channelAvatar`,
+        JSON.stringify(items[0].snippet.thumbnails.default.url)
+      )
+      setAvatarFunction(items[0].snippet.thumbnails.default.url)
+    } else {
+      // data is a channel instead of video
+      console.log(items[0])
+      localStorage.setItem(`${channelId}_channelInfo`, JSON.stringify(items[0]))
+      setChannelInfoFunction(items[0])
+    }
   } catch (error) {
     console.log(error)
   }
