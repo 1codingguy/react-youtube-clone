@@ -49,25 +49,20 @@ export const StyledAppBar = styled(AppBar)`
   }
 
   .MuiToolbar-regular {
-    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-      min-height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
-      height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+    min-height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+    height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      min-height: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
+      height: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
     }
-
-    min-height: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
-    height: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
   }
 `
 
 const StyledToolbar = styled(Toolbar)`
-  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-    padding-left: 0;
-    padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    padding-left: 16px;
+    padding-right: 16px;
   }
-
-  /* remove the border later */
-  /* border-bottom: 1px solid lightgray; */
-  padding-left: 16px;
-  padding-right: 16px;
-  /* background-color: white; */
 `

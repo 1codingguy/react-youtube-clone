@@ -12,6 +12,7 @@ import {
   StyledIconButton,
   handleSearchFormSubmit,
   useClearSearchTerm,
+  TWO_COL_MIN_WIDTH,
 } from '../../utils/utils'
 import ClearIcon from '@material-ui/icons/Clear'
 import { useAtom } from 'jotai'
@@ -94,10 +95,10 @@ export default MobileViewSearchDrawer
 
 const MobileToolbar = styled(Toolbar)`
   && {
-    @media screen and (max-width) {
-      min-height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+    min-height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      min-height: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
     }
-    min-height: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
   }
 `
 

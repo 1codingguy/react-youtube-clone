@@ -37,7 +37,7 @@ export const HEADER_OPACITY = 0.98
 
 // useMediaQuery hooks
 export const useIsMobileView = () =>
-  useMediaQuery(`(max-width: ${MOBILE_VIEW_MAX_WIDTH}px)`)
+  !useMediaQuery(`(min-width: ${TWO_COL_MIN_WIDTH}px)`)
 
 export const useShouldOpenSidebarDrawer = () =>
   !useMediaQuery(`(min-width:${SHOW_FULL_SIDEBAR_BREAKPOINT}px)`)
@@ -147,7 +147,7 @@ export const queryChannelDetails = async (
         id: channelId,
       },
     })
-    
+
     // console.log(items)
 
     if (isVideo) {
@@ -214,10 +214,10 @@ export const IconTooltip = styled(({ className, ...props }) => (
 // common settings of padding for all IconButton
 export const StyledIconButton = styled(IconButton)`
   && {
-    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-      padding: 12px;
+    padding: 12px;
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      padding: 8px;
     }
-    padding: 8px;
   }
 `
 export const StyledMenuItem = styled(MenuItem)`

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Tooltip from '@material-ui/core/Tooltip'
-import { MOBILE_VIEW_MAX_WIDTH } from '../../utils/utils'
+import { TWO_COL_MIN_WIDTH } from '../../utils/utils'
 import { useIsMobileView } from '../../utils/utils'
 
 const YouTubeLogo = () => {
@@ -55,10 +55,10 @@ const YouTubeLogoContainer = styled.button`
 `
 
 const Logo = styled.img`
-  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-    margin: auto 1rem;
-  }
+  margin: auto 1rem;
   height: 20px;
   cursor: pointer;
-  margin: auto 16px;
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    margin: auto 16px;
+  }
 `

@@ -7,6 +7,7 @@ import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
   MOBILE_VIEW_MAX_WIDTH,
+  TWO_COL_MIN_WIDTH,
 } from '../utils/utils'
 import SidebarToShow from '../Sidebar/SidebarToShow'
 import Search from '../Search/Search'
@@ -56,9 +57,8 @@ const Main = () => {
 export default Main
 
 const StyledMain = styled.div`
-  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-    padding-top: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+  padding-top: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    padding-top: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
   }
-  padding-top: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
-  /* min-height: 100vh; */
 `

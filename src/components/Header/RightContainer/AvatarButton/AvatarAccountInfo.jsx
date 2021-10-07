@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import {
   DEFAULT_FONT_SIZE,
-  MOBILE_VIEW_MAX_WIDTH,
+  TWO_COL_MIN_WIDTH,
   useIsMobileView,
 } from '../../../utils/utils'
 
@@ -46,21 +46,21 @@ const ManageAccountButton = styled(Typography)`
 `
 
 const AccountInfoHeader = styled.div`
+  padding: 0;
+  margin: 12px auto;
   display: flex;
-  padding: 16px;
-
-  @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-    padding: 0;
-    margin: 12px auto;
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    padding: 16px;
   }
 
   .MuiAvatar-root {
     background-color: #ef6c00;
     margin-right: 16px;
-
-    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-      width: 48px;
-      height: 48px;
+    width: 48px;
+    height: 48px;
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      width: 40px;
+      height: 40px;
     }
   }
 `

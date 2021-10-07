@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Avatar from '@material-ui/core/Avatar'
-import { MOBILE_VIEW_MAX_WIDTH, StyledIconButton } from '../../../utils/utils'
+import { StyledIconButton, TWO_COL_MIN_WIDTH } from '../../../utils/utils'
 
 function AvatarIconButton({ setAnchorAvatarButton }) {
   return (
@@ -17,13 +17,13 @@ export default AvatarIconButton
 
 const StyledAvatar = styled(Avatar)`
   && {
-    @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-      width: 24px;
-      height: 24px;
-    }
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     font-size: 0.875rem;
     background-color: #ef6c00;
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      width: 32px;
+      height: 32px;
+    }
   }
 `
