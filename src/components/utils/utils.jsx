@@ -63,7 +63,8 @@ export const useClearSearchTerm = (history, searchTermSetterFunction) => {
   }, [])
 }
 
-export const getSearchTermVideos = async (
+// called by handleSearchFormSubmit()
+const getSearchTermVideos = async (
   queryString,
   searchTermNextPageTokenSetterFunction,
   searchTermTotalResultsSetterFunction,
@@ -104,9 +105,10 @@ export const handleSearchFormSubmit = (
 ) => {
   event.preventDefault()
 
+  let storedResults
+
   if (useLocalData) {
-    // temporary if then statement to load search results from localStorage
-    var storedResults = JSON.parse(localStorage.getItem(queryString))
+    storedResults = JSON.parse(localStorage.getItem(queryString))
   }
 
   if (useLocalData && storedResults) {
@@ -127,17 +129,15 @@ export const handleSearchFormSubmit = (
   history.push('/results?search_query=' + queryString)
 }
 
-export const queryChannelDetails = async (
-  setAvatarFunction,
-  setChannelInfoFunction,
+// called by useGetChannelDetails()
+const queryChannelDetails = async (
+  useLocalStorage,
+  channelAvatarSetterFunction,
+  channelInfoSetterFunction,
   channelId,
-  // no need videoId if not using localStorage
-  videoId,
+  videoId, // no need videoId if not using localStorage
   isVideo
 ) => {
-  // if (!isVideo) {
-  //   console.log('not a video, getting channel info')
-  // }
   try {
     const {
       data: { items },
@@ -148,23 +148,70 @@ export const queryChannelDetails = async (
       },
     })
 
-    // console.log(items)
+    if (useLocalStorage) {
+      if (isVideo) {
+        localStorage.setItem(
+          `${videoId}_channelAvatar`,
+          JSON.stringify(items[0].snippet.thumbnails.default.url)
+        )
+      } else {
+        // data is a channel instead of video
+        localStorage.setItem(
+          `${channelId}_channelInfo`,
+          JSON.stringify(items[0])
+        )
+      }
+    }
 
     if (isVideo) {
-      localStorage.setItem(
-        `${videoId}_channelAvatar`,
-        JSON.stringify(items[0].snippet.thumbnails.default.url)
-      )
-      setAvatarFunction(items[0].snippet.thumbnails.default.url)
+      channelAvatarSetterFunction(items[0].snippet.thumbnails.default.url)
     } else {
-      // data is a channel instead of video
-      console.log(items[0])
-      localStorage.setItem(`${channelId}_channelInfo`, JSON.stringify(items[0]))
-      setChannelInfoFunction(items[0])
+      channelInfoSetterFunction(items[0])
     }
   } catch (error) {
     console.log(error)
   }
+}
+
+export const useGetChannelDetails = (
+  useLocalStorage,
+  isVideo, // video or channel?
+  videoId,
+  channelId,
+  channelAvatarSetterFunction,
+  channelInfoSetterFunction
+) => {
+  useEffect(() => {
+    let storedChannelAvatar
+    let storedChannelInfo
+
+    if (useLocalStorage) {
+      if (isVideo) {
+        storedChannelAvatar = JSON.parse(
+          localStorage.getItem(`${videoId}_channelAvatar`)
+        )
+      } else {
+        storedChannelInfo = JSON.parse(
+          localStorage.getItem(`${channelId}_channelInfo`)
+        )
+      }
+    }
+
+    if (storedChannelAvatar) {
+      channelAvatarSetterFunction(storedChannelAvatar)
+    } else if (storedChannelInfo) {
+      channelInfoSetterFunction(storedChannelInfo)
+    } else {
+      queryChannelDetails(
+        useLocalStorage,
+        channelAvatarSetterFunction,
+        channelInfoSetterFunction,
+        channelId,
+        videoId,
+        isVideo
+      )
+    }
+  }, [channelId])
 }
 
 export const getFormattedDurationString = (duration) => {

@@ -8,7 +8,7 @@ import Slide from '@material-ui/core/Slide'
 const MobileFooter = () => {
   return (
     <HideFooterOnScroll>
-      <FooterContainer showLabels>
+      <FooterContainer showLabels={true}>
         <FooterIcons />
       </FooterContainer>
     </HideFooterOnScroll>
@@ -22,7 +22,7 @@ const FooterContainer = styled(BottomNavigation)`
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100vw; // 100vw instead of % because Grid spacing adds width to the container 
+    width: 100vw; // 100vw instead of % because Grid spacing adds width to the container
     height: 48px;
     overflow-x: hidden;
   }

@@ -50,12 +50,11 @@ const Videos = ({
           pageToken: popularVideosNextPageToken,
         },
       })
-      // console.log(data)
-      setPopularVideosTotalResults(data.pageInfo.popularVideosTotalResults)
+      setPopularVideosTotalResults(data.pageInfo.totalResults)
 
       // infinite scroll needs previous page + current page data
       setLandingPageVideos([...landingPageVideos, ...data.items])
-      setPopularVideosNextPageToken(data.popularVideosNextPageToken)
+      setPopularVideosNextPageToken(data.nextPageToken)
       setIsLoading(false)
     } catch (error) {
       console.log(error)

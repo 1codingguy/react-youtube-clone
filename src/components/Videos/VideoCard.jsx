@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
@@ -10,7 +10,7 @@ import {
   useIsMobileView,
   TWO_COL_MIN_WIDTH,
   getFormattedDurationString,
-  queryChannelDetails,
+  useGetChannelDetails,
 } from '../utils/utils'
 import he from 'he'
 import { ChannelDetails } from './ChannelDetails'
@@ -35,28 +35,15 @@ const VideoCard = ({ video }) => {
 
   const [channelAvatar, setChannelAvatar] = useState(null)
 
-  // Get channelAvatar by querying './channels' of YouTube API
-  useEffect(() => {
-    queryChannelDetails(
-      setChannelAvatar,
-      null, //setChannelInfo
-      channelId,
-      null, //videoId
-      true //isVideo
-    )
-
-    // localStorage, to be deleted when finished.
-    // const storedChannelAvatar = JSON.parse(
-    //   localStorage.getItem(`${videoId}_channelAvatar`)
-    // )
-
-    // if (storedChannelAvatar) {
-    //   setChannelAvatar(storedChannelAvatar)
-    //   // console.log('using local stored channelAvatar')
-    // } else {
-    //   queryChannelDetails(setChannelAvatar, channelId)
-    // }
-  }, [channelId])
+  // Get channelAvatar
+  useGetChannelDetails(
+    true, //useLocalStorage
+    true, // isVideo
+    videoId,
+    channelId,
+    setChannelAvatar,
+    null // channelInfoSetterFunction
+  )
 
   return (
     <StyledCard square={true} elevation={0}>
@@ -73,7 +60,7 @@ const VideoCard = ({ video }) => {
       </ImageContainer>
 
       <StyledCardHeader
-        avatar={<StyledAvatar src={channelAvatar ? channelAvatar.url : ''} />}
+        avatar={<StyledAvatar src={channelAvatar ? channelAvatar : ''} />}
         action={<MoreButton />}
         title={<VideoTitle variant="h3">{he.decode(title)}</VideoTitle>}
         subheader={

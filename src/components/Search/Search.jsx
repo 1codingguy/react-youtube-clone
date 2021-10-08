@@ -14,17 +14,11 @@ import TuneIcon from '@material-ui/icons/Tune'
 const Search = () => {
   const { marginLeftToOffset } = useGlobalContext()
   const isMobileView = useIsMobileView()
-
-  // load result directly from localStorage for now to test the layout
-  // const results = JSON.parse(localStorage.getItem('kitten')).items
-  // console.log(results)
-
   const [searchResults] = useAtom(searchResultsAtom)
 
   return (
     <SearchContainer marginLeftToOffset={marginLeftToOffset}>
       <InnerSearchContainer>
-        {/* FILTERS button here */}
         {!isMobileView && (
           <FilterButton
             variant="contained"
@@ -36,12 +30,12 @@ const Search = () => {
             FILTERS
           </FilterButton>
         )}
-        <StyledList component="div">
+        <VideoCardsContainer component="div">
           {searchResults &&
             searchResults.map((video) => {
               return <ResultsVideoCard key={video.id.videoId} video={video} />
             })}
-        </StyledList>
+        </VideoCardsContainer>
       </InnerSearchContainer>
     </SearchContainer>
   )
@@ -49,7 +43,7 @@ const Search = () => {
 
 export default Search
 
-const StyledList = styled(List)`
+const VideoCardsContainer = styled(List)`
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 `
 
