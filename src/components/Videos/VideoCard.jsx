@@ -32,7 +32,6 @@ const VideoCard = ({ video }) => {
     : thumbnails.medium.url
 
   const formattedDuration = getFormattedDurationString(duration)
-
   const [channelAvatar, setChannelAvatar] = useState(null)
 
   // Get channelAvatar
@@ -47,17 +46,7 @@ const VideoCard = ({ video }) => {
 
   return (
     <StyledCard square={true} elevation={0}>
-      <ImageContainer>
-        <CardMedia
-          // every video has medium size thumbnail, use as fallback if maxres not available
-          image={thumbnailImage}
-          component="img"
-          style={{ width: '100%', cursor: 'pointer' }}
-        />
-        <DurationContainer variant="body2">
-          {formattedDuration}
-        </DurationContainer>
-      </ImageContainer>
+      <Thumbnail {...{ thumbnailImage, formattedDuration }} />
 
       <StyledCardHeader
         avatar={<StyledAvatar src={channelAvatar ? channelAvatar : ''} />}
@@ -72,6 +61,20 @@ const VideoCard = ({ video }) => {
 }
 
 export default VideoCard
+
+const Thumbnail = ({ thumbnailImage, formattedDuration }) => {
+  return (
+    <ImageContainer>
+      <CardMedia
+        // every video has medium size thumbnail, use as fallback if maxres not available
+        image={thumbnailImage}
+        component="img"
+        style={{ width: '100%', cursor: 'pointer' }}
+      />
+      <DurationContainer variant="body2">{formattedDuration}</DurationContainer>
+    </ImageContainer>
+  )
+}
 
 export const StyledIconButton = styled(IconButton)`
   && {

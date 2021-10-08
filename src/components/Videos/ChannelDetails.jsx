@@ -5,28 +5,6 @@ import { TWO_COL_MIN_WIDTH, useIsMobileView } from '../utils/utils'
 import moment from 'moment'
 import numeral from 'numeral'
 
-// change 'a' & 'an' to '1'
-moment.updateLocale('en', {
-  relativeTime: {
-    future: 'in %s',
-    past: '%s ago',
-    s: '1 few seconds',
-    ss: '%d seconds',
-    m: '1 minute',
-    mm: '%d minutes',
-    h: '1 hour',
-    hh: '%d hours',
-    d: '1 day',
-    dd: '%d days',
-    w: '1 week',
-    ww: '%d weeks',
-    M: '1 month',
-    MM: '%d months',
-    y: '1 year',
-    yy: '%d years',
-  },
-})
-
 export const ChannelDetails = ({
   channelTitle,
   publishedAt,
@@ -35,30 +13,44 @@ export const ChannelDetails = ({
 }) => {
   const isMobileView = useIsMobileView()
 
-  return (
-    <ChannelDetailsContainer style={isMobileView ? { fontSize: '12px' } : null}>
-      {/* ChannelName is outside StatsContainer in desktop view */}
-      {isMobileView ? null : (
+  if (isMobileView) {
+    return (
+      <ChannelDetailsContainer style={{ fontSize: '12px' }}>
+        <StatsContainer>
+          {isSearchPage ? (
+            // no DotSeparator on mobile search result page, channelTitle on its own line
+            <SearchChannelName variant="h3">{channelTitle}</SearchChannelName>
+          ) : (
+            // mobile view landing page
+            <ChannelName variant="h3">
+              {channelTitle} <DotSeparator />
+            </ChannelName>
+          )}
+          <Stats {...{ viewCount, publishedAt }} />
+        </StatsContainer>
+      </ChannelDetailsContainer>
+    )
+  } else {
+    return (
+      <ChannelDetailsContainer>
+        {/* ChannelName is outside StatsContainer in desktop view */}
         <ChannelName variant="subtitle2">{channelTitle}</ChannelName>
-      )}
+        <StatsContainer>
+          <Stats {...{ viewCount, publishedAt }} />
+        </StatsContainer>
+      </ChannelDetailsContainer>
+    )
+  }
+}
 
-      <StatsContainer>
-        {/* mobile view landing page */}
-        {isMobileView && !isSearchPage && (
-          <ChannelName variant="h3">
-            {channelTitle} <DotSeparator />
-          </ChannelName>
-        )}
-        {/* no DotSeparator on mobile search result page, channelTitle on its own line */}
-        {isMobileView && isSearchPage && (
-          <SearchChannelName variant="h3">{channelTitle}</SearchChannelName>
-        )}
-        <span style={{ marginRight: '4px' }}>
-          {numeral(viewCount).format('0.a')} views <DotSeparator />
-        </span>
-        <span>{moment(publishedAt).fromNow()}</span>
-      </StatsContainer>
-    </ChannelDetailsContainer>
+const Stats = ({ viewCount, publishedAt }) => {
+  return (
+    <>
+      <span style={{ marginRight: '4px' }}>
+        {numeral(viewCount).format('0.a')} views <DotSeparator />
+      </span>
+      <span>{moment(publishedAt).fromNow()}</span>
+    </>
   )
 }
 
@@ -109,3 +101,25 @@ const StatsContainer = styled.div`
 export const DotSeparator = () => {
   return <span>•</span>
 }
+
+// change 'a' & 'an' to '1'
+moment.updateLocale('en', {
+  relativeTime: {
+    future: 'in %s',
+    past: '%s ago',
+    s: '1 few seconds',
+    ss: '%d seconds',
+    m: '1 minute',
+    mm: '%d minutes',
+    h: '1 hour',
+    hh: '%d hours',
+    d: '1 day',
+    dd: '%d days',
+    w: '1 week',
+    ww: '%d weeks',
+    M: '1 month',
+    MM: '%d months',
+    y: '1 year',
+    yy: '%d years',
+  },
+})

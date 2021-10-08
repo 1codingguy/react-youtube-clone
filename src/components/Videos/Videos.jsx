@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useGlobalContext } from '../../context'
 import { ThemeProvider } from '@material-ui/styles'
-import VideoCard from './VideoCard'
 import { Grid } from '@material-ui/core'
 import { columnBreakpoints } from './columnBreakpoints'
 import {
@@ -19,7 +18,7 @@ import {
 import { request } from '../utils/api'
 import countries from '../ChipsBar/chipsArray'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import { GridItem } from './GridItem'
 
 const Videos = ({
   selectedChipIndex,
@@ -105,51 +104,10 @@ const Videos = ({
 
 export default Videos
 
-const GridItem = ({ video }) => {
-  return (
-    <Grid
-      container
-      item
-      // not sure if justifyContent is needed if MuiPaper-root had width: 100%, need to test
-      justifyContent="center"
-      xs={12}
-      sm={6}
-      md={4}
-      lg={3}
-      xl={2}
-    >
-      {/* change from here if remove loading-skeleton */}
-      {video ? <VideoCard video={video} /> : <VideoSkeleton />}
-    </Grid>
-  )
-}
-
-const VideoSkeleton = () => {
-  return (
-    <div style={{ width: '100%', margin: '1rem ' }}>
-      <SkeletonTheme>
-        <Skeleton height={180} />
-        <div>
-          <Skeleton
-            style={{ margin: '0.5rem 0' }}
-            circle
-            height={40}
-            width={40}
-          />
-          <Skeleton height={40} width="75%" style={{ marginLeft: '0.5rem' }} />
-        </div>
-      </SkeletonTheme>
-    </div>
-  )
-}
-
 export const OuterVideoContainer = styled.div`
-  /* min-height: 200vh; */
   background-color: #f9f9f9;
-  /* display: inline-block; */
   padding-top: ${(props) => props.marginTopToOffset}px;
   padding-left: ${(props) => props.marginLeftToOffset}px;
-  /* width: calc(100% - ${(props) => props.marginLeftToOffset}px); */
   width: 100%;
 `
 
@@ -180,49 +138,3 @@ const InnerVideoContainer = styled.div`
     max-width: ${SIX_COL_MAX_WIDTH}px;
   }
 `
-// To test the layout when all the data is hard-coded instead of query from YouTube API
-// Can be deleted after finished
-// const SampleGridItem = () => {
-//   return (
-//     <Grid
-//       container
-//       justifyContent="center"
-//       item
-//       xs={12}
-//       sm={6}
-//       md={4}
-//       lg={3}
-//       xl={2}
-//     >
-//       <VideoCard />
-//     </Grid>
-//   )
-// }
-
-// // after finished styling, turn getKittenVideos() into a function to query initial data/ videos to display when the page first loaded
-// // if placing this function in a separated module, setLandingPageVideos needs to be a global state
-// const getKittenVideos = async () => {
-//   const response = await request('/search', {
-//     params: {
-//       part: 'snippet',
-//       maxResults: 24,
-//       q: 'kitten',
-//     },
-//   })
-//   localStorage.setItem('kittenVideos', JSON.stringify(response.data.items))
-//   setLandingPageVideos(response.data.items)
-// }
-
-// // when app start, either load the kittenVideos in localStorage, or run getKittenVideos() to query data from YouTube API
-// useEffect(() => {
-//   const storedKittenVideos = JSON.parse(localStorage.getItem('kittenVideos'))
-//   if (storedKittenVideos) {
-//     // console.log(storedKittenVideos)
-//     setLandingPageVideos(storedKittenVideos)
-//     // console.log('using stored Videos data')
-//   } else {
-//     getKittenVideos()
-//   }
-// }, [])
-
-// // console.log(landingPageVideos)
