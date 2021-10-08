@@ -42,8 +42,7 @@ const Stats = ({ channelInfo }) => {
           </span>
           <DotSeparator />{' '}
           <span>
-            {numeral(channelInfo.statistics.subscriberCount).format('0,0')}{' '}
-            videos
+            {numeral(channelInfo.statistics.videoCount).format('0,0')} videos
           </span>
         </ContentText>
       )}
