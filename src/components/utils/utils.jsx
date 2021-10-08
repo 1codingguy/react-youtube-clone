@@ -66,10 +66,8 @@ export const useClearSearchTerm = (history, searchTermSetterFunction) => {
 // called by handleSearchFormSubmit()
 const getSearchTermVideos = async (
   queryString,
-  searchTermNextPageTokenSetterFunction,
-  searchTermTotalResultsSetterFunction,
   searchResultsSetterFunction,
-  shouldQueryAndStore = true
+  useLocalData
 ) => {
   try {
     const { data } = await request('/search', {
@@ -80,13 +78,11 @@ const getSearchTermVideos = async (
         q: queryString,
       },
     })
-    if (shouldQueryAndStore) {
-      // store data into localStorage, not just `items`
+    if (useLocalData) {
+      // data contains nextPageToken and totalResults for infinite-scroll
+      // but currently not implementing infinite-scroll
       localStorage.setItem(queryString, JSON.stringify(data))
     }
-    // store nextPageToken and totalResults into a state variable
-    searchTermNextPageTokenSetterFunction(data.pageInfo.nextPageToken)
-    searchTermTotalResultsSetterFunction(data.pageInfo.totalResults)
     searchResultsSetterFunction(data.items)
   } catch (error) {
     console.log(error)
@@ -96,12 +92,9 @@ const getSearchTermVideos = async (
 export const handleSearchFormSubmit = (
   event,
   queryString,
-  searchTermNextPageTokenSetterFunction,
-  searchTermTotalResultsSetterFunction,
   searchResultsSetterFunction,
   history,
-  useLocalData = true,
-  shouldQueryAndStore = true
+  useLocalData
 ) => {
   event.preventDefault()
 
@@ -112,18 +105,10 @@ export const handleSearchFormSubmit = (
   }
 
   if (useLocalData && storedResults) {
-    searchTermNextPageTokenSetterFunction(storedResults.pageInfo.nextPageToken)
-    searchTermTotalResultsSetterFunction(storedResults.pageInfo.totalResults)
     searchResultsSetterFunction(storedResults.items)
   } else {
     // query API with the searchTerm
-    getSearchTermVideos(
-      queryString,
-      searchTermNextPageTokenSetterFunction,
-      searchTermTotalResultsSetterFunction,
-      searchResultsSetterFunction,
-      shouldQueryAndStore
-    )
+    getSearchTermVideos(queryString, searchResultsSetterFunction, useLocalData)
   }
   // jump to the search Page
   history.push('/results?search_query=' + queryString)

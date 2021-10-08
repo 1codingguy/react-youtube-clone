@@ -8,18 +8,11 @@ import {
   useClearSearchTerm,
 } from '../../utils/utils'
 import { useAtom } from 'jotai'
-import {
-  searchTermAtom,
-  searchTermNextPageTokenAtom,
-  searchTermTotalResultsAtom,
-  searchResultsAtom,
-} from '../../../store'
+import { searchTermAtom, searchResultsAtom } from '../../../store'
 import { useHistory } from 'react-router'
 
 export const SearchContainerWithTextField = () => {
   const [searchTerm, setSearchTerm] = useAtom(searchTermAtom)
-  const [, setSearchTermNextPageToken] = useAtom(searchTermNextPageTokenAtom)
-  const [, setSearchTermTotalResults] = useAtom(searchTermTotalResultsAtom)
   const [, setSearchResults] = useAtom(searchResultsAtom)
   const history = useHistory()
 
@@ -27,12 +20,9 @@ export const SearchContainerWithTextField = () => {
     handleSearchFormSubmit(
       event,
       searchTerm,
-      setSearchTermNextPageToken,
-      setSearchTermTotalResults,
       setSearchResults,
       history,
-      true, //useLocalData
-      true //shouldQueryAndStore
+      true //useLocalData
     )
   }
 

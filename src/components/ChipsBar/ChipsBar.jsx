@@ -10,10 +10,8 @@ import {
   CHIPS_BAR_MAX_WIDTH,
 } from '../utils/utils'
 import { useGlobalContext } from '../../context'
-import Chip from '@material-ui/core/Chip'
-import countries from './chipsArray'
+import { Chips } from './Chips'
 
-/** topbar under the search that shows category filter chips that scroll left/right */
 const ChipsBar = ({
   selectedChipIndex,
   setSelectedChipIndex,
@@ -47,67 +45,6 @@ const ChipsBar = ({
 }
 
 export default ChipsBar
-
-const Chips = ({
-  selectedChipIndex,
-  setSelectedChipIndex,
-  setLandingPageVideos,
-  setPopularVideosNextPageToken,
-}) => {
-  const handleChipClick = (index) => {
-    setSelectedChipIndex(index)
-    // reset landingPageVideos & popularVideosNextPageToken to default when select another chip
-    setLandingPageVideos([])
-    setPopularVideosNextPageToken(null)
-  }
-
-  return countries.map(({ country }, index) => {
-    return (
-      <StyledChip
-        key={country}
-        label={country}
-        // console says it's an error to have boolean value of true
-        active={index === selectedChipIndex ? `true` : null}
-        onClick={() => handleChipClick(index)}
-        component="li"
-      />
-    )
-  })
-}
-
-const StyledChip = styled(Chip)`
-  && {
-    margin-right: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    /* active chip in mobile view has grey background */
-    background-color: ${(props) =>
-      props.active ? '#606060' : 'rgba(0, 0, 0, 0.05)'};
-    color: ${(props) => (props.active ? 'white' : '#030303')};
-
-    &:hover,
-    &:focus {
-      background-color: ${(props) => props.active && '#606060'};
-      color: ${(props) => props.active && 'white'};
-    }
-
-    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
-      /* active chip in desktop view has black background */
-      background-color: ${(props) =>
-        props.active ? 'black' : 'rgba(0, 0, 0, 0.05)'};
-      color: ${(props) => (props.active ? 'white' : '#030303')};
-      &:hover,
-      &:focus {
-        background-color: ${(props) => props.active && 'black'};
-        color: ${(props) => props.active && 'white'};
-      }
-    }
-  }
-
-  .MuiChip-label {
-    padding: 0 12px;
-    font-size: 0.875rem;
-  }
-`
 
 const StyledTabs = styled(Tabs)`
   /* to make the tabs indicator invisible */
@@ -159,67 +96,3 @@ const ChipsContainer = styled.div`
     }
   }
 `
-
-// Unable to style the arrows as I like, thus not using
-// const TabsWithArrows = styled(Tabs)`
-//   .Mui-disabled {
-//     /* width: 10px;
-//     transition: all 0.2s cubic-bezier(0.05, 0, 0, 1); */
-//     /* transform: scaleX(0.5);
-//     transform: translateX(-20px); */
-//   }
-
-//   .MuiTabs-scrollable {
-//     display: flex;
-//     align-items: center;
-//     /* padding-left: 1rem; */
-//   }
-
-//   .MuiTabs-scrollButtons:first-of-type {
-//     /* background-color: red; */
-
-//     &.Mui-disabled {
-//       flex-shrink: 1;
-//       transition: flex 0.3s ease;
-//     }
-
-//     &::before {
-//       @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-//         height: calc(${MOBILE_CATEGORIES_BAR_HEIGHT}px - 4px);
-//       }
-//       height: calc(${DESKTOP_CATEGORIES_BAR_HEIGHT}px - 6px);
-//       width: 50px;
-//       position: fixed;
-//       left: calc(40px + ${(props) => props.marginLeftToOffset}px);
-//       pointer-events: none;
-//       content: '';
-//       /* doesn't do the fade out effect as intended */
-//       background: linear-gradient(
-//         to right,
-//         white 20%,
-//         rgba(255, 255, 255, 0) 80%
-//       );
-//       /* background-color: red; */
-//     }
-//   }
-//   .MuiTabScrollButton-root:last-of-type {
-//     /* background-color: yellow; */
-
-//     &::before {
-//       @media screen and (max-width: ${MOBILE_VIEW_MAX_WIDTH}px) {
-//         height: calc(${MOBILE_CATEGORIES_BAR_HEIGHT}px - 4px);
-//       }
-//       height: calc(${DESKTOP_CATEGORIES_BAR_HEIGHT}px - 6px);
-//       width: 50px;
-//       position: fixed;
-//       right: 40px;
-//       content: '';
-//       pointer-events: none;
-//       background: linear-gradient(
-//         to left,
-//         white 20%,
-//         rgba(255, 255, 255, 0) 80%
-//       );
-//     }
-//   }
-// `
