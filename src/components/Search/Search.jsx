@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import ResultsVideoCard from './ResultsVideoCard'
 import { searchResultsAtom } from '../../store'
 import { useAtom } from 'jotai'
-import { useIsMobileView } from '../utils/utils'
+import { TWO_COL_MIN_WIDTH, useIsMobileView } from '../utils/utils'
 import Button from '@material-ui/core/Button'
 import TuneIcon from '@material-ui/icons/Tune'
 
@@ -44,7 +44,9 @@ const Search = () => {
 export default Search
 
 const VideoCardsContainer = styled(List)`
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
 `
 
 const FilterButton = styled(Button)`

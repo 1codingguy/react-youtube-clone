@@ -14,9 +14,7 @@ export const MobileVideoContent = ({
   return (
     <SearchCardHeader
       action={<MoreButton isSearchPage={true} />}
-      title={
-        <SearchVideoTitle variant="h4">{he.decode(title)}</SearchVideoTitle>
-      }
+      title={<Title title={title} />}
       subheader={
         <ChannelDetails
           {...{
@@ -29,4 +27,8 @@ export const MobileVideoContent = ({
       }
     />
   )
+}
+
+const Title = ({ title }) => {
+  return <SearchVideoTitle variant="h4">{he.decode(title)}</SearchVideoTitle>
 }

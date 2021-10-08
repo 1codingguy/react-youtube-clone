@@ -12,34 +12,36 @@ export const MobileChannelContent = ({
 }) => {
   return (
     <SearchCardHeader
-      title={
-        <SearchVideoTitle variant="h4">
-          {he.decode(channelTitle)}
-        </SearchVideoTitle>
-      }
-      subheader={
-        <ChannelStatsContainer
-          style={isMobileView ? { fontSize: '12px' } : null}
-        >
-          {channelInfo && (
-            <>
-              <p>
-                {numeral(channelInfo.statistics.videoCount).format('0,0')}{' '}
-                videos
-              </p>
-              <p>
-                {numeral(channelInfo.statistics.subscriberCount).format(
-                  '0.0.a'
-                )}{' '}
-                subscribers
-              </p>
-            </>
-          )}
-        </ChannelStatsContainer>
-      }
+      title={<Title {...{ channelTitle }} />}
+      subheader={<Stats {...{ isMobileView, channelInfo }} />}
     />
   )
 }
+
+const Stats = ({ isMobileView, channelInfo }) => {
+  return (
+    <ChannelStatsContainer style={isMobileView ? { fontSize: '12px' } : null}>
+      {channelInfo && (
+        <>
+          <p>
+            {numeral(channelInfo.statistics.videoCount).format('0,0')} videos
+          </p>
+          <p>
+            {numeral(channelInfo.statistics.subscriberCount).format('0.0.a')}{' '}
+            subscribers
+          </p>
+        </>
+      )}
+    </ChannelStatsContainer>
+  )
+}
+
+const Title = ({ channelTitle }) => {
+  return (
+    <SearchVideoTitle variant="h4">{he.decode(channelTitle)}</SearchVideoTitle>
+  )
+}
+
 const ChannelStatsContainer = styled.div`
   opacity: 0.6;
   line-height: 14px;

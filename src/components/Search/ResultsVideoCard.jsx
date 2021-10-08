@@ -41,9 +41,15 @@ const ResultsVideoCard = ({ video }) => {
   const [channelInfo, setChannelInfo] = useState(null)
   const thumbnailImage = thumbnails.medium.url
 
-  useGetVideoDetails(true, videoId, setDuration, setViewCount)
+  // get duration and viewCount
+  useGetVideoDetails(
+    true, // useLocalStorage
+    videoId,
+    setDuration,
+    setViewCount
+  )
 
-  // to get channelAvatar for video, get channel details for channel
+  // get channelAvatar for video or get channel info for channel
   useGetChannelDetails(
     true, // useLocalStorage
     isVideo,
@@ -55,52 +61,48 @@ const ResultsVideoCard = ({ video }) => {
 
   const formattedDuration = getFormattedDurationString(duration)
 
-  return (
-    <StyledCard>
-      {/* The image on the left on each row */}
-      {!isVideo ? (
-        <ChannelImage thumbnailImage={thumbnailImage} />
-      ) : (
+  if (isVideo) {
+    return (
+      <StyledCard>
         <VideoThumbnail {...{ thumbnailImage, formattedDuration }} />
-      )}
 
-      {/* the content on the right on each row */}
+        {isMobileView ? (
+          <MobileVideoContent
+            {...{ title, channelTitle, publishedAt, viewCount }}
+          />
+        ) : (
+          <DesktopVideoContent
+            {...{
+              title,
+              viewCount,
+              publishedAt,
+              channelAvatar,
+              channelTitle,
+              description,
+            }}
+          />
+        )}
+      </StyledCard>
+    )
+  } else {
+    // if the row is a channel
+    return (
+      <StyledCard>
+        <ChannelImage thumbnailImage={thumbnailImage} />
 
-      {isMobileView && isVideo && (
-        <MobileVideoContent
-          {...{ title, channelTitle, publishedAt, viewCount }}
-        />
-      )}
+        {isMobileView ? (
+          <MobileChannelContent
+            {...{ channelTitle, isMobileView, channelInfo }}
+          />
+        ) : (
+          <DesktopChannelContent {...{ channelTitle, channelInfo }} />
+        )}
 
-      {isMobileView && !isVideo && (
-        <MobileChannelContent
-          {...{ channelTitle, isMobileView, channelInfo }}
-        />
-      )}
-
-      {!isMobileView && isVideo && (
-        <DesktopVideoContent
-          {...{
-            title,
-            viewCount,
-            publishedAt,
-            channelAvatar,
-            channelTitle,
-            description,
-          }}
-        />
-      )}
-
-      {!isMobileView && !isVideo && (
-        <DesktopChannelContent {...{ channelTitle, channelInfo }} />
-      )}
-
-      {/* Red subscribe button if it's a channel on desktop view */}
-      {!isMobileView && !isVideo && showSubscribeButton && (
-        <ChannelSubscribeButton />
-      )}
-    </StyledCard>
-  )
+        {/* Red subscribe button if it's a channel on desktop view */}
+        {!isMobileView && showSubscribeButton && <ChannelSubscribeButton />}
+      </StyledCard>
+    )
+  }
 }
 
 export default ResultsVideoCard

@@ -12,34 +12,49 @@ import {
 } from './searchUtils'
 
 export const DesktopChannelContent = ({ channelTitle, channelInfo }) => {
-  const {
-    statistics: { subscriberCount, videoCount },
-    snippet: { description },
-  } = channelInfo
-
   return (
     <ContentContainer style={{ justifyContent: 'center' }}>
-      <VideoContentTop>
-        <SearchVideoTitle variant="h3">
-          {he.decode(channelTitle)}
-        </SearchVideoTitle>
-      </VideoContentTop>
-
-      <StatsContainer>
-        {channelInfo && (
-          <ContentText variant="body2">
-            <span style={{ marginRight: '4px' }}>
-              {numeral(subscriberCount).format('0.0.a')} subscribers
-            </span>
-            <DotSeparator />{' '}
-            <span>{numeral(videoCount).format('0,0')} videos</span>
-          </ContentText>
-        )}
-      </StatsContainer>
-
-      <DescriptionsContainer>
-        {channelInfo && description.substr(0, 120) + '...'}
-      </DescriptionsContainer>
+      <Title channelTitle={channelTitle} />
+      <Stats channelInfo={channelInfo} />
+      <Descriptions channelInfo={channelInfo} />
     </ContentContainer>
+  )
+}
+
+const Title = ({ channelTitle }) => {
+  return (
+    <VideoContentTop>
+      <SearchVideoTitle variant="h3">
+        {he.decode(channelTitle)}
+      </SearchVideoTitle>
+    </VideoContentTop>
+  )
+}
+
+const Stats = ({ channelInfo }) => {
+  return (
+    <StatsContainer>
+      {channelInfo && (
+        <ContentText variant="body2">
+          <span style={{ marginRight: '4px' }}>
+            {numeral(channelInfo.statistics.subscriberCount).format('0.0.a')}{' '}
+            subscribers
+          </span>
+          <DotSeparator />{' '}
+          <span>
+            {numeral(channelInfo.statistics.subscriberCount).format('0,0')}{' '}
+            videos
+          </span>
+        </ContentText>
+      )}
+    </StatsContainer>
+  )
+}
+
+const Descriptions = ({ channelInfo }) => {
+  return (
+    <DescriptionsContainer>
+      {channelInfo && channelInfo.snippet.description.substr(0, 120) + '...'}
+    </DescriptionsContainer>
   )
 }

@@ -26,30 +26,51 @@ export const DesktopVideoContent = ({
 }) => {
   return (
     <ContentContainer>
-      <VideoContentTop>
-        <SearchVideoTitle variant="h3">{he.decode(title)}</SearchVideoTitle>
-        <MoreButton isSearchPage={true} />
-      </VideoContentTop>
-
-      <StatsContainer>
-        <ContentText variant="body2">
-          <span style={{ marginRight: '4px' }}>
-            {numeral(viewCount).format('0.a')} views
-          </span>
-          <DotSeparator /> <span>{moment(publishedAt).fromNow()}</span>
-        </ContentText>
-      </StatsContainer>
-
-      <AvatarContainer>
-        <StyledAvatar src={channelAvatar} />
-        <ContentText variant="subtitle1" style={{ paddingLeft: '8px' }}>
-          {channelTitle}
-        </ContentText>
-      </AvatarContainer>
-
-      <DescriptionsContainer>
-        {description.substr(0, 120) + '...'}
-      </DescriptionsContainer>
+      <Title title={title} />
+      <Stats {...{ viewCount, publishedAt }} />
+      <Avatar {...{ channelAvatar, channelTitle }} />
+      <Descriptions description={description} />
     </ContentContainer>
+  )
+}
+
+const Title = ({ title }) => {
+  return (
+    <VideoContentTop>
+      <SearchVideoTitle variant="h3">{he.decode(title)}</SearchVideoTitle>
+      <MoreButton isSearchPage={true} />
+    </VideoContentTop>
+  )
+}
+
+const Stats = ({ viewCount, publishedAt }) => {
+  return (
+    <StatsContainer>
+      <ContentText variant="body2">
+        <span style={{ marginRight: '4px' }}>
+          {numeral(viewCount).format('0.a')} views
+        </span>
+        <DotSeparator /> <span>{moment(publishedAt).fromNow()}</span>
+      </ContentText>
+    </StatsContainer>
+  )
+}
+
+const Avatar = ({ channelAvatar, channelTitle }) => {
+  return (
+    <AvatarContainer>
+      <StyledAvatar src={channelAvatar} />
+      <ContentText variant="subtitle1" style={{ paddingLeft: '8px' }}>
+        {channelTitle}
+      </ContentText>
+    </AvatarContainer>
+  )
+}
+
+const Descriptions = ({ description }) => {
+  return (
+    <DescriptionsContainer>
+      {description.substr(0, 120) + '...'}
+    </DescriptionsContainer>
   )
 }
