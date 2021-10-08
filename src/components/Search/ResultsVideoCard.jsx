@@ -17,11 +17,17 @@ import {
   useIsMobileView,
   getFormattedDurationString,
   queryChannelDetails,
+  TWO_COL_MAX_WIDTH,
 } from '../utils/utils'
 import { Typography, Avatar } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import { useMediaQuery } from '@material-ui/core'
 
 const ResultsVideoCard = ({ video }) => {
   const isMobileView = useIsMobileView()
+  const showSubscribeButton = useMediaQuery(
+    `(min-width: ${TWO_COL_MAX_WIDTH}px)`
+  )
 
   const {
     id: { kind, videoId },
@@ -42,7 +48,7 @@ const ResultsVideoCard = ({ video }) => {
   const [duration, setDuration] = useState(null)
   const [channelAvatar, setChannelAvatar] = useState(null)
   // const [isChannel, setIsChannel] = useState(false)
-  const [channelInfo, setChannelInfo] = useState({})
+  const [channelInfo, setChannelInfo] = useState(null)
 
   // this is unique to searchResults, because popular videos no need to get more details from 'contentDetails,statistics'
   useEffect(() => {
@@ -173,9 +179,16 @@ const ResultsVideoCard = ({ video }) => {
             <ChannelStatsContainer
               style={isMobileView ? { fontSize: '12px' } : null}
             >
-              <p>{channelInfo.statistics.videoCount} videos</p>
               <p>
-                {numeral(channelInfo.statistics.subscriberCount).format('0.a')}{' '}
+                {channelInfo &&
+                  numeral(channelInfo.statistics.videoCount).format('0,0')}{' '}
+                videos
+              </p>
+              <p>
+                {channelInfo &&
+                  numeral(channelInfo.statistics.subscriberCount).format(
+                    '0.0.a'
+                  )}{' '}
                 subscribers
               </p>
             </ChannelStatsContainer>
@@ -207,12 +220,14 @@ const ResultsVideoCard = ({ video }) => {
             </ContentText>
           </AvatarContainer>
 
-          <DescriptionsContainer>{description}</DescriptionsContainer>
+          <DescriptionsContainer>
+            {description.substr(0, 120) + '...'}
+          </DescriptionsContainer>
         </ContentContainer>
       )}
 
       {!isMobileView && !isVideo && (
-        <ContentContainer>
+        <ContentContainer style={{ justifyContent: 'center' }}>
           <VideoContentTop>
             <SearchVideoTitle variant="h3">
               {he.decode(channelTitle)}
@@ -222,24 +237,62 @@ const ResultsVideoCard = ({ video }) => {
           <StatsContainer>
             <ContentText variant="body2">
               <span style={{ marginRight: '4px' }}>
-                {numeral(channelInfo.statistics.subscriberCount).format('0.a')}{' '}
+                {channelInfo &&
+                  numeral(channelInfo.statistics.subscriberCount).format(
+                    '0.0.a'
+                  )}{' '}
                 subscribers
               </span>
               <DotSeparator />{' '}
-              <span>{channelInfo.statistics.videoCount} videos</span>
+              <span>
+                {channelInfo &&
+                  numeral(channelInfo.statistics.videoCount).format('0,0')}{' '}
+                videos
+              </span>
             </ContentText>
           </StatsContainer>
 
           <DescriptionsContainer>
-            {channelInfo.snippet.description}
+            {channelInfo &&
+              channelInfo.snippet.description.substr(0, 120) + '...'}
           </DescriptionsContainer>
         </ContentContainer>
+      )}
+
+      {!isMobileView && !isVideo && showSubscribeButton && (
+        <SubscribeButtonContainer>
+          <SubscribeButton size="small">SUBSCRIBE</SubscribeButton>
+        </SubscribeButtonContainer>
       )}
     </StyledCard>
   )
 }
 
 export default ResultsVideoCard
+
+const SubscribeButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+`
+
+const SubscribeButton = styled(Button)`
+  && {
+    background-color: #c00;
+    color: white;
+    /* font-size: 14px; */
+    font-weight: 500;
+    padding: 10px 16px;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+    margin: 0 4px;
+
+    &:hover {
+      background-color: #c00;
+    }
+  }
+`
 
 const ChannelStatsContainer = styled.div`
   opacity: 0.6;
@@ -261,6 +314,10 @@ const DescriptionsContainer = styled(Typography)`
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+      margin-top: 4px;
+      width: 80%;
+    }
   }
 `
 
@@ -348,6 +405,11 @@ const MobileChannelImg = styled.img`
   height: 90px;
   width: 90px;
   border-radius: 50%;
+  cursor: pointer;
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    height: 136px;
+    width: 136px;
+  }
 `
 
 const SearchVideoTitle = styled(VideoTitle)`

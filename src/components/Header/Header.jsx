@@ -6,7 +6,6 @@ import LeftContainer from './LeftContainer/LeftContainer'
 import MiddleContainer from './MiddleContainer/MiddleContainer'
 import RightContainer from './RightContainer/RightContainer'
 import {
-  MOBILE_VIEW_MAX_WIDTH,
   TWO_COL_MIN_WIDTH,
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
