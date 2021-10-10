@@ -52,7 +52,6 @@ export const useShouldShowMiniSidebar = () =>
 export const useClearSearchTerm = (history, searchTermSetterFunction) => {
   useEffect(() => {
     const unListen = history.listen((location) => {
-      // console.log('new location: ', location)
       if (location.pathname === '/') {
         searchTermSetterFunction('')
       }
@@ -67,7 +66,7 @@ export const useClearSearchTerm = (history, searchTermSetterFunction) => {
 const getSearchTermVideos = async (
   queryString,
   searchResultsSetterFunction,
-  useLocalData
+  useLocalStorage
 ) => {
   try {
     const { data } = await request('/search', {
@@ -78,7 +77,7 @@ const getSearchTermVideos = async (
         q: queryString,
       },
     })
-    if (useLocalData) {
+    if (useLocalStorage) {
       // data contains nextPageToken and totalResults for infinite-scroll
       // but currently not implementing infinite-scroll
       localStorage.setItem(queryString, JSON.stringify(data))
@@ -94,24 +93,33 @@ export const handleSearchFormSubmit = (
   queryString,
   searchResultsSetterFunction,
   history,
-  useLocalData
+  useLocalStorage,
+  pushHistory = true
 ) => {
-  event.preventDefault()
+  if (event) {
+    event.preventDefault()
+  }
 
   let storedResults
 
-  if (useLocalData) {
+  if (useLocalStorage) {
     storedResults = JSON.parse(localStorage.getItem(queryString))
   }
 
-  if (useLocalData && storedResults) {
+  if (useLocalStorage && storedResults) {
     searchResultsSetterFunction(storedResults.items)
   } else {
     // query API with the searchTerm
-    getSearchTermVideos(queryString, searchResultsSetterFunction, useLocalData)
+    getSearchTermVideos(
+      queryString,
+      searchResultsSetterFunction,
+      useLocalStorage
+    )
   }
   // jump to the search Page
-  history.push('/results?search_query=' + queryString)
+  if (pushHistory) {
+    history.push('/results?search_query=' + queryString)
+  }
 }
 
 // called by useGetChannelDetails()

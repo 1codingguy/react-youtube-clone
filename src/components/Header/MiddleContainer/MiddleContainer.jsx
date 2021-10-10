@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { useMediaQuery, Typography } from '@material-ui/core'
+import { useMediaQuery } from '@material-ui/core'
 import styled from 'styled-components'
 import {
   SHOW_SEARCH_BOX_BREAKPOINT,
-  StyledIconButton,
   useIsMobileView,
+  handleSearchFormSubmit as querySearchOnReload,
 } from '../../utils/utils'
 import MobileViewSearchDrawer from './MobileViewSearchDrawer'
 import { SearchContainerWithTextField } from './SearchContainerWithTextField'
 import { MicButton } from './MicButton'
 import { SearchButton } from './SearchButton'
-import { useLocation } from 'react-router'
-import TuneIcon from '@material-ui/icons/Tune'
+import { useLocation, useHistory } from 'react-router'
+import { useAtom } from 'jotai'
+import { searchResultsAtom, searchTermAtom } from '../../../store'
+import { MobileSearchTermContainer } from './MobileSearchTermContainer'
 
 const MiddleContainer = () => {
   const isMobileView = useIsMobileView()
-
   const showSearchBox = useMediaQuery(
     `(min-width: ${SHOW_SEARCH_BOX_BREAKPOINT}px)`
   )
-
   const [isSearchDrawerOpen, setIsSearchDrawerOpen] = useState(false)
 
   const currentLocation = useLocation()
@@ -28,6 +28,26 @@ const MiddleContainer = () => {
   const searchTermFromUrl = new URLSearchParams(currentLocation.search).get(
     'search_query'
   )
+
+  const [, setSearchResults] = useAtom(searchResultsAtom)
+  const [searchTerm, setSearchTerm] = useAtom(searchTermAtom)
+  const history = useHistory()
+
+  // update searchResults and searchTerm if page is refresh, or if clicked on browser's forward and back button
+  useEffect(() => {
+    if (searchTermFromUrl) {
+      querySearchOnReload(
+        null, // event
+        searchTermFromUrl,
+        setSearchResults,
+        history,
+        true, // useLocalStorage
+        false //pushHistory
+      )
+      // update the searchTerm so search box value displayed correct
+      setSearchTerm(searchTermFromUrl)
+    }
+  }, [searchTermFromUrl])
 
   // reset isSearchDrawerOpen to false when >= 657px
   useEffect(() => {
@@ -53,20 +73,9 @@ const MiddleContainer = () => {
         <>
           {/* only show search icon < 657px */}
           {isInSearchResultsPage && isMobileView ? (
-            <ResultsHeaderBar>
-              {/* button with searchTerm that opens up the SearchDrawer */}
-              <MobileHeaderSearchTermButton
-                onClick={() => setIsSearchDrawerOpen(true)}
-              >
-                <MobileHeaderText
-                  style={{ lineHeight: '48px', fontSize: '14px' }}
-                >
-                  {searchTermFromUrl}
-                </MobileHeaderText>
-              </MobileHeaderSearchTermButton>
-              {/* IconButton */}
-              <MobileHeaderFilterButton />
-            </ResultsHeaderBar>
+            <MobileSearchTermContainer
+              {...{ setIsSearchDrawerOpen, searchTerm }}
+            />
           ) : (
             <SearchButton {...{ setIsSearchDrawerOpen }} />
           )}
@@ -84,47 +93,6 @@ const MiddleContainer = () => {
 }
 
 export default MiddleContainer
-
-const MobileHeaderText = styled(Typography)`
-  transform: translateY(-16%);
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: #030303;
-  padding-left: 12px;
-  height: 48px;
-  line-height: 48px;
-  text-align: initial;
-`
-
-const MobileHeaderSearchTermButton = styled.button`
-  padding: 0;
-  border: none;
-  outline: none;
-  font: inherit;
-  text-transform: inherit;
-  color: inherit;
-  background: transparent;
-  flex-grow: 1;
-`
-
-const MobileHeaderFilterButton = () => {
-  return (
-    <StyledIconButton>
-      <TuneIcon />
-    </StyledIconButton>
-  )
-}
-
-const ResultsHeaderBar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: #f1f1f1;
-  border-radius: 4px;
-  height: 32px;
-  flex-grow: 1;
-`
 
 const StyledMiddleContainer = styled.div`
   color: #030303;

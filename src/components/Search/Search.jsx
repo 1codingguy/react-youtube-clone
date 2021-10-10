@@ -1,5 +1,4 @@
 import React from 'react'
-// import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { OuterVideoContainer as SearchContainer } from '../Videos/Videos'
 import { useGlobalContext } from '../../context'
 import { List } from '@material-ui/core'
