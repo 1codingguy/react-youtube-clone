@@ -12,6 +12,9 @@ export const VideoThumbnail = ({ thumbnailImage, formattedDuration }) => {
   )
 }
 const StyledImageContainer = styled(ImageContainer)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
     min-width: 240px;
     max-width: 360px;

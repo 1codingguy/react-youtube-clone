@@ -32,7 +32,10 @@ const Search = () => {
         <VideoCardsContainer component="div">
           {searchResults &&
             searchResults.map((video) => {
-              return <ResultsVideoCard key={video.id.videoId} video={video} />
+              const key = video.id.videoId
+                ? video.id.videoId
+                : video.id.channelId
+              return <ResultsVideoCard key={key} video={video} />
             })}
         </VideoCardsContainer>
       </InnerSearchContainer>
