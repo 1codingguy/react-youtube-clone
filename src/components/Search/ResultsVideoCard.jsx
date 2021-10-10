@@ -43,7 +43,7 @@ const ResultsVideoCard = ({ video }) => {
 
   // get duration and viewCount
   useGetVideoDetails(
-    true, // useLocalStorage
+    false, // useLocalStorage
     videoId,
     setDuration,
     setViewCount
@@ -51,7 +51,7 @@ const ResultsVideoCard = ({ video }) => {
 
   // get channelAvatar for video or get channel info for channel
   useGetChannelDetails(
-    true, // useLocalStorage
+    false, // useLocalStorage
     isVideo,
     videoId,
     channelId,

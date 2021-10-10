@@ -36,7 +36,7 @@ const VideoCard = ({ video }) => {
 
   // Get channelAvatar
   useGetChannelDetails(
-    true, //useLocalStorage
+    false, //useLocalStorage
     true, // isVideo
     videoId,
     channelId,
