@@ -69,5 +69,7 @@ const InnerSearchContainer = styled.div`
   width: 100%;
   max-width: 1096px;
   margin: 0 auto;
-  padding: 16px 24px;
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    padding: 16px 24px;
+  }
 `
