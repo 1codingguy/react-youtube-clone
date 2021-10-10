@@ -1,9 +1,6 @@
-import React from 'react';
-import MicIcon from '@material-ui/icons/Mic';
-import {
-  IconTooltip,
-  StyledIconButton
-} from '../../utils/utils';
+import React from 'react'
+import MicIcon from '@material-ui/icons/Mic'
+import { IconTooltip, StyledIconButton } from '../../utils/utils'
 
 export const MicButton = () => {
   return (
@@ -12,5 +9,5 @@ export const MicButton = () => {
         <MicIcon />
       </StyledIconButton>
     </IconTooltip>
-  );
-};
+  )
+}

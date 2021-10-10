@@ -5,14 +5,15 @@ import { MobileHeaderFilterButton as FilterButton } from './MobileHeaderFilterBu
 
 export const MobileSearchTermContainer = ({
   setIsSearchDrawerOpen,
-  searchTerm,
+  searchTermFromUrl,
 }) => {
   return (
     <OuterContainer>
       {/* button with searchTerm that opens up the SearchDrawer */}
       <SearchTermContainer onClick={() => setIsSearchDrawerOpen(true)}>
         <SearchTermText style={{ lineHeight: '48px', fontSize: '14px' }}>
-          {searchTerm}
+          {/* should use searchTermFromUrl instead of searchTerm, otherwise if searchTerm is amended, the change is reflected in the container, which is not desired */}
+          {searchTermFromUrl}
         </SearchTermText>
       </SearchTermContainer>
       <FilterButton />

@@ -9,15 +9,15 @@ import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
   DEFAULT_FONT_SIZE,
-  StyledIconButton,
   handleSearchFormSubmit,
   useClearSearchTerm,
   TWO_COL_MIN_WIDTH,
 } from '../../utils/utils'
-import ClearIcon from '@material-ui/icons/Clear'
 import { useAtom } from 'jotai'
 import { searchTermAtom, searchResultsAtom } from '../../../store'
 import { useHistory } from 'react-router'
+import { DrawerSearchButton } from './DrawerSearchButton'
+import { DrawerClearButton } from './DrawerClearButton'
 
 const MobileViewSearchDrawer = ({
   isSearchDrawerOpen,
@@ -47,8 +47,8 @@ const MobileViewSearchDrawer = ({
       onClose={() => setIsSearchDrawerOpen(false)}
       transitionDuration={0} // disable the transition animation
     >
-      <MobileToolbar disableGutters>
-        <MobileBackIcon onClick={() => setIsSearchDrawerOpen(false)} />
+      <DrawerToolbar disableGutters>
+        <BackIcon onClick={() => setIsSearchDrawerOpen(false)} />
 
         <form
           style={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
@@ -64,26 +64,18 @@ const MobileViewSearchDrawer = ({
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           {/* add a clear icon to clear the searchTerm if searchTerm is not empty*/}
-          {searchTerm && (
-            <StyledIconButton
-              style={{ padding: '8px' }}
-              onClick={() => setSearchTerm('')}
-            >
-              <ClearIcon />
-            </StyledIconButton>
-          )}
-          <StyledIconButton type="submit" style={{ padding: '8px' }}>
-            <MobileSearchIcon />
-          </StyledIconButton>
+          {searchTerm && <DrawerClearButton {...{ setSearchTerm }} />}
+
+          <DrawerSearchButton />
         </form>
-      </MobileToolbar>
+      </DrawerToolbar>
     </Drawer>
   )
 }
 
 export default MobileViewSearchDrawer
 
-const MobileToolbar = styled(Toolbar)`
+const DrawerToolbar = styled(Toolbar)`
   && {
     min-height: ${MOBILE_VIEW_HEADER_HEIGHT}px;
     @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
@@ -92,7 +84,7 @@ const MobileToolbar = styled(Toolbar)`
   }
 `
 
-const MobileBackIcon = styled(ArrowBackOutlinedIcon)`
+const BackIcon = styled(ArrowBackOutlinedIcon)`
   color: #606060;
   margin: 12px;
 `
@@ -103,7 +95,7 @@ const MobileSearchField = styled(TextField)`
   }
 `
 
-const MobileSearchIcon = styled(SearchOutlinedIcon)`
+export const MobileSearchIcon = styled(SearchOutlinedIcon)`
   color: #606060;
   /* margin: 8px; */
 `

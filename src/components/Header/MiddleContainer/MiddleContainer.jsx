@@ -30,7 +30,7 @@ const MiddleContainer = () => {
   )
 
   const [, setSearchResults] = useAtom(searchResultsAtom)
-  const [searchTerm, setSearchTerm] = useAtom(searchTermAtom)
+  const [, setSearchTerm] = useAtom(searchTermAtom)
   const history = useHistory()
 
   // update searchResults and searchTerm if page is refresh, or if clicked on browser's forward and back button
@@ -64,32 +64,39 @@ const MiddleContainer = () => {
     }
   })
 
-  return (
-    <StyledMiddleContainer>
-      {showSearchBox ? (
-        // only show search box with text field >= 657px
-        <SearchContainerWithTextField />
-      ) : (
-        <>
-          {/* only show search icon < 657px */}
-          {isInSearchResultsPage && isMobileView ? (
-            <MobileSearchTermContainer
-              {...{ setIsSearchDrawerOpen, searchTerm }}
-            />
-          ) : (
-            <SearchButton {...{ setIsSearchDrawerOpen }} />
-          )}
-
-          <MobileViewSearchDrawer
-            {...{ isSearchDrawerOpen, setIsSearchDrawerOpen }}
+  if (isMobileView) {
+    return (
+      <StyledMiddleContainer>
+        {isInSearchResultsPage ? (
+          <MobileSearchTermContainer
+            {...{ setIsSearchDrawerOpen, searchTermFromUrl }}
           />
-        </>
-      )}
-
-      {/* only show mic icon in desktop view */}
-      {isMobileView ? null : <MicButton />}
-    </StyledMiddleContainer>
-  )
+        ) : (
+          <SearchButton {...{ setIsSearchDrawerOpen }} />
+        )}
+        <MobileViewSearchDrawer
+          {...{ isSearchDrawerOpen, setIsSearchDrawerOpen }}
+        />
+      </StyledMiddleContainer>
+    )
+  } else {
+    return (
+      <StyledMiddleContainer>
+        {showSearchBox ? (
+          // only show search box with text field >= 657px
+          <SearchContainerWithTextField />
+        ) : (
+          <>
+            <SearchButton {...{ setIsSearchDrawerOpen }} />
+            <MobileViewSearchDrawer
+              {...{ isSearchDrawerOpen, setIsSearchDrawerOpen }}
+            />
+          </>
+        )}
+        <MicButton />
+      </StyledMiddleContainer>
+    )
+  }
 }
 
 export default MiddleContainer
