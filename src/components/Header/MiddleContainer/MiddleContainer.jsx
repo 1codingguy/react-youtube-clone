@@ -47,7 +47,7 @@ const MiddleContainer = () => {
       // update the searchTerm so search box value displayed correct
       setSearchTerm(searchTermFromUrl)
     }
-  }, [searchTermFromUrl])
+  }, [setSearchTerm, searchTermFromUrl, setSearchResults, history])
 
   // reset isSearchDrawerOpen to false when >= 657px
   useEffect(() => {

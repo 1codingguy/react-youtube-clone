@@ -59,7 +59,7 @@ export const useClearSearchTerm = (history, searchTermSetterFunction) => {
     return () => {
       unListen()
     }
-  }, [])
+  }, [history, searchTermSetterFunction])
 }
 
 // called by handleSearchFormSubmit()
@@ -204,7 +204,14 @@ export const useGetChannelDetails = (
         isVideo
       )
     }
-  }, [channelId])
+  }, [
+    useLocalStorage,
+    isVideo,
+    videoId,
+    channelId,
+    channelAvatarSetterFunction,
+    channelInfoSetterFunction,
+  ])
 }
 
 export const getFormattedDurationString = (duration) => {

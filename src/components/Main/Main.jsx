@@ -30,7 +30,7 @@ const Main = () => {
               setPopularVideosNextPageToken,
             }}
           />
-          {/* <Videos
+          <Videos
             {...{
               selectedChipIndex,
               setSelectedChipIndex,
@@ -39,7 +39,7 @@ const Main = () => {
               popularVideosNextPageToken,
               setPopularVideosNextPageToken,
             }}
-          /> */}
+          />
         </Route>
         <Route path="/results">
           <Search />
