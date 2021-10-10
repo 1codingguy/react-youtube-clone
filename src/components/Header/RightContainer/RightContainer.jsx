@@ -14,24 +14,22 @@ const RightContainer = () => {
   // console.log(currentLocation)
   const isInSearchResultsPage = currentLocation.pathname === '/results'
 
-  return (
-    <StyledRightContainer>
-      {isMobileView ? null : (
-        <>
-          <CreateVideoButton />
-          <AppsButton />
-          <NotificationsButton />
-        </>
-      )}
-      {/* in mobile search result page a more button on the right */}
-      {isInSearchResultsPage && isMobileView ? (
-        <HeaderMoreButton />
-      ) : (
-        // in mobile landing page an avatar button on the right
+  if (isMobileView) {
+    return (
+      <StyledRightContainer>
+        {isInSearchResultsPage ? <HeaderMoreButton /> : <AvatarButton />}
+      </StyledRightContainer>
+    )
+  } else {
+    return (
+      <StyledRightContainer>
+        <CreateVideoButton />
+        <AppsButton />
+        <NotificationsButton />
         <AvatarButton />
-      )}
-    </StyledRightContainer>
-  )
+      </StyledRightContainer>
+    )
+  }
 }
 
 export default RightContainer

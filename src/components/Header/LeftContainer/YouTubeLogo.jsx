@@ -11,9 +11,8 @@ const YouTubeLogo = () => {
   const smallLogoUrl =
     'https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg'
 
-  const currentLocation = useLocation()
   const isMobileView = useIsMobileView()
-
+  const currentLocation = useLocation()
   const isInSearchResultsPage = currentLocation.pathname === '/results'
 
   return (
