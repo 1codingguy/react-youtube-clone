@@ -15,6 +15,8 @@ const StyledImageContainer = styled(ImageContainer)`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  min-width: 160px;
   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
     min-width: 240px;
     max-width: 360px;
