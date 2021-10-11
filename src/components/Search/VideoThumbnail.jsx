@@ -11,13 +11,14 @@ export const VideoThumbnail = ({ thumbnailImage, formattedDuration }) => {
     </StyledImageContainer>
   )
 }
-const StyledImageContainer = styled(ImageContainer)`
+export const StyledImageContainer = styled(ImageContainer)`
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   flex-shrink: 0;
   min-width: 160px;
   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    align-items: center;
     min-width: 240px;
     max-width: 360px;
     margin-right: 12px;
@@ -26,7 +27,7 @@ const StyledImageContainer = styled(ImageContainer)`
   }
 `
 const StyledImg = styled.img`
-  height: 100%;
+  height: auto;
   cursor: pointer;
 
   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {

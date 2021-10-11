@@ -1,29 +1,33 @@
 import React from 'react'
 import styled from 'styled-components'
 import { TWO_COL_MIN_WIDTH } from '../utils/utils'
+import { StyledImageContainer } from './VideoThumbnail'
 
 export const ChannelImage = ({ thumbnailImage }) => {
   return (
-    <StyledChannelImageContainer>
+    <StyledImageContainer>
       <ChannelImg src={thumbnailImage} />
-    </StyledChannelImageContainer>
+    </StyledImageContainer>
   )
 }
-const StyledChannelImageContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  min-width: 160px;
 
-  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
-    min-width: 240px;
-    max-width: 360px;
-    margin-right: 12px;
-    flex: 1 0 50%;
-    width: 100%;
-  }
-`
+// most props same as StyledImageContainer
+// try using StyledImageContainer instead
+// const StyledChannelImageContainer = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   flex-shrink: 0;
+//   min-width: 160px;
+
+//   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+//     min-width: 240px;
+//     max-width: 360px;
+//     margin-right: 12px;
+//     flex: 1 0 50%;
+//     width: 100%;
+//   }
+// `
 const ChannelImg = styled.img`
   height: 90px;
   width: 90px;
