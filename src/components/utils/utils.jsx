@@ -96,6 +96,7 @@ export const handleSearchFormSubmit = (
   useLocalStorage,
   pushHistory = true
 ) => {
+  // reload on refresh, back, forward has no event object, only form submit does
   if (event) {
     event.preventDefault()
   }
@@ -116,7 +117,7 @@ export const handleSearchFormSubmit = (
       useLocalStorage
     )
   }
-  // jump to the search Page
+  // no need to push history when reload on refresh, back, forward
   if (pushHistory) {
     history.push('/results?search_query=' + queryString)
   }

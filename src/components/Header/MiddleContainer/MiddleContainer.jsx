@@ -41,7 +41,7 @@ const MiddleContainer = () => {
         searchTermFromUrl,
         setSearchResults,
         history,
-        false, // useLocalStorage
+        true, // useLocalStorage
         false //pushHistory
       )
       // update the searchTerm so search box value displayed correct
