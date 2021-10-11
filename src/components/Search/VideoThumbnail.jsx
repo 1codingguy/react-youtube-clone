@@ -15,7 +15,6 @@ export const StyledImageContainer = styled(ImageContainer)`
   display: flex;
   align-items: stretch;
   justify-content: center;
-  flex-shrink: 0;
   width: 160px;
   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
     align-items: center;
