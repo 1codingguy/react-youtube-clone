@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline'
 

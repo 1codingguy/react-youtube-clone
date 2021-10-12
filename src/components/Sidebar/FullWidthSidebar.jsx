@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
 import {
@@ -11,6 +11,7 @@ import {
 import { SidebarFirstPart } from './SidebarFirstPart'
 import { SidebarSecondPart } from './SidebarSecondPart'
 import { SidebarThirdPart } from './SidebarThirdPart'
+import { CUSTOM_SCROLLBAR_CSS } from '../../CUSTOM_SCROLLBAR_CSS'
 
 const FullWidthSidebar = () => {
   const shouldOpenSidebarDrawer = useShouldOpenSidebarDrawer()
@@ -35,8 +36,8 @@ const StyledFullWidthSidebar = styled.div`
   width: ${FULL_SIDEBAR_WIDTH}px;
   height: ${(props) =>
     props.drawer ? '100%' : `calc(100% - ${DESKTOP_VIEW_HEADER_HEIGHT}px)`};
-  overflow-y: scroll;
   background-color: white;
+  ${CUSTOM_SCROLLBAR_CSS}
 `
 
 export const DividerWithMargin = styled(Divider)`

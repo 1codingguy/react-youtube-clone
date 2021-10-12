@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { request } from '../utils/api'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { Typography, Avatar } from '@material-ui/core'
 import { StyledCardHeader, VideoTitle } from '../Videos/VideoCard'
 import { TWO_COL_MIN_WIDTH } from '../utils/utils'

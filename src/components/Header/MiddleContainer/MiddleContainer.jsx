@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from '@material-ui/core'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import {
   SHOW_SEARCH_BOX_BREAKPOINT,
   useIsMobileView,

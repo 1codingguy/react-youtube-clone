@@ -1,6 +1,6 @@
 import React from 'react'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { FooterIcons } from './FooterIcons'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Slide from '@material-ui/core/Slide'

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import ChipsBar from '../ChipsBar/ChipsBar'
 import Videos from '../Videos/Videos'
 import {
@@ -9,7 +9,7 @@ import {
   TWO_COL_MIN_WIDTH,
 } from '../utils/utils'
 import SidebarToShow from '../Sidebar/SidebarToShow'
-import Search from '../Search/Search'
+import SearchPage from '../../pages/SearchPage'
 
 const Main = () => {
   const [selectedChipIndex, setSelectedChipIndex] = useState(0)
@@ -42,7 +42,7 @@ const Main = () => {
           />
         </Route>
         <Route path="/results">
-          <Search />
+          <SearchPage />
         </Route>
         {/* original YouTube has a 'something went wrong' page instead of redirecting back to the homepage */}
         <Route path="*">

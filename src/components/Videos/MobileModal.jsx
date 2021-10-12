@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from '@material-ui/core/Modal'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { List, ListItem, Typography } from '@material-ui/core'
 
 export const MobileModal = ({

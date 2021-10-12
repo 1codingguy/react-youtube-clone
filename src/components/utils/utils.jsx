@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { useMediaQuery } from '@material-ui/core'
 import Tooltip from '@material-ui/core/Tooltip'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'

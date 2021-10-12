@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import YouTubeLogo from './YouTubeLogo'
 import SidebarDrawer from '../../Sidebar/SidebarDrawer'
 import HamburgerMenuIcon from './HamburgerMenuIcon'

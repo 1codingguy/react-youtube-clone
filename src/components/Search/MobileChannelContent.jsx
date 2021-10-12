@@ -1,7 +1,7 @@
 import React from 'react'
 import he from 'he'
 import numeral from 'numeral'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { TWO_COL_MIN_WIDTH } from '../utils/utils'
 import { SearchCardHeader, SearchVideoTitle } from './searchUtils'
 

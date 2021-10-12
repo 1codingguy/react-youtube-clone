@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Menu from '@material-ui/core/Menu'
 import Divider from '@material-ui/core/Divider'
 import { DEFAULT_FONT_SIZE } from '../../../utils/utils'
@@ -16,9 +16,9 @@ const AppsMenu = ({ anchorAppsButton, handleAppsMenuClose }) => {
     >
       <AppsMenuTop onClick={handleAppsMenuClose} />
       <Divider />
-      <AppsMenuMiddle onClick={handleAppsMenuClose}/>
+      <AppsMenuMiddle onClick={handleAppsMenuClose} />
       <Divider />
-      <AppsMenuBottom onClick={handleAppsMenuClose}/>
+      <AppsMenuBottom onClick={handleAppsMenuClose} />
     </StyledAppsMenu>
   )
 }

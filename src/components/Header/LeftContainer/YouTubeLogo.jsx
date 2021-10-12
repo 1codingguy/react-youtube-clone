@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Tooltip from '@material-ui/core/Tooltip'
 import { TWO_COL_MIN_WIDTH } from '../../utils/utils'
 import { useIsMobileView } from '../../utils/utils'

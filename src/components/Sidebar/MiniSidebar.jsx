@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import { FooterIcons as MiniSidebarIcons } from '../Footer/FooterIcons'
 import { MINI_SIDEBAR_WIDTH, DESKTOP_VIEW_HEADER_HEIGHT } from '../utils/utils'

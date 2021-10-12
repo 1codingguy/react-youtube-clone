@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Drawer from '@material-ui/core/Drawer'
 import FullWidthSidebar from './FullWidthSidebar'
 import YouTubeLogo from '../Header/LeftContainer/YouTubeLogo'

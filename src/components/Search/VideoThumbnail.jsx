@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { ImageContainer, DurationContainer } from '../Videos/VideoCard'
 import { TWO_COL_MIN_WIDTH } from '../utils/utils'
 
@@ -13,9 +13,10 @@ export const VideoThumbnail = ({ thumbnailImage, formattedDuration }) => {
 }
 export const StyledImageContainer = styled(ImageContainer)`
   display: flex;
-  align-items: stretch;
+  /* align-items: stretch; */
   justify-content: center;
   width: 160px;
+  height: 90px;
   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
     align-items: center;
     min-width: 240px;

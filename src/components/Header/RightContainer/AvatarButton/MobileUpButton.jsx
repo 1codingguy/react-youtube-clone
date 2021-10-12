@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined'
 import Fab from '@material-ui/core/Fab'
 

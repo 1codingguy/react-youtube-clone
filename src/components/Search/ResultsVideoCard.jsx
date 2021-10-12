@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { useMediaQuery } from '@material-ui/core'
 import {
   TWO_COL_MIN_WIDTH,

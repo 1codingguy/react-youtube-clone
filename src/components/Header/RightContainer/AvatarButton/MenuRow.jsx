@@ -1,5 +1,5 @@
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import ListItemText from '@material-ui/core/ListItemText'
 import { StyledMenuItem, StyledListItemIcon } from '../../../utils/utils'
 

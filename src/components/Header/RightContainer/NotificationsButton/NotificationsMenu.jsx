@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Popover from '@material-ui/core/Popover'
 import Paper from '@material-ui/core/Paper'
 import { NotificationsContent } from './NotificationsContent'
@@ -9,8 +9,6 @@ const NotificationsMenu = ({
   anchorNotificationsButton,
   handleNotificationsMenuClose,
 }) => {
-
-
   return (
     <PopUpMenu
       anchorEl={anchorNotificationsButton}

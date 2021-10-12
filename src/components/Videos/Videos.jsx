@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { useGlobalContext } from '../../context'
 import { ThemeProvider } from '@material-ui/styles'
 import { Grid } from '@material-ui/core'

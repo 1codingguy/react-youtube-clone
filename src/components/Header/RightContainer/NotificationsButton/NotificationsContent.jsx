@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined'

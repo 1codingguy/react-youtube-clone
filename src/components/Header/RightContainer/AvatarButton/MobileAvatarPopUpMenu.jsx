@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Popover from '@material-ui/core/Popover'
 import Divider from '@material-ui/core/Divider'
 import { AvatarAccountInfo } from './AvatarAccountInfo'
