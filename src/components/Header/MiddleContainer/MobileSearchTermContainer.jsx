@@ -1,7 +1,8 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components/macro'
-import { MobileHeaderFilterButton as FilterButton } from './MobileHeaderFilterButton'
+import { StyledIconButton } from '../../utils/utils'
+import TuneIcon from '@material-ui/icons/Tune'
 
 export const MobileSearchTermContainer = ({
   setIsSearchDrawerOpen,
@@ -16,10 +17,20 @@ export const MobileSearchTermContainer = ({
           {searchTermFromUrl}
         </SearchTermText>
       </SearchTermContainer>
-      <FilterButton />
+      <SearchPageFilterButton />
     </OuterContainer>
   )
 }
+
+const SearchPageFilterButton = () => {
+  return(
+    <StyledIconButton style={{alignSelf: 'center'}}>
+      <TuneIcon />
+    </StyledIconButton>
+  )
+}
+
+
 const SearchTermText = styled(Typography)`
   transform: translateY(-16%);
   display: block;

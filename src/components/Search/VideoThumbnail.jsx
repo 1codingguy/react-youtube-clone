@@ -12,22 +12,16 @@ export const VideoThumbnail = ({ thumbnailImage, formattedDuration }) => {
   )
 }
 export const StyledImageContainer = styled(ImageContainer)`
-  display: flex;
-  /* align-items: stretch; */
-  justify-content: center;
-  width: 160px;
-  height: 90px;
+  display: grid;
+  place-items: center;
+  grid-template-columns: minmax(160px, 160px);
   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
-    align-items: center;
-    min-width: 240px;
-    max-width: 360px;
+    grid-template-columns: minmax(240px, 360px);
     margin-right: 12px;
-    flex: 1 0 50%;
-    width: 100%;
   }
 `
 const StyledImg = styled.img`
-  height: auto;
+  width: 100%;
   cursor: pointer;
 
   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {

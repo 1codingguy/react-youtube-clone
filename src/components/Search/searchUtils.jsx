@@ -121,6 +121,7 @@ export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  flex-basis: 60%;
 `
 
 export const SearchCardHeader = styled(StyledCardHeader)`

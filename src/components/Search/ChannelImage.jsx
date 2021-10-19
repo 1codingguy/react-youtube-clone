@@ -11,23 +11,6 @@ export const ChannelImage = ({ thumbnailImage }) => {
   )
 }
 
-// most props same as StyledImageContainer
-// try using StyledImageContainer instead
-// const StyledChannelImageContainer = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   flex-shrink: 0;
-//   min-width: 160px;
-
-//   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
-//     min-width: 240px;
-//     max-width: 360px;
-//     margin-right: 12px;
-//     flex: 1 0 50%;
-//     width: 100%;
-//   }
-// `
 const ChannelImg = styled.img`
   height: 90px;
   width: 90px;
