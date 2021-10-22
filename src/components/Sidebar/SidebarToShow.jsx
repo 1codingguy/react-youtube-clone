@@ -1,11 +1,23 @@
 import React from 'react'
 import FullWidthSidebar from './FullWidthSidebar'
 import MiniSidebar from './MiniSidebar'
-import { useGlobalContext } from '../../context'
+import {
+  useShouldShowMiniSidebar,
+  useMinWidthToShowFullSidebar,
+} from '../utils/utils'
+import { userSettingToShowFullSidebarAtom } from '../../store'
+import { useAtom } from 'jotai'
 
 // determine to show MiniSidebar or FullWidthSidebar
 const SidebarToShow = () => {
-  const { shouldShowFullSidebar, shouldShowMiniSidebar } = useGlobalContext()
+  const shouldShowMiniSidebar = useShouldShowMiniSidebar()
+  const minWidthToShowFullSidebar = useMinWidthToShowFullSidebar()
+  const [userSettingToShowFullSidebar] = useAtom(
+    userSettingToShowFullSidebarAtom
+  )
+  // combine user setting and width criteria
+  const shouldShowFullSidebar =
+    minWidthToShowFullSidebar && userSettingToShowFullSidebar
 
   // if not show FullWidthSidebar, then either show MiniSidebar or nothing
   return shouldShowFullSidebar ? (

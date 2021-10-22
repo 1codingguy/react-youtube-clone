@@ -1,6 +1,5 @@
 import React from 'react'
 import { OuterVideoContainer as SearchContainer } from '../components/Videos/Videos'
-import { useGlobalContext } from '../context'
 import { List } from '@material-ui/core'
 import styled from 'styled-components/macro'
 import ResultsVideoCard from '../components/Search/ResultsVideoCard'
@@ -9,14 +8,17 @@ import { useAtom } from 'jotai'
 import { TWO_COL_MIN_WIDTH, useIsMobileView } from '../components/utils/utils'
 import TuneIcon from '@material-ui/icons/Tune'
 import { FilterButton } from '../components/Search/FilterButton'
+import { userSettingToShowFullSidebarAtom } from '../store'
 
 const SearchPage = () => {
-  const { marginLeftToOffset } = useGlobalContext()
   const isMobileView = useIsMobileView()
   const [searchResults] = useAtom(searchResultsAtom)
+  const [userSettingToShowFullSidebar] = useAtom(
+    userSettingToShowFullSidebarAtom
+  )
 
   return (
-    <SearchContainer marginLeftToOffset={marginLeftToOffset}>
+    <SearchContainer showFullSidebar={userSettingToShowFullSidebar}>
       <InnerSearchContainer>
         {!isMobileView && (
           <FilterButton

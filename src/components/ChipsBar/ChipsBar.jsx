@@ -1,6 +1,6 @@
 import React from 'react'
 import Tabs from '@material-ui/core/Tabs'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import {
   HideOnScroll,
   MOBILE_VIEW_HEADER_HEIGHT as MOBILE_CATEGORIES_BAR_HEIGHT,
@@ -8,9 +8,14 @@ import {
   TWO_COL_MIN_WIDTH,
   HEADER_OPACITY,
   CHIPS_BAR_MAX_WIDTH,
+  FULL_SIDEBAR_WIDTH,
+  MINI_SIDEBAR_WIDTH,
+  SHOW_FULL_SIDEBAR_BREAKPOINT,
+  SHOW_MINI_SIDEBAR_BREAKPOINT,
 } from '../utils/utils'
-import { useGlobalContext } from '../../context'
 import { Chips } from './Chips'
+import { useAtom } from 'jotai'
+import { userSettingToShowFullSidebarAtom } from '../../store'
 
 const ChipsBar = ({
   selectedChipIndex,
@@ -18,11 +23,15 @@ const ChipsBar = ({
   setLandingPageVideos,
   setPopularVideosNextPageToken,
 }) => {
-  const { marginLeftToOffset } = useGlobalContext()
+  const [userSettingToShowFullSidebar] = useAtom(
+    userSettingToShowFullSidebarAtom
+  )
 
   return (
     <HideOnScroll>
-      <ChipsContainer marginLeftToOffset={marginLeftToOffset}>
+      <ChipsContainer
+        showFullSidebar={userSettingToShowFullSidebar}
+      >
         <StyledTabs
           variant="scrollable"
           scrollButtons="off"
@@ -71,13 +80,27 @@ const ChipsContainer = styled.div`
     transition: none !important;
     opacity: ${HEADER_OPACITY};
   }
-  width: calc(100vw - ${(props) => props.marginLeftToOffset}px);
   position: fixed;
-  margin-left: ${(props) => props.marginLeftToOffset}px;
   background-color: white;
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   z-index: 1000; // 100 less than AppBar, to show the AppBar shadow, as well as to prevent Avatar and IconButton appears on top of the ChipsBar
+
+  /* 792px */
+  @media screen and (min-width: ${SHOW_MINI_SIDEBAR_BREAKPOINT}px) {
+    width: calc(100vw - ${MINI_SIDEBAR_WIDTH}px);
+    margin-left: ${MINI_SIDEBAR_WIDTH}px;
+  }
+  /* 1313px */
+  @media screen and (min-width: ${SHOW_FULL_SIDEBAR_BREAKPOINT}px) {
+    width: calc(
+      100vw -
+        ${({ showFullSidebar }) =>
+          showFullSidebar ? FULL_SIDEBAR_WIDTH : MINI_SIDEBAR_WIDTH}px
+    );
+    margin-left: ${({ showFullSidebar }) =>
+      showFullSidebar ? FULL_SIDEBAR_WIDTH : MINI_SIDEBAR_WIDTH}px;
+  }
 
   /* This doesn't even show in dev-tool if defined under StyledTabs */
   .MuiTabs-root {
