@@ -9,8 +9,6 @@ function App() {
   const isMobileView = useIsMobileView()
 
   return (
-    // need to add overflowY: hidden here otherwise footer position is not correct
-    // style={{ overflowY: 'hidden' }}
     <div className="App">
       <Header />
       <Main />

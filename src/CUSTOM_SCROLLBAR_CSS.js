@@ -37,4 +37,4 @@ export const CUSTOM_SCROLLBAR_CSS = `
     background: none;
   }
 }
-`;
+`
