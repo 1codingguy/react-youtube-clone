@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import { createGlobalStyle } from 'styled-components/macro'
-import { ContextProvider } from './context'
 import { BrowserRouter } from 'react-router-dom'
 
 const GlobalStyle = createGlobalStyle`
@@ -16,10 +15,8 @@ const GlobalStyle = createGlobalStyle`
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ContextProvider>
-        <GlobalStyle />
-        <App />
-      </ContextProvider>
+      <GlobalStyle />
+      <App />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

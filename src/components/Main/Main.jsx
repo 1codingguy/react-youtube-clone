@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import ChipsBar from '../ChipsBar/ChipsBar'
 import Videos from '../Videos/Videos'
@@ -16,9 +16,10 @@ const Main = () => {
   const [landingPageVideos, setLandingPageVideos] = useState([])
   const [popularVideosNextPageToken, setPopularVideosNextPageToken] =
     useState(null)
+  const isInSearchResultsPage = useLocation().pathname === '/results'
 
   return (
-    <StyledMain>
+    <StyledMain isInSearchResultsPage={isInSearchResultsPage}>
       <SidebarToShow />
       <Switch>
         <Route path="/" exact>
@@ -56,8 +57,10 @@ const Main = () => {
 export default Main
 
 const StyledMain = styled.div`
-  padding-top: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+  padding-top: ${({ isInSearchResultsPage }) =>
+    isInSearchResultsPage ? 0 : MOBILE_VIEW_HEADER_HEIGHT}px;
   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
-    padding-top: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
+    padding-top: ${({ isInSearchResultsPage }) =>
+      isInSearchResultsPage ? 0 : DESKTOP_VIEW_HEADER_HEIGHT}px;
   }
 `

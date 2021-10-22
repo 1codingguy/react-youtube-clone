@@ -33,3 +33,10 @@ TestHeader.jsx
 
 # API key
 .env
+
+# system config for intellisense speed
+jsconfig.json
+
+# Rewrite my own provider/ maxin later to replace AppProvider
+AppStylesProvider.js
+src/components/ChipsBar/failedStyling.js

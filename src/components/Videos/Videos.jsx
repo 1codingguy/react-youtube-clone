@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
-import { useGlobalContext } from '../../context'
 import { ThemeProvider } from '@material-ui/styles'
 import { Grid } from '@material-ui/core'
 import { columnBreakpoints } from './columnBreakpoints'
@@ -14,11 +13,19 @@ import {
   FOUR_COL_MAX_WIDTH,
   SIX_COL_MIN_WIDTH,
   SIX_COL_MAX_WIDTH,
+  MOBILE_VIEW_HEADER_HEIGHT,
+  DESKTOP_VIEW_HEADER_HEIGHT,
+  SHOW_MINI_SIDEBAR_BREAKPOINT,
+  MINI_SIDEBAR_WIDTH,
+  SHOW_FULL_SIDEBAR_BREAKPOINT,
+  FULL_SIDEBAR_WIDTH,
 } from '../utils/utils'
 import { request } from '../utils/api'
 import countries from '../ChipsBar/chipsArray'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { GridItem } from './GridItem'
+import { useAtom } from 'jotai'
+import { userSettingToShowFullSidebarAtom } from '../../store'
 
 const Videos = ({
   selectedChipIndex,
@@ -29,7 +36,9 @@ const Videos = ({
 }) => {
   const VIDEOS_PER_QUERY = 24
   const isMobileView = useIsMobileView()
-  const { marginTopToOffset, marginLeftToOffset } = useGlobalContext()
+  const [userSettingToShowFullSidebar] = useAtom(
+    userSettingToShowFullSidebarAtom
+  )
 
   // total number of videos returned by API query
   const [popularVideosTotalResults, setPopularVideosTotalResults] = useState(0)
@@ -73,8 +82,7 @@ const Videos = ({
 
   return (
     <OuterVideoContainer
-      marginTopToOffset={marginTopToOffset}
-      marginLeftToOffset={marginLeftToOffset}
+      showFullSidebar={userSettingToShowFullSidebar}
     >
       <ThemeProvider theme={columnBreakpoints}>
         <InnerVideoContainer>
@@ -106,9 +114,24 @@ export default Videos
 
 export const OuterVideoContainer = styled.div`
   background-color: #f9f9f9;
-  padding-top: ${(props) => props.marginTopToOffset}px;
-  padding-left: ${(props) => props.marginLeftToOffset}px;
   width: 100%;
+  padding-top: ${MOBILE_VIEW_HEADER_HEIGHT}px;
+
+  /* 496px */
+  @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
+    padding-top: ${DESKTOP_VIEW_HEADER_HEIGHT}px;
+  }
+
+  /* 792px */
+  @media screen and (min-width: ${SHOW_MINI_SIDEBAR_BREAKPOINT}px) {
+    padding-left: ${MINI_SIDEBAR_WIDTH}px;
+  }
+
+  /* 1313px */
+  @media screen and (min-width: ${SHOW_FULL_SIDEBAR_BREAKPOINT}px) {
+    padding-left: ${({ showFullSidebar }) =>
+      showFullSidebar ? FULL_SIDEBAR_WIDTH : MINI_SIDEBAR_WIDTH}px;
+  }
 `
 
 const InnerVideoContainer = styled.div`
