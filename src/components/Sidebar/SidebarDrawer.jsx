@@ -42,7 +42,7 @@ const SidebarDrawer = () => {
         <YouTubeLogo />
       </DrawerHeader>
       {/* drawer prop to change height calculation */}
-      <FullWidthSidebar drawer />
+      <FullWidthSidebar isDrawer={isSidebarDrawerOpen} />
     </Drawer>
   )
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import ChipsBar from '../ChipsBar/ChipsBar'
-import Videos from '../Videos/Videos'
+import LandingPageVideos from '../../pages/LandingPage'
 import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
@@ -31,7 +31,7 @@ const Main = () => {
               setPopularVideosNextPageToken,
             }}
           />
-          <Videos
+          <LandingPageVideos
             {...{
               selectedChipIndex,
               setSelectedChipIndex,

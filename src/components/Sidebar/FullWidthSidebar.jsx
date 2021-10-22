@@ -12,14 +12,21 @@ import { SidebarFirstPart } from './SidebarFirstPart'
 import { SidebarSecondPart } from './SidebarSecondPart'
 import { SidebarThirdPart } from './SidebarThirdPart'
 import { CUSTOM_SCROLLBAR_CSS } from '../../CUSTOM_SCROLLBAR_CSS'
+import { useLocation } from 'react-router-dom'
+import { isSidebarDrawerOpenAtom } from '../../store'
+import { useAtom } from 'jotai'
 
 const FullWidthSidebar = () => {
   const shouldOpenSidebarDrawer = useShouldOpenSidebarDrawer()
+  const isInSearchResultsPage = useLocation().pathname === '/results'
+  const [isSidebarDrawerOpen] = useAtom(isSidebarDrawerOpenAtom)
 
   return (
     <StyledFullWidthSidebar
       // no position fixed for FullWidthSidebar in a drawer
-      style={shouldOpenSidebarDrawer ? null : { position: 'fixed' }}
+      isDrawer={isSidebarDrawerOpen}
+      isFullSidebar={!shouldOpenSidebarDrawer}
+      isInSearchResultsPage={isInSearchResultsPage}
     >
       <SidebarFirstPart />
       <Divider />
@@ -33,9 +40,16 @@ const FullWidthSidebar = () => {
 export default FullWidthSidebar
 
 const StyledFullWidthSidebar = styled.div`
+  position: ${({ isFullSidebar }) => (isFullSidebar ? `fixed` : null)};
+  padding-top: ${({ isInSearchResultsPage, isDrawer }) =>
+    isDrawer ? 0 : isInSearchResultsPage ? 56 : 0}px;
   width: ${FULL_SIDEBAR_WIDTH}px;
-  height: ${(props) =>
-    props.drawer ? '100%' : `calc(100% - ${DESKTOP_VIEW_HEADER_HEIGHT}px)`};
+  height: ${({ isDrawer, isInSearchResultsPage }) =>
+    isDrawer
+      ? '100%'
+      : isInSearchResultsPage
+      ? '100%'
+      : `calc(100% - ${DESKTOP_VIEW_HEADER_HEIGHT}px)`};
   background-color: white;
   ${CUSTOM_SCROLLBAR_CSS}
 `

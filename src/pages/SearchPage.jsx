@@ -1,5 +1,5 @@
 import React from 'react'
-import { OuterVideoContainer as SearchContainer } from '../components/Videos/Videos'
+import { OuterVideoContainer as SearchContainer } from './LandingPage'
 import { List } from '@material-ui/core'
 import styled from 'styled-components/macro'
 import ResultsVideoCard from '../components/Search/ResultsVideoCard'

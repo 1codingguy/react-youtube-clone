@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { ThemeProvider } from '@material-ui/styles'
 import { Grid } from '@material-ui/core'
-import { columnBreakpoints } from './columnBreakpoints'
+import { columnBreakpoints } from '../components/Videos/columnBreakpoints'
 import {
   useIsMobileView,
   TWO_COL_MIN_WIDTH,
@@ -19,13 +19,13 @@ import {
   MINI_SIDEBAR_WIDTH,
   SHOW_FULL_SIDEBAR_BREAKPOINT,
   FULL_SIDEBAR_WIDTH,
-} from '../utils/utils'
-import { request } from '../utils/api'
-import countries from '../ChipsBar/chipsArray'
+} from '../components/utils/utils'
+import { request } from '../components/utils/api'
+import countries from '../components/ChipsBar/chipsArray'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { GridItem } from './GridItem'
+import { GridItem } from '../components/Videos/GridItem'
 import { useAtom } from 'jotai'
-import { userSettingToShowFullSidebarAtom } from '../../store'
+import { userSettingToShowFullSidebarAtom } from '../store'
 
 const Videos = ({
   selectedChipIndex,
@@ -75,7 +75,7 @@ const Videos = ({
     getPopularVideos()
   }, [selectedChipIndex])
 
-  // logic to determine if more query needed for infinite scroll
+  // determine if more query needed for infinite scroll
   let shouldGetMoreResults =
     (popularVideosTotalResults - landingPageVideos.length) / VIDEOS_PER_QUERY >=
     1

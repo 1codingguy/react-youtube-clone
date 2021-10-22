@@ -11,7 +11,6 @@ import { HeaderMoreButton } from './HeaderMoreButton'
 const RightContainer = () => {
   const isMobileView = useIsMobileView()
   const currentLocation = useLocation()
-  // console.log(currentLocation)
   const isInSearchResultsPage = currentLocation.pathname === '/results'
 
   if (isMobileView) {
