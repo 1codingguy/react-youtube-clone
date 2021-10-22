@@ -95,17 +95,24 @@ const ResultsVideoCard = ({ video }) => {
             {...{ channelTitle, isMobileView, channelInfo }}
           />
         ) : (
-          <DesktopChannelContent {...{ channelTitle, channelInfo }} />
+          <DeskChannelContentContainer>
+            <DesktopChannelContent {...{ channelTitle, channelInfo }} />
+            {/* Red subscribe button if it's a channel on desktop view */}
+            {!isMobileView && showSubscribeButton && <ChannelSubscribeButton />}
+          </DeskChannelContentContainer>
         )}
-
-        {/* Red subscribe button if it's a channel on desktop view */}
-        {!isMobileView && showSubscribeButton && <ChannelSubscribeButton />}
       </StyledCard>
     )
   }
 }
 
 export default ResultsVideoCard
+
+const DeskChannelContentContainer = styled.div`
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 60%;
+`
 
 const StyledCard = styled.div`
   margin-top: 12px;
