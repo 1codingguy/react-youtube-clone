@@ -73,6 +73,7 @@ const StyledTabs = styled(Tabs)`
 `
 
 const ChipsContainer = styled.div`
+  width: 100vw;
   height: ${MOBILE_CATEGORIES_BAR_HEIGHT}px;
   @media screen and (min-width: ${TWO_COL_MIN_WIDTH}px) {
     height: ${DESKTOP_CATEGORIES_BAR_HEIGHT}px;
