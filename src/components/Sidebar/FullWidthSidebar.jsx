@@ -42,7 +42,7 @@ export default FullWidthSidebar
 const StyledFullWidthSidebar = styled.div`
   position: ${({ isFullSidebar }) => (isFullSidebar ? `fixed` : null)};
   padding-top: ${({ isInSearchResultsPage, isDrawer }) =>
-    isDrawer ? 0 : isInSearchResultsPage ? 56 : 0}px;
+    isDrawer ? 0 : isInSearchResultsPage ? DESKTOP_VIEW_HEADER_HEIGHT : 0}px;
   width: ${FULL_SIDEBAR_WIDTH}px;
   height: ${({ isDrawer, isInSearchResultsPage }) =>
     isDrawer
@@ -51,7 +51,10 @@ const StyledFullWidthSidebar = styled.div`
       ? '100%'
       : `calc(100% - ${DESKTOP_VIEW_HEADER_HEIGHT}px)`};
   background-color: white;
-  ${CUSTOM_SCROLLBAR_CSS}
+  &:hover {
+    /* scrollbar only visible when hover on FullSidebar. In drawer sidebar always visible */
+    ${({ isDrawer }) => !isDrawer && CUSTOM_SCROLLBAR_CSS}
+  }
 `
 
 export const DividerWithMargin = styled(Divider)`
