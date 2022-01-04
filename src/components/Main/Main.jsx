@@ -10,6 +10,7 @@ import {
 } from '../utils/utils'
 import SidebarToShow from '../Sidebar/SidebarToShow'
 import SearchPage from '../../pages/SearchPage'
+import ScrollToTop from '../ScrollToTop'
 
 const Main = () => {
   const [selectedChipIndex, setSelectedChipIndex] = useState(0)
@@ -20,9 +21,10 @@ const Main = () => {
 
   return (
     <StyledMain isInSearchResultsPage={isInSearchResultsPage}>
+      <ScrollToTop />
       <SidebarToShow />
       <Switch>
-        <Route path="/" exact>
+        <Route path='/' exact>
           <ChipsBar
             {...{
               selectedChipIndex,
@@ -42,12 +44,12 @@ const Main = () => {
             }}
           />
         </Route>
-        <Route path="/results">
+        <Route path='/results'>
           <SearchPage />
         </Route>
         {/* original YouTube has a 'something went wrong' page instead of redirecting back to the homepage */}
-        <Route path="*">
-          <Redirect to="/" />
+        <Route path='*'>
+          <Redirect to='/' />
         </Route>
       </Switch>
     </StyledMain>

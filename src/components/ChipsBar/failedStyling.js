@@ -1,4 +1,5 @@
 // Unable to style the arrows as I like, thus not using
+// TODO: https://mui.com/api/tabs/ ScrollButtonComponent={<ScrollButtonWithGradientBackground/>}
 const TabsWithArrows = styled(Tabs)`
   .Mui-disabled {
     /* width: 10px;
