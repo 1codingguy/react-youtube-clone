@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import { miniSidebarRows as footerColumns } from '../Sidebar/sidebarData'
-import { TWO_COL_MIN_WIDTH } from '../utils/utils'
+import { TWO_COL_MIN_WIDTH } from '../../utils/utils'
 import { Link } from 'react-router-dom'
 
 export const FooterIcons = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import MicIcon from '@material-ui/icons/Mic'
-import { IconTooltip, StyledIconButton } from '../../utils/utils'
+import { IconTooltip, StyledIconButton } from '../../../utils/utils'
 
 export const MicButton = () => {
   return (

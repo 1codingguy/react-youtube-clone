@@ -7,7 +7,7 @@ import {
   MOBILE_VIEW_HEADER_HEIGHT,
   DESKTOP_VIEW_HEADER_HEIGHT,
   TWO_COL_MIN_WIDTH,
-} from '../utils/utils'
+} from '../../utils/utils'
 import SidebarToShow from '../Sidebar/SidebarToShow'
 import SearchPage from '../../pages/SearchPage'
 import ScrollToTop from '../ScrollToTop'

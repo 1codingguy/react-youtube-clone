@@ -19,8 +19,8 @@ import {
   MINI_SIDEBAR_WIDTH,
   SHOW_FULL_SIDEBAR_BREAKPOINT,
   FULL_SIDEBAR_WIDTH,
-} from '../components/utils/utils'
-import { request } from '../components/utils/api'
+} from '../utils/utils'
+import { request } from '../utils/api'
 import countries from '../components/ChipsBar/chipsArray'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { GridItem } from '../components/Videos/GridItem'

@@ -5,7 +5,7 @@ import {
   StyledIconButton,
   useShouldOpenSidebarDrawer,
   SHOW_FULL_SIDEBAR_BREAKPOINT,
-} from '../../utils/utils'
+} from '../../../utils/utils'
 import {
   isSidebarDrawerOpenAtom,
   userSettingToShowFullSidebarAtom,

@@ -4,7 +4,7 @@ import MiniSidebar from './MiniSidebar'
 import {
   useShouldShowMiniSidebar,
   useMinWidthToShowFullSidebar,
-} from '../utils/utils'
+} from '../../utils/utils'
 import { userSettingToShowFullSidebarAtom } from '../../store'
 import { useAtom } from 'jotai'
 

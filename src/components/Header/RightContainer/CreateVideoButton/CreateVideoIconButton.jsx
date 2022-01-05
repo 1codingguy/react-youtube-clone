@@ -1,6 +1,6 @@
 import React from 'react'
 import VideoCallIcon from '@material-ui/icons/VideoCall'
-import { IconTooltip, StyledIconButton } from '../../../utils/utils'
+import { IconTooltip, StyledIconButton } from '../../../../utils/utils'
 
 function CreateVideoIconButton({ setAnchorVideoButton }) {
 

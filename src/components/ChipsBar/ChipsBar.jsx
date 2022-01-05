@@ -12,7 +12,7 @@ import {
   MINI_SIDEBAR_WIDTH,
   SHOW_FULL_SIDEBAR_BREAKPOINT,
   SHOW_MINI_SIDEBAR_BREAKPOINT,
-} from '../utils/utils'
+} from '../../utils/utils'
 import { Chips } from './Chips'
 import { useAtom } from 'jotai'
 import { userSettingToShowFullSidebarAtom } from '../../store'

@@ -1,7 +1,7 @@
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import styled from 'styled-components/macro'
 import ListItemText from '@material-ui/core/ListItemText'
-import { StyledMenuItem, StyledListItemIcon } from '../../../utils/utils'
+import { StyledMenuItem, StyledListItemIcon } from '../../../../utils/utils'
 
 export const MenuRow = ({ Icon, text, arrow, onClick }) => {
   return (

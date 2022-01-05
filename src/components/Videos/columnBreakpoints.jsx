@@ -4,7 +4,7 @@ import {
   SIX_COL_MIN_WIDTH,
   THREE_COL_MIN_WIDTH,
   TWO_COL_MIN_WIDTH,
-} from '../utils/utils'
+} from '../../utils/utils'
 
 export const columnBreakpoints = createTheme({
   breakpoints: {

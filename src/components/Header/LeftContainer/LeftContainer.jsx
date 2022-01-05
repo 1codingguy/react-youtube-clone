@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 import YouTubeLogo from './YouTubeLogo'
 import SidebarDrawer from '../../Sidebar/SidebarDrawer'
 import HamburgerMenuIcon from './HamburgerMenuIcon'
-import { useIsMobileView } from '../../utils/utils'
+import { useIsMobileView } from '../../../utils/utils'
 
 const LeftContainer = () => {
   const isMobileView = useIsMobileView()

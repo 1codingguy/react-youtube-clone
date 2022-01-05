@@ -7,7 +7,7 @@ import {
   StyledMenuItem,
   useShouldOpenSidebarDrawer,
   DESKTOP_VIEW_HEADER_HEIGHT,
-} from '../utils/utils'
+} from '../../utils/utils'
 import { SidebarFirstPart } from './SidebarFirstPart'
 import { SidebarSecondPart } from './SidebarSecondPart'
 import { SidebarThirdPart } from './SidebarThirdPart'

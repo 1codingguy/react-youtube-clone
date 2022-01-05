@@ -6,7 +6,7 @@ import {
   StyledIconButton,
   handleSearchFormSubmit,
   useClearSearchTerm,
-} from '../../utils/utils'
+} from '../../../utils/utils'
 import { useAtom } from 'jotai'
 import { searchTermAtom, searchResultsAtom } from '../../../store'
 import { useHistory } from 'react-router'

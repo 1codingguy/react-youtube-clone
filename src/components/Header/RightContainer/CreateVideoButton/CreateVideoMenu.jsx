@@ -6,7 +6,7 @@ import {
   DEFAULT_FONT_SIZE,
   StyledMenuItem,
   StyledListItemIcon,
-} from '../../../utils/utils'
+} from '../../../../utils/utils'
 import { createVideoMenuItems } from './createVideoMenuItems'
 
 const CreateVideoMenu = ({ anchorVideoButton, handleVideoMenuClose }) => {

@@ -4,7 +4,7 @@ import CreateVideoButton from './CreateVideoButton/CreateVideoButton'
 import AppsButton from './AppsButton/AppsButton'
 import NotificationsButton from './NotificationsButton/NotificationsButton'
 import AvatarButton from './AvatarButton/AvatarButton'
-import { useIsMobileView } from '../../utils/utils'
+import { useIsMobileView } from '../../../utils/utils'
 import { useLocation } from 'react-router-dom'
 import { HeaderMoreButton } from './HeaderMoreButton'
 

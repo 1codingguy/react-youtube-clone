@@ -11,7 +11,7 @@ import {
   TWO_COL_MIN_WIDTH,
   getFormattedDurationString,
   useGetChannelDetails,
-} from '../utils/utils'
+} from '../../utils/utils'
 import he from 'he'
 import { ChannelDetails } from './ChannelDetails'
 import { MoreButton } from './MoreButton'

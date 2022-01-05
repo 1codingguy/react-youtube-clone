@@ -6,7 +6,7 @@ import YouTubeLogo from '../Header/LeftContainer/YouTubeLogo'
 import {
   DESKTOP_VIEW_HEADER_HEIGHT,
   SHOW_FULL_SIDEBAR_BREAKPOINT,
-} from '../utils/utils'
+} from '../../utils/utils'
 import HamburgerMenuIcon from '../Header/LeftContainer/HamburgerMenuIcon'
 import { isSidebarDrawerOpenAtom } from '../../store'
 import { useAtom } from 'jotai'

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { StyledIconButton } from './VideoCard'
-import { useIsMobileView } from '../utils/utils'
+import { useIsMobileView } from '../../utils/utils'
 import { MobileModal } from './MobileModal'
 import { DesktopPopper } from './DesktopPopper'
 

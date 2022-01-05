@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components/macro'
-import { StyledIconButton } from '../../utils/utils'
+import { StyledIconButton } from '../../../utils/utils'
 import TuneIcon from '@material-ui/icons/Tune'
 
 export const MobileSearchTermContainer = ({

@@ -5,7 +5,7 @@ import {
   SHOW_SEARCH_BOX_BREAKPOINT,
   useIsMobileView,
   handleSearchFormSubmit as querySearchOnReload,
-} from '../../utils/utils'
+} from '../../../utils/utils'
 import MobileViewSearchDrawer from './MobileViewSearchDrawer'
 import { SearchContainerWithTextField } from './SearchContainerWithTextField'
 import { MicButton } from './MicButton'

@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchIcon from '@material-ui/icons/Search'
-import { IconTooltip, StyledIconButton } from '../../utils/utils'
+import { IconTooltip, StyledIconButton } from '../../../utils/utils'
 
 export const SearchButton = ({ setIsSearchDrawerOpen }) => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp'
-import { StyledIconButton, IconTooltip } from '../../../utils/utils'
+import { StyledIconButton, IconTooltip } from '../../../../utils/utils'
 
 function NotificationsButton({ setAnchorNotificationsButton }) {
 

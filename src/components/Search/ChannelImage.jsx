@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import { TWO_COL_MIN_WIDTH } from '../utils/utils'
+import { TWO_COL_MIN_WIDTH } from '../../utils/utils'
 import { StyledImageContainer } from './VideoThumbnail'
 
 export const ChannelImage = ({ thumbnailImage }) => {

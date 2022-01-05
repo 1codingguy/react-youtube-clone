@@ -1,7 +1,7 @@
 import React from 'react'
 import MobileAvatarPopUpMenu from './MobileAvatarPopUpMenu'
 import { AvatarPopUpMenu } from './AvatarPopUpMenu'
-import { useIsMobileView } from '../../../utils/utils'
+import { useIsMobileView } from '../../../../utils/utils'
 
 const AvatarMenu = ({ anchorAvatarButton, handleAvatarMenuClose }) => {
   const isMobileView = useIsMobileView()

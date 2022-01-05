@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyledIconButton } from '../../utils/utils'
+import { StyledIconButton } from '../../../utils/utils'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { MobileModal } from '../../Videos/MobileModal'
 

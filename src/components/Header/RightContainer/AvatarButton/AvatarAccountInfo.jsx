@@ -7,7 +7,7 @@ import {
   DEFAULT_FONT_SIZE,
   TWO_COL_MIN_WIDTH,
   useIsMobileView,
-} from '../../../utils/utils'
+} from '../../../../utils/utils'
 
 export const AvatarAccountInfo = ({ onClick }) => {
   const isMobileView = useIsMobileView()

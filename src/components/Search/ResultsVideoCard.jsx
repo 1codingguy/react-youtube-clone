@@ -7,7 +7,7 @@ import {
   getFormattedDurationString,
   TWO_COL_MAX_WIDTH,
   useGetChannelDetails,
-} from '../utils/utils'
+} from '../../utils/utils'
 import { useGetVideoDetails } from './searchUtils'
 import { ChannelImage } from './ChannelImage'
 import { VideoThumbnail } from './VideoThumbnail'

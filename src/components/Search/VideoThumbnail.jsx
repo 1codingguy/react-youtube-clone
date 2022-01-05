@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { ImageContainer, DurationContainer } from '../Videos/VideoCard'
-import { TWO_COL_MIN_WIDTH } from '../utils/utils'
+import { TWO_COL_MIN_WIDTH } from '../../utils/utils'
 
 export const VideoThumbnail = ({ thumbnailImage, formattedDuration }) => {
   return (

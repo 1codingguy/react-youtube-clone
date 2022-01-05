@@ -12,7 +12,7 @@ import {
   HideOnScroll,
   useIsMobileView,
   HEADER_OPACITY,
-} from '../utils/utils'
+} from '../../utils/utils'
 // import { TextForScrollingTest } from '../utils/TextForScrollingTest'
 
 function Header() {

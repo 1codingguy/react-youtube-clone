@@ -1,5 +1,5 @@
 import { SidebarMenuItem } from './FullWidthSidebar'
-import { StyledListItemIcon } from '../utils/utils'
+import { StyledListItemIcon } from '../../utils/utils'
 import ListItemText from '@material-ui/core/ListItemText'
 import { isSidebarDrawerOpenAtom } from '../../store'
 import { useAtom } from 'jotai'

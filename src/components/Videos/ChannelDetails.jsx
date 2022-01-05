@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { Typography } from '@material-ui/core'
-import { TWO_COL_MIN_WIDTH, useIsMobileView } from '../utils/utils'
+import { TWO_COL_MIN_WIDTH, useIsMobileView } from '../../utils/utils'
 import moment from 'moment'
 import numeral from 'numeral'
 
