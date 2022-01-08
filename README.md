@@ -6,6 +6,12 @@
 
 ### Or Go to the live site and try it for yourself [here](https://react-youtubeclone.netlify.app/)
 
+## WARNING
+<strong> if the app does not load anything or the search function doesn't work, it is very likely the daily YouTube API quota has exceeded. There are only 5000 daily quota for free usage, and each search costs 100 quota. If the app doesn't work, I hope the animated GIF here can give you an idea of how it works. </strong>
+
+## Mobile view search function demo
+![mobile-search-demo](./readme_assets/mobile-search-demo.gif)
+
 ## What does this app do?
 
 - It is a clone of YouTube HomePage and SearchPage.
